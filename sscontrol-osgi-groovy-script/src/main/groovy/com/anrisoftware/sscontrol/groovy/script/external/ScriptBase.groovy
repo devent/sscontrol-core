@@ -273,14 +273,20 @@ abstract class ScriptBase extends Script implements HostServiceScript {
     }
 
     /**
-     * Fetch command.
+     * Fetches a file from the remote the local.
+     * <pre>
+     * fetch "source.txt" call()
+     * </pre>
      */
     Fetch fetch(String src) {
         fetch([src: src])
     }
 
     /**
-     * Fetch command.
+     * Fetches a file from the remote the local.
+     * <pre>
+     * fetch src: "source.txt", dest: "dest.txt" call()
+     * </pre>
      */
     Fetch fetch(Map args) {
         def a = setupArgs(args, 'fetch')
@@ -289,7 +295,7 @@ abstract class ScriptBase extends Script implements HostServiceScript {
     }
 
     /**
-     * Copy command.
+     * Copies a file from the local to the remote.
      * <p>
      * <pre>
      * copy dest: '/etc/config' call()
@@ -303,7 +309,7 @@ abstract class ScriptBase extends Script implements HostServiceScript {
     }
 
     /**
-     * Copy command.
+     * Copies a file from the local to the remote.
      */
     Copy copy(Map args) {
         def a = setupArgs(args, 'copy')
@@ -459,22 +465,25 @@ abstract class ScriptBase extends Script implements HostServiceScript {
                     name: "${name}.ca",
                     src: tls.ca,
                     dest: "$dest/$tls.caName",
-                    privileged: true
+                    privileged: true,
+                    fileExists: tls.ca && tls.caName
                 ],
                 [
                     name: "${name}.cert",
                     src: tls.cert,
                     dest: "$dest/$tls.certName",
-                    privileged: true
+                    privileged: true,
+                    fileExists: tls.cert && tls.certName
                 ],
                 [
                     name: "${name}.key",
                     src: tls.key,
                     dest: "$dest/$tls.keyName",
-                    privileged: true
+                    privileged: true,
+                    fileExists: tls.key && tls.keyName
                 ],
             ].each {
-                if (it.src) {
+                if (it.fileExists) {
                     log.debug 'Upload {} TLS', it.name
                     copyResource it
                 }
@@ -718,6 +727,45 @@ abstract class ScriptBase extends Script implements HostServiceScript {
     }
 
     /**
+     * Calls the callback on a created local temporary file. The temporary file
+     * is deleted after the callback returns.
+     */
+    def withLocalTempFile(def name, def callback) {
+        File tmp = File.createTempFile(name, null)
+        try {
+            return callback(tmp)
+        } finally {
+            tmp.delete()
+        }
+    }
+
+    /**
+     * Calls the callback on a created remote temporary file. The temporary file
+     * is deleted after the callback returns.
+     */
+    def withRemoteTempFile(def callback, Map args=[:]) {
+        File tmp = createTmpFile(args)
+        try {
+            return callback(tmp)
+        } finally {
+            deleteTmpFile tmp
+        }
+    }
+
+    /**
+     * Calls the callback on a created remote temporary directory.
+     * The temporary directory is deleted after the callback returns.
+     */
+    def withRemoteTempDir(def callback, Map args=[:]) {
+        File tmp = createTmpDir(args)
+        try {
+            return callback(tmp)
+        } finally {
+            deleteTmpFile tmp
+        }
+    }
+
+    /**
      * Creates and returns a temporary file.
      */
     File createTmpFile(Map args=[:]) {
@@ -810,6 +858,9 @@ echo \$file
         new HashMap<String, T>() {
                     T get(Object key) {
                         return getState(key)
+                    }
+                    T put(String key, T value) {
+                        putState(key, value)
                     }
                 }
     }
@@ -927,6 +978,19 @@ echo \$file
     }
 
     /**
+     * Returns the default log level.
+     *
+     * <ul>
+     * <li>profile property {@code default_log_level}</li>
+     * </ul>
+     *
+     * @see #getDefaultProperties()
+     */
+    int getDefaultLogLevel() {
+        getScriptNumberProperty('default_log_level').intValue()
+    }
+
+    /**
      * Returns the file property.
      *
      * @param key
@@ -964,7 +1028,7 @@ echo \$file
     Map getScriptProperties() {
         new HashMap() {
                     def get(def name) {
-                        properties.getProperty name, defaultProperties
+                        ScriptBase.this.getScriptProperty name
                     }
                 }
     }
@@ -976,12 +1040,36 @@ echo \$file
         return getFileProperty(key, parent, defaults, useAbsolute)
     }
 
+    File getScriptFileProperties() {
+        new HashMap() {
+                    def get(def name) {
+                        ScriptBase.this.getScriptFileProperty name
+                    }
+                }
+    }
+
+    Map getScriptListProperties() {
+        new HashMap() {
+                    def get(def name) {
+                        ScriptBase.this.getScriptListProperty name
+                    }
+                }
+    }
+
     /**
      * Returns a list script property.
      */
     List getScriptListProperty(String key,
             ContextProperties defaults=defaultProperties) {
         properties.getListProperty key, defaults
+    }
+
+    /**
+     * Returns a list script property.
+     */
+    List getScriptListProperty(String key, String separatorChars,
+            ContextProperties defaults=defaultProperties) {
+        properties.getListProperty key, separatorChars, defaults
     }
 
     /**
@@ -992,12 +1080,28 @@ echo \$file
         properties.getNumberProperty name, defaults
     }
 
+    Map getScriptNumberProperties() {
+        new HashMap() {
+                    def get(def name) {
+                        ScriptBase.this.getScriptNumberProperty name
+                    }
+                }
+    }
+
     /**
      * Returns a boolean script property.
      */
     boolean getScriptBooleanProperty(String name,
             ContextProperties defaults=defaultProperties) {
         properties.getBooleanProperty name, defaults
+    }
+
+    Map getScriptBooleanProperties() {
+        new HashMap() {
+                    def get(def name) {
+                        ScriptBase.this.getScriptBooleanProperty name
+                    }
+                }
     }
 
     /**

@@ -23,7 +23,9 @@ import org.junit.Before
 import org.junit.Test
 
 import com.anrisoftware.globalpom.core.resources.ResourcesModule
+import com.anrisoftware.globalpom.core.strings.StringsModule
 import com.anrisoftware.propertiesutils.PropertiesUtilsModule
+import com.anrisoftware.sscontrol.debug.internal.DebugLoggingModule
 import com.anrisoftware.sscontrol.docker.service.external.Docker
 import com.anrisoftware.sscontrol.docker.service.external.Mirror
 import com.anrisoftware.sscontrol.docker.service.internal.DockerImpl.DockerImplFactory
@@ -57,9 +59,9 @@ class DockerScriptTest {
     HostServicesImplFactory servicesFactory
 
     @Test
-    void "service"() {
+    void "basic service"() {
         def test = [
-            name: 'service',
+            name: 'basic service',
             input: """
 service "docker"
 """,
@@ -67,6 +69,28 @@ service "docker"
                 assert services.getServices('docker').size() == 1
                 Docker s = services.getServices('docker')[0]
                 assert s != null
+            },
+        ]
+        doTest test
+    }
+
+    @Test
+    void "log driver"() {
+        def test = [
+            name: "log driver",
+            input: """
+service "docker" with {
+    log driver: 'json-file', maxSize: "10m", maxFile: 10
+}
+""",
+            expected: { HostServices services ->
+                assert services.getServices('docker').size() == 1
+                Docker s = services.getServices('docker')[0]
+                assert s != null
+                assert s.loggingDriver.driver == "json-file"
+                assert s.loggingDriver.opts.size() == 2
+                assert s.loggingDriver.opts.maxSize == "10m"
+                assert s.loggingDriver.opts.maxFile == 10
             },
         ]
         doTest test
@@ -160,6 +184,24 @@ service "docker" with {
         doTest test
     }
 
+    @Test
+    void "cgroup_driver"() {
+        def test = [
+            name: 'cgroup_driver',
+            input: """
+service "docker" with {
+    property << "native_cgroupdriver=systemd"
+}
+""",
+            expected: { HostServices services ->
+                assert services.getServices('docker').size() == 1
+                Docker s = services.getServices('docker')[0]
+                assert s.serviceProperties.getProperty("native_cgroupdriver") == "systemd"
+            },
+        ]
+        doTest test
+    }
+
     void doTest(Map test) {
         log.info '\n######### {} #########\ncase: {}', test.name, test
         def services = servicesFactory.create()
@@ -176,8 +218,10 @@ service "docker" with {
         Guice.createInjector(
                 new DockerModule(),
                 new DockerPreModule(),
+                new DebugLoggingModule(),
                 new PropertiesModule(),
                 new HostServicesModule(),
+                new StringsModule(),
                 new TargetsModule(),
                 new TargetsServiceModule(),
                 new PropertiesUtilsModule(),

@@ -22,8 +22,6 @@ import static org.junit.Assume.*
 import org.junit.Before
 import org.junit.Test
 
-import com.anrisoftware.sscontrol.shell.external.utils.UnixTestUtil
-
 import groovy.util.logging.Slf4j
 
 
@@ -46,8 +44,28 @@ service "ssh" with {
     host "robobee@node-1.robobee-test.test", socket: sockets.nodes[1]
     host "robobee@node-2.robobee-test.test", socket: sockets.nodes[2]
 }
+service "docker"
+''',
+            scriptVars: [sockets: sockets, certs: certs],
+            expectedServicesSize: 2,
+            expected: { Map args ->
+            },
+        ]
+        doTest test
+    }
+
+    @Test
+    void "cluster_docker_native_cgroupdriver"() {
+        def test = [
+            name: "cluster_docker_native_cgroupdriver",
+            script: '''
+service "ssh" with {
+    host "robobee@node-0.robobee-test.test", socket: sockets.nodes[0]
+    host "robobee@node-1.robobee-test.test", socket: sockets.nodes[1]
+    host "robobee@node-2.robobee-test.test", socket: sockets.nodes[2]
+}
 service "docker" with {
-    registry mirror: 'https://registry.robobee-test.test:5000', ca: certs.ca
+    property << "native_cgroupdriver=systemd"
 }
 ''',
             scriptVars: [sockets: sockets, certs: certs],

@@ -19,7 +19,6 @@ import static org.hamcrest.MatcherAssert.assertThat
 import static org.hamcrest.Matchers.*
 
 import javax.inject.Inject
-import javax.inject.Named
 
 import org.apache.commons.io.FileUtils
 import org.apache.commons.lang3.StringUtils
@@ -27,10 +26,7 @@ import org.apache.commons.lang3.StringUtils
 import com.anrisoftware.propertiesutils.ContextProperties
 import com.anrisoftware.sscontrol.command.shell.linux.openssh.external.find.FindFilesFactory
 import com.anrisoftware.sscontrol.groovy.script.external.ScriptBase
-import com.anrisoftware.sscontrol.k8s.fromrepository.script.linux.internal.script_1_8.TemplateParser
 import com.anrisoftware.sscontrol.k8s.fromrepository.service.external.FromRepository
-import com.anrisoftware.sscontrol.types.host.external.HostServiceScript
-import com.anrisoftware.sscontrol.types.host.external.HostServiceScriptService
 
 import groovy.io.FileType
 import groovy.util.logging.Slf4j
@@ -45,11 +41,7 @@ import groovy.util.logging.Slf4j
 class FromRepositoryLinux extends ScriptBase {
 
     @Inject
-    FromRepositoryLinuxProperties debianPropertiesProvider
-
-    @Inject
-    @Named("cluster-service")
-    HostServiceScriptService clusterService
+    FromRepositoryLinuxProperties linuxPropertiesProvider
 
     @Inject
     Map<String, TemplateParser> templateParsers
@@ -57,18 +49,23 @@ class FromRepositoryLinux extends ScriptBase {
     @Inject
     FindFilesFactory findFilesFactory
 
+    KubectlClusterLinux kubectlClusterLinux
+
+    @Inject
+    void setKubectlClusterLinuxFactory(KubectlClusterLinuxFactory factory) {
+        this.kubectlClusterLinux = factory.create(scriptsRepository, service, target, threads, scriptEnv)
+    }
+
     @Override
     def run() {
         FromRepository service = service
-        assertThat "clusters=0 for $service", service.clusters.size(), greaterThan(0)
-        def cluster = clusterService.create(scriptsRepository, service, target, threads, scriptEnv)
-        cluster.uploadCertificates credentials: service.cluster.cluster.credentials, clusterName: service.cluster.cluster.cluster.name
+        assertThat "clusters=0 for $service", service.clusterHosts.size(), greaterThan(0)
         File dir = getState "${service.repo.type}-${service.repo.repo.group}-dir"
         assertThat "checkout-dir=null for $service", dir, notNullValue()
         try {
-            parseTemplateFiles(dir, cluster)
-            buildDocker(dir)
-            kubeFiles(dir, cluster)
+            parseTemplateFiles dir
+            buildDocker dir
+            kubeFiles dir
         } finally {
             shell "rm -rf $dir" call()
         }
@@ -113,17 +110,12 @@ class FromRepositoryLinux extends ScriptBase {
     /**
      * Apply kubectl files.
      */
-    def kubeFiles(File dir, HostServiceScript cluster) {
+    def kubeFiles(File dir) {
         FromRepository service = this.service
         createCmd findFilesFactory, chdir: dir, suffix: kubectlFilesPatterns call() each {
             if (!StringUtils.isBlank(it)) {
                 try {
-                    File tmp = File.createTempFile(it, null)
-                    fetch src: "$dir/$it", dest: tmp call()
-                    def s = FileUtils.readFileToString(tmp, charset)
-                    tmp.delete()
-                    log.trace 'Apply manifest {}/{}: ```\n{}```', dir, it, s
-                    cluster.runKubectl chdir: dir, service: service, cluster: service.cluster, args: "apply -f $it"
+                    readApplyManifestTmpFile dir, it
                 } catch (e) {
                     throw new ApplyManifestException(e, dir, it)
                 }
@@ -131,7 +123,28 @@ class FromRepositoryLinux extends ScriptBase {
         }
     }
 
-    def parseTemplateFiles(File dir, HostServiceScript cluster) {
+    def readApplyManifestTmpFile(File dir, def name) {
+        withLocalTempFile name, { File tmp ->
+            readApplyManifest dir, name, tmp
+        }
+    }
+
+    def readApplyManifest(File dir, def name, File tmp) {
+        fetch src: "$dir/$name", dest: tmp call()
+        def s = FileUtils.readFileToString(tmp, charset)
+        withRemoteTempFile { File destTmp ->
+            copy src: tmp, dest: destTmp call()
+            log.trace 'Apply manifest {}/{}: ```\n{}```', dir, name, s
+            FromRepository service = service
+            if (service.destination && !service.dryrun) {
+                deployToDestination name, destTmp, service.destination
+            } else {
+                kubectlClusterLinux.runKubectl chdir: dir, args: "apply ${service.dryrun ? "--dry-run=true" : ""} -f $destTmp"
+            }
+        }
+    }
+
+    def parseTemplateFiles(File dir) {
         FromRepository service = this.service
         def args = [parent: this, vars: service.vars]
         findTemplateFiles dir, { String pattern, String fileName ->
@@ -181,17 +194,27 @@ class FromRepositoryLinux extends ScriptBase {
         }
     }
 
+    /**
+     * Deploy manifests to the destination directory.
+     */
+    def deployToDestination(String name, File destTmp, String destination) {
+        shell privileged: true, """
+mkdir -p ${destination}
+mv ${destTmp} ${destination}/${name}
+""" call()
+    }
+
     @Override
     ContextProperties getDefaultProperties() {
-        debianPropertiesProvider.get()
+        linuxPropertiesProvider.get()
     }
 
     List getKubectlFilesPatterns() {
-        properties.getListProperty 'kubectl_files_patterns', defaultProperties
+        getScriptListProperty 'kubectl_files_patterns'
     }
 
     List getDockerfileFilesPatterns () {
-        properties.getListProperty 'dockerfiles_files_patterns', defaultProperties
+        getScriptListProperty 'dockerfiles_files_patterns'
     }
 
     @Override

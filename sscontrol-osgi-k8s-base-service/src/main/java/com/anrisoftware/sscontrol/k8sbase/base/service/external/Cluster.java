@@ -20,7 +20,7 @@ import java.util.List;
 import com.anrisoftware.sscontrol.types.ssh.external.SshHost;
 
 /**
- * K8s cluster.
+ * Information about the Kubernetes cluster.
  *
  * @author Erwin Müller <erwin.mueller@deventm.de>
  * @version 1.0
@@ -32,8 +32,15 @@ public interface Cluster {
      */
     String getName();
 
+    /**
+     * Returns the pods network CIDR, the range of IP addresses for the pod
+     * network.
+     */
     String getPodRange();
 
+    /**
+     * Returns the range of IP address for service VIPs.
+     */
     String getServiceRange();
 
     /**
@@ -42,7 +49,10 @@ public interface Cluster {
      */
     Object getAdvertiseAddress();
 
-    String getDnsAddress();
+    /**
+     * Returns the DNS domain like {@code cluster.local}
+     */
+    String getDnsDomain();
 
     /**
      * Returns the list of api servers. The list can contain a host string or
@@ -60,6 +70,9 @@ public interface Cluster {
      */
     Integer getPort();
 
-    String getHostnameOverride();
+    /**
+     * Returns the join command for the cluster.
+     */
+    String getJoinCommand();
 
 }

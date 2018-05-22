@@ -15,14 +15,19 @@
  */
 package com.anrisoftware.sscontrol.k8smaster.script.debian.internal.k8smaster_1_8.debian_9
 
+import static org.apache.commons.lang3.StringUtils.*
+import static org.hamcrest.Matchers.*
+
 import javax.inject.Inject
 
 import com.anrisoftware.propertiesutils.ContextProperties
+import com.anrisoftware.sscontrol.k8sbase.base.service.external.CanalPlugin
+import com.anrisoftware.sscontrol.k8sbase.script.upstream.debian.external.k8s_1_8.debian.debian_9.AbstractK8sUpstreamDebian
 import com.anrisoftware.sscontrol.k8skubectl.linux.external.kubectl_1_8.AbstractKubectlLinux
-import com.anrisoftware.sscontrol.k8smaster.script.upstream.external.k8smaster_1_8.K8sMasterUpstreamSystemd
 import com.anrisoftware.sscontrol.k8smaster.service.external.K8sMaster
 
 import groovy.util.logging.Slf4j
+
 
 /**
  * Configures the K8s-Master service from the upstream sources Debian.
@@ -31,7 +36,7 @@ import groovy.util.logging.Slf4j
  * @since 1.0
  */
 @Slf4j
-class K8sMasterUpstreamDebian extends K8sMasterUpstreamSystemd {
+class K8sMasterUpstreamDebian extends AbstractK8sUpstreamDebian {
 
     @Inject
     K8sMasterDebianProperties debianPropertiesProvider
@@ -44,15 +49,13 @@ class K8sMasterUpstreamDebian extends K8sMasterUpstreamSystemd {
 
     def setupDefaults() {
         setupMiscDefaults()
+        setupLabelsDefaults()
         setupApiServersDefaults()
-        setupAdmissionsDefaults()
-        setupAccountDefaults()
         setupClusterDefaults()
         setupClusterHostDefaults()
         setupClusterApiDefaults()
         setupBindDefaults()
         setupKubeletDefaults()
-        setupAuthenticationsDefaults()
         setupPluginsDefaults()
         setupKernelParameter()
     }
@@ -60,29 +63,88 @@ class K8sMasterUpstreamDebian extends K8sMasterUpstreamSystemd {
     def createService() {
         createDirectories()
         uploadK8sCertificates()
-        uploadAccountCertificates()
-        uploadAuthenticationsCertificates()
         uploadEtcdCertificates()
-        createKubeletService()
+        createKubeadmConfig()
         createKubeletConfig()
-        createKubeletKubeconfig()
-        createKubeletManifests()
-        createHostRkt()
-        createFlannelCni()
-    }
-
-    def postInstall() {
-        startAddons()
-        startCalico()
-        applyTaints()
-        applyLabels()
+        restartKubelet()
     }
 
     def setupClusterDefaults() {
-        super.setupClusterDefaults()
         K8sMaster service = service
+        super.setupClusterDefaults()
         if (!service.cluster.name) {
             service.cluster.name = 'master'
+        }
+    }
+
+    def postInstall() {
+        applyLabels()
+        applyTaints()
+    }
+
+    def setupMiscDefaults() {
+        super.setupMiscDefaults()
+        K8sMaster service = service
+        if (service.ca.cert) {
+            service.ca.certName = scriptProperties.default_kubernetes_ca_cert_name
+        }
+        if (service.ca.key) {
+            service.ca.keyName = scriptProperties.default_kubernetes_ca_key_name
+        }
+    }
+
+    def setupClusterApiDefaults() {
+        log.debug 'Setup cluster api defaults for {}', service
+        K8sMaster service = service
+        if (!service.cluster.port) {
+            service.cluster.port = scriptNumberProperties.default_api_port_secure
+        }
+        if (!service.cluster.protocol) {
+            service.cluster.protocol = scriptProperties.default_api_protocol_secure
+        }
+    }
+
+    def setupBindDefaults() {
+        log.debug 'Setup bind defaults for {}', service
+        K8sMaster service = service
+        if (!service.binding.insecureAddress) {
+            service.binding.insecureAddress = scriptProperties.default_bind_insecure_address
+        }
+        if (!service.binding.secureAddress) {
+            service.binding.secureAddress = scriptProperties.default_bind_secure_address
+        }
+        if (!service.binding.port) {
+            service.binding.port = scriptNumberProperties.default_bind_port
+        }
+        if (!service.binding.insecurePort) {
+            service.binding.insecurePort = scriptNumberProperties.default_bind_insecure_port
+        }
+    }
+
+    /**
+     * Installs a pod network.
+     */
+    def installNetwork() {
+        log.debug 'Installs pod network for {}', service
+        K8sMaster service = service
+        if (service.plugins.containsKey("canal")) {
+            installCanalNetwork()
+        }
+    }
+
+    def installCanalNetwork() {
+        log.debug 'Installs canal as the pod network for {}', service
+        K8sMaster service = service
+        CanalPlugin canal = service.plugins.canal
+        withRemoteTempFile { File tmp ->
+            def replace = ""
+            replace += isNoneBlank(canal.iface) ? "sed -ie 's/  canal_iface: \"\"/  canal_iface: \"${canal.iface}\"/' ${tmp}" : ""
+            shell """
+wget -O ${tmp} https://raw.githubusercontent.com/projectcalico/canal/master/k8s-install/1.7/canal.yaml
+${replace}
+kubectl apply -f https://raw.githubusercontent.com/projectcalico/canal/master/k8s-install/1.7/rbac.yaml
+kubectl apply -f ${tmp}
+""" call()
         }
     }
 

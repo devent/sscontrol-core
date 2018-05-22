@@ -100,6 +100,12 @@ public class GlusterfsHeketiImpl implements GlusterfsHeketi {
 
     private transient StorageImplFactory storageFactory;
 
+    private Integer maxBrickSizeGb;
+
+    private Integer minBrickSizeGb;
+
+    private String serviceAddress;
+
     @Inject
     GlusterfsHeketiImpl(GlusterfsHeketiImplLogger log,
             HostServicePropertiesService propertiesService,
@@ -179,8 +185,7 @@ public class GlusterfsHeketiImpl implements GlusterfsHeketi {
     /**
      * <pre>
      * vars << [heketi: [snapshot: [limit: 32]]]
-     * vars << [tolerations: [toleration: [key: 'robobeerun.com/dedicated', effect: 'NoSchedule']]]
-     * vars << [tolerations: [toleration: [key: 'node.alpha.kubernetes.io/ismaster', effect: 'NoSchedule']]]
+     * vars << [tolerations: [toleration: [key: 'node-role.kubernetes.io/master', effect: 'NoSchedule']]]
      * </pre>
      */
     @Override
@@ -215,6 +220,25 @@ public class GlusterfsHeketiImpl implements GlusterfsHeketi {
                 });
     }
 
+    /**
+     * <pre>
+     * brick min: 1, max: 50
+     * </pre>
+     */
+    public void brick(Map<String, Object> args) {
+        parseMaxBrickSizeGb(args);
+        parseMinBrickSizeGb(args);
+    }
+
+    /**
+     * <pre>
+     * service address: "10.96.10.10"
+     * </pre>
+     */
+    public void service(Map<String, Object> args) {
+        parseServiceAddress(args);
+    }
+
     @Override
     public TargetHost getTarget() {
         return getTargets().get(0);
@@ -230,17 +254,17 @@ public class GlusterfsHeketiImpl implements GlusterfsHeketi {
     }
 
     @Override
-    public ClusterHost getCluster() {
-        return getClusters().get(0);
+    public ClusterHost getClusterHost() {
+        return getClusterHosts().get(0);
     }
 
-    public void addClusters(List<ClusterHost> list) {
+    public void addClusterHosts(List<ClusterHost> list) {
         this.clusters.addAll(list);
         log.clustersAdded(this, list);
     }
 
     @Override
-    public List<ClusterHost> getClusters() {
+    public List<ClusterHost> getClusterHosts() {
         return Collections.unmodifiableList(clusters);
     }
 
@@ -327,12 +351,39 @@ public class GlusterfsHeketiImpl implements GlusterfsHeketi {
         return storage;
     }
 
+    public void setMinBrickSizeGb(int minBrickSizeGb) {
+        this.minBrickSizeGb = minBrickSizeGb;
+    }
+
+    @Override
+    public Integer getMinBrickSizeGb() {
+        return minBrickSizeGb;
+    }
+
+    public void setMaxBrickSizeGb(int maxBrickSizeGb) {
+        this.maxBrickSizeGb = maxBrickSizeGb;
+    }
+
+    @Override
+    public Integer getMaxBrickSizeGb() {
+        return maxBrickSizeGb;
+    }
+
+    public void setServiceAddress(String serviceAddress) {
+        this.serviceAddress = serviceAddress;
+    }
+
+    @Override
+    public String getServiceAddress() {
+        return serviceAddress;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this).append("name", getName())
                 .append("targets", getTargets())
-                .append("clusters", getClusters()).append("repos", getRepos())
-                .toString();
+                .append("clusters", getClusterHosts())
+                .append("repos", getRepos()).toString();
     }
 
     private void parseArgs(Map<String, Object> args) {
@@ -376,7 +427,7 @@ public class GlusterfsHeketiImpl implements GlusterfsHeketi {
     private void parseClusters(Map<String, Object> args) {
         Object v = args.get("clusters");
         assertThat("clusters=null", v, notNullValue());
-        addClusters((List<ClusterHost>) v);
+        addClusterHosts((List<ClusterHost>) v);
     }
 
     @SuppressWarnings("unchecked")
@@ -384,6 +435,27 @@ public class GlusterfsHeketiImpl implements GlusterfsHeketi {
         Object v = args.get("repos");
         assertThat("repos=null", v, notNullValue());
         addRepos((List<RepoHost>) v);
+    }
+
+    private void parseMinBrickSizeGb(Map<String, Object> args) {
+        Object v = args.get("min");
+        if (v != null) {
+            setMinBrickSizeGb(((Number) v).intValue());
+        }
+    }
+
+    private void parseMaxBrickSizeGb(Map<String, Object> args) {
+        Object v = args.get("max");
+        if (v != null) {
+            setMaxBrickSizeGb(((Number) v).intValue());
+        }
+    }
+
+    private void parseServiceAddress(Map<String, Object> args) {
+        Object v = args.get("address");
+        if (v != null) {
+            setServiceAddress(v.toString());
+        }
     }
 
 }

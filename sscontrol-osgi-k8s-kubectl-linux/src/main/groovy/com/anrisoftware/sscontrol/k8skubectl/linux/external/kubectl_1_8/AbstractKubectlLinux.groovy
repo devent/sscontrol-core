@@ -20,12 +20,12 @@ import static org.hamcrest.Matchers.*
 
 import javax.inject.Inject
 
+import com.anrisoftware.globalpom.exec.external.core.ProcessTask
 import com.anrisoftware.resources.templates.external.TemplateResource
 import com.anrisoftware.resources.templates.external.TemplatesFactory
 import com.anrisoftware.sscontrol.groovy.script.external.ScriptBase
 import com.anrisoftware.sscontrol.tls.external.Tls
 import com.anrisoftware.sscontrol.tls.external.Tls.TlsFactory
-import com.anrisoftware.sscontrol.types.cluster.external.Cluster
 import com.anrisoftware.sscontrol.types.cluster.external.ClusterHost
 import com.anrisoftware.sscontrol.types.cluster.external.ClusterService
 import com.anrisoftware.sscontrol.types.cluster.external.Credentials
@@ -45,9 +45,6 @@ abstract class AbstractKubectlLinux extends ScriptBase {
     @Inject
     TlsFactory tlsFactory
 
-    @Inject
-    CredentialsNopFactory credentialsNopFactory
-
     TemplateResource kubectlTemplate
 
     TemplateResource kubeconfTemplate
@@ -60,70 +57,13 @@ abstract class AbstractKubectlLinux extends ScriptBase {
         this.kubeconfTemplate = templates.getResource('kubectl_conf')
     }
 
-    def setupMiscDefaults() {
-        log.debug 'Setup misc defaults for {}', service
-        Cluster service = service
-        if (service.credentials.size() == 0) {
-            def args = [:]
-            args.name = "default-admin"
-            args.type = "anon"
-            service.credentials << credentialsNopFactory.create(args)
-        }
-    }
-
-    def uploadCertificates(Map vars) {
-        log.info 'Uploads k8s-cluster certificates.'
-        def certsdir = certsDir
-        List credentials = vars.credentials
-        String clusterName = vars.clusterName
-        assertThat "credentials=null", credentials, notNullValue()
-        assertThat "clusterName=null", clusterName, notNullValue()
-        def args = [:]
-        def certsDir = getClusterCertsDir(clusterName)
-        shell privileged: true, """
-mkdir -p $certsDir
-chown robobee.robobee -R $certsDir
-chmod o-rx $certsDir
-""" call()
-        credentials.findAll { it.hasProperty('tls') } each {
-            Tls tls = it.tls
-            if (tls.cert) {
-                tls.certName = defaultCredentialsTlsCertName
-            }
-            if (tls.key) {
-                tls.keyName = defaultCredentialsTlsKeyName
-            }
-            if (tls.ca) {
-                tls.caName = defaultCredentialsTlsCaName
-            }
-            def a = [:]
-            a.dest = certsDir
-            a.tls = tls
-            a.name = 'client-tls'
-            uploadTlsCerts a
-        }
-    }
-
-    def runKubectl(Map vars) {
-        log.info 'Run kubectl with {}', vars
-        ClusterService service = vars.service
-        ClusterHost host = vars.cluster
-        assertThat "chdir!=null", vars.chdir, notNullValue()
-        assertThat "service!=null", service, notNullValue()
-        assertThat "host!=null", host, notNullValue()
-        Credentials c = host.credentials
-        setupHost host
-        Map v = new HashMap(vars)
-        v.service = service
-        v.cluster = host
-        v.credentials = c
-        v.tls = c.hasProperty('tls') ? c.tls : null
-        v.certsDir = getClusterCertsDir(host.clusterName)
-        def args = new HashMap(vars)
-        args.resource = kubectlTemplate
-        args.name = 'kubectlCmd'
-        args.vars = v
-        shell args call()
+    /**
+     * Returns the {@link ClusterHost} from where to run kubectl from to
+     * access the cluster.
+     */
+    List<ClusterHost> getCluster() {
+        ClusterService service = service
+        service.clusterHosts
     }
 
     /**
@@ -131,39 +71,34 @@ chmod o-rx $certsDir
      *
      * @param vars
      * <li>kubeconfigFile: the path of the kubeconfig file on the server.
-     * <li>cluster: the ClusterHost.
      */
     def uploadKubeconfig(Map vars) {
         log.info 'Uploads kubeconfig for {}.', vars
-        ClusterHost cluster = vars.cluster
         assertThat "kubeconfigFile!=null", vars.kubeconfigFile, notNullValue()
-        assertThat "cluster!=null", cluster, notNullValue()
-        setupHost cluster
-        Credentials c = cluster.credentials
-        Map v = new HashMap(vars)
-        v.vars = new HashMap(vars)
-        v.vars.certs = c.hasProperty('tls') ? certsData(c.tls) : [:]
-        v.resource = kubeconfTemplate
-        v.name = 'kubectlConf'
-        v.dest = vars.kubeconfigFile
-        template v call()
+        cluster.each {
+            Credentials c = it.credentials
+            Map v = new HashMap(vars)
+            v.vars = new HashMap(vars)
+            v.vars.certs = c.hasProperty('tls') ? certsData(c.tls) : [:]
+            v.resource = kubeconfTemplate
+            v.name = 'kubectlConf'
+            v.dest = vars.kubeconfigFile
+            template v call()
+        }
     }
 
     /**
-     * Runs kubectl with a kubeconfig file.
+     * Runs kubectl with a specific kube-config file.
      *
      * @param vars
      * <ul>
-     * <li>kubeconfigFile: the path of the kubeconfig file on the server.
-     * <li>cluster: the ClusterHost.
+     * <li>kubeconfigFile: the path of the kube-config file on the server.
      * <li>args: kubectl arguments.
      * </ul>
      */
     def runKubectlKubeconfig(Map vars) {
         log.info 'Run kubectl with {}', vars
-        ClusterHost cluster = vars.cluster
         assertThat "kubeconfigFile!=null", vars.kubeconfigFile, notNullValue()
-        assertThat "cluster!=null", cluster, notNullValue()
         Map v = new HashMap(vars)
         v.vars = new HashMap(vars)
         v.resource = kubectlTemplate
@@ -172,86 +107,131 @@ chmod o-rx $certsDir
     }
 
     /**
-     * Applies the taint on the node.
+     * Runs kubectl on each of the hosts.
      *
      * @param vars
      * <ul>
-     * <li>kubeconfigFile: the path of the kubeconfig file on the server.
-     * <li>cluster: the ClusterHost.
-     * <li>node: the node name.
-     * <li>taint: the Taint.
+     * <li>args: kubectl arguments.
      * </ul>
+     *
+     * @return {@link List} of {@link ProcessTask}
      */
-    def applyTaintNode(Map vars, String node, def taint) {
-        log.info 'Apply taint {} for node {} with {}', taint, node, vars
-        ClusterHost cluster = vars.cluster
-        assertThat "kubeconfigFile!=null", vars.kubeconfigFile, notNullValue()
-        assertThat "cluster!=null", cluster, notNullValue()
+    List<ProcessTask> runKubectl(Map vars) {
+        log.info 'Run kubectl with {}', vars
+        Map v = new HashMap(vars)
+        v.vars = new HashMap(vars)
+        v.vars.service = service
+        v.resource = kubectlTemplate
+        v.name = 'kubectlCmd'
+        runShell v
+    }
+
+    /**
+     * Deletes the resource.
+     *
+     * @param vars
+     * <ul>
+     * <li>namespace: the namespace of the resource.
+     * <li>type: the type of the resource.
+     * <li>name: the name of the resource.
+     * <li>checkExists: set to true to check first if the resource exist.
+     * </ul>
+     *
+     * @return {@link List} of {@link ProcessTask}
+     */
+    List<ProcessTask> deleteResource(Map vars) {
+        log.info 'Run kubectl with {}', vars
+        Map v = new HashMap(vars)
+        v.vars = new HashMap(vars)
+        v.vars.service = service
+        v.resource = kubectlTemplate
+        v.name = 'deleteResource'
+        runShell v
+    }
+
+    /**
+     * Waits for the node to be available.
+     *
+     * @param vars additional arguments to the shell, like the timeout.
+     * @param node the node name.
+     */
+    def waitNodeAvailable(Map vars, String node) {
+        log.info 'Wait for node to be available: {}', node
         Map v = new HashMap(vars)
         v.vars = new HashMap(vars)
         v.vars.node = node
-        v.vars.taint = "${taint.key}=${taint.value?taint.value:''}:${taint.effect}"
         v.resource = kubectlTemplate
-        v.name = 'applyTaintCmd'
-        shell v call()
+        v.name = 'waitNodeAvailableCmd'
+        runShell v
+    }
+
+    /**
+     * Waits for the node to be ready.
+     *
+     * @param vars additional arguments to the shell, like the timeout.
+     * @param node the node name.
+     */
+    def waitNodeReady(Map vars, String node) {
+        log.info 'Wait for node to become ready: {}', node
+        Map v = new HashMap(vars)
+        v.vars = new HashMap(vars)
+        v.vars.node = node
+        v.resource = kubectlTemplate
+        v.name = 'waitNodeReadyCmd'
+        runShell v
+    }
+
+    /**
+     * Applies the taints on the node.
+     *
+     * @param vars additional arguments to the shell, like the timeout.
+     * @param node the node name.
+     * @param taints the taints to apply.
+     */
+    def applyNodeTaints(Map vars, String node, Map taints) {
+        log.debug 'Apply taints {} for node {} with {}', taints, node, vars
+        Map v = new HashMap(vars)
+        v.vars = new HashMap(vars)
+        v.vars.node = node
+        v.vars.taints = taints
+        v.resource = kubectlTemplate
+        v.name = 'applyTaintsCmd'
+        runShell v
     }
 
     /**
      * Applies the label on the node.
      *
-     * @param vars
-     * <ul>
-     * <li>kubeconfigFile: the path of the kubeconfig file on the server.
-     * <li>cluster: the ClusterHost.
-     * <li>node: the node name.
-     * <li>label: the Label.
-     * </ul>
+     * @param vars additional arguments to the shell, like the timeout.
+     * @param node the node name.
+     * @param labels the labels to apply.
      */
-    def applyLabelNode(Map vars, String node, def label) {
-        log.info 'Apply label {} for node {} with {}', label, node, vars
-        ClusterHost cluster = vars.cluster
-        assertThat "kubeconfigFile!=null", vars.kubeconfigFile, notNullValue()
-        assertThat "cluster!=null", cluster, notNullValue()
+    def applyNodeLabels(Map vars, String node, def labels) {
+        log.debug 'Apply labels {} for node {} with {}', labels, node, vars
         Map v = new HashMap(vars)
         v.vars = new HashMap(vars)
         v.vars.node = node
-        v.vars.label = "${label.key}=${label.value?label.value:''}"
+        v.vars.labels = labels
         v.resource = kubectlTemplate
-        v.name = 'applyLabelCmd'
-        shell v call()
+        v.name = 'applyLabelsCmd'
+        runShell v
     }
 
     /**
-     * Setups the credentials.
+     * Runs kubectl on the cluster hosts and returns the process from each.
+     *
+     * @return {@link List} of {@link ProcessTask}
      */
-    def setupHost(ClusterHost host) {
-        Credentials c = host.credentials
-        if (!host.proto) {
-            if (c.hasProperty('tls') && c.tls.ca) {
-                host.proto = defaultServerProtoSecured
-            } else {
-                host.proto = defaultServerProtoUnsecured
-            }
+    List<ProcessTask> runShell(Map vars) {
+        Map v = new HashMap(vars)
+        List<ProcessTask> ret = []
+        cluster.each { ClusterHost it ->
+            v.vars.cluster = it.cluster
+            v.target = it.target
+            def process = shell v call()
+            ret << process
         }
-        if (!host.port) {
-            if (c.hasProperty('tls') && c.tls.ca) {
-                host.port = defaultServerPortSecured
-            } else {
-                host.port = defaultServerPortUnsecured
-            }
-        }
-        if (c.hasProperty('tls')) {
-            Tls tls = c.tls
-            if (tls.cert) {
-                tls.certName = defaultCredentialsTlsCertName
-            }
-            if (tls.key) {
-                tls.keyName = defaultCredentialsTlsKeyName
-            }
-            if (tls.ca) {
-                tls.caName = defaultCredentialsTlsCaName
-            }
-        }
+        return ret
     }
 
     /**
@@ -302,40 +282,60 @@ chmod o-rx $certsDir
         getClusterTls()
     }
 
-    def getDefaultCredentialsTlsCaName() {
-        properties.getProperty 'default_credentials_tls_ca_name', defaultProperties
+    /**
+     * Setups the hosts.
+     */
+    def setupHosts(List<ClusterHost> clusterHosts) {
+        clusterHosts.each { ClusterHost host ->
+            host.credentials.each { Credentials c ->
+                setupCredentials host, c
+            }
+        }
     }
 
-    def getDefaultCredentialsTlsCertName() {
-        properties.getProperty 'default_credentials_tls_cert_name', defaultProperties
-    }
-
-    def getDefaultCredentialsTlsKeyName() {
-        properties.getProperty 'default_credentials_tls_key_name', defaultProperties
-    }
-
-    int getDefaultServerPortUnsecured() {
-        properties.getNumberProperty 'default_server_port_unsecured', defaultProperties
-    }
-
-    int getDefaultServerPortSecured() {
-        properties.getNumberProperty 'default_server_port_secured', defaultProperties
-    }
-
-    String getDefaultServerProtoUnsecured() {
-        properties.getProperty 'default_server_proto_unsecured', defaultProperties
-    }
-
-    String getDefaultServerProtoSecured() {
-        properties.getProperty 'default_server_proto_secured', defaultProperties
+    def setupCredentials(ClusterHost host, Credentials c) {
+        if (!host.proto) {
+            if (c.hasProperty('tls') && c.tls.ca) {
+                host.proto = defaultServerProtoSecured
+            } else {
+                host.proto = defaultServerProtoUnsecured
+            }
+        }
+        if (!host.port) {
+            if (c.hasProperty('tls') && c.tls.ca) {
+                host.port = defaultServerPortSecured
+            } else {
+                host.port = defaultServerPortUnsecured
+            }
+        }
     }
 
     File getKubectlCmd() {
-        getFileProperty 'kubectl_cmd', binDir
+        getScriptFileProperty 'kubectl_cmd'
     }
 
     String getRobobeeLabelNode() {
-        properties.getProperty 'robobee_label_node', defaultProperties
+        getScriptProperty 'robobee_label_node'
+    }
+
+    String getKubernetesLabelHostname() {
+        getScriptProperty 'kubernetes_label_hostname'
+    }
+
+    int getDefaultServerPortUnsecured() {
+        getScriptNumberProperty 'default_server_port_unsecured'
+    }
+
+    int getDefaultServerPortSecured() {
+        getScriptNumberProperty 'default_server_port_secured'
+    }
+
+    String getDefaultServerProtoUnsecured() {
+        getScriptProperty 'default_server_proto_unsecured'
+    }
+
+    String getDefaultServerProtoSecured() {
+        getScriptProperty 'default_server_proto_secured'
     }
 
     @Override

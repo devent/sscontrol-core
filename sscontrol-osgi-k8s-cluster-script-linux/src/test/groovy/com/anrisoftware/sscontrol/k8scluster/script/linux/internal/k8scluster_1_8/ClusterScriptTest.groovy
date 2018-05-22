@@ -32,9 +32,55 @@ import groovy.util.logging.Slf4j
 class ClusterScriptTest extends AbstractClusterScriptTest {
 
     @Test
-    void "unsecured"() {
+    void "script with implicit default context"() {
         def test = [
-            name: "unsecured",
+            name: "implicit_context",
+            test: "https://project.anrisoftware.com/issues/4020",
+            input: '''
+service "ssh", host: "localhost", socket: localhostSocket
+service "k8s-cluster", target: 'default'
+''',
+            scriptVars: [localhostSocket: localhostSocket],
+            generatedDir: folder.newFolder(),
+            expected: { Map args ->
+                File dir = args.dir
+                File gen = args.test.generatedDir
+                assert new File(dir, "chmod.out").isFile() == false
+                assert new File(dir, "mkdir.out").isFile() == false
+                assert new File(dir, "sudo.out").isFile() == false
+            },
+        ]
+        doTest test
+    }
+
+    @Test
+    void "script with unsecured context"() {
+        def test = [
+            name: "unsecured_context",
+            test: "https://project.anrisoftware.com/issues/4019",
+            input: '''
+service "ssh", host: "localhost", socket: localhostSocket
+service "k8s-cluster", target: 'default' with {
+    context name: 'default-system'
+}
+''',
+            scriptVars: [localhostSocket: localhostSocket],
+            generatedDir: folder.newFolder(),
+            expected: { Map args ->
+                File dir = args.dir
+                File gen = args.test.generatedDir
+                assert new File(dir, "chmod.out").isFile() == false
+                assert new File(dir, "mkdir.out").isFile() == false
+                assert new File(dir, "sudo.out").isFile() == false
+            },
+        ]
+        doTest test
+    }
+
+    @Test
+    void "script with unsecured cluster and context"() {
+        def test = [
+            name: "unsecured_cluster",
             input: '''
 service "ssh", host: "localhost", socket: localhostSocket
 service "k8s-cluster", target: 'default' with {
@@ -47,38 +93,9 @@ service "k8s-cluster", target: 'default' with {
             expected: { Map args ->
                 File dir = args.dir
                 File gen = args.test.generatedDir
-                assertFileResource ClusterScriptTest, dir, "chmod.out", "${args.test.name}_chmod_expected.txt"
-                assertFileResource ClusterScriptTest, dir, "mkdir.out", "${args.test.name}_mkdir_expected.txt"
-                assertFileResource ClusterScriptTest, dir, "sudo.out", "${args.test.name}_sudo_expected.txt"
-                assertFileResource ClusterScriptTest, dir, "wget.out", "${args.test.name}_wget_expected.txt"
-            },
-        ]
-        doTest test
-    }
-
-    @Test
-    void "client_cert"() {
-        def test = [
-            name: "client_cert",
-            input: '''
-service "ssh", host: "localhost", socket: localhostSocket
-service "k8s-cluster", target: 'default' with {
-    cluster name: 'default-cluster'
-    context name: 'default-system'
-    credentials type: 'cert', name: 'default-admin', ca: cert.ca, cert: cert.cert, key: cert.key
-}
-''',
-            scriptVars: [localhostSocket: localhostSocket, cert: [ca: certCaPem, cert: certCertPem, key: certKeyPem]],
-            generatedDir: folder.newFolder(),
-            expected: { Map args ->
-                File dir = args.dir
-                File gen = args.test.generatedDir
-                assertFileResource ClusterScriptTest, dir, "chmod.out", "${args.test.name}_chmod_expected.txt"
-                assertFileResource ClusterScriptTest, dir, "mkdir.out", "${args.test.name}_mkdir_expected.txt"
-                assertFileResource ClusterScriptTest, dir, "sudo.out", "${args.test.name}_sudo_expected.txt"
-                assertFileResource ClusterScriptTest, dir, "wget.out", "${args.test.name}_wget_expected.txt"
-                assertFileResource ClusterScriptTest, dir, "scp.out", "${args.test.name}_scp_expected.txt"
-                assertFileResource ClusterScriptTest, dir, "cp.out", "${args.test.name}_cp_expected.txt"
+                assert new File(dir, "chmod.out").isFile() == false
+                assert new File(dir, "mkdir.out").isFile() == false
+                assert new File(dir, "sudo.out").isFile() == false
             },
         ]
         doTest test

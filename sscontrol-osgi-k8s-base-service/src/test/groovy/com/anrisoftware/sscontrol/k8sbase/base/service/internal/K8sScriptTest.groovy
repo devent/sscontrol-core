@@ -26,6 +26,7 @@ import com.anrisoftware.globalpom.core.resources.ResourcesModule
 import com.anrisoftware.globalpom.core.strings.StringsModule
 import com.anrisoftware.propertiesutils.PropertiesUtilsModule
 import com.anrisoftware.sscontrol.debug.internal.DebugLoggingModule
+import com.anrisoftware.sscontrol.k8sbase.base.service.external.CanalPlugin
 import com.anrisoftware.sscontrol.k8sbase.base.service.external.EtcdPlugin
 import com.anrisoftware.sscontrol.k8sbase.base.service.external.K8s
 import com.anrisoftware.sscontrol.k8sbase.base.service.internal.K8sImpl.K8sImplFactory
@@ -65,7 +66,14 @@ class K8sScriptTest {
             name: 'cluster args',
             input: """
 service "k8s-master" with {
-    cluster name: 'master-0', advertise: '192.168.0.1', hostname: '192.168.0.1', service: '10.3.0.0/24', pod: '10.2.0.0/16', dns: '10.3.0.10', api: 'http://localhost:8080'
+    cluster name: 'master-0',
+        target: "default",
+        advertise: '192.168.0.1',
+        service: '10.3.0.0/24',
+        pod: '10.2.0.0/16',
+        domain: 'cluster.local',
+        api: 'http://localhost:8080',
+        join: 'kubeadm join --token 34f578.e9676c9fc49544bb 192.168.56.200:443 --discovery-token-ca-cert-hash sha256:7501bc596d3dce2f88ece232d3454876293bea94884bb19f90f2ebc6824e845f'
 }
 """,
             expected: { HostServices services ->
@@ -76,9 +84,10 @@ service "k8s-master" with {
                 assert s.cluster.advertiseAddress == '192.168.0.1'
                 assert s.cluster.serviceRange == '10.3.0.0/24'
                 assert s.cluster.podRange == '10.2.0.0/16'
-                assert s.cluster.dnsAddress == '10.3.0.10'
+                assert s.cluster.dnsDomain == 'cluster.local'
                 assert s.cluster.apiServers.size() == 1
                 assert s.cluster.apiServers[0] == 'http://localhost:8080'
+                assert s.cluster.joinCommand == 'kubeadm join --token 34f578.e9676c9fc49544bb 192.168.56.200:443 --discovery-token-ca-cert-hash sha256:7501bc596d3dce2f88ece232d3454876293bea94884bb19f90f2ebc6824e845f'
             },
         ]
         doTest test
@@ -151,15 +160,60 @@ service "k8s-master" with {
     }
 
     @Test
-    void "kubelet"() {
+    void "canal plugin flannel iface with argument"() {
         def test = [
-            name: 'kubelet',
+            input: """
+service "k8s-master" with {
+    plugin "canal", iface: "enp0s8"
+}
+""",
+            expected: { HostServices services ->
+                assert services.getServices('k8s-master').size() == 1
+                K8s s = services.getServices('k8s-master')[0] as K8s
+                assert s.targets.size() == 0
+                assert s.cluster.serviceRange == null
+                assert s.plugins.size() == 1
+                CanalPlugin e = s.plugins.canal
+                assert e.name == 'canal'
+                assert e.iface == "enp0s8"
+            },
+        ]
+        doTest test
+    }
+
+    @Test
+    void "canal plugin flannel iface with statement"() {
+        def test = [
+            input: """
+service "k8s-master" with {
+    plugin "canal" with {
+        iface name: "enp0s8"
+    }
+}
+""",
+            expected: { HostServices services ->
+                assert services.getServices('k8s-master').size() == 1
+                K8s s = services.getServices('k8s-master')[0] as K8s
+                assert s.targets.size() == 0
+                assert s.cluster.serviceRange == null
+                assert s.plugins.size() == 1
+                CanalPlugin e = s.plugins.canal
+                assert e.name == 'canal'
+                assert e.iface == "enp0s8"
+            },
+        ]
+        doTest test
+    }
+
+    @Test
+    void "kubelet with statements"() {
+        def test = [
             input: '''
 service "k8s-master" with {
     kubelet.with {
         tls ca: "ca.pem", cert: "cert.pem", key: "key.pem"
         preferred types: "InternalIP,Hostname,ExternalIP"
-        bind port: 10250
+        bind address: "192.168.56.200", port: 10250
     }
 }
 ''',
@@ -170,11 +224,30 @@ service "k8s-master" with {
                 assert s.kubelet.tls.cert.toString() =~ /.*cert\.pem/
                 assert s.kubelet.tls.key.toString() =~ /.*key\.pem/
                 assert s.kubelet.preferredAddressTypes.size() == 3
+                assert s.kubelet.address == "192.168.56.200"
                 assert s.kubelet.port == 10250
                 def k = -1
                 assert s.kubelet.preferredAddressTypes[++k] == "InternalIP"
                 assert s.kubelet.preferredAddressTypes[++k] == "Hostname"
                 assert s.kubelet.preferredAddressTypes[++k] == "ExternalIP"
+            },
+        ]
+        doTest test
+    }
+
+    @Test
+    void "kubelet bind arguments"() {
+        def test = [
+            input: '''
+service "k8s-master" with {
+    kubelet address: "192.168.56.200", port: 10250
+}
+''',
+            expected: { HostServices services ->
+                assert services.getServices('k8s-master').size() == 1
+                K8s s = services.getServices('k8s-master')[0] as K8s
+                assert s.kubelet.address == "192.168.56.200"
+                assert s.kubelet.port == 10250
             },
         ]
         doTest test

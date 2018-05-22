@@ -48,7 +48,7 @@ class FromRepositoryHeapsterGrafanaEphemeralClusterTest extends AbstractFromRepo
         def test = [
             name: "heapster_grafana_ephemeral",
             script: '''
-service "ssh", host: "andrea-master.robobee-test.test", socket: robobeeSocket
+service "ssh", host: "node-0.robobee-test.test", socket: robobeeSocket
 service "k8s-cluster" with {
     credentials type: 'cert', name: 'default-admin', ca: certs.worker.ca, cert: certs.worker.cert, key: certs.worker.key
 }
@@ -56,20 +56,25 @@ service "repo-git", group: "heapster-influxdb-grafana-monitoring" with {
     remote url: "git@github.com:robobee-repos/heapster-influxdb-grafana-monitoring.git"
     credentials "ssh", key: robobeeKey
 }
-service "from-repository", repo: "heapster-influxdb-grafana-monitoring" with {
+service "from-repository", repo: "heapster-influxdb-grafana-monitoring", dest: "/etc/kubernetes/addons/cluster-monitoring" with {
     vars << [
         heapster: [
-            image: [name: 'gcr.io/google_containers/heapster-amd64', version: 'v1.5.0-beta.0'],
-            affinityRequired: true,
-            tolerations: [
-                [key: 'node.alpha.kubernetes.io/ismaster', effect: 'NoSchedule'],
-                [key: 'robobeerun.com/dedicated', effect: 'NoSchedule'],
-            ],
+            image: [name: "k8s.gcr.io/heapster-amd64", version: "v1.5.2"],
+            affinity: [key: "robobeerun.com/heapster", name: "required", required: true],
+            allowOnMaster: true
+        ]
+    ]
+    vars << [
+        eventer: [
+            baseCpu: '25m',
+            extraCpu: '0',
+            baseMemory: '40Mi',
+            extraMemory: '5Mi',
         ]
     ]
     vars << [
         resizer: [
-            image: [name: 'gcr.io/google_containers/addon-resizer', version: '1.7']
+            image: [name: 'k8s.gcr.io/addon-resizer', version: '1.8.1']
         ]
     ]
     vars << [
@@ -87,35 +92,25 @@ service "from-repository", repo: "heapster-influxdb-grafana-monitoring" with {
         ]
     ]
     vars << [
-        eventer: [
-            baseCpu: '25m',
-            extraCpu: '0',
-            baseMemory: '40Mi',
-            extraMemory: '5Mi',
-        ]
-    ]
-    vars << [
         influxGrafana: [
             image: [version: 'v4'],
-            affinityRequired: true,
-            tolerations: [
-                [key: 'node.alpha.kubernetes.io/ismaster', effect: 'NoSchedule'],
-                [key: 'robobeerun.com/dedicated', effect: 'NoSchedule'],
-            ]
+            affinity: [key: "robobeerun.com/heapster", name: "required", required: true],
+            allowOnMaster: true
         ]
     ]
     vars << [
-        heapsterInfluxdb: [
-            image: [name: 'gcr.io/google_containers/heapster-influxdb-amd64', version: 'v1.3.3'],
+        influxdb: [
+            image: [name: 'k8s.gcr.io/heapster-influxdb-amd64', version: 'v1.3.3'],
             limits: [cpu: '50m', memory: '100Mi'],
             requests: [cpu: '50m', memory: '100Mi'],
         ]
     ]
     vars << [
-        heapsterGrafana: [
-            image: [name: 'gcr.io/google_containers/heapster-grafana-amd64', version: 'v4.4.3'],
+        grafana: [
+            image: [name: 'k8s.gcr.io/heapster-grafana-amd64', version: 'v4.4.3'],
             limits: [cpu: '50m', memory: '50Mi'],
             requests: [cpu: '50m', memory: '50Mi'],
+            auth: [basic: true, anonymous: false],
         ]
     ]
 }

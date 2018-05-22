@@ -108,15 +108,15 @@ class UnixTestUtil {
 
     static assertFileResource(Class context, File dir, String name, String res) {
         def file = new File(dir, name)
-        assert file.isFile() == true
+        assert file.isFile() == true : "File not found: ${file}"
         def resource = context.getResource(res)
-        assert resource != null
+        assert resource != null : "Resource not found: ${context}#${res}"
         assertStringContent fileToStringReplace(file), resourceToString(resource)
     }
 
     static assertStringResource(Class context, String string, String res) {
         def resource = context.getResource(res)
-        assert resource != null
+        assert resource != null : "Resource not found: ${context}#${res}"
         assertStringContent string, resourceToString(resource)
     }
 
@@ -171,4 +171,6 @@ class UnixTestUtil {
     static final URL idCommand = UnixTestUtil.class.getResource('id_cmd.txt')
 
     static final URL robobeeKey = UnixTestUtil.class.getResource('robobee')
+
+    static final URL robobeePub = UnixTestUtil.class.getResource('robobee.pub')
 }

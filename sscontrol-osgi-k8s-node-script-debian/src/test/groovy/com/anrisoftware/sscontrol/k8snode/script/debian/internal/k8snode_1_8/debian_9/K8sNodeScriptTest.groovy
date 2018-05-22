@@ -33,23 +33,39 @@ import groovy.util.logging.Slf4j
 @Slf4j
 class K8sNodeScriptTest extends AbstractNodeScriptTest {
 
-    @Test
-    void "script_tls_api_host"() {
+    @Test(expected=AssertionError)
+    void "script_no_join"() {
         def test = [
-            name: "script_tls_api_host",
+            name: "script_no_join",
             script: '''
 service "ssh", host: "localhost", socket: localhostSocket
-service "k8s-node", name: "andrea-cluster", advertise: '192.168.0.200', api: 'https://192.168.0.100', cluster: "default" with {
-    plugin "flannel"
-    plugin "calico"
-    kubelet.with {
-        tls certs
-        client certs
-    }
-}
+service "ssh", host: "etcd-0", socket: localhostSocket, group: "etcd"
+service "k8s-node", name: "node-0"
 ''',
             scriptVars: [localhostSocket: localhostSocket, certs: certs],
             expectedServicesSize: 2,
+            generatedDir: folder.newFolder(),
+            expected: { Map args ->
+                File dir = args.dir
+                File gen = args.test.generatedDir
+            },
+        ]
+        doTest test
+    }
+
+    @Test
+    void "script_join_arg"() {
+        def test = [
+            name: "script_join_arg",
+            script: '''
+service "ssh", host: "localhost", socket: localhostSocket
+service "ssh", host: "localhost", socket: localhostSocket, group: "masters"
+service "ssh", host: "etcd-0", socket: localhostSocket, group: "etcd"
+service "k8s-cluster", target: "masters"
+service "k8s-node", name: "node-0", join: 'kubeadm join abc'
+''',
+            scriptVars: [localhostSocket: localhostSocket, certs: certs],
+            expectedServicesSize: 3,
             generatedDir: folder.newFolder(),
             expected: { Map args ->
                 File dir = args.dir
@@ -60,40 +76,23 @@ service "k8s-node", name: "andrea-cluster", advertise: '192.168.0.200', api: 'ht
                 assertFileResource K8sNodeScriptTest, dir, "mkdir.out", "${args.test.name}_mkdir_expected.txt"
                 assertFileResource K8sNodeScriptTest, dir, "scp.out", "${args.test.name}_scp_expected.txt"
                 assertFileResource K8sNodeScriptTest, dir, "sudo.out", "${args.test.name}_sudo_expected.txt"
-                checkAlternatives K8sNodeScriptTest, dir, 4, "systemctl.out", { int i -> "${args.test.name}_systemctl${i+1}_expected.txt" }
-                assertFileResource K8sNodeScriptTest, dir, "modprobe.out", "${args.test.name}_modprobe_expected.txt"
-                assertFileResource K8sNodeScriptTest, new File(gen, '/etc/systemd/system'), "kubelet.service", "${args.test.name}_kubelet_service_expected.txt"
-                assertFileResource K8sNodeScriptTest, new File(gen, '/etc/systemd/system/docker.service.d'), "10_kube_options.conf", "${args.test.name}_kube_options_conf_expected.txt"
-                assertFileResource K8sNodeScriptTest, new File(gen, '/etc/sysconfig'), "kubelet", "${args.test.name}_kubelet_conf_expected.txt"
-                assertFileResource K8sNodeScriptTest, new File(gen, '/usr/local/bin'), "host-rkt", "${args.test.name}_host_rkt_expected.txt"
-                assertFileResource K8sNodeScriptTest, new File(gen, '/usr/local/bin'), "kubelet-wrapper", "${args.test.name}_kubelet_wrapper_expected.txt"
-                assertFileResource K8sNodeScriptTest, new File(gen, '/etc/kubernetes'), "kubelet.yaml", "${args.test.name}_kubelet_yaml_expected.txt"
-                assertFileResource K8sNodeScriptTest, new File(gen, '/etc/kubernetes/manifests'), "kube-proxy.yaml", "${args.test.name}_kube_proxy_yaml_expected.txt"
-                assertFileResource K8sNodeScriptTest, new File(gen, '/etc/kubernetes/cni/net.d'), "10-flannel.conf", "${args.test.name}_cni_flannel_conf_expected.txt"
-                assertFileResource K8sNodeScriptTest, new File(gen, '/etc/kubernetes'), "worker-kubeconfig.yaml", "${args.test.name}_worker_kubeconfig_yaml_expected.txt"
+                assertFileResource K8sNodeScriptTest, dir, "kubeadm.out", "${args.test.name}_kubeadm_expected.txt"
+                assertFileResource K8sNodeScriptTest, new File(gen, "kubelet.service.d"), "20-robobee.conf", "${args.test.name}_kubelet_extra_conf_expected.txt"
+                //assertFileResource K8sNodeScriptTest, dir, "kubectl.out", "${args.test.name}_kubectl_expected.txt"
             },
         ]
         doTest test
     }
 
     @Test
-    void "script_tls_api_target"() {
+    void "script_kubelet_labels"() {
         def test = [
-            name: "script_tls_api_target",
+            name: "script_kubelet_labels",
             script: '''
-service "ssh", group: "master" with {
-    host "master.robobee.test", socket: localhostSocket
-}
-service "ssh", group: "nodes" with {
-    host "localhost", socket: localhostSocket
-}
-service "k8s-node", name: "andrea-cluster", target: "nodes", advertise: '192.168.0.200', api: targets['master'] with {
-    plugin "flannel"
-    plugin "calico"
-    kubelet.with {
-        tls certs
-        client certs
-    }
+service "ssh", host: "localhost", socket: localhostSocket
+service "ssh", host: "etcd-0", socket: localhostSocket, group: "etcd"
+service "k8s-node", name: "node-0", join: 'kubeadm join abc' with {
+    label << "some-label=value"
 }
 ''',
             scriptVars: [localhostSocket: localhostSocket, certs: certs],
@@ -102,33 +101,20 @@ service "k8s-node", name: "andrea-cluster", target: "nodes", advertise: '192.168
             expected: { Map args ->
                 File dir = args.dir
                 File gen = args.test.generatedDir
-                assertFileResource K8sNodeScriptTest, new File(gen, '/etc/systemd/system'), "kubelet.service", "${args.test.name}_kubelet_service_expected.txt"
-                assertFileResource K8sNodeScriptTest, new File(gen, '/etc/sysconfig'), "kubelet", "${args.test.name}_kubelet_conf_expected.txt"
-                assertFileResource K8sNodeScriptTest, new File(gen, '/etc/kubernetes/manifests'), "kube-proxy.yaml", "${args.test.name}_kube_proxy_yaml_expected.txt"
+                assertFileResource K8sNodeScriptTest, new File(gen, "kubelet.service.d"), "20-robobee.conf", "${args.test.name}_kubelet_extra_conf_expected.txt"
             },
         ]
         doTest test
     }
 
     @Test
-    void "script_ufw"() {
+    void "open ports for node via ufw"() {
         def test = [
-            name: "script_ufw",
+            name: "script_nodes_ufw",
             script: '''
-service "ssh", group: "master" with {
-    host "master.robobee.test", socket: localhostSocket
-}
-service "ssh", group: "nodes" with {
-    host "localhost", socket: localhostSocket
-}
-service "k8s-node", name: "andrea-cluster", target: "nodes", advertise: '192.168.0.200', api: targets['master'] with {
-    plugin "flannel"
-    plugin "calico"
-    kubelet.with {
-        tls certs
-        client certs
-    }
-}
+service "ssh", host: "localhost", socket: localhostSocket
+service "ssh", host: "etcd-0", socket: localhostSocket, group: "etcd"
+service "k8s-node", name: "node-0", join: 'kubeadm join abc'
 ''',
             scriptVars: [localhostSocket: localhostSocket, certs: certs],
             before: { Map test ->
@@ -146,35 +132,24 @@ service "k8s-node", name: "andrea-cluster", target: "nodes", advertise: '192.168
         doTest test
     }
 
-    //@Test
-    void "script_taints"() {
+    @Test
+    void "explicit kubelet node address"() {
         def test = [
-            name: "script_taints",
+            name: "script_kubelet_node_address",
             script: '''
-service "ssh", group: "master" with {
-    host "master.robobee.test", socket: localhostSocket
-}
-service "ssh", group: "nodes" with {
-    host "localhost", socket: localhostSocket
-}
-service "k8s-cluster", target: "master" with {
-    credentials type: 'cert', name: 'default-admin', ca: certs.ca
-}
-service "k8s-node", name: "andrea-cluster", target: "nodes", advertise: '192.168.0.200', api: targets['master'] with {
-    plugin "flannel"
-    plugin "calico"
-    taint << "robobeerun.com/dedicated=:NoSchedule"
+service "ssh", host: "localhost", socket: localhostSocket
+service "ssh", host: "etcd-0", socket: localhostSocket, group: "etcd"
+service "k8s-node", name: "node-0", join: 'kubeadm join abc' with {
+    kubelet address: "192.168.56.200"
 }
 ''',
             scriptVars: [localhostSocket: localhostSocket, certs: certs],
-            expectedServicesSize: 3,
+            expectedServicesSize: 2,
             generatedDir: folder.newFolder(),
             expected: { Map args ->
                 File dir = args.dir
                 File gen = args.test.generatedDir
-                assertFileResource K8sNodeScriptTest, new File(gen, '/etc/systemd/system'), "kubelet.service", "${args.test.name}_kubelet_service_expected.txt"
-                assertFileResource K8sNodeScriptTest, new File(gen, '/etc/sysconfig'), "kubelet", "${args.test.name}_kubelet_conf_expected.txt"
-                assertFileResource K8sNodeScriptTest, dir, "kubectl.out", "${args.test.name}_kubectl_expected.txt"
+                assertFileResource K8sNodeScriptTest, new File(gen, "kubelet.service.d"), "20-robobee.conf", "${args.test.name}_kubelet_extra_conf_expected.txt"
             },
         ]
         doTest test

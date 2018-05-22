@@ -29,7 +29,6 @@
         <module>../sscontrol-osgi-command-shell-openssh</module>
         <module>../sscontrol-osgi-command-template</module>
         <module>../sscontrol-osgi-debug</module>
-        <module>../sscontrol-osgi-dhclient</module>
         <module>../sscontrol-osgi-docker-script-debian</module>
         <module>../sscontrol-osgi-docker-script-systemd</module>
         <module>../sscontrol-osgi-docker-service</module>
@@ -50,14 +49,12 @@
         <module>../sscontrol-osgi-hostname-service</module>
         <module>../sscontrol-osgi-hosts-script-linux</module>
         <module>../sscontrol-osgi-hosts-service</module>
-        <module>../sscontrol-osgi-icinga-service</module>
-        <module>../sscontrol-osgi-icinga-script-debian</module>
-        <module>../sscontrol-osgi-icinga-script-icinga2</module>
         <module>../sscontrol-osgi-k8s-backup-client</module>
         <module>../sscontrol-osgi-k8s-backup-script-linux</module>
         <module>../sscontrol-osgi-k8s-backup-service</module>
         <module>../sscontrol-osgi-k8s-base-service</module>
-        <module>../sscontrol-osgi-k8s-base-script-upstream</module>
+        <module>../sscontrol-osgi-k8s-base-script-upstream-debian</module>
+        <module>../sscontrol-osgi-k8s-base-script-upstream-linux</module>
         <module>../sscontrol-osgi-k8s-cluster-service</module>
         <module>../sscontrol-osgi-k8s-cluster-script-linux</module>
         <module>../sscontrol-osgi-k8s-from-repository-service</module>
@@ -67,10 +64,8 @@
         <module>../sscontrol-osgi-k8s-kubectl-linux</module>
         <module>../sscontrol-osgi-k8s-master-service</module>
         <module>../sscontrol-osgi-k8s-master-script-debian</module>
-        <module>../sscontrol-osgi-k8s-master-script-upstream</module>
         <module>../sscontrol-osgi-k8s-node-service</module>
         <module>../sscontrol-osgi-k8s-node-script-debian</module>
-        <module>../sscontrol-osgi-k8s-node-script-upstream</module>
         <module>../sscontrol-osgi-k8s-restore-script-linux</module>
         <module>../sscontrol-osgi-k8s-restore-service</module>
         <module>../sscontrol-osgi-registry-docker-service</module>
@@ -102,7 +97,6 @@
         <module>../sscontrol-osgi-types-ssh</module>
         <module>../sscontrol-osgi-utils-centos</module>
         <module>../sscontrol-osgi-utils-debian</module>
-        <module>../sscontrol-osgi-utils-fabric-test</module>
         <module>../sscontrol-osgi-utils-st-base64renderer</module>
         <module>../sscontrol-osgi-utils-st-durationrenderer</module>
         <module>../sscontrol-osgi-utils-st-miscrenderers</module>

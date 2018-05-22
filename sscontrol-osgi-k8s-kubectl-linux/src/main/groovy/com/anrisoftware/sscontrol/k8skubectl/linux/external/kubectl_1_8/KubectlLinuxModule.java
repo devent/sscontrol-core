@@ -15,9 +15,7 @@
  */
 package com.anrisoftware.sscontrol.k8skubectl.linux.external.kubectl_1_8;
 
-import com.anrisoftware.sscontrol.types.cluster.external.Credentials;
 import com.google.inject.AbstractModule;
-import com.google.inject.assistedinject.FactoryModuleBuilder;
 
 /**
  *
@@ -29,21 +27,6 @@ public class KubectlLinuxModule extends AbstractModule {
 
     @Override
     protected void configure() {
-        install(new FactoryModuleBuilder()
-                .implement(Credentials.class, CredentialsNop.class)
-                .build(CredentialsNopFactory.class));
-        install(new FactoryModuleBuilder()
-                .implement(KubectlClient.class, KubectlClient.class)
-                .build(KubectlClientFactory.class));
-        install(new FactoryModuleBuilder()
-                .implement(KubeNodeClient.class, KubeNodeClient.class)
-                .build(KubeNodeClientFactory.class));
-        install(new FactoryModuleBuilder()
-                .implement(KubeNode.class, KubeNode.class)
-                .build(KubeNodeFactory.class));
-        install(new FactoryModuleBuilder()
-                .implement(KubeNodeResource.class, KubeNodeResource.class)
-                .build(KubeNodeResourceFactory.class));
     }
 
 }

@@ -94,6 +94,8 @@ public class RestoreImpl implements Restore {
 
     private final List<Source> sources;
 
+	private boolean dryrun;
+
     @Inject
     RestoreImpl(RestoreImplLogger log, HostServicePropertiesService propertiesService,
             @Assisted Map<String, Object> args) {
@@ -102,6 +104,7 @@ public class RestoreImpl implements Restore {
         this.targets = new ArrayList<>();
         this.clusters = new ArrayList<>();
         this.sources = new ArrayList<>();
+		this.dryrun = false;
         parseArgs(args);
     }
 
@@ -212,17 +215,17 @@ public class RestoreImpl implements Restore {
     }
 
     @Override
-    public ClusterHost getCluster() {
-        return getClusters().get(0);
+    public ClusterHost getClusterHost() {
+        return getClusterHosts().get(0);
     }
 
-    public void addClusters(List<ClusterHost> list) {
+    public void addClusterHosts(List<ClusterHost> list) {
         this.clusters.addAll(list);
         log.clustersAdded(this, list);
     }
 
     @Override
-    public List<ClusterHost> getClusters() {
+    public List<ClusterHost> getClusterHosts() {
         return Collections.unmodifiableList(clusters);
     }
 
@@ -260,16 +263,34 @@ public class RestoreImpl implements Restore {
         return sources;
     }
 
+	public void setDryrun(boolean dryrun) {
+		this.dryrun = dryrun;
+		log.dryrunSet(this, dryrun);
+	}
+
     @Override
+	public boolean getDryrun() {
+		return dryrun;
+	}
+
+	@Override
     public String toString() {
         return new ToStringBuilder(this).append("name", getName())
                 .append("targets", getTargets())
-                .append("clusters", getClusters()).toString();
+                .append("clusters", getClusterHosts()).toString();
     }
 
     private void parseArgs(Map<String, Object> args) {
         parseTargets(args);
         parseClusters(args);
+		parseDryrun(args);
+	}
+
+	private void parseDryrun(Map<String, Object> args) {
+		Object v = args.get("dryrun");
+		if (v != null) {
+			setDryrun((boolean) v);
+		}
     }
 
     @SuppressWarnings("unchecked")
@@ -283,7 +304,7 @@ public class RestoreImpl implements Restore {
     private void parseClusters(Map<String, Object> args) {
         Object v = args.get("clusters");
         assertThat("clusters=null", v, notNullValue());
-        addClusters((List<ClusterHost>) v);
+        addClusterHosts((List<ClusterHost>) v);
     }
 
 }

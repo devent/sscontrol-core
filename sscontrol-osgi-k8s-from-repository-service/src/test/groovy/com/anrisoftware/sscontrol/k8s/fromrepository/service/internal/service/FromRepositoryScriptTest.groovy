@@ -82,9 +82,9 @@ class FromRepositoryScriptTest {
     File tmpRepo
 
     @Test
-    void "cluster"() {
+    void "use external cluster in the group default implicit"() {
         def test = [
-            name: 'cluster',
+            name: 'cluster_default',
             script: '''
 service "k8s-cluster"
 service "repo-git", group: "wordpress-app" with {
@@ -92,6 +92,35 @@ service "repo-git", group: "wordpress-app" with {
     credentials "ssh", key: "id_rsa"
 }
 service "from-repository", repo: "wordpress-app"
+''',
+            before: { Map args ->
+                def tmp = folder.newFolder()
+                unzip FromRepositoryScriptTest.class.getResource("repo_only_app_zip.txt"), tmp
+                args.tmpRepo = tmp
+            },
+            scriptVars: [:],
+            expected: { HostServices services ->
+                assert services.getServices('from-repository').size() == 1
+                FromRepository s = services.getServices('from-repository')[0]
+                assert s.repo.repo.remote.uri.toString() == 'ssh://git@github.com/devent/wordpress-app.git'
+                assert s.repo.repo.credentials.type == 'ssh'
+                assert s.clusterHosts.size() == 1
+                assert s.clusterHosts[0].target.host == "localhost"
+            },
+        ]
+        doTest test
+    }
+
+    @Test
+    void "use kubectl host on explicit host default"() {
+        def test = [
+            name: 'kubectl_host_default',
+            script: '''
+service "repo-git", group: "wordpress-app" with {
+    remote url: "git@github.com:devent/wordpress-app.git"
+    credentials "ssh", key: "id_rsa"
+}
+service "from-repository", repo: "wordpress-app", cluster: "default"
 ''',
             before: { Map args ->
                 def tmp = folder.newFolder()
@@ -136,6 +165,122 @@ service "from-repository", repo: "wordpress-app" with {
                 assert s.vars.size() == 2
                 assert s.vars.mysql.size() == 2
                 assert s.vars.mysql.version == '5.6'
+            },
+        ]
+        doTest test
+    }
+
+    @Test
+    void "vars_add"() {
+        def test = [
+            name: 'vars_add',
+            script: '''
+service "k8s-cluster"
+service "repo-git", group: "wordpress-app" with {
+    remote url: "git@github.com:devent/wordpress-app.git"
+    credentials "ssh", key: "id_rsa"
+}
+service "from-repository", repo: "wordpress-app" with {
+    vars << [mysql: [version: "5.6", image: "mysql"]]
+    vars.mysql.putAll([name: "aaa"])
+}
+''',
+            before: { Map args ->
+                def tmp = folder.newFolder()
+                unzip FromRepositoryScriptTest.class.getResource("repo_only_app_zip.txt"), tmp
+                args.tmpRepo = tmp
+            },
+            scriptVars: [:],
+            expected: { HostServices services ->
+                assert services.getServices('from-repository').size() == 1
+                FromRepository s = services.getServices('from-repository')[0]
+                assert s.vars.size() == 1
+                assert s.vars.mysql.size() == 3
+                assert s.vars.mysql.version == '5.6'
+                assert s.vars.mysql.name == 'aaa'
+            },
+        ]
+        doTest test
+    }
+
+    @Test
+    void "load manifests to destination directory in argument"() {
+        def test = [
+            script: '''
+service "k8s-cluster"
+service "repo-git", group: "wordpress-app" with {
+    remote url: "git@github.com:devent/wordpress-app.git"
+    credentials "ssh", key: "id_rsa"
+}
+service "from-repository", repo: "wordpress-app", dest: "/etc/kubernetes/addon"
+''',
+            before: { Map args ->
+                def tmp = folder.newFolder()
+                unzip FromRepositoryScriptTest.class.getResource("repo_only_app_zip.txt"), tmp
+                args.tmpRepo = tmp
+            },
+            scriptVars: [:],
+            expected: { HostServices services ->
+                assert services.getServices('from-repository').size() == 1
+                FromRepository s = services.getServices('from-repository')[0]
+                assert s.vars.size() == 0
+                assert s.destination == "/etc/kubernetes/addon"
+            },
+        ]
+        doTest test
+    }
+
+    @Test
+    void "load manifests to destination directory as statement"() {
+        def test = [
+            script: '''
+service "k8s-cluster"
+service "repo-git", group: "wordpress-app" with {
+    remote url: "git@github.com:devent/wordpress-app.git"
+    credentials "ssh", key: "id_rsa"
+}
+service "from-repository", repo: "wordpress-app" with {
+    dest dir: "/etc/kubernetes/addon"
+}
+''',
+            before: { Map args ->
+                def tmp = folder.newFolder()
+                unzip FromRepositoryScriptTest.class.getResource("repo_only_app_zip.txt"), tmp
+                args.tmpRepo = tmp
+            },
+            scriptVars: [:],
+            expected: { HostServices services ->
+                assert services.getServices('from-repository').size() == 1
+                FromRepository s = services.getServices('from-repository')[0]
+                assert s.vars.size() == 0
+                assert s.destination == "/etc/kubernetes/addon"
+            },
+        ]
+        doTest test
+    }
+
+    @Test
+    void "dry-run to see the generated templates"() {
+        def test = [
+            script: '''
+service "k8s-cluster"
+service "repo-git", group: "wordpress-app" with {
+    remote url: "git@github.com:devent/wordpress-app.git"
+    credentials "ssh", key: "id_rsa"
+}
+service "from-repository", repo: "wordpress-app", dryrun: true
+''',
+            before: { Map args ->
+                def tmp = folder.newFolder()
+                unzip FromRepositoryScriptTest.class.getResource("repo_only_app_zip.txt"), tmp
+                args.tmpRepo = tmp
+            },
+            scriptVars: [:],
+            expected: { HostServices services ->
+                assert services.getServices('from-repository').size() == 1
+                FromRepository s = services.getServices('from-repository')[0]
+                assert s.vars.size() == 0
+                assert s.dryrun == true
             },
         ]
         doTest test

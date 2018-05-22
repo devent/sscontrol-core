@@ -31,8 +31,8 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import com.anrisoftware.sscontrol.k8s.fromrepository.service.external.FromRepository;
 import com.anrisoftware.sscontrol.types.cluster.external.ClusterHost;
-import com.anrisoftware.sscontrol.types.host.external.HostServicePropertiesService;
 import com.anrisoftware.sscontrol.types.host.external.HostServiceProperties;
+import com.anrisoftware.sscontrol.types.host.external.HostServicePropertiesService;
 import com.anrisoftware.sscontrol.types.host.external.HostServiceService;
 import com.anrisoftware.sscontrol.types.host.external.TargetHost;
 import com.anrisoftware.sscontrol.types.misc.external.StringListPropertyUtil.ListProperty;
@@ -72,6 +72,10 @@ public class FromRepositoryImpl implements FromRepository {
 
     private final Map<String, Object> vars;
 
+    private String destination;
+
+    private boolean dryrun;
+
     @Inject
     FromRepositoryImpl(FromRepositoryImplLogger log,
             HostServicePropertiesService propertiesService,
@@ -83,6 +87,7 @@ public class FromRepositoryImpl implements FromRepository {
         this.repos = new ArrayList<>();
         this.registries = new ArrayList<>();
         this.vars = new HashMap<>();
+        this.dryrun = false;
         parseArgs(args);
     }
 
@@ -111,6 +116,17 @@ public class FromRepositoryImpl implements FromRepository {
         return vars;
     }
 
+    /**
+     * <pre>
+     * dest dir: "/etc/kubernetes/addon"
+     * </pre>
+     */
+    public void dest(Map<String, Object> args) {
+        Object v = args.get("dir");
+        assertThat("dir=null", v, notNullValue());
+        setDestination(v.toString());
+    }
+
     @Override
     public TargetHost getTarget() {
         return getTargets().get(0);
@@ -126,17 +142,17 @@ public class FromRepositoryImpl implements FromRepository {
     }
 
     @Override
-    public ClusterHost getCluster() {
-        return getClusters().get(0);
+    public ClusterHost getClusterHost() {
+        return getClusterHosts().get(0);
     }
 
-    public void addClusters(List<ClusterHost> list) {
+    public void addClusterHosts(List<ClusterHost> list) {
         this.clusters.addAll(list);
         log.clustersAdded(this, list);
     }
 
     @Override
-    public List<ClusterHost> getClusters() {
+    public List<ClusterHost> getClusterHosts() {
         return Collections.unmodifiableList(clusters);
     }
 
@@ -186,16 +202,37 @@ public class FromRepositoryImpl implements FromRepository {
         return serviceProperties;
     }
 
+    public void setDestination(String destination) {
+        this.destination = destination;
+        log.destinationSet(this, destination);
+    }
+
+    @Override
+    public String getDestination() {
+        return destination;
+    }
+
     @Override
     public String getName() {
         return "from-repository";
+    }
+
+    public void setDryrun(boolean dryrun) {
+        this.dryrun = dryrun;
+        log.dryrunSet(this, dryrun);
+    }
+
+    @Override
+    public boolean getDryrun() {
+        return dryrun;
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this).append("name", getName())
                 .append("targets", getTargets())
-                .append("clusters", getClusters()).append("repos", getRepos())
+                .append("clusters", getClusterHosts())
+                .append("repos", getRepos())
                 .append("registries", getRegistries()).toString();
     }
 
@@ -204,6 +241,22 @@ public class FromRepositoryImpl implements FromRepository {
         parseClusters(args);
         parseRepos(args);
         parseRegistries(args);
+        parseDestination(args);
+        parseDryrun(args);
+    }
+
+    private void parseDryrun(Map<String, Object> args) {
+        Object v = args.get("dryrun");
+        if (v != null) {
+            setDryrun((boolean) v);
+        }
+    }
+
+    private void parseDestination(Map<String, Object> args) {
+        Object v = args.get("dest");
+        if (v != null) {
+            setDestination(v.toString());
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -217,7 +270,7 @@ public class FromRepositoryImpl implements FromRepository {
     private void parseClusters(Map<String, Object> args) {
         Object v = args.get("clusters");
         assertThat("clusters=null", v, notNullValue());
-        addClusters((List<ClusterHost>) v);
+        addClusterHosts((List<ClusterHost>) v);
     }
 
     @SuppressWarnings("unchecked")

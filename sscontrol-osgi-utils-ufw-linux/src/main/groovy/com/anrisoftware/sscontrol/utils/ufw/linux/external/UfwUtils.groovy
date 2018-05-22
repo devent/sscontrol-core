@@ -64,16 +64,27 @@ abstract class UfwUtils {
      */
     List getTcpPorts(List ports) {
         def list = ports
-        list.inject([]) { l, String v ->
-            l << v.replaceAll('-', ':')
+        list.inject([]) { l, def v ->
+            if (v instanceof String) {
+                l << v.replaceAll('-', ':')
+            } else {
+                l << v
+            }
         }
     }
 
     /**
      * Allows ports on all nodes.
      */
-    def allowPortsOnNodes(List<SshHost> nodes, List<String> nodesAddresses, List ports, Object script) {
+    def allowTcpPortsOnNodes(List<SshHost> nodes, List<String> nodesAddresses, List ports, Object script) {
         allowPortsOnNodes nodes, nodesAddresses, ports, "tcp", script
+    }
+
+    /**
+     * Allows ports on all nodes.
+     */
+    def allowUdpPortsOnNodes(List<SshHost> nodes, List<String> nodesAddresses, List ports, Object script) {
+        allowPortsOnNodes nodes, nodesAddresses, ports, "udp", script
     }
 
     /**
@@ -102,5 +113,13 @@ abstract class UfwUtils {
     def allowPortsToNetwork(List ports, def toNetwork, Object script) {
         script.shell privileged: true, resource: ufwCommandsTemplate, name: "ufwAllowPortsToNetwork",
         vars: [ports: getTcpPorts(ports), toNetwork: toNetwork] call()
+    }
+
+    /**
+     * Allows ports any.
+     */
+    def ufwAllowPortsToAny(List ports, Object script) {
+        script.shell privileged: true, resource: ufwCommandsTemplate, name: "ufwAllowPortsToAny",
+        vars: [ports: getTcpPorts(ports)] call()
     }
 }

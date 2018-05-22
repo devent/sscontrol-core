@@ -94,9 +94,9 @@ service "etcd", member: "default" with {
     }
 
     @Test
-    void "cert_auth"() {
+    void "script_cert_auth"() {
         def test = [
-            name: "cert_auth",
+            name: "script_cert_auth",
             script: '''
 service "ssh", host: "localhost", socket: localhostSocket
 service "etcd", member: "default" with {
@@ -119,9 +119,9 @@ service "etcd", member: "default" with {
     }
 
     @Test
-    void "static_peer"() {
+    void "script_static_peer"() {
         def test = [
-            name: "static_peer",
+            name: "script_static_peer",
             script: '''
 service "ssh", host: "localhost", socket: localhostSocket
 service "etcd", member: "infra0" with {
@@ -145,15 +145,16 @@ service "etcd", member: "infra0" with {
                 assertFileResource EtcdScriptTest, dir, "cp.out", "${args.test.name}_cp_expected.txt"
                 assertFileResource EtcdScriptTest, new File(gen, '/etc/systemd/system'), "etcd.service", "${args.test.name}_etcd_service_expected.txt"
                 assertFileResource EtcdScriptTest, new File(gen, '/etc/etcd'), "etcd.conf", "${args.test.name}_etcd_config_expected.txt"
+                assertFileResource EtcdScriptTest, new File(gen, '/usr/local/share/'), "etcdctl-vars", "${args.test.name}_etcdctl_vars_expected.txt"
             },
         ]
         doTest test
     }
 
     @Test
-    void "peers_ufw"() {
+    void "script_peers_ufw"() {
         def test = [
-            name: "peers_ufw",
+            name: "script_peers_ufw",
             script: '''
 service "ssh", host: "localhost", socket: localhostSocket
 service "etcd", member: "infra0" with {
@@ -282,7 +283,7 @@ service "ssh", host: "localhost", socket: localhostSocket
 service "etcd" with {
     bind "https://127.0.0.1:22379"
     gateway endpoints: "https://etcd-0:2379,https://etcd-1:2379,https://etcd-2:2379"
-    client ca: testCerts.ca
+    client testCerts
 }
 ''',
             scriptVars: [localhostSocket: localhostSocket, testCerts: testCerts],

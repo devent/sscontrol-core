@@ -216,7 +216,11 @@ public class K8sImpl implements K8s {
     @Override
     public void cluster(Map<String, Object> args) {
         Map<String, Object> a = new HashMap<>(args);
-        this.cluster = clusterFactory.create(a);
+        if (this.cluster != null) {
+            this.cluster = clusterFactory.create(this.cluster, a);
+        } else {
+            this.cluster = clusterFactory.create(a);
+        }
         log.clusterSet(this, cluster);
     }
 
@@ -261,33 +265,18 @@ public class K8sImpl implements K8s {
         return plugin;
     }
 
-    /**
-     * <pre>
-     * privileged true
-     * </pre>
-     */
     @Override
     public void privileged(boolean allow) {
         this.allowPrivileged = allow;
         log.allowPrivilegedSet(this, allow);
     }
 
-    /**
-     * <pre>
-     * tls ca: "ca.pem", cert: "cert.pem", key: "key.pem"
-     * </pre>
-     */
     @Override
     public void tls(Map<String, Object> args) {
         this.tls = tlsFactory.create(args);
         log.tlsSet(this, tls);
     }
 
-    /**
-     * <pre>
-     * kubelet port: 10250
-     * </pre>
-     */
     @Override
     public Kubelet kubelet(Map<String, Object> args) {
         this.kubelet = kubeletFactory.create(args);
@@ -461,7 +450,10 @@ public class K8sImpl implements K8s {
         Object name = args.get("name");
         Object advertise = args.get("advertise");
         Object api = args.get("api");
-        if (name != null || advertise != null || api != null) {
+        Object join = args.get("join");
+        Object host = args.get("host");
+        if (name != null || advertise != null || api != null || join != null
+                || host != null) {
             this.cluster = clusterFactory.create(args);
         }
     }

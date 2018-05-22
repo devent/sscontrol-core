@@ -43,13 +43,17 @@ abstract class Dockerce_17_Systemd extends ScriptBase {
 
     TemplateResource dockerdTemplate
 
+    TemplateResource daemonTemplate
+
     SystemdUtils systemd
 
     @Inject
-    void loadTemplates(TemplatesFactory templatesFactory) {
-        def templates = templatesFactory.create('Dockerce_17_Systemd_Templates')
+    void loadTemplates(TemplatesFactory templatesFactory, LoggingDriverOptsRenderer loggingDriverOptsRenderer) {
+        def a = [renderers:[loggingDriverOptsRenderer]]
+        def templates = templatesFactory.create('Dockerce_17_Systemd_Templates', a)
         this.dockerdTemplate = templates.getResource('dockerd_config')
         this.mirrorTemplate = templates.getResource('mirror_config')
+        this.daemonTemplate = templates.getResource('daemon_config')
     }
 
     @Inject
@@ -70,6 +74,17 @@ abstract class Dockerce_17_Systemd extends ScriptBase {
                 tls.caName = defaultRegistryMirrorCaName
             }
         }
+    }
+
+    def setupDefaultLogDriver() {
+        Docker service = service
+        if (service.loggingDriver.driver != null) {
+            return
+        }
+        def vars = [:]
+        vars.driver = scriptProperties.default_logging_driver_driver
+        vars << getScriptMapProperty("default_logging_driver_opts")
+        service.log vars
     }
 
     def createDirectories() {
@@ -121,6 +136,38 @@ mkdir -p '$dropin'
                 copyResource privileged: true, src: tls.ca, dest: "$dir/${tls.caName}"
             }
         }
+    }
+
+    /**
+     * Creates the docker daemon configuration in "/etc/docker/daemon.json".
+     */
+    def createDaemonConfig() {
+        Docker service = service
+        boolean notEmpty = false
+        notEmpty = notEmpty || haveNativeCgroupdriver
+        notEmpty = notEmpty || haveLoggingDriver
+        if (!notEmpty) {
+            return
+        }
+        def vars = [:]
+        vars << execOptsVars
+        vars << [loggingDriver: service.loggingDriver]
+        template resource: daemonTemplate,
+        name: 'daemonConfig',
+        privileged: true,
+        dest: "$daemonConfigFile",
+        vars: vars call()
+    }
+
+    Map getExecOptsVars() {
+        def execOpts = []
+        haveNativeCgroupdriver ? execOpts << "native.cgroupdriver=${nativeCgroupdriver}" : false
+        [execOpts: execOpts.empty ? null : execOpts]
+    }
+
+    boolean getHaveLoggingDriver() {
+        Docker service = service
+        service.loggingDriver.driver != null
     }
 
     def stopServices() {
@@ -191,6 +238,18 @@ rm -rf $dockerAufsDirectory; true
 
     File getDockerAufsDirectory() {
         getFileProperty 'docker_aufs_directory'
+    }
+
+    String getNativeCgroupdriver() {
+        getScriptProperty 'native_cgroupdriver'
+    }
+
+    boolean getHaveNativeCgroupdriver() {
+        !nativeCgroupdriver.empty
+    }
+
+    File getDaemonConfigFile() {
+        getScriptFileProperty 'daemon_config_file'
     }
 
     @Override

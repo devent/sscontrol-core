@@ -27,8 +27,16 @@ import com.anrisoftware.sscontrol.types.host.external.HostService;
  */
 public interface ClusterService extends HostService {
 
-    ClusterHost getCluster();
+    /**
+     * Returns the host that can be used to have access to the cluster via
+     * kubectl.
+     */
+    ClusterHost getClusterHost();
 
-    List<ClusterHost> getClusters();
+    /**
+     * Returns the hosts that can be used to have access to the clusters via
+     * kubectl.
+     */
+    List<ClusterHost> getClusterHosts();
 
 }

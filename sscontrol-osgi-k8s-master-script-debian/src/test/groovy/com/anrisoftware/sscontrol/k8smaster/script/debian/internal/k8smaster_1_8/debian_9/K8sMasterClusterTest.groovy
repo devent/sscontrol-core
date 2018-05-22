@@ -49,40 +49,31 @@ import groovy.util.logging.Slf4j
 class K8sMasterClusterTest extends AbstractMasterRunnerTest {
 
     @Test
-    void "cluster_tls"() {
+    void "cluster external etcd, canal"() {
         def test = [
-            name: "cluster_tls",
+            name: "cluster_external_etcd_canal",
             script: '''
-service "ssh", host: "robobee@andrea-master.robobee-test.test", socket: sockets.masters[0]
+service "ssh", host: "robobee@node-0.robobee-test.test", socket: sockets.masters[0]
 service "ssh", group: "masters" with {
-    host "robobee@andrea-master.robobee-test.test", socket: sockets.masters[0]
+    host "robobee@node-0.robobee-test.test", socket: sockets.masters[0]
 }
 service "ssh", group: "nodes" with {
     host "robobee@node-1.robobee-test.test", socket: sockets.nodes[1]
     host "robobee@node-2.robobee-test.test", socket: sockets.nodes[2]
 }
-service "k8s-cluster", target: 'masters' with {
-    credentials type: 'cert', name: 'robobee-admin', ca: certs.admin.ca, cert: certs.admin.cert, key: certs.admin.key
+service "k8s-cluster", target: "masters" with {
 }
-service "k8s-master", name: "andrea-master-0-test", advertise: targets.masters[0] with {
+service "k8s-master", name: "node-0" with {
     bind secure: "192.168.56.200"
+    kubelet address: "192.168.56.200"
     nodes << "masters"
     nodes << "nodes"
-    tls certs.tls
-    authentication "cert", ca: certs.tls.ca
-    plugin "flannel"
-    plugin "calico"
+    plugin "canal", iface: "enp0s8"
     plugin "etcd", endpoint: "https://10.10.10.7:22379" with {
         tls certs.etcd
     }
-    kubelet.with {
-        tls certs.tls
-    }
-    label << "robobeerun.com/dns"
-    label << "robobeerun.com/dashboard"
-    label << "robobeerun.com/calico"
-    label << "robobeerun.com/cluster-monitoring-heapster=required"
-    label << "robobeerun.com/cluster-monitoring-influxdb-grafana=required"
+    label << "robobeerun.com/heapster=required"
+    label << "robobeerun.com/dashboard=required"
 }
 ''',
             scriptVars: [sockets: sockets, certs: robobeetestCerts],

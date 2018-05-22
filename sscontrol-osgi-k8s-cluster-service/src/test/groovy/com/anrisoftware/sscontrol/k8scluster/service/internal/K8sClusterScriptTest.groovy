@@ -46,9 +46,28 @@ class K8sClusterScriptTest {
     HostServicesImplFactory servicesFactory
 
     @Test
-    void "cluster"() {
+    void "explicit target, default cluster and context"() {
         def test = [
-            name: 'cluster',
+            input: """
+service "k8s-cluster" with {
+    target name: 'default'
+}
+""",
+            expected: { HostServices services ->
+                assert services.getServices('k8s-cluster').size() == 1
+                K8sCluster s = services.getServices('k8s-cluster')[0] as K8sCluster
+                assert s.group == 'default'
+                assert s.targets.size() == 0
+                assert s.cluster.name == null
+                assert s.context.name == null
+            },
+        ]
+        doTest test
+    }
+
+    @Test
+    void "explicit statements"() {
+        def test = [
             input: """
 service "k8s-cluster", target: 'default' with {
     cluster name: 'default-context'
@@ -59,7 +78,7 @@ service "k8s-cluster", target: 'default' with {
             expected: { HostServices services ->
                 assert services.getServices('k8s-cluster').size() == 1
                 K8sCluster s = services.getServices('k8s-cluster')[0] as K8sCluster
-                assert s.group == 'default-context'
+                assert s.group == 'default'
                 assert s.cluster.name == 'default-context'
                 assert s.context.name == 'default-system'
                 assert s.credentials.size() == 1
@@ -75,18 +94,18 @@ service "k8s-cluster", target: 'default' with {
     }
 
     @Test
-    void "args"() {
+    void "statements as arguments"() {
         def test = [
-            name: 'args',
+            name: 'statements_args',
             input: """
 service "k8s-cluster", cluster: 'default-cluster', context: 'default-system' with {
-    credentials type: 'cert', name: 'default-admin', ca: 'ca.pem', cert: 'cert.pem', key: 'key.pem'
+    credentials 'cert', name: 'default-admin', ca: 'ca.pem', cert: 'cert.pem', key: 'key.pem'
 }
 """,
             expected: { HostServices services ->
                 assert services.getServices('k8s-cluster').size() == 1
                 K8sCluster s = services.getServices('k8s-cluster')[0] as K8sCluster
-                assert s.group == 'default-cluster'
+                assert s.group == 'default'
                 assert s.cluster.name == 'default-cluster'
                 assert s.context.name == 'default-system'
                 assert s.credentials.size() == 1
@@ -101,26 +120,19 @@ service "k8s-cluster", cluster: 'default-cluster', context: 'default-system' wit
     }
 
     @Test
-    void "defaults"() {
+    void "only with defaults"() {
         def test = [
             name: 'defaults',
             input: """
-service "k8s-cluster" with {
-    credentials type: 'cert', name: 'default-admin', ca: 'ca.pem', cert: 'cert.pem', key: 'key.pem'
-}
+service "k8s-cluster"
 """,
             expected: { HostServices services ->
                 assert services.getServices('k8s-cluster').size() == 1
                 K8sCluster s = services.getServices('k8s-cluster')[0] as K8sCluster
                 assert s.group == 'default'
-                assert s.cluster.name == 'default'
-                assert s.context.name == 'default-system'
-                assert s.credentials.size() == 1
-                assert s.credentials[0].type == 'cert'
-                assert s.credentials[0].name == 'default-admin'
-                assert s.credentials[0].tls.ca.toString() =~ /.*ca\.pem/
-                assert s.credentials[0].tls.cert.toString() =~ /.*cert\.pem/
-                assert s.credentials[0].tls.key.toString() =~ /.*key\.pem/
+                assert s.cluster.name == null
+                assert s.context.name == null
+                assert s.credentials.size() == 0
             },
         ]
         doTest test

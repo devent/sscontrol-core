@@ -25,7 +25,7 @@ import com.anrisoftware.sscontrol.utils.debian.external.Debian_9_UtilsFactory
 import groovy.util.logging.Slf4j
 
 /**
- * Kubernetes node.
+ * K8s-Master Debian.
  *
  * @author Erwin Müller, erwin.mueller@deventm.de
  * @since 1.0
@@ -36,20 +36,12 @@ class K8sNodeDebian extends ScriptBase {
     @Inject
     K8sNodeDebianProperties debianPropertiesProvider
 
-    @Inject
-    K8sNodeDockerDebianFactory dockerDebianFactory
-
-    @Inject
-    KubectlUpstreamDebianFactory kubectlUpstreamFactory
+    K8sNodeUpstreamDebian upstream
 
     @Inject
     K8sNodeUfwDebianFactory ufwFactory
 
     DebianUtils debian
-
-    K8sNodeUpstreamDebian upstream
-
-    K8sNodeSystemdDebian systemd
 
     @Inject
     void setDebian(Debian_9_UtilsFactory factory) {
@@ -61,23 +53,15 @@ class K8sNodeDebian extends ScriptBase {
         this.upstream = factory.create(scriptsRepository, service, target, threads, scriptEnv)
     }
 
-    @Inject
-    void setSystemdDebianFactory(K8sNodeSystemdDebianFactory factory) {
-        this.systemd = factory.create(scriptsRepository, service, target, threads, scriptEnv)
-    }
-
     @Override
     def run() {
-        dockerDebianFactory.create(scriptsRepository, service, target, threads, scriptEnv).run()
-        systemd.stopServices()
         debian.installPackages()
         debian.enableModules()
-        kubectlUpstreamFactory.create(scriptsRepository, service, target, threads, scriptEnv).run()
         upstream.setupDefaults()
         ufwFactory.create(scriptsRepository, service, target, threads, scriptEnv).run()
+        upstream.installKubeadm()
         upstream.createService()
-        systemd.startServices()
-        systemd.enableServices()
+        upstream.joinNode()
         upstream.postInstall()
     }
 
