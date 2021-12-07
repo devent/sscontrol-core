@@ -18,7 +18,7 @@ package com.anrisoftware.sscontrol.sshd.service.internal;
 import com.anrisoftware.sscontrol.sshd.service.external.Binding;
 import com.anrisoftware.sscontrol.sshd.service.internal.BindingImpl.BindingImplFactory;
 import com.anrisoftware.sscontrol.sshd.service.internal.SshdImpl.SshdImplFactory;
-import com.anrisoftware.sscontrol.types.host.external.HostService;
+import com.anrisoftware.sscontrol.types.host.HostService;
 import com.google.inject.AbstractModule;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 

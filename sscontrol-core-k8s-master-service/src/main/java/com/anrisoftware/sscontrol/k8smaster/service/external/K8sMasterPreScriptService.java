@@ -15,7 +15,7 @@
  */
 package com.anrisoftware.sscontrol.k8smaster.service.external;
 
-import com.anrisoftware.sscontrol.types.host.external.PreHostService;
+import com.anrisoftware.sscontrol.types.host.PreHostFactory;
 
 /**
  * <i>K8s-Master</i> pre-script service.
@@ -23,6 +23,6 @@ import com.anrisoftware.sscontrol.types.host.external.PreHostService;
  * @author Erwin Mueller, erwin.mueller@deventm.org
  * @since 1.0
  */
-public interface K8sMasterPreScriptService extends PreHostService {
+public interface K8sMasterPreScriptService extends PreHostFactory {
 
 }

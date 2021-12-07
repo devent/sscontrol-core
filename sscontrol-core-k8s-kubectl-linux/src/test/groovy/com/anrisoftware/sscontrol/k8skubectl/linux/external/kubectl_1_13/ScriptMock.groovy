@@ -19,11 +19,11 @@ import java.util.concurrent.ExecutorService
 
 import org.joda.time.Duration
 
-import com.anrisoftware.sscontrol.types.host.external.HostService
-import com.anrisoftware.sscontrol.types.host.external.HostServiceProperties
-import com.anrisoftware.sscontrol.types.host.external.HostServiceScript
-import com.anrisoftware.sscontrol.types.host.external.HostServices
-import com.anrisoftware.sscontrol.types.host.external.TargetHost
+import com.anrisoftware.sscontrol.types.host.HostService
+import com.anrisoftware.sscontrol.types.host.HostServiceProperties
+import com.anrisoftware.sscontrol.types.host.HostServiceScript
+import com.anrisoftware.sscontrol.types.host.HostServices
+import com.anrisoftware.sscontrol.types.host.TargetHost
 
 /**
  *

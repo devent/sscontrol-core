@@ -32,7 +32,7 @@ import com.anrisoftware.sscontrol.k8sbase.base.service.internal.EtcdPluginImpl.E
 import com.anrisoftware.sscontrol.k8sbase.base.service.internal.K8sImpl.K8sImplFactory;
 import com.anrisoftware.sscontrol.k8sbase.base.service.internal.KubeletImpl.KubeletImplFactory;
 import com.anrisoftware.sscontrol.k8sbase.base.service.internal.NfsClientPluginImpl.NfsClientPluginImplFactory;
-import com.anrisoftware.sscontrol.types.host.external.HostService;
+import com.anrisoftware.sscontrol.types.host.HostService;
 import com.google.inject.AbstractModule;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 import com.google.inject.multibindings.MapBinder;

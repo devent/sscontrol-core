@@ -15,8 +15,8 @@
  */
 package com.anrisoftware.sscontrol.utils.systemmappings.internal;
 
-import com.anrisoftware.sscontrol.types.host.external.ScriptInfo;
-import com.anrisoftware.sscontrol.types.host.external.SystemInfo;
+import com.anrisoftware.sscontrol.types.host.ScriptInfo;
+import com.anrisoftware.sscontrol.types.host.SystemInfo;
 import com.anrisoftware.sscontrol.utils.systemmappings.external.DefaultScriptInfoFactory;
 import com.anrisoftware.sscontrol.utils.systemmappings.external.DefaultSystemInfoFactory;
 import com.anrisoftware.sscontrol.utils.systemmappings.external.SystemNameMappings;

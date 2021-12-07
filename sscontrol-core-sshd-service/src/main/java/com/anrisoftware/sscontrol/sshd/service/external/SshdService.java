@@ -15,7 +15,7 @@
  */
 package com.anrisoftware.sscontrol.sshd.service.external;
 
-import com.anrisoftware.sscontrol.types.host.external.HostServiceService;
+import com.anrisoftware.sscontrol.types.host.HostServiceFactory;
 
 /**
  * Sshd service.
@@ -23,6 +23,6 @@ import com.anrisoftware.sscontrol.types.host.external.HostServiceService;
  * @author Erwin Müller, erwin.mueller@deventm.de
  * @since 1.0
  */
-public interface SshdService extends HostServiceService {
+public interface SshdService extends HostServiceFactory {
 
 }

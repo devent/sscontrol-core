@@ -16,7 +16,7 @@
 package com.anrisoftware.sscontrol.fail2ban.service.internal;
 
 import com.anrisoftware.sscontrol.fail2ban.service.internal.Fail2banPreScriptImpl.HostnamePreScriptImplFactory;
-import com.anrisoftware.sscontrol.types.host.external.PreHost;
+import com.anrisoftware.sscontrol.types.host.PreHost;
 import com.google.inject.AbstractModule;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 

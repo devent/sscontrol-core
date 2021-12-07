@@ -25,7 +25,7 @@ import org.apache.commons.lang3.StringUtils
 
 import com.anrisoftware.propertiesutils.ContextProperties
 import com.anrisoftware.sscontrol.command.shell.linux.openssh.external.find.FindFilesFactory
-import com.anrisoftware.sscontrol.groovy.script.external.ScriptBase
+import com.anrisoftware.sscontrol.groovy.script.ScriptBase
 import com.anrisoftware.sscontrol.k8s.fromrepository.service.external.FromRepository
 
 import groovy.io.FileType

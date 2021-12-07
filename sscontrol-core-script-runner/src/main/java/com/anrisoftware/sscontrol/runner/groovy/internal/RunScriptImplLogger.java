@@ -20,7 +20,7 @@ import static com.anrisoftware.sscontrol.runner.groovy.internal.RunScriptImplLog
 import javax.inject.Singleton;
 
 import com.anrisoftware.globalpom.log.AbstractLogger;
-import com.anrisoftware.sscontrol.types.host.external.ScriptInfo;
+import com.anrisoftware.sscontrol.types.host.ScriptInfo;
 
 /**
  * Logging for {@link RunScriptImpl}.

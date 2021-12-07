@@ -17,7 +17,7 @@ package com.anrisoftware.sscontrol.sshd.script.openssh.external
 
 import org.apache.commons.text.CaseUtils
 
-import com.anrisoftware.sscontrol.groovy.script.external.ScriptBase
+import com.anrisoftware.sscontrol.groovy.script.ScriptBase
 import com.anrisoftware.sscontrol.sshd.service.external.Sshd
 
 import groovy.util.logging.Slf4j

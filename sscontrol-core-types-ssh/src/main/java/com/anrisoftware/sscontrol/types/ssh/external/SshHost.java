@@ -18,8 +18,8 @@ package com.anrisoftware.sscontrol.types.ssh.external;
 import java.io.File;
 import java.net.URI;
 
-import com.anrisoftware.sscontrol.types.host.external.SystemInfo;
-import com.anrisoftware.sscontrol.types.host.external.TargetHost;
+import com.anrisoftware.sscontrol.types.host.SystemInfo;
+import com.anrisoftware.sscontrol.types.host.TargetHost;
 
 /**
  * <i>Ssh</i> host.

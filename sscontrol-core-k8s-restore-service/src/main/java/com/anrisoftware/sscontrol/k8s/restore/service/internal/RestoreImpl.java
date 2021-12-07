@@ -39,10 +39,10 @@ import com.anrisoftware.sscontrol.k8s.restore.service.internal.DirSourceImpl.Dir
 import com.anrisoftware.sscontrol.k8s.restore.service.internal.ServiceImpl.ServiceImplFactory;
 import com.anrisoftware.sscontrol.k8s.restore.service.internal.SourceImpl.SourceImplFactory;
 import com.anrisoftware.sscontrol.types.cluster.external.ClusterHost;
-import com.anrisoftware.sscontrol.types.host.external.HostServiceProperties;
-import com.anrisoftware.sscontrol.types.host.external.HostServicePropertiesService;
-import com.anrisoftware.sscontrol.types.host.external.HostServiceService;
-import com.anrisoftware.sscontrol.types.host.external.TargetHost;
+import com.anrisoftware.sscontrol.types.host.HostServiceProperties;
+import com.anrisoftware.sscontrol.types.host.HostServicePropertiesService;
+import com.anrisoftware.sscontrol.types.host.HostServiceFactory;
+import com.anrisoftware.sscontrol.types.host.TargetHost;
 import com.anrisoftware.sscontrol.types.misc.external.GeneticListPropertyUtil;
 import com.anrisoftware.sscontrol.types.misc.external.GeneticListPropertyUtil.GeneticListProperty;
 import com.anrisoftware.sscontrol.types.misc.external.StringListPropertyUtil.ListProperty;
@@ -62,7 +62,7 @@ public class RestoreImpl implements Restore {
      * @author Erwin Müller {@literal <erwin.mueller@deventm.de>}
      * @version 1.0
      */
-    public interface RestoreImplFactory extends HostServiceService {
+    public interface RestoreImplFactory extends HostServiceFactory {
 
     }
 

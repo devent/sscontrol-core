@@ -20,11 +20,11 @@ import java.util.concurrent.ExecutorService;
 
 import javax.inject.Inject;
 
-import com.anrisoftware.sscontrol.types.host.external.HostService;
-import com.anrisoftware.sscontrol.types.host.external.HostServiceScript;
-import com.anrisoftware.sscontrol.types.host.external.HostServiceScriptService;
-import com.anrisoftware.sscontrol.types.host.external.HostServices;
-import com.anrisoftware.sscontrol.types.host.external.TargetHost;
+import com.anrisoftware.sscontrol.types.host.HostService;
+import com.anrisoftware.sscontrol.types.host.HostServiceScript;
+import com.anrisoftware.sscontrol.types.host.HostServiceScriptFactory;
+import com.anrisoftware.sscontrol.types.host.HostServices;
+import com.anrisoftware.sscontrol.types.host.TargetHost;
 
 /**
  * CRI-O 1.20 Debian 10 script service.
@@ -32,7 +32,7 @@ import com.anrisoftware.sscontrol.types.host.external.TargetHost;
  * @author Erwin Müller {@literal <erwin.mueller@deventm.de>}
  * @version 1.0
  */
-public class Crio_1_20_Debian_10_Service implements HostServiceScriptService {
+public class Crio_1_20_Debian_10_Service implements HostServiceScriptFactory {
 
     public static final String SYSTEM_VERSION = "10";
 

@@ -17,7 +17,7 @@ package com.anrisoftware.sscontrol.collectd.script.collect_5_8.external
 
 import com.anrisoftware.sscontrol.collectd.service.external.Collectd
 import com.anrisoftware.sscontrol.collectd.service.external.Config
-import com.anrisoftware.sscontrol.groovy.script.external.ScriptBase
+import com.anrisoftware.sscontrol.groovy.script.ScriptBase
 
 import groovy.text.SimpleTemplateEngine
 import groovy.util.logging.Slf4j

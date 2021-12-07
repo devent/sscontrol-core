@@ -19,8 +19,8 @@ import javax.inject.Singleton;
 
 import com.anrisoftware.globalpom.log.AbstractLogger;
 import com.anrisoftware.sscontrol.types.app.external.AppException;
-import com.anrisoftware.sscontrol.types.host.external.HostService;
-import com.anrisoftware.sscontrol.types.host.external.PreHost;
+import com.anrisoftware.sscontrol.types.host.HostService;
+import com.anrisoftware.sscontrol.types.host.PreHost;
 
 /**
  * Logging for {@link ParserImpl}.

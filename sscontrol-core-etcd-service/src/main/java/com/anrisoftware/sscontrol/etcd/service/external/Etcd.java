@@ -18,7 +18,7 @@ package com.anrisoftware.sscontrol.etcd.service.external;
 import java.util.List;
 
 import com.anrisoftware.sscontrol.tls.external.Tls;
-import com.anrisoftware.sscontrol.types.host.external.HostService;
+import com.anrisoftware.sscontrol.types.host.HostService;
 import com.anrisoftware.sscontrol.types.misc.external.DebugLogging;
 import com.anrisoftware.sscontrol.types.ssh.external.SshHost;
 

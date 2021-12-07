@@ -15,7 +15,7 @@
  */
 package com.anrisoftware.sscontrol.haproxy.service.external;
 
-import com.anrisoftware.sscontrol.types.host.external.HostServiceService;
+import com.anrisoftware.sscontrol.types.host.HostServiceFactory;
 
 /**
  * HAProxy service.
@@ -23,6 +23,6 @@ import com.anrisoftware.sscontrol.types.host.external.HostServiceService;
  * @author Erwin Müller, erwin.mueller@deventm.de
  * @since 1.0
  */
-public interface HAProxyService extends HostServiceService {
+public interface HAProxyService extends HostServiceFactory {
 
 }

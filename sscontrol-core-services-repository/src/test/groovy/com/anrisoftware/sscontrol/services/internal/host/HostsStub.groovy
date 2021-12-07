@@ -17,10 +17,10 @@ package com.anrisoftware.sscontrol.services.internal.host
 
 import javax.inject.Inject
 
-import com.anrisoftware.sscontrol.types.host.external.HostService
-import com.anrisoftware.sscontrol.types.host.external.HostServiceProperties
-import com.anrisoftware.sscontrol.types.host.external.HostServiceService
-import com.anrisoftware.sscontrol.types.host.external.TargetHost
+import com.anrisoftware.sscontrol.types.host.HostService
+import com.anrisoftware.sscontrol.types.host.HostServiceProperties
+import com.anrisoftware.sscontrol.types.host.HostServiceFactory
+import com.anrisoftware.sscontrol.types.host.TargetHost
 import com.anrisoftware.sscontrol.types.ssh.external.SshHost
 import com.google.inject.assistedinject.Assisted
 
@@ -53,7 +53,7 @@ class HostsStub implements HostService {
      * @version 1.0
      */
     @ToString
-    static class HostsStubServiceImpl implements HostServiceService {
+    static class HostsStubServiceImpl implements HostServiceFactory {
 
         @Inject
         HostsStubFactory serviceFactory

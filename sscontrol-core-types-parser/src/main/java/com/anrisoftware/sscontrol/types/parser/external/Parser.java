@@ -16,7 +16,7 @@
 package com.anrisoftware.sscontrol.types.parser.external;
 
 import com.anrisoftware.sscontrol.types.app.external.AppException;
-import com.anrisoftware.sscontrol.types.host.external.HostServices;
+import com.anrisoftware.sscontrol.types.host.HostServices;
 
 /**
  * Script parser.

@@ -20,12 +20,12 @@ import java.util.concurrent.ExecutorService;
 
 import javax.inject.Inject;
 
-import com.anrisoftware.sscontrol.types.host.external.HostService;
-import com.anrisoftware.sscontrol.types.host.external.HostServiceScript;
-import com.anrisoftware.sscontrol.types.host.external.HostServiceScriptService;
-import com.anrisoftware.sscontrol.types.host.external.HostServices;
-import com.anrisoftware.sscontrol.types.host.external.ScriptInfo;
-import com.anrisoftware.sscontrol.types.host.external.TargetHost;
+import com.anrisoftware.sscontrol.types.host.HostService;
+import com.anrisoftware.sscontrol.types.host.HostServiceScript;
+import com.anrisoftware.sscontrol.types.host.HostServiceScriptFactory;
+import com.anrisoftware.sscontrol.types.host.HostServices;
+import com.anrisoftware.sscontrol.types.host.ScriptInfo;
+import com.anrisoftware.sscontrol.types.host.TargetHost;
 import com.anrisoftware.sscontrol.utils.systemmappings.external.AbstractScriptInfo;
 import com.anrisoftware.sscontrol.utils.systemmappings.external.AbstractSystemInfo;
 
@@ -35,7 +35,7 @@ import com.anrisoftware.sscontrol.utils.systemmappings.external.AbstractSystemIn
  * @author Erwin Müller {@literal <erwin.mueller@deventm.de>}
  * @version 1.0
  */
-public class GitRepoDebianService implements HostServiceScriptService {
+public class GitRepoDebianService implements HostServiceScriptFactory {
 
     static final String SERVICE_NAME = "git";
 

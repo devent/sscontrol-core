@@ -15,7 +15,7 @@
  */
 package com.anrisoftware.sscontrol.crio.service.internal;
 
-import com.anrisoftware.sscontrol.types.host.external.HostService;
+import com.anrisoftware.sscontrol.types.host.HostService;
 import com.google.inject.AbstractModule;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 

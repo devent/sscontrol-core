@@ -15,7 +15,7 @@
  */
 package com.anrisoftware.sscontrol.k8snode.script.debian.internal.k8snode_1_13.debian_9;
 
-import com.anrisoftware.sscontrol.types.host.external.HostServiceScript;
+import com.anrisoftware.sscontrol.types.host.HostServiceScript;
 import com.google.inject.AbstractModule;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 

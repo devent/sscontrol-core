@@ -15,7 +15,7 @@
  */
 package com.anrisoftware.sscontrol.types.repo.external;
 
-import com.anrisoftware.sscontrol.types.host.external.TargetHostService;
+import com.anrisoftware.sscontrol.types.host.TargetHostService;
 
 /**
  * Code repository.

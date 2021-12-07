@@ -49,9 +49,9 @@ import com.anrisoftware.sscontrol.etcd.service.internal.PeerImpl.PeerImplFactory
 import com.anrisoftware.sscontrol.etcd.service.internal.ProxyImpl.ProxyImplFactory;
 import com.anrisoftware.sscontrol.tls.external.Tls;
 import com.anrisoftware.sscontrol.tls.external.Tls.TlsFactory;
-import com.anrisoftware.sscontrol.types.host.external.HostServiceProperties;
-import com.anrisoftware.sscontrol.types.host.external.HostServicePropertiesService;
-import com.anrisoftware.sscontrol.types.host.external.TargetHost;
+import com.anrisoftware.sscontrol.types.host.HostServiceProperties;
+import com.anrisoftware.sscontrol.types.host.HostServicePropertiesService;
+import com.anrisoftware.sscontrol.types.host.TargetHost;
 import com.anrisoftware.sscontrol.types.misc.external.DebugLogging;
 import com.anrisoftware.sscontrol.types.misc.external.StringListPropertyUtil.ListProperty;
 import com.anrisoftware.sscontrol.types.ssh.external.SshHost;

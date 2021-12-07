@@ -19,11 +19,11 @@ import static com.anrisoftware.sscontrol.types.misc.external.StringListPropertyU
 
 import javax.inject.Inject
 
-import com.anrisoftware.sscontrol.types.host.external.HostServicePropertiesService
-import com.anrisoftware.sscontrol.types.host.external.HostService
-import com.anrisoftware.sscontrol.types.host.external.HostServiceProperties
-import com.anrisoftware.sscontrol.types.host.external.HostServiceService
-import com.anrisoftware.sscontrol.types.host.external.TargetHost
+import com.anrisoftware.sscontrol.types.host.HostService
+import com.anrisoftware.sscontrol.types.host.HostServiceProperties
+import com.anrisoftware.sscontrol.types.host.HostServicePropertiesService
+import com.anrisoftware.sscontrol.types.host.HostServiceFactory
+import com.anrisoftware.sscontrol.types.host.TargetHost
 import com.anrisoftware.sscontrol.types.misc.external.StringListPropertyUtil.ListProperty
 import com.google.inject.assistedinject.Assisted
 
@@ -56,7 +56,7 @@ class PropertiesStub implements HostService {
      * @version 1.0
      */
     @ToString
-    static class PropertiesStubServiceImpl implements HostServiceService {
+    static class PropertiesStubServiceImpl implements HostServiceFactory {
 
         @Inject
         PropertiesStubFactory serviceFactory

@@ -37,14 +37,14 @@ import com.anrisoftware.sscontrol.types.cluster.external.ClusterTargetService;
 import com.anrisoftware.sscontrol.types.cluster.external.ClusterHost;
 import com.anrisoftware.sscontrol.types.cluster.external.Clusters;
 import com.anrisoftware.sscontrol.types.cluster.external.ClustersService;
-import com.anrisoftware.sscontrol.types.host.external.HostService;
-import com.anrisoftware.sscontrol.types.host.external.HostServiceScriptService;
-import com.anrisoftware.sscontrol.types.host.external.HostServiceService;
-import com.anrisoftware.sscontrol.types.host.external.HostServices;
-import com.anrisoftware.sscontrol.types.host.external.HostServicesService;
-import com.anrisoftware.sscontrol.types.host.external.HostTargets;
-import com.anrisoftware.sscontrol.types.host.external.PreHostService;
-import com.anrisoftware.sscontrol.types.host.external.ScriptInfo;
+import com.anrisoftware.sscontrol.types.host.HostService;
+import com.anrisoftware.sscontrol.types.host.HostServiceScriptFactory;
+import com.anrisoftware.sscontrol.types.host.HostServiceFactory;
+import com.anrisoftware.sscontrol.types.host.HostServices;
+import com.anrisoftware.sscontrol.types.host.HostServicesService;
+import com.anrisoftware.sscontrol.types.host.HostTargets;
+import com.anrisoftware.sscontrol.types.host.PreHostFactory;
+import com.anrisoftware.sscontrol.types.host.ScriptInfo;
 import com.anrisoftware.sscontrol.types.registry.external.Registries;
 import com.anrisoftware.sscontrol.types.registry.external.RegistriesService;
 import com.anrisoftware.sscontrol.types.registry.external.Registry;
@@ -78,11 +78,11 @@ public class HostServicesImpl implements HostServices {
 
     }
 
-    private final Map<String, HostServiceService> availableServices;
+    private final Map<String, HostServiceFactory> availableServices;
 
-    private final Map<String, PreHostService> availablePreServices;
+    private final Map<String, PreHostFactory> availablePreServices;
 
-    private final Map<ScriptInfo, HostServiceScriptService> availableScriptServices;
+    private final Map<ScriptInfo, HostServiceScriptFactory> availableScriptServices;
 
     private final Map<String, List<HostService>> hostServices;
 
@@ -120,9 +120,9 @@ public class HostServicesImpl implements HostServices {
         this.repos = reposService.create();
         this.registries = registriesService.create();
         this.availableServices = synchronizedMap(
-                new HashMap<String, HostServiceService>());
+                new HashMap<String, HostServiceFactory>());
         this.availablePreServices = synchronizedMap(
-                new HashMap<String, PreHostService>());
+                new HashMap<String, PreHostFactory>());
         this.hostServices = synchronizedMap(
                 new LinkedHashMap<String, List<HostService>>());
         this.availableScriptServices = synchronizedMap(
@@ -133,7 +133,7 @@ public class HostServicesImpl implements HostServices {
                 ClusterHost.class, ClusterTargetService.class, "cluster") {
 
             @Override
-            public List<ClusterHost> getTargets(HostServiceService service,
+            public List<ClusterHost> getTargets(HostServiceFactory service,
                     HostTargets<ClusterHost, ClusterTargetService> targets, String name) {
                 try {
                     return targets.getHosts(name);
@@ -147,7 +147,7 @@ public class HostServicesImpl implements HostServices {
                 Repo.class, "repo") {
 
             @Override
-            public List<RepoHost> getTargets(HostServiceService service,
+            public List<RepoHost> getTargets(HostServiceFactory service,
                     HostTargets<RepoHost, Repo> targets, String name) {
                 try {
                     return targets.getHosts(name);
@@ -161,7 +161,7 @@ public class HostServicesImpl implements HostServices {
                 RegistryHost.class, Registry.class, "registry") {
 
             @Override
-            public List<RegistryHost> getTargets(HostServiceService service,
+            public List<RegistryHost> getTargets(HostServiceFactory service,
                     HostTargets<RegistryHost, Registry> targets, String name) {
                 try {
                     return targets.getHosts(name);
@@ -188,7 +188,7 @@ public class HostServicesImpl implements HostServices {
      * </pre>
      */
     public HostService call(Map<String, Object> args, String name) {
-        HostServiceService service = availableServices.get(name);
+        HostServiceFactory service = availableServices.get(name);
         checkService(name, service);
         Map<String, Object> a = parseArgs(service, args);
         HostService hostService = service.create(a);
@@ -250,7 +250,7 @@ public class HostServicesImpl implements HostServices {
 
     @SuppressWarnings("unchecked")
     @Override
-    public <T extends HostServiceService> T getAvailableService(String name) {
+    public <T extends HostServiceFactory> T getAvailableService(String name) {
         return (T) availableServices.get(name);
     }
 
@@ -260,7 +260,7 @@ public class HostServicesImpl implements HostServices {
     }
 
     @Override
-    public void putAvailableService(String name, HostServiceService service) {
+    public void putAvailableService(String name, HostServiceFactory service) {
         availableServices.put(name, service);
         log.availableServiceAdded(this, name, service);
     }
@@ -272,12 +272,12 @@ public class HostServicesImpl implements HostServices {
 
     @SuppressWarnings("unchecked")
     @Override
-    public <T extends PreHostService> T getAvailablePreService(String name) {
+    public <T extends PreHostFactory> T getAvailablePreService(String name) {
         return (T) availablePreServices.get(name);
     }
 
     @Override
-    public void putAvailablePreService(String name, PreHostService service) {
+    public void putAvailablePreService(String name, PreHostFactory service) {
         availablePreServices.put(name, service);
     }
 
@@ -287,26 +287,26 @@ public class HostServicesImpl implements HostServices {
     }
 
     @SuppressWarnings("unchecked")
-    public <T extends HostServiceScriptService> T getAvailableScriptService(
+    public <T extends HostServiceScriptFactory> T getAvailableScriptService(
             String name) {
         return (T) availableScriptServices.get(scriptInfoFactory.parse(name));
     }
 
     @SuppressWarnings("unchecked")
     @Override
-    public <T extends HostServiceScriptService> T getAvailableScriptService(
+    public <T extends HostServiceScriptFactory> T getAvailableScriptService(
             ScriptInfo info) {
         return (T) availableScriptServices.get(info);
     }
 
     public void putAvailableScriptService(String name,
-            HostServiceScriptService service) {
+            HostServiceScriptFactory service) {
         availableScriptServices.put(scriptInfoFactory.parse(name), service);
     }
 
     @Override
     public void putAvailableScriptService(ScriptInfo info,
-            HostServiceScriptService service) {
+            HostServiceScriptFactory service) {
         availableScriptServices.put(info, service);
     }
 
@@ -383,7 +383,7 @@ public class HostServicesImpl implements HostServices {
                 .append("services", getServices()).toString();
     }
 
-    private Map<String, Object> parseArgs(HostServiceService service,
+    private Map<String, Object> parseArgs(HostServiceFactory service,
             Map<String, Object> args) {
         Map<String, Object> result = new HashMap<>(args);
         List<SshHost> t;
@@ -407,7 +407,7 @@ public class HostServicesImpl implements HostServices {
         return unmodifiableMap(result);
     }
 
-    private void checkService(String name, HostServiceService service) {
+    private void checkService(String name, HostServiceFactory service) {
         if (service == null) {
             throw new NullPointerException(
                     format("Service '%s' not found.", name));

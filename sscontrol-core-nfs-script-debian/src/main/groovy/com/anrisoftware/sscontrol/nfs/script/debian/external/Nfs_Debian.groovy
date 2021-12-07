@@ -17,7 +17,7 @@ package com.anrisoftware.sscontrol.nfs.script.debian.external
 
 import javax.inject.Inject
 
-import com.anrisoftware.sscontrol.groovy.script.external.ScriptBase
+import com.anrisoftware.sscontrol.groovy.script.ScriptBase
 import com.anrisoftware.sscontrol.utils.debian.external.DebianUtils
 import com.anrisoftware.sscontrol.utils.debian.external.Debian_10_UtilsFactory
 

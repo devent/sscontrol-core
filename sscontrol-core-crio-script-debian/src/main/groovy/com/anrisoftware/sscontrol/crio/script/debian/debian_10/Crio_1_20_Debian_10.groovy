@@ -18,7 +18,7 @@ package com.anrisoftware.sscontrol.crio.script.debian.debian_10
 import javax.inject.Inject
 
 import com.anrisoftware.propertiesutils.ContextProperties
-import com.anrisoftware.sscontrol.groovy.script.external.ScriptBase
+import com.anrisoftware.sscontrol.groovy.script.ScriptBase
 
 import groovy.util.logging.Slf4j
 

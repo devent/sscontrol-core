@@ -15,7 +15,7 @@
  */
 package com.anrisoftware.sscontrol.types.ssh.external;
 
-import com.anrisoftware.sscontrol.types.host.external.HostTargets;
+import com.anrisoftware.sscontrol.types.host.HostTargets;
 
 /**
  * Ssh host targets.

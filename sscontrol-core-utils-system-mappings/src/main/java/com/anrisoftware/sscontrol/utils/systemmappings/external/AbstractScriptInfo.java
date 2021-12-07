@@ -19,8 +19,8 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-import com.anrisoftware.sscontrol.types.host.external.ScriptInfo;
-import com.anrisoftware.sscontrol.types.host.external.SystemInfo;
+import com.anrisoftware.sscontrol.types.host.ScriptInfo;
+import com.anrisoftware.sscontrol.types.host.SystemInfo;
 
 /**
  *

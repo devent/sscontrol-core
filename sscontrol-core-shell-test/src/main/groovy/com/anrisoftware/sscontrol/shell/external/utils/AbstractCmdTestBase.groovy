@@ -22,7 +22,7 @@ import org.junit.jupiter.api.BeforeEach
 import com.anrisoftware.propertiesutils.PropertiesUtilsModule
 import com.anrisoftware.sscontrol.properties.internal.PropertiesModule
 import com.anrisoftware.sscontrol.properties.internal.HostServicePropertiesImpl.HostServicePropertiesImplFactory
-import com.anrisoftware.sscontrol.types.host.external.HostServicePropertiesService
+import com.anrisoftware.sscontrol.types.host.HostServicePropertiesService
 import com.google.inject.AbstractModule
 import com.google.inject.Guice
 import com.google.inject.Injector

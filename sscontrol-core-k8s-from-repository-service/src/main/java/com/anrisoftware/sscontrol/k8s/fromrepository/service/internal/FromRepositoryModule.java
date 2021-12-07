@@ -19,7 +19,7 @@ import com.anrisoftware.sscontrol.k8s.fromrepository.service.external.Crd;
 import com.anrisoftware.sscontrol.k8s.fromrepository.service.internal.CrdImpl.CrdImplFactory;
 
 import com.anrisoftware.sscontrol.k8s.fromrepository.service.internal.FromRepositoryImpl.FromRepositoryImplFactory;
-import com.anrisoftware.sscontrol.types.host.external.HostService;
+import com.anrisoftware.sscontrol.types.host.HostService;
 import com.google.inject.AbstractModule;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 

@@ -19,7 +19,7 @@ import static org.apache.commons.io.FilenameUtils.getBaseName
 
 import org.apache.commons.io.FilenameUtils
 
-import com.anrisoftware.sscontrol.groovy.script.external.ScriptBase
+import com.anrisoftware.sscontrol.groovy.script.ScriptBase
 
 import groovy.util.logging.Slf4j
 

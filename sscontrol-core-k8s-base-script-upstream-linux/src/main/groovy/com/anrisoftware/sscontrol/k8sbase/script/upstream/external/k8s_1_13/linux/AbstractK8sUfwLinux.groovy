@@ -17,9 +17,9 @@ package com.anrisoftware.sscontrol.k8sbase.script.upstream.external.k8s_1_13.lin
 
 import javax.inject.Inject
 
-import com.anrisoftware.sscontrol.groovy.script.external.ScriptBase
+import com.anrisoftware.sscontrol.groovy.script.ScriptBase
 import com.anrisoftware.sscontrol.k8sbase.base.service.external.K8s
-import com.anrisoftware.sscontrol.types.host.external.TargetHost
+import com.anrisoftware.sscontrol.types.host.TargetHost
 import com.anrisoftware.sscontrol.types.ssh.external.TargetsAddressListFactory
 import com.anrisoftware.sscontrol.types.ssh.external.TargetsListFactory
 import com.anrisoftware.sscontrol.utils.ufw.linux.external.UfwLinuxUtilsFactory

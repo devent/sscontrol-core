@@ -15,7 +15,7 @@
  */
 package com.anrisoftware.sscontrol.sshd.script.openssh.external
 
-import com.anrisoftware.sscontrol.groovy.script.external.ScriptBase
+import com.anrisoftware.sscontrol.groovy.script.ScriptBase
 
 /**
  * Configures the firewall for the Sshd service.

@@ -15,7 +15,7 @@
  */
 package com.anrisoftware.sscontrol.k8snode.script.debian.internal.k8snode_1_13.debian_9;
 
-import com.anrisoftware.sscontrol.types.host.external.HostServiceScriptService;
+import com.anrisoftware.sscontrol.types.host.HostServiceScriptFactory;
 
 /**
  *
@@ -24,5 +24,5 @@ import com.anrisoftware.sscontrol.types.host.external.HostServiceScriptService;
  * @version 1.0
  */
 public interface K8sNodeUfwDebianFactory
-        extends HostServiceScriptService {
+        extends HostServiceScriptFactory {
 }

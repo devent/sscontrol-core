@@ -17,7 +17,7 @@ package com.anrisoftware.sscontrol.utils.systemmappings.external;
 
 import java.util.Map;
 
-import com.anrisoftware.sscontrol.types.host.external.ScriptInfo;
+import com.anrisoftware.sscontrol.types.host.ScriptInfo;
 
 /**
  * Creates information about the script service.

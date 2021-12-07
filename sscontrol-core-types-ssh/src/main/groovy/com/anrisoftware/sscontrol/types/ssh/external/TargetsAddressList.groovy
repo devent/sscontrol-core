@@ -17,8 +17,8 @@ package com.anrisoftware.sscontrol.types.ssh.external
 
 import javax.inject.Inject
 
-import com.anrisoftware.sscontrol.types.host.external.HostService
-import com.anrisoftware.sscontrol.types.host.external.HostServices
+import com.anrisoftware.sscontrol.types.host.HostService
+import com.anrisoftware.sscontrol.types.host.HostServices
 import com.google.inject.assistedinject.Assisted
 
 /**

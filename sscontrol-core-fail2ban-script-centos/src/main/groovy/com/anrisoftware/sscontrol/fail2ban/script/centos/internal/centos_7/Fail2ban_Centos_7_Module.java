@@ -15,7 +15,7 @@
  */
 package com.anrisoftware.sscontrol.fail2ban.script.centos.internal.centos_7;
 
-import com.anrisoftware.sscontrol.types.host.external.HostServiceScript;
+import com.anrisoftware.sscontrol.types.host.HostServiceScript;
 import com.google.inject.AbstractModule;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 

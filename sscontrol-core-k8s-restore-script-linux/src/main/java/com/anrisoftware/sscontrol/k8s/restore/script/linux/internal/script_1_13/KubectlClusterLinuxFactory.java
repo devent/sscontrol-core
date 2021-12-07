@@ -15,7 +15,7 @@
  */
 package com.anrisoftware.sscontrol.k8s.restore.script.linux.internal.script_1_13;
 
-import com.anrisoftware.sscontrol.types.host.external.HostServiceScriptService;
+import com.anrisoftware.sscontrol.types.host.HostServiceScriptFactory;
 
 /**
  *
@@ -24,5 +24,5 @@ import com.anrisoftware.sscontrol.types.host.external.HostServiceScriptService;
  * @version 1.0
  */
 public interface KubectlClusterLinuxFactory
-        extends HostServiceScriptService {
+        extends HostServiceScriptFactory {
 }

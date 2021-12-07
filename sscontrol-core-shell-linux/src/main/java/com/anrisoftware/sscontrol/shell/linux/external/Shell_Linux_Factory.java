@@ -15,7 +15,7 @@
  */
 package com.anrisoftware.sscontrol.shell.linux.external;
 
-import com.anrisoftware.sscontrol.types.host.external.HostServiceScriptService;
+import com.anrisoftware.sscontrol.types.host.HostServiceScriptFactory;
 
 /**
  *
@@ -23,6 +23,6 @@ import com.anrisoftware.sscontrol.types.host.external.HostServiceScriptService;
  * @author Erwin Müller {@literal <erwin.mueller@deventm.de>}
  * @version 1.0
  */
-public interface Shell_Linux_Factory extends HostServiceScriptService {
+public interface Shell_Linux_Factory extends HostServiceScriptFactory {
 
 }

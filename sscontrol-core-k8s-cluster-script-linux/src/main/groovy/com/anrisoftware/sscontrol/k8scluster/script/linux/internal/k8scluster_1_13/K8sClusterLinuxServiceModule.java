@@ -15,7 +15,7 @@
  */
 package com.anrisoftware.sscontrol.k8scluster.script.linux.internal.k8scluster_1_13;
 
-import com.anrisoftware.sscontrol.types.host.external.HostServiceScriptService;
+import com.anrisoftware.sscontrol.types.host.HostServiceScriptFactory;
 import com.google.inject.AbstractModule;
 import com.google.inject.name.Names;
 
@@ -29,7 +29,7 @@ public class K8sClusterLinuxServiceModule extends AbstractModule {
 
     @Override
     protected void configure() {
-        bind(HostServiceScriptService.class)
+        bind(HostServiceScriptFactory.class)
                 .annotatedWith(Names.named("cluster-service"))
                 .to(K8sClusterLinuxService.class);
     }

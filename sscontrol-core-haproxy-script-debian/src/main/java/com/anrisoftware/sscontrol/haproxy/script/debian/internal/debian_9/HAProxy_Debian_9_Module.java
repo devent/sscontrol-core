@@ -18,8 +18,7 @@ package com.anrisoftware.sscontrol.haproxy.script.debian.internal.debian_9;
 import com.anrisoftware.sscontrol.haproxy.script.debian.internal.debian_9.HAProxy_1_8_Debian_9;
 import com.anrisoftware.sscontrol.haproxy.script.debian.internal.debian_9.HAProxy_1_8_Impl;
 import com.anrisoftware.sscontrol.haproxy.script.debian.internal.debian_9.HAProxy_1_8_Ufw_Impl;
-
-import com.anrisoftware.sscontrol.types.host.external.HostServiceScript;
+import com.anrisoftware.sscontrol.types.host.HostServiceScript;
 import com.google.inject.AbstractModule;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 

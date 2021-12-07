@@ -15,7 +15,7 @@
  */
 package com.anrisoftware.sscontrol.haproxy.script.haproxy_1_8.external
 
-import com.anrisoftware.sscontrol.groovy.script.external.ScriptBase
+import com.anrisoftware.sscontrol.groovy.script.ScriptBase
 import com.anrisoftware.sscontrol.haproxy.service.external.Proxy
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;

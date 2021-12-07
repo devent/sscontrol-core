@@ -17,7 +17,7 @@ package com.anrisoftware.sscontrol.types.run.external;
 
 import java.util.concurrent.ExecutorService;
 
-import com.anrisoftware.sscontrol.types.host.external.HostServices;
+import com.anrisoftware.sscontrol.types.host.HostServices;
 
 /**
  * Script runner service.

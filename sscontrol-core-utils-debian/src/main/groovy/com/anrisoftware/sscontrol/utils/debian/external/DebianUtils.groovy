@@ -22,7 +22,7 @@ import org.apache.commons.lang3.StringUtils
 import org.stringtemplate.v4.ST
 
 import com.anrisoftware.resources.templates.external.TemplateResource
-import com.anrisoftware.sscontrol.types.host.external.HostServiceScript
+import com.anrisoftware.sscontrol.types.host.HostServiceScript
 
 import groovy.util.logging.Slf4j
 

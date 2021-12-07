@@ -25,7 +25,7 @@ import org.junit.jupiter.api.Test
 import com.anrisoftware.sscontrol.k8scluster.service.external.K8sCluster
 import com.anrisoftware.sscontrol.k8scluster.service.external.K8sClusterFactory
 import com.anrisoftware.sscontrol.services.internal.host.HostServicesImpl.HostServicesImplFactory
-import com.anrisoftware.sscontrol.types.host.external.HostServices
+import com.anrisoftware.sscontrol.types.host.HostServices
 import com.anrisoftware.sscontrol.types.ssh.external.Ssh
 
 import groovy.util.logging.Slf4j

@@ -33,8 +33,8 @@ import com.anrisoftware.sscontrol.k8snode.service.external.K8sNode;
 import com.anrisoftware.sscontrol.k8snode.service.external.K8sNodeService;
 import com.anrisoftware.sscontrol.tls.external.Tls;
 import com.anrisoftware.sscontrol.types.cluster.external.ClusterHost;
-import com.anrisoftware.sscontrol.types.host.external.HostServiceProperties;
-import com.anrisoftware.sscontrol.types.host.external.TargetHost;
+import com.anrisoftware.sscontrol.types.host.HostServiceProperties;
+import com.anrisoftware.sscontrol.types.host.TargetHost;
 import com.anrisoftware.sscontrol.types.misc.external.DebugLogging;
 import com.google.inject.assistedinject.Assisted;
 

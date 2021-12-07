@@ -15,7 +15,7 @@
  */
 package com.anrisoftware.sscontrol.k8snode.service.external;
 
-import com.anrisoftware.sscontrol.types.host.external.HostServiceService;
+import com.anrisoftware.sscontrol.types.host.HostServiceFactory;
 
 /**
  * <i>K8s-Node</i> service.
@@ -23,5 +23,5 @@ import com.anrisoftware.sscontrol.types.host.external.HostServiceService;
  * @author Erwin Müller, erwin.mueller@deventm.de
  * @since 1.0
  */
-public interface K8sNodeService extends HostServiceService {
+public interface K8sNodeService extends HostServiceFactory {
 }

@@ -19,7 +19,7 @@ import javax.inject.Inject
 
 import com.anrisoftware.resources.templates.external.TemplateResource
 import com.anrisoftware.resources.templates.external.TemplatesFactory
-import com.anrisoftware.sscontrol.types.host.external.HostServiceScript
+import com.anrisoftware.sscontrol.types.host.HostServiceScript
 import com.google.inject.assistedinject.Assisted
 
 /**

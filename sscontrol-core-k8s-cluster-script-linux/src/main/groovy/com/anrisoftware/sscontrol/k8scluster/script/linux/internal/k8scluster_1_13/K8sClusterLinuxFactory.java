@@ -15,7 +15,7 @@
  */
 package com.anrisoftware.sscontrol.k8scluster.script.linux.internal.k8scluster_1_13;
 
-import com.anrisoftware.sscontrol.types.host.external.HostServiceScriptService;
+import com.anrisoftware.sscontrol.types.host.HostServiceScriptFactory;
 
 /**
  *
@@ -24,5 +24,5 @@ import com.anrisoftware.sscontrol.types.host.external.HostServiceScriptService;
  * @version 1.0
  */
 public interface K8sClusterLinuxFactory
-        extends HostServiceScriptService {
+        extends HostServiceScriptFactory {
 }

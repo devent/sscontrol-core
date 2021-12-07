@@ -15,7 +15,7 @@
  */
 package com.anrisoftware.sscontrol.k8sbase.script.upstream.external.k8s_1_13.linux
 
-import com.anrisoftware.sscontrol.groovy.script.external.ScriptBase
+import com.anrisoftware.sscontrol.groovy.script.ScriptBase
 import com.anrisoftware.sscontrol.k8skubectl.linux.external.kubectl_1_13.AbstractKubectlLinux
 
 /**

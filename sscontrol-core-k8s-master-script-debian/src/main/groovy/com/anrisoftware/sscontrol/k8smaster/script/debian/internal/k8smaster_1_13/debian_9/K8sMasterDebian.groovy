@@ -18,7 +18,7 @@ package com.anrisoftware.sscontrol.k8smaster.script.debian.internal.k8smaster_1_
 import javax.inject.Inject
 
 import com.anrisoftware.propertiesutils.ContextProperties
-import com.anrisoftware.sscontrol.groovy.script.external.ScriptBase
+import com.anrisoftware.sscontrol.groovy.script.ScriptBase
 import com.anrisoftware.sscontrol.k8smaster.script.debian.internal.k8smaster_1_13.debian_9.K8sMasterUfwDebianFactory
 import com.anrisoftware.sscontrol.k8smaster.script.debian.internal.k8smaster_1_13.debian_9.K8sMasterUpstreamDebianFactory
 import com.anrisoftware.sscontrol.utils.debian.external.DebianUtils

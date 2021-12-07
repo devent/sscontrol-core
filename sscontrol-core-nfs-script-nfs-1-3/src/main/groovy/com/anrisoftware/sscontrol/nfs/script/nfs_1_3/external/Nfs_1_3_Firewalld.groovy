@@ -15,7 +15,7 @@
  */
 package com.anrisoftware.sscontrol.nfs.script.nfs_1_3.external
 
-import com.anrisoftware.sscontrol.groovy.script.external.ScriptBase
+import com.anrisoftware.sscontrol.groovy.script.ScriptBase
 import com.anrisoftware.sscontrol.nfs.service.external.Export
 import com.anrisoftware.sscontrol.nfs.service.external.Host
 import com.anrisoftware.sscontrol.nfs.service.external.Nfs

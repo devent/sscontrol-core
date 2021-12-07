@@ -15,7 +15,7 @@
  */
 package com.anrisoftware.sscontrol.types.registry.external;
 
-import com.anrisoftware.sscontrol.types.host.external.TargetHost;
+import com.anrisoftware.sscontrol.types.host.TargetHost;
 
 /**
  * Container registry target host.

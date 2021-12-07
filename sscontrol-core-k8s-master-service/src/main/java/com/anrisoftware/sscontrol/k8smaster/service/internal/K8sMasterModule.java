@@ -31,7 +31,7 @@ import com.anrisoftware.sscontrol.k8smaster.service.internal.BasicAuthentication
 import com.anrisoftware.sscontrol.k8smaster.service.internal.BindingImpl.BindingImplFactory;
 import com.anrisoftware.sscontrol.k8smaster.service.internal.ClientCertsAuthenticationImpl.ClientCertsAuthenticationImplFactory;
 import com.anrisoftware.sscontrol.k8smaster.service.internal.K8sMasterImpl.K8sMasterImplFactory;
-import com.anrisoftware.sscontrol.types.host.external.HostService;
+import com.anrisoftware.sscontrol.types.host.HostService;
 import com.google.inject.AbstractModule;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 import com.google.inject.multibindings.MapBinder;

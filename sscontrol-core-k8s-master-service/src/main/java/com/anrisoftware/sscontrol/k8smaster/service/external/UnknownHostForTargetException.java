@@ -18,7 +18,7 @@ package com.anrisoftware.sscontrol.k8smaster.service.external;
 import java.net.UnknownHostException;
 
 import com.anrisoftware.sscontrol.types.app.external.AppException;
-import com.anrisoftware.sscontrol.types.host.external.TargetHost;
+import com.anrisoftware.sscontrol.types.host.TargetHost;
 
 /**
  * Thrown if the host could not be found for the target.

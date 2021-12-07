@@ -28,8 +28,8 @@ import javax.inject.Singleton;
 
 import com.anrisoftware.globalpom.log.AbstractLogger;
 import com.anrisoftware.sscontrol.types.cluster.external.ClusterHost;
-import com.anrisoftware.sscontrol.types.host.external.HostService;
-import com.anrisoftware.sscontrol.types.host.external.HostServiceService;
+import com.anrisoftware.sscontrol.types.host.HostService;
+import com.anrisoftware.sscontrol.types.host.HostServiceFactory;
 import com.anrisoftware.sscontrol.types.registry.external.RegistryHost;
 import com.anrisoftware.sscontrol.types.repo.external.RepoHost;
 
@@ -81,7 +81,7 @@ final class HostServicesImplLogger extends AbstractLogger {
     }
 
     void availableServiceAdded(HostServicesImpl services, String name,
-            HostServiceService service) {
+            HostServiceFactory service) {
         debug(availableServiceAdded, name, service, services);
     }
 

@@ -17,7 +17,7 @@ package com.anrisoftware.sscontrol.collectd.service.external;
 
 import java.util.List;
 
-import com.anrisoftware.sscontrol.types.host.external.HostService;
+import com.anrisoftware.sscontrol.types.host.HostService;
 
 /**
  * Collectd service.

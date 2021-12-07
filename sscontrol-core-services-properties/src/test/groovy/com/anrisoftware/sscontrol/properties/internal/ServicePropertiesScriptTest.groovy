@@ -26,7 +26,7 @@ import com.anrisoftware.propertiesutils.PropertiesUtilsModule
 import com.anrisoftware.sscontrol.properties.internal.HostServicePropertiesImpl.HostServicePropertiesImplFactory
 import com.anrisoftware.sscontrol.properties.internal.PropertiesStub.PropertiesStubFactory
 import com.anrisoftware.sscontrol.properties.internal.PropertiesStub.PropertiesStubServiceImpl
-import com.anrisoftware.sscontrol.types.host.external.HostServicePropertiesService
+import com.anrisoftware.sscontrol.types.host.HostServicePropertiesService
 import com.anrisoftware.sscontrol.types.misc.internal.TypesModule
 import com.google.inject.AbstractModule
 import com.google.inject.Guice

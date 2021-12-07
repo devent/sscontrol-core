@@ -15,7 +15,7 @@
  */
 package com.anrisoftware.sscontrol.utils.ufw.linux.external;
 
-import com.anrisoftware.sscontrol.types.host.external.HostServiceScript;
+import com.anrisoftware.sscontrol.types.host.HostServiceScript;
 
 /**
  * Ufw utilities factory.

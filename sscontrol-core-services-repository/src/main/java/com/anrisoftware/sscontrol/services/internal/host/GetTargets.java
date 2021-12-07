@@ -20,11 +20,11 @@ import java.util.List;
 import java.util.Map;
 
 import com.anrisoftware.sscontrol.services.external.NoTargetsForServiceException;
-import com.anrisoftware.sscontrol.types.host.external.HostService;
-import com.anrisoftware.sscontrol.types.host.external.HostServiceService;
-import com.anrisoftware.sscontrol.types.host.external.HostTargets;
-import com.anrisoftware.sscontrol.types.host.external.TargetHost;
-import com.anrisoftware.sscontrol.types.host.external.TargetHostService;
+import com.anrisoftware.sscontrol.types.host.HostService;
+import com.anrisoftware.sscontrol.types.host.HostServiceFactory;
+import com.anrisoftware.sscontrol.types.host.HostTargets;
+import com.anrisoftware.sscontrol.types.host.TargetHost;
+import com.anrisoftware.sscontrol.types.host.TargetHostService;
 
 /**
  *
@@ -49,7 +49,7 @@ public class GetTargets<HostType extends TargetHost, TargetType extends TargetHo
     }
 
     @SuppressWarnings("unchecked")
-    public List<HostType> parseTarget(HostServiceService service, HostTargets<HostType, TargetType> targets,
+    public List<HostType> parseTarget(HostServiceFactory service, HostTargets<HostType, TargetType> targets,
             Map<String, Object> args) {
         Object object = args.get(argName);
         if (hostType.isInstance(object)) {
@@ -67,11 +67,11 @@ public class GetTargets<HostType extends TargetHost, TargetType extends TargetHo
         }
     }
 
-    public List<HostType> getDefaultTargets(HostServiceService service, HostTargets<HostType, TargetType> targets) {
+    public List<HostType> getDefaultTargets(HostServiceFactory service, HostTargets<HostType, TargetType> targets) {
         return getTargets(service, targets, DEFAULT_TARGETS_NAME);
     }
 
-    public List<HostType> getTargets(HostServiceService service, HostTargets<HostType, TargetType> targets,
+    public List<HostType> getTargets(HostServiceFactory service, HostTargets<HostType, TargetType> targets,
             TargetType target) {
         try {
             return targets.getHosts(target);
@@ -80,7 +80,7 @@ public class GetTargets<HostType extends TargetHost, TargetType extends TargetHo
         }
     }
 
-    public List<HostType> getTargets(HostServiceService service, HostTargets<HostType, TargetType> targets,
+    public List<HostType> getTargets(HostServiceFactory service, HostTargets<HostType, TargetType> targets,
             String name) {
         try {
             return targets.getHosts(name);

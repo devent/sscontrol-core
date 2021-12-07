@@ -15,7 +15,7 @@
  */
 package com.anrisoftware.sscontrol.crio.script.debian.debian_10;
 
-import com.anrisoftware.sscontrol.types.host.external.HostServiceScriptService;
+import com.anrisoftware.sscontrol.types.host.HostServiceScriptFactory;
 
 /**
  * Factory CRI-O from upstream.
@@ -23,5 +23,5 @@ import com.anrisoftware.sscontrol.types.host.external.HostServiceScriptService;
  * @author Erwin Müller {@literal <erwin.mueller@deventm.de>}
  * @version 1.0
  */
-public interface Upstream_Crio_Debian_10_Factory extends HostServiceScriptService {
+public interface Upstream_Crio_Debian_10_Factory extends HostServiceScriptFactory {
 }

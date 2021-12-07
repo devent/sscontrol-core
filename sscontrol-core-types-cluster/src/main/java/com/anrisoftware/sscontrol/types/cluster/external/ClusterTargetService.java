@@ -17,7 +17,7 @@ package com.anrisoftware.sscontrol.types.cluster.external;
 
 import java.util.List;
 
-import com.anrisoftware.sscontrol.types.host.external.TargetHostService;
+import com.anrisoftware.sscontrol.types.host.TargetHostService;
 
 /**
  * Cluster target service. Contains the {@link ClusterHost} that can be used to

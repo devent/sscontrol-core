@@ -19,7 +19,7 @@ import javax.inject.Inject
 
 import org.joda.time.Duration
 
-import com.anrisoftware.sscontrol.groovy.script.external.ScriptBase
+import com.anrisoftware.sscontrol.groovy.script.ScriptBase
 import com.anrisoftware.sscontrol.k8s.backup.client.external.AbstractBackupWorker
 import com.anrisoftware.sscontrol.k8s.backup.client.external.Deployment
 import com.anrisoftware.sscontrol.types.cluster.external.ClusterService

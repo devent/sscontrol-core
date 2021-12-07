@@ -15,7 +15,7 @@
  */
 package com.anrisoftware.sscontrol.crio.service.external;
 
-import com.anrisoftware.sscontrol.types.host.external.HostService;
+import com.anrisoftware.sscontrol.types.host.HostService;
 
 /**
  * CRI-O service.

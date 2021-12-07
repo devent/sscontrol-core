@@ -28,7 +28,7 @@ import org.junit.jupiter.migrationsupport.rules.EnableRuleMigrationSupport
 import org.junit.rules.TemporaryFolder
 
 import com.anrisoftware.sscontrol.shell.external.utils.RobobeeSocketCondition
-import com.anrisoftware.sscontrol.types.host.external.HostServiceScript
+import com.anrisoftware.sscontrol.types.host.HostServiceScript
 
 import groovy.util.logging.Slf4j
 

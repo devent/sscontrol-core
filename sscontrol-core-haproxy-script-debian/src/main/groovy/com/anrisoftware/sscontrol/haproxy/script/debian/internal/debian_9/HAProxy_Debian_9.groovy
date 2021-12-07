@@ -17,7 +17,7 @@ package com.anrisoftware.sscontrol.haproxy.script.debian.internal.debian_9
 
 import javax.inject.Inject
 
-import com.anrisoftware.sscontrol.groovy.script.external.ScriptBase
+import com.anrisoftware.sscontrol.groovy.script.ScriptBase
 import com.anrisoftware.sscontrol.utils.debian.external.DebianUtils
 import com.anrisoftware.sscontrol.utils.debian.external.Debian_10_UtilsFactory
 import com.anrisoftware.sscontrol.utils.systemd.external.SystemdUtils

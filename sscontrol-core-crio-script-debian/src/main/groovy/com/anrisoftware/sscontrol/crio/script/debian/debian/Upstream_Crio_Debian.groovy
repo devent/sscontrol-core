@@ -15,7 +15,7 @@
  */
 package com.anrisoftware.sscontrol.crio.script.debian.debian
 
-import com.anrisoftware.sscontrol.groovy.script.external.ScriptBase
+import com.anrisoftware.sscontrol.groovy.script.ScriptBase
 import com.anrisoftware.sscontrol.utils.debian.external.DebianUtils
 
 import groovy.util.logging.Slf4j

@@ -66,8 +66,8 @@ import com.anrisoftware.propertiesutils.JodaDateTypedProperties;
 import com.anrisoftware.propertiesutils.StringToType;
 import com.anrisoftware.propertiesutils.TypedAllPropertiesFactory;
 import com.anrisoftware.sscontrol.types.app.external.ArgumentInvalidException;
-import com.anrisoftware.sscontrol.types.host.external.HostServiceProperties;
-import com.anrisoftware.sscontrol.types.host.external.HostServicePropertiesService;
+import com.anrisoftware.sscontrol.types.host.HostServiceProperties;
+import com.anrisoftware.sscontrol.types.host.HostServicePropertiesService;
 import com.google.inject.assistedinject.AssistedInject;
 
 import groovy.lang.GroovyObjectSupport;

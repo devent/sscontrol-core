@@ -26,7 +26,7 @@ import com.anrisoftware.sscontrol.k8scluster.service.external.ContextFactory
 import com.anrisoftware.sscontrol.k8scluster.service.external.K8sClusterFactory
 import com.anrisoftware.sscontrol.k8scluster.service.external.K8sClusterHostFactory
 import com.anrisoftware.sscontrol.k8scluster.service.internal.CredentialsAnonImpl.CredentialsAnonImplFactory
-import com.anrisoftware.sscontrol.types.host.external.TargetHost
+import com.anrisoftware.sscontrol.types.host.TargetHost
 
 import groovy.util.logging.Slf4j
 

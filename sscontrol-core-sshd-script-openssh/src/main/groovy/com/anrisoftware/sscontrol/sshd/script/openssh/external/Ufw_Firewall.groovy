@@ -2,7 +2,7 @@ package com.anrisoftware.sscontrol.sshd.script.openssh.external;
 
 import javax.inject.Inject
 
-import com.anrisoftware.sscontrol.groovy.script.external.ScriptBase
+import com.anrisoftware.sscontrol.groovy.script.ScriptBase
 import com.anrisoftware.sscontrol.sshd.service.external.Sshd
 import com.anrisoftware.sscontrol.utils.ufw.linux.external.UfwLinuxUtilsFactory
 import com.anrisoftware.sscontrol.utils.ufw.linux.external.UfwUtils

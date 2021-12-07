@@ -15,7 +15,7 @@
  */
 package com.anrisoftware.sscontrol.sshd.script.debian.internal.debian_10;
 
-import com.anrisoftware.sscontrol.types.host.external.HostServiceScriptService;
+import com.anrisoftware.sscontrol.types.host.HostServiceScriptFactory;
 
 /**
  *
@@ -23,5 +23,5 @@ import com.anrisoftware.sscontrol.types.host.external.HostServiceScriptService;
  * @author Erwin Müller {@literal <erwin.mueller@deventm.de>}
  * @version 1.0
  */
-public interface SshdDebianFactory extends HostServiceScriptService {
+public interface SshdDebianFactory extends HostServiceScriptFactory {
 }

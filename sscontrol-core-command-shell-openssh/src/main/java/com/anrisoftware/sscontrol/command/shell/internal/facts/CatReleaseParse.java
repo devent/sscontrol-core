@@ -23,7 +23,7 @@ import java.util.concurrent.Callable;
 
 import javax.inject.Inject;
 
-import com.anrisoftware.sscontrol.types.host.external.SystemInfo;
+import com.anrisoftware.sscontrol.types.host.SystemInfo;
 import com.anrisoftware.sscontrol.utils.systemmappings.external.DefaultSystemInfoFactory;
 import com.google.inject.assistedinject.Assisted;
 

@@ -33,10 +33,10 @@ import org.yaml.snakeyaml.Yaml;
 import com.anrisoftware.sscontrol.k8s.fromhelm.service.external.FromHelm;
 import com.anrisoftware.sscontrol.k8s.fromhelm.service.external.Release;
 import com.anrisoftware.sscontrol.k8s.fromhelm.service.internal.ReleaseImpl.ReleaseImplFactory;
-import com.anrisoftware.sscontrol.types.host.external.HostServiceProperties;
-import com.anrisoftware.sscontrol.types.host.external.HostServicePropertiesService;
-import com.anrisoftware.sscontrol.types.host.external.HostServiceService;
-import com.anrisoftware.sscontrol.types.host.external.TargetHost;
+import com.anrisoftware.sscontrol.types.host.HostServiceProperties;
+import com.anrisoftware.sscontrol.types.host.HostServicePropertiesService;
+import com.anrisoftware.sscontrol.types.host.HostServiceFactory;
+import com.anrisoftware.sscontrol.types.host.TargetHost;
 import com.anrisoftware.sscontrol.types.misc.external.StringListPropertyUtil.ListProperty;
 import com.anrisoftware.sscontrol.types.repo.external.RepoHost;
 import com.google.inject.assistedinject.Assisted;
@@ -55,7 +55,7 @@ public class FromHelmImpl implements FromHelm {
 	 * @author Erwin Müller {@literal <erwin.mueller@deventm.de>}
 	 * @version 1.0
 	 */
-	public interface FromHelmImplFactory extends HostServiceService {
+	public interface FromHelmImplFactory extends HostServiceFactory {
 
 	}
 

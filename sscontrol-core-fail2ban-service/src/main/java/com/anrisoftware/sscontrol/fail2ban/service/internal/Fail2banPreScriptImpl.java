@@ -23,9 +23,9 @@ import org.codehaus.groovy.control.customizers.ImportCustomizer;
 import com.anrisoftware.sscontrol.fail2ban.service.external.Backend;
 import com.anrisoftware.sscontrol.fail2ban.service.external.Type;
 import com.anrisoftware.sscontrol.types.app.external.AppException;
-import com.anrisoftware.sscontrol.types.host.external.HostServiceScript;
-import com.anrisoftware.sscontrol.types.host.external.PreHost;
-import com.anrisoftware.sscontrol.types.host.external.PreHostService;
+import com.anrisoftware.sscontrol.types.host.HostServiceScript;
+import com.anrisoftware.sscontrol.types.host.PreHost;
+import com.anrisoftware.sscontrol.types.host.PreHostFactory;
 
 /**
  * <i>Fail2ban</i> service pre-script.
@@ -41,7 +41,7 @@ public class Fail2banPreScriptImpl implements PreHost {
      * @author Erwin Müller {@literal <erwin.mueller@deventm.de>}
      * @version 1.0
      */
-    public interface HostnamePreScriptImplFactory extends PreHostService {
+    public interface HostnamePreScriptImplFactory extends PreHostFactory {
     }
 
     @Override

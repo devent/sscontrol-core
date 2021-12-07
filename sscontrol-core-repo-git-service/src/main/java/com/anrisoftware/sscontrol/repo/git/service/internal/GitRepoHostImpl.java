@@ -24,7 +24,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import com.anrisoftware.sscontrol.repo.git.service.external.GitRepo;
 import com.anrisoftware.sscontrol.repo.git.service.external.GitRepoHost;
-import com.anrisoftware.sscontrol.types.host.external.TargetHost;
+import com.anrisoftware.sscontrol.types.host.TargetHost;
 import com.google.inject.assistedinject.Assisted;
 
 /**

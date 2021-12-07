@@ -25,7 +25,7 @@ import org.apache.commons.io.FilenameUtils
 
 import com.anrisoftware.resources.templates.external.TemplateResource
 import com.anrisoftware.resources.templates.external.TemplatesFactory
-import com.anrisoftware.sscontrol.groovy.script.external.ScriptBase
+import com.anrisoftware.sscontrol.groovy.script.ScriptBase
 import com.anrisoftware.sscontrol.k8s.fromhelm.service.external.FromHelm
 
 import groovy.json.JsonOutput

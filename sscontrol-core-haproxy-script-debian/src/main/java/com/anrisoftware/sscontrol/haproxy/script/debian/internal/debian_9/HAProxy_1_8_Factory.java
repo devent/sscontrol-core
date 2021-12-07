@@ -15,7 +15,7 @@
  */
 package com.anrisoftware.sscontrol.haproxy.script.debian.internal.debian_9;
 
-import com.anrisoftware.sscontrol.types.host.external.HostServiceScriptService;
+import com.anrisoftware.sscontrol.types.host.HostServiceScriptFactory;
 
 /**
  *
@@ -23,5 +23,5 @@ import com.anrisoftware.sscontrol.types.host.external.HostServiceScriptService;
  * @author Erwin Müller {@literal <erwin.mueller@deventm.de>}
  * @version 1.0
  */
-public interface HAProxy_1_8_Factory extends HostServiceScriptService {
+public interface HAProxy_1_8_Factory extends HostServiceScriptFactory {
 }

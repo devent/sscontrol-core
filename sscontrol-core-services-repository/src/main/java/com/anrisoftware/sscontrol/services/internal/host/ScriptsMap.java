@@ -20,8 +20,8 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
-import com.anrisoftware.sscontrol.types.host.external.HostServiceScriptService;
-import com.anrisoftware.sscontrol.types.host.external.ScriptInfo;
+import com.anrisoftware.sscontrol.types.host.HostServiceScriptFactory;
+import com.anrisoftware.sscontrol.types.host.ScriptInfo;
 import com.anrisoftware.sscontrol.utils.systemmappings.external.AbstractScriptInfo;
 import com.anrisoftware.sscontrol.utils.systemmappings.external.AbstractSystemInfo;
 import com.anrisoftware.sscontrol.utils.systemmappings.internal.SystemNameMappingsProperties;
@@ -33,7 +33,7 @@ import com.anrisoftware.sscontrol.utils.systemmappings.internal.SystemNameMappin
  * @version 1.0
  */
 @SuppressWarnings("serial")
-public class ScriptsMap extends HashMap<ScriptInfo, HostServiceScriptService> {
+public class ScriptsMap extends HashMap<ScriptInfo, HostServiceScriptFactory> {
 
     /**
      *
@@ -55,8 +55,8 @@ public class ScriptsMap extends HashMap<ScriptInfo, HostServiceScriptService> {
     }
 
     @Override
-    public HostServiceScriptService get(Object key) {
-        HostServiceScriptService s = super.get(key);
+    public HostServiceScriptFactory get(Object key) {
+        HostServiceScriptFactory s = super.get(key);
         ScriptInfo info = (ScriptInfo) key;
         String name = info.getName();
         String system = mappingsProperties.getMapping(name);
@@ -75,8 +75,8 @@ public class ScriptsMap extends HashMap<ScriptInfo, HostServiceScriptService> {
         return s;
     }
 
-    private HostServiceScriptService findScriptService(String service) {
-        for (Map.Entry<ScriptInfo, HostServiceScriptService> services : this
+    private HostServiceScriptFactory findScriptService(String service) {
+        for (Map.Entry<ScriptInfo, HostServiceScriptFactory> services : this
                 .entrySet()) {
             if (services.getKey().getService().equals(service)) {
                 return services.getValue();

@@ -18,7 +18,7 @@ package com.anrisoftware.sscontrol.utils.systemmappings.external;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-import com.anrisoftware.sscontrol.types.host.external.SystemInfo;
+import com.anrisoftware.sscontrol.types.host.SystemInfo;
 
 /**
  *

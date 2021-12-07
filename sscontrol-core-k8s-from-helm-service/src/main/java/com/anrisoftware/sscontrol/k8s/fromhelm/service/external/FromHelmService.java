@@ -15,7 +15,7 @@
  */
 package com.anrisoftware.sscontrol.k8s.fromhelm.service.external;
 
-import com.anrisoftware.sscontrol.types.host.external.HostServiceService;
+import com.anrisoftware.sscontrol.types.host.HostServiceFactory;
 
 /**
  * From Helm service.
@@ -23,5 +23,5 @@ import com.anrisoftware.sscontrol.types.host.external.HostServiceService;
  * @author Erwin Müller, erwin.mueller@deventm.de
  * @since 1.0
  */
-public interface FromHelmService extends HostServiceService {
+public interface FromHelmService extends HostServiceFactory {
 }

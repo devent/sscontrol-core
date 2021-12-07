@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assumptions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
-import com.anrisoftware.sscontrol.types.host.external.HostServiceScript
+import com.anrisoftware.sscontrol.types.host.HostServiceScript
 
 import groovy.util.logging.Slf4j
 

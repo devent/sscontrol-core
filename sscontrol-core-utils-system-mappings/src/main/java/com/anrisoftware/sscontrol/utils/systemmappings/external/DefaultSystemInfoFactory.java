@@ -17,7 +17,7 @@ package com.anrisoftware.sscontrol.utils.systemmappings.external;
 
 import java.util.Map;
 
-import com.anrisoftware.sscontrol.types.host.external.SystemInfo;
+import com.anrisoftware.sscontrol.types.host.SystemInfo;
 
 /**
  * Creates information about the host system.

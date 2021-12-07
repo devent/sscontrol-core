@@ -15,7 +15,7 @@
  */
 package com.anrisoftware.sscontrol.k8smaster.script.debian.internal.k8smaster_1_13.debian_9;
 
-import com.anrisoftware.sscontrol.types.host.external.HostServiceScriptService;
+import com.anrisoftware.sscontrol.types.host.HostServiceScriptFactory;
 
 /**
  *
@@ -24,5 +24,5 @@ import com.anrisoftware.sscontrol.types.host.external.HostServiceScriptService;
  * @version 1.0
  */
 public interface KubectlClusterDebianFactory
-        extends HostServiceScriptService {
+        extends HostServiceScriptFactory {
 }

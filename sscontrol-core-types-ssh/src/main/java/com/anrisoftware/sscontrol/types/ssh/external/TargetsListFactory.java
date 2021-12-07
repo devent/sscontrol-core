@@ -15,8 +15,8 @@
  */
 package com.anrisoftware.sscontrol.types.ssh.external;
 
-import com.anrisoftware.sscontrol.types.host.external.HostService;
-import com.anrisoftware.sscontrol.types.host.external.HostServices;
+import com.anrisoftware.sscontrol.types.host.HostService;
+import com.anrisoftware.sscontrol.types.host.HostServices;
 
 /**
  *

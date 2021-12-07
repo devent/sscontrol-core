@@ -15,7 +15,7 @@
  */
 package com.anrisoftware.sscontrol.etcd.script.debian.internal.debian_10.etcd_3_4;
 
-import com.anrisoftware.sscontrol.types.host.external.HostServiceScriptService;
+import com.anrisoftware.sscontrol.types.host.HostServiceScriptFactory;
 
 /**
  *
@@ -24,5 +24,5 @@ import com.anrisoftware.sscontrol.types.host.external.HostServiceScriptService;
  * @version 1.0
  */
 public interface SystemdUpstreamEtcd_3_4_Debian_10_DebianFactory
-        extends HostServiceScriptService {
+        extends HostServiceScriptFactory {
 }

@@ -17,8 +17,7 @@ package com.anrisoftware.sscontrol.k8s.fromhelm.script.linux.internal.script_1_1
 
 import com.anrisoftware.sscontrol.k8s.fromhelm.script.linux.internal.script_1_13.FromHelmLinux;
 import com.anrisoftware.sscontrol.k8s.fromhelm.script.linux.internal.script_1_13.KubectlClusterLinux;
-
-import com.anrisoftware.sscontrol.types.host.external.HostServiceScript;
+import com.anrisoftware.sscontrol.types.host.HostServiceScript;
 import com.google.inject.AbstractModule;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 

@@ -15,7 +15,7 @@
  */
 package com.anrisoftware.sscontrol.k8s.restore.service.external;
 
-import com.anrisoftware.sscontrol.types.host.external.HostServiceService;
+import com.anrisoftware.sscontrol.types.host.HostServiceFactory;
 
 /**
  * Restore service.
@@ -23,5 +23,5 @@ import com.anrisoftware.sscontrol.types.host.external.HostServiceService;
  * @author Erwin Müller, erwin.mueller@deventm.de
  * @since 1.0
  */
-public interface RestoreService extends HostServiceService {
+public interface RestoreService extends HostServiceFactory {
 }

@@ -19,7 +19,7 @@ import com.anrisoftware.sscontrol.nfs.service.external.Export;
 import com.anrisoftware.sscontrol.nfs.service.external.Host;
 import com.anrisoftware.sscontrol.nfs.service.internal.ExportImpl.ExportImplFactory;
 import com.anrisoftware.sscontrol.nfs.service.internal.HostImpl.HostImplFactory;
-import com.anrisoftware.sscontrol.types.host.external.HostService;
+import com.anrisoftware.sscontrol.types.host.HostService;
 import com.google.inject.AbstractModule;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 

@@ -29,9 +29,9 @@ import org.codehaus.groovy.control.CompilerConfiguration;
 import com.anrisoftware.sscontrol.parser.groovy.external.LoadScriptException;
 import com.anrisoftware.sscontrol.parser.groovy.external.ParsedScript;
 import com.anrisoftware.sscontrol.types.app.external.AppException;
-import com.anrisoftware.sscontrol.types.host.external.HostServices;
-import com.anrisoftware.sscontrol.types.host.external.PreHost;
-import com.anrisoftware.sscontrol.types.host.external.PreHostService;
+import com.anrisoftware.sscontrol.types.host.HostServices;
+import com.anrisoftware.sscontrol.types.host.PreHost;
+import com.anrisoftware.sscontrol.types.host.PreHostFactory;
 import com.anrisoftware.sscontrol.types.parser.external.Parser;
 import com.google.inject.assistedinject.Assisted;
 
@@ -116,7 +116,7 @@ public class ParserImpl implements Parser {
         cc.setScriptBaseClass(ParsedScript.class.getName());
         Set<String> names = services.getAvailableServices();
         for (String name : names) {
-            PreHostService preService = services.getAvailablePreService(name);
+            PreHostFactory preService = services.getAvailablePreService(name);
             if (preService != null) {
                 PreHost pre = preService.create();
                 pre.configureCompiler(cc);

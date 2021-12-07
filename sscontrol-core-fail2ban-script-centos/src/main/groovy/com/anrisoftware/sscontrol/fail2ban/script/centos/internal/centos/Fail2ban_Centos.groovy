@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.anrisoftware.sscontrol.fail2ban.script.centos.internal.centos
+package com.anrisoftware.sscontrol.fail2ban.script.generic.centos.internal.centos
 
 import javax.inject.Inject
 
-import com.anrisoftware.sscontrol.fail2ban.script.fail2ban_0_11.external.Fail2ban_0_11
+import com.anrisoftware.sscontrol.fail2ban.script.generic.fail2ban_0_11.Fail2ban_0_11
 import com.anrisoftware.sscontrol.utils.centos.external.CentosUtils
 import com.anrisoftware.sscontrol.utils.systemd.external.SystemdUtils
 import com.anrisoftware.sscontrol.utils.systemd.external.SystemdUtilsFactory
@@ -30,8 +30,7 @@ import groovy.util.logging.Slf4j
  * @author Erwin Müller, erwin.mueller@deventm.de
  * @since 1.0
  */
-@Slf4j
-abstract class Fail2ban_Centos extends Fail2ban_0_11 {
+com.anrisoftware.sscontrol.fail2ban.script.genericnds Fail2ban_0_11 {
 
     abstract CentosUtils getCentos()
 

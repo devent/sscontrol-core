@@ -15,7 +15,7 @@
  */
 package com.anrisoftware.sscontrol.types.cluster.external;
 
-import com.anrisoftware.sscontrol.types.host.external.HostTargets;
+import com.anrisoftware.sscontrol.types.host.HostTargets;
 
 /**
  * Cluster targets.

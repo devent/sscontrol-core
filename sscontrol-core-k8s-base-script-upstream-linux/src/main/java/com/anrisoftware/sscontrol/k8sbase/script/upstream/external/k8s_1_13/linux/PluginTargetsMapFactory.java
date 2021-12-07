@@ -20,7 +20,7 @@ import java.util.Map;
 import com.anrisoftware.sscontrol.k8sbase.base.service.external.K8s;
 import com.anrisoftware.sscontrol.k8sbase.base.service.external.Plugin;
 import com.anrisoftware.sscontrol.k8sbase.script.upstream.external.k8s_1_13.linux.PluginTargetsMap;
-import com.anrisoftware.sscontrol.types.host.external.HostServices;
+import com.anrisoftware.sscontrol.types.host.HostServices;
 
 /**
  *

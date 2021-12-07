@@ -18,7 +18,7 @@ package com.anrisoftware.sscontrol.types.parser.external;
 import java.net.URI;
 import java.util.Map;
 
-import com.anrisoftware.sscontrol.types.host.external.HostServices;
+import com.anrisoftware.sscontrol.types.host.HostServices;
 
 /**
  * Script parser service.

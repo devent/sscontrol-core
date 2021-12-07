@@ -25,14 +25,14 @@ import java.util.concurrent.ExecutorService;
 import javax.inject.Inject;
 
 import com.anrisoftware.sscontrol.types.app.external.AppException;
-import com.anrisoftware.sscontrol.types.host.external.HostService;
-import com.anrisoftware.sscontrol.types.host.external.HostServiceScript;
-import com.anrisoftware.sscontrol.types.host.external.HostServiceScriptService;
-import com.anrisoftware.sscontrol.types.host.external.HostServices;
-import com.anrisoftware.sscontrol.types.host.external.PreHost;
-import com.anrisoftware.sscontrol.types.host.external.PreHostService;
-import com.anrisoftware.sscontrol.types.host.external.ScriptInfo;
-import com.anrisoftware.sscontrol.types.host.external.TargetHost;
+import com.anrisoftware.sscontrol.types.host.HostService;
+import com.anrisoftware.sscontrol.types.host.HostServiceScript;
+import com.anrisoftware.sscontrol.types.host.HostServiceScriptFactory;
+import com.anrisoftware.sscontrol.types.host.HostServices;
+import com.anrisoftware.sscontrol.types.host.PreHost;
+import com.anrisoftware.sscontrol.types.host.PreHostFactory;
+import com.anrisoftware.sscontrol.types.host.ScriptInfo;
+import com.anrisoftware.sscontrol.types.host.TargetHost;
 import com.anrisoftware.sscontrol.types.run.external.RunScript;
 import com.anrisoftware.sscontrol.types.ssh.external.SshHost;
 import com.anrisoftware.sscontrol.utils.systemmappings.external.AbstractScriptInfo;
@@ -108,7 +108,7 @@ public class RunScriptImpl implements RunScript {
     private HostServiceScript createScript(String name, HostService s, TargetHost host, Map<String, Object> vars)
             throws AppException {
         ScriptInfo info = getSystemScriptName(host, s.getName());
-        HostServiceScriptService service = services.getAvailableScriptService(info);
+        HostServiceScriptFactory service = services.getAvailableScriptService(info);
         if (service == null) {
             ScriptInfo i = getLinuxScriptName(name);
             service = services.getAvailableScriptService(i);
@@ -120,13 +120,13 @@ public class RunScriptImpl implements RunScript {
     }
 
     private HostServiceScript createScript(String name, HostService s, TargetHost host, Map<String, Object> vars,
-            HostServiceScriptService service) {
+            HostServiceScriptFactory service) {
         HostServiceScript script = emptyServiceScript;
         if (service == null) {
             return script;
         }
         script = service.create(services, s, host, threads, vars);
-        PreHostService preService = services.getAvailablePreService(name);
+        PreHostFactory preService = services.getAvailablePreService(name);
         if (preService != null) {
             PreHost pre = preService.create();
             pre.configureServiceScript(script);

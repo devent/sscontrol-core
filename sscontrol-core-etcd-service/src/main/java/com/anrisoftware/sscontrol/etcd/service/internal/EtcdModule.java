@@ -32,7 +32,7 @@ import com.anrisoftware.sscontrol.etcd.service.internal.GatewayImpl.GatewayImplF
 import com.anrisoftware.sscontrol.etcd.service.internal.PeerClientCertsAuthenticationImpl.PeerClientCertsAuthenticationImplFactory;
 import com.anrisoftware.sscontrol.etcd.service.internal.PeerImpl.PeerImplFactory;
 import com.anrisoftware.sscontrol.etcd.service.internal.ProxyImpl.ProxyImplFactory;
-import com.anrisoftware.sscontrol.types.host.external.HostService;
+import com.anrisoftware.sscontrol.types.host.HostService;
 import com.google.inject.AbstractModule;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 import com.google.inject.multibindings.MapBinder;

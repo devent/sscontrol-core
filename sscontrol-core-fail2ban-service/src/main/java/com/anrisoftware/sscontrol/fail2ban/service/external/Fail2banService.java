@@ -15,7 +15,7 @@
  */
 package com.anrisoftware.sscontrol.fail2ban.service.external;
 
-import com.anrisoftware.sscontrol.types.host.external.HostServiceService;
+import com.anrisoftware.sscontrol.types.host.HostServiceFactory;
 
 /**
  * <i>Fail2ban</i> service.
@@ -23,6 +23,6 @@ import com.anrisoftware.sscontrol.types.host.external.HostServiceService;
  * @author Erwin Mueller, erwin.mueller@deventm.org
  * @since 1.0
  */
-public interface Fail2banService extends HostServiceService {
+public interface Fail2banService extends HostServiceFactory {
 
 }

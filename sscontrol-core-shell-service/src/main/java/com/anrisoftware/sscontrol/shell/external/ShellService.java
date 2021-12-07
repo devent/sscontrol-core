@@ -15,7 +15,7 @@
  */
 package com.anrisoftware.sscontrol.shell.external;
 
-import com.anrisoftware.sscontrol.types.host.external.HostServiceService;
+import com.anrisoftware.sscontrol.types.host.HostServiceFactory;
 
 /**
  * <i>Shell</i> service.
@@ -23,6 +23,6 @@ import com.anrisoftware.sscontrol.types.host.external.HostServiceService;
  * @author Erwin Müller, erwin.mueller@deventm.de
  * @since 1.0
  */
-public interface ShellService extends HostServiceService {
+public interface ShellService extends HostServiceFactory {
 
 }

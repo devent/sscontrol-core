@@ -15,7 +15,7 @@
  */
 package com.anrisoftware.sscontrol.utils.debian.external;
 
-import com.anrisoftware.sscontrol.types.host.external.HostServiceScript;
+import com.anrisoftware.sscontrol.types.host.HostServiceScript;
 
 /**
  * Debian 10 utilities factory.

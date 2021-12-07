@@ -17,7 +17,7 @@ package com.anrisoftware.sscontrol.haproxy.script.haproxy_1_8.external
 
 import javax.inject.Inject
 
-import com.anrisoftware.sscontrol.groovy.script.external.ScriptBase
+import com.anrisoftware.sscontrol.groovy.script.ScriptBase
 import com.anrisoftware.sscontrol.haproxy.service.external.HAProxy
 import com.anrisoftware.sscontrol.utils.ufw.linux.external.UfwLinuxUtilsFactory
 import com.anrisoftware.sscontrol.utils.ufw.linux.external.UfwUtils

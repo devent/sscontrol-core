@@ -21,7 +21,7 @@ import org.apache.commons.io.IOUtils
 
 import com.anrisoftware.resources.templates.external.TemplateResource
 import com.anrisoftware.resources.templates.external.TemplatesFactory
-import com.anrisoftware.sscontrol.groovy.script.external.ScriptBase
+import com.anrisoftware.sscontrol.groovy.script.ScriptBase
 import com.anrisoftware.sscontrol.repo.git.service.external.Credentials
 import com.anrisoftware.sscontrol.repo.git.service.external.GitRepo
 import com.anrisoftware.sscontrol.types.repo.external.RepoHost

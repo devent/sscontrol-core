@@ -17,7 +17,7 @@ package com.anrisoftware.sscontrol.types.repo.external;
 
 import java.util.List;
 
-import com.anrisoftware.sscontrol.types.host.external.HostService;
+import com.anrisoftware.sscontrol.types.host.HostService;
 
 /**
  * Code repository service.

@@ -21,7 +21,7 @@ import javax.inject.Inject
 
 import org.apache.commons.io.FileUtils
 
-import com.anrisoftware.sscontrol.types.host.external.HostServices
+import com.anrisoftware.sscontrol.types.host.HostServices
 import com.google.inject.assistedinject.Assisted
 
 /**

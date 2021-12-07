@@ -15,7 +15,7 @@
  */
 package com.anrisoftware.sscontrol.k8scluster.script.linux.internal.k8scluster_1_13;
 
-import com.anrisoftware.sscontrol.types.host.external.HostServiceScript;
+import com.anrisoftware.sscontrol.types.host.HostServiceScript;
 import com.google.inject.AbstractModule;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 

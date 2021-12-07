@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.anrisoftware.sscontrol.fail2ban.script.centos.internal.centos_7
+package com.anrisoftware.sscontrol.fail2ban.script.generic.centos.internal.centos_7
 
 import static com.anrisoftware.globalpom.utils.TestUtils.*
 
@@ -28,7 +28,7 @@ import com.anrisoftware.sscontrol.runner.test.external.AbstractRunnerTestBase
 import com.anrisoftware.sscontrol.ssh.script.linux.external.Ssh_Linux_Factory
 import com.anrisoftware.sscontrol.ssh.script.linux.internal.Ssh_Linux_Module
 import com.anrisoftware.sscontrol.ssh.service.internal.SshImpl.SshImplFactory
-import com.anrisoftware.sscontrol.types.host.external.HostServices
+import com.anrisoftware.sscontrol.types.host.HostServices
 
 /**
  *
@@ -36,7 +36,7 @@ import com.anrisoftware.sscontrol.types.host.external.HostServices
  * @author Erwin Müller, erwin.mueller@deventm.de
  * @since 1.0
  */
-abstract class AbstractFail2banRunnerTest extends AbstractRunnerTestBase {
+com.anrisoftware.sscontrol.fail2ban.script.genericextends AbstractRunnerTestBase {
 
     @Inject
     RunScriptImplFactory runnerFactory

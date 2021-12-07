@@ -17,7 +17,7 @@ package com.anrisoftware.sscontrol.services.internal.host;
 
 import com.anrisoftware.sscontrol.services.internal.host.HostServicesImpl.HostServicesImplFactory;
 import com.anrisoftware.sscontrol.services.internal.host.ScriptsMap.ScriptsMapFactory;
-import com.anrisoftware.sscontrol.types.host.external.HostServices;
+import com.anrisoftware.sscontrol.types.host.HostServices;
 import com.google.inject.AbstractModule;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 

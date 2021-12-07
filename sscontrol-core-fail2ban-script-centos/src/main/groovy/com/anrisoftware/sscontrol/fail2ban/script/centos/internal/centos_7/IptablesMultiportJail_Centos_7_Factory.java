@@ -15,7 +15,7 @@
  */
 package com.anrisoftware.sscontrol.fail2ban.script.centos.internal.centos_7;
 
-import com.anrisoftware.sscontrol.types.host.external.HostServiceScriptService;
+import com.anrisoftware.sscontrol.types.host.HostServiceScriptFactory;
 
 /**
  *
@@ -23,5 +23,5 @@ import com.anrisoftware.sscontrol.types.host.external.HostServiceScriptService;
  * @author Erwin Müller {@literal <erwin.mueller@deventm.de>}
  * @version 1.0
  */
-public interface IptablesMultiportJail_Centos_7_Factory extends HostServiceScriptService {
+public interface IptablesMultiportJail_Centos_7_Factory extends HostServiceScriptFactory {
 }

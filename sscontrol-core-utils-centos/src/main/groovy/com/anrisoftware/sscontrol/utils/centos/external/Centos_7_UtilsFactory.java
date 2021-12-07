@@ -15,7 +15,7 @@
  */
 package com.anrisoftware.sscontrol.utils.centos.external;
 
-import com.anrisoftware.sscontrol.types.host.external.HostServiceScript;
+import com.anrisoftware.sscontrol.types.host.HostServiceScript;
 
 /**
  * Debian 8 utilities factory.

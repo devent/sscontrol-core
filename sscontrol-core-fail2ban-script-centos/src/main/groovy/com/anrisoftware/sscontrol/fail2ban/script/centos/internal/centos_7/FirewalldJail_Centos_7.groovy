@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.anrisoftware.sscontrol.fail2ban.script.centos.internal.centos_7
+package com.anrisoftware.sscontrol.fail2ban.script.generic.centos.internal.centos_7
 
 import javax.inject.Inject
 
 import com.anrisoftware.resources.templates.external.TemplatesFactory
-import com.anrisoftware.sscontrol.fail2ban.script.fail2ban_0_x.external.Jail_0_x
+import com.anrisoftware.sscontrol.fail2ban.script.generic.fail2ban_0_x.Jail_0_x
 import com.anrisoftware.sscontrol.utils.centos.external.CentosUtils
 import com.anrisoftware.sscontrol.utils.centos.external.Centos_7_UtilsFactory
 
@@ -28,7 +28,7 @@ import com.anrisoftware.sscontrol.utils.centos.external.Centos_7_UtilsFactory
  * @author Erwin Müller <erwin.mueller@deventm.de>
  * @version 1.0
  */
-class FirewalldJail_Centos_7 extends Jail_0_x {
+com.anrisoftware.sscontrol.fail2ban.script.generic0_x {
 
     @Inject
     FirewalldJail_Centos_7_Properties centosPropertiesProvider

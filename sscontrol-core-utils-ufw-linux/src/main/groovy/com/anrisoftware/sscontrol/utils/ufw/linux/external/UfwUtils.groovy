@@ -17,7 +17,7 @@ package com.anrisoftware.sscontrol.utils.ufw.linux.external
 
 import com.anrisoftware.globalpom.exec.external.core.ProcessTask
 import com.anrisoftware.resources.templates.external.TemplateResource
-import com.anrisoftware.sscontrol.types.host.external.HostServiceScript
+import com.anrisoftware.sscontrol.types.host.HostServiceScript
 import com.anrisoftware.sscontrol.types.ssh.external.SshHost
 
 import groovy.util.logging.Slf4j

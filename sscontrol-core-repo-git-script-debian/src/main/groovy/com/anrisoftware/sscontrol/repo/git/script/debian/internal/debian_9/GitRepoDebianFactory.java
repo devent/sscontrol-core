@@ -15,7 +15,7 @@
  */
 package com.anrisoftware.sscontrol.repo.git.script.debian.internal.debian_9;
 
-import com.anrisoftware.sscontrol.types.host.external.HostServiceScriptService;
+import com.anrisoftware.sscontrol.types.host.HostServiceScriptFactory;
 
 /**
  *
@@ -23,5 +23,5 @@ import com.anrisoftware.sscontrol.types.host.external.HostServiceScriptService;
  * @author Erwin Müller {@literal <erwin.mueller@deventm.de>}
  * @version 1.0
  */
-public interface GitRepoDebianFactory extends HostServiceScriptService {
+public interface GitRepoDebianFactory extends HostServiceScriptFactory {
 }

@@ -30,7 +30,7 @@ import com.anrisoftware.sscontrol.ssh.script.linux.internal.Ssh_Linux_Module
 import com.anrisoftware.sscontrol.ssh.service.internal.SshImpl.SshImplFactory
 import com.anrisoftware.sscontrol.sshd.script.debian.internal.debian_10.SshdDebianFactory
 import com.anrisoftware.sscontrol.sshd.service.internal.SshdImpl.SshdImplFactory
-import com.anrisoftware.sscontrol.types.host.external.HostServices
+import com.anrisoftware.sscontrol.types.host.HostServices
 
 /**
  *

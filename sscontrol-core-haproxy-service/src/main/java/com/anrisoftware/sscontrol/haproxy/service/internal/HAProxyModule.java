@@ -21,7 +21,7 @@ import com.anrisoftware.sscontrol.haproxy.service.external.Proxy;
 import com.anrisoftware.sscontrol.haproxy.service.internal.BackendImpl.BackendImplFactory;
 import com.anrisoftware.sscontrol.haproxy.service.internal.FrontendImpl.FrontendImplFactory;
 import com.anrisoftware.sscontrol.haproxy.service.internal.ProxyImpl.ProxyImplFactory;
-import com.anrisoftware.sscontrol.types.host.external.HostService;
+import com.anrisoftware.sscontrol.types.host.HostService;
 import com.google.inject.AbstractModule;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 
