@@ -16,7 +16,7 @@
 package com.anrisoftware.sscontrol.crio.script.debian.debian_10
 
 import static com.anrisoftware.sscontrol.shell.external.utils.UnixTestUtil.*
-import static com.anrisoftware.sscontrol.utils.debian.external.Debian_10_TestUtils.*
+import static com.anrisoftware.sscontrol.utils.debian.Debian_11_TestUtils.*
 
 /**
  *

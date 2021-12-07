@@ -19,8 +19,8 @@ import javax.inject.Inject
 
 import com.anrisoftware.propertiesutils.ContextProperties
 import com.anrisoftware.sscontrol.crio.script.crio_1_20.Crio_1_20
-import com.anrisoftware.sscontrol.utils.debian.external.DebianUtils
-import com.anrisoftware.sscontrol.utils.debian.external.Debian_10_UtilsFactory
+import com.anrisoftware.sscontrol.utils.debian.DebianUtils
+import com.anrisoftware.sscontrol.utils.debian.Debian_11_UtilsFactory
 import com.anrisoftware.sscontrol.utils.systemd.external.SystemdUtils
 import com.anrisoftware.sscontrol.utils.systemd.external.SystemdUtilsFactory
 
@@ -52,7 +52,7 @@ class Crio_Crio_1_20_Debian_10 extends Crio_1_20 {
     }
 
     @Inject
-    void setDebian(Debian_10_UtilsFactory factory) {
+    void setDebian(Debian_11_UtilsFactory factory) {
         this.debian = factory.create this
     }
 

@@ -18,8 +18,8 @@ package com.anrisoftware.sscontrol.haproxy.script.debian.internal.debian_9
 import javax.inject.Inject
 
 import com.anrisoftware.sscontrol.groovy.script.ScriptBase
-import com.anrisoftware.sscontrol.utils.debian.external.DebianUtils
-import com.anrisoftware.sscontrol.utils.debian.external.Debian_10_UtilsFactory
+import com.anrisoftware.sscontrol.utils.debian.DebianUtils
+import com.anrisoftware.sscontrol.utils.debian.Debian_11_UtilsFactory
 import com.anrisoftware.sscontrol.utils.systemd.external.SystemdUtils
 import com.anrisoftware.sscontrol.utils.systemd.external.SystemdUtilsFactory
 
@@ -44,7 +44,7 @@ abstract class HAProxy_Debian_9 extends ScriptBase {
     }
 
     @Inject
-    void setDebianFactory(Debian_10_UtilsFactory factory) {
+    void setDebianFactory(Debian_11_UtilsFactory factory) {
         this.debian = factory.create(this)
     }
 

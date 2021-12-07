@@ -19,8 +19,8 @@ import javax.inject.Inject
 
 import com.anrisoftware.propertiesutils.ContextProperties
 import com.anrisoftware.sscontrol.repo.git.script.debian.internal.linux.GitRepoLinux
-import com.anrisoftware.sscontrol.utils.debian.external.DebianUtils
-import com.anrisoftware.sscontrol.utils.debian.external.Debian_10_UtilsFactory
+import com.anrisoftware.sscontrol.utils.debian.DebianUtils
+import com.anrisoftware.sscontrol.utils.debian.Debian_11_UtilsFactory
 
 import groovy.util.logging.Slf4j
 
@@ -39,7 +39,7 @@ class GitRepoDebian extends GitRepoLinux {
     DebianUtils debian
 
     @Inject
-    void setDebianFactory(Debian_10_UtilsFactory factory) {
+    void setDebianFactory(Debian_11_UtilsFactory factory) {
         this.debian = factory.create(this)
     }
 

@@ -21,8 +21,8 @@ import com.anrisoftware.propertiesutils.ContextProperties
 import com.anrisoftware.sscontrol.groovy.script.ScriptBase
 import com.anrisoftware.sscontrol.k8smaster.script.debian.internal.k8smaster_1_13.debian_9.K8sMasterUfwDebianFactory
 import com.anrisoftware.sscontrol.k8smaster.script.debian.internal.k8smaster_1_13.debian_9.K8sMasterUpstreamDebianFactory
-import com.anrisoftware.sscontrol.utils.debian.external.DebianUtils
-import com.anrisoftware.sscontrol.utils.debian.external.Debian_10_UtilsFactory
+import com.anrisoftware.sscontrol.utils.debian.DebianUtils
+import com.anrisoftware.sscontrol.utils.debian.Debian_11_UtilsFactory
 
 import groovy.util.logging.Slf4j
 
@@ -46,7 +46,7 @@ class K8sMasterDebian extends ScriptBase {
     DebianUtils debian
 
     @Inject
-    void setDebian(Debian_10_UtilsFactory factory) {
+    void setDebian(Debian_11_UtilsFactory factory) {
         this.debian = factory.create this
     }
 

@@ -42,7 +42,7 @@ import com.anrisoftware.sscontrol.ssh.service.internal.SshModule
 import com.anrisoftware.sscontrol.tls.internal.TlsModule
 import com.anrisoftware.sscontrol.types.misc.internal.TypesModule
 import com.anrisoftware.sscontrol.types.ssh.external.TargetsListModule
-import com.anrisoftware.sscontrol.utils.debian.external.DebianUtilsModule
+import com.anrisoftware.sscontrol.utils.debian.DebianUtilsModule
 import com.anrisoftware.sscontrol.utils.systemd.external.SystemdUtilsModule
 import com.anrisoftware.sscontrol.utils.systemmappings.internal.SystemNameMappingsModule
 import com.anrisoftware.sscontrol.utils.ufw.linux.external.UfwUtilsModule

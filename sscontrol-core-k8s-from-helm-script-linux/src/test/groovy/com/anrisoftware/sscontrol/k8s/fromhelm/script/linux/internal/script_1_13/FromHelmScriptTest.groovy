@@ -17,8 +17,8 @@ package com.anrisoftware.sscontrol.k8s.fromhelm.script.linux.internal.script_1_1
 
 import static com.anrisoftware.globalpom.utils.TestUtils.*
 import static com.anrisoftware.sscontrol.shell.external.utils.UnixTestUtil.*
+import static com.anrisoftware.sscontrol.utils.debian.Debian_9_TestUtils.*
 import static com.anrisoftware.sscontrol.shell.external.utils.LocalhostSocketCondition.*
-import static com.anrisoftware.sscontrol.utils.debian.external.Debian_9_TestUtils.*
 
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test

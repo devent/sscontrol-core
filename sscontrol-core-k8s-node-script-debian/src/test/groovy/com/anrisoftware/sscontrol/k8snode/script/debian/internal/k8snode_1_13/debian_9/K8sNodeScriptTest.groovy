@@ -18,7 +18,7 @@ package com.anrisoftware.sscontrol.k8snode.script.debian.internal.k8snode_1_13.d
 import static com.anrisoftware.globalpom.utils.TestUtils.*
 import static com.anrisoftware.sscontrol.shell.external.utils.LocalhostSocketCondition.*
 import static com.anrisoftware.sscontrol.shell.external.utils.UnixTestUtil.*
-import static com.anrisoftware.sscontrol.utils.debian.external.Debian_9_TestUtils.*
+import static com.anrisoftware.sscontrol.utils.debian.Debian_9_TestUtils.*
 import static org.junit.jupiter.api.Assertions.assertThrows
 
 import org.junit.jupiter.api.Test

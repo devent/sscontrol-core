@@ -35,7 +35,7 @@ import com.anrisoftware.sscontrol.repo.git.service.internal.GitRepoModule
 import com.anrisoftware.sscontrol.services.internal.host.HostServicesModule
 import com.anrisoftware.sscontrol.ssh.service.internal.SshModule
 import com.anrisoftware.sscontrol.types.misc.internal.TypesModule
-import com.anrisoftware.sscontrol.utils.debian.external.DebianUtilsModule
+import com.anrisoftware.sscontrol.utils.debian.DebianUtilsModule
 import com.anrisoftware.sscontrol.utils.systemmappings.internal.SystemNameMappingsModule
 
 /**
