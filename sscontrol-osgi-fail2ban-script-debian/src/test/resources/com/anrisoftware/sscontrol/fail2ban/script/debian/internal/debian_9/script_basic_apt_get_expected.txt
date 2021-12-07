@@ -1,4 +1,0 @@
--y install fail2ban
--y install python-pyinotify
--y install whois
--y install ufw

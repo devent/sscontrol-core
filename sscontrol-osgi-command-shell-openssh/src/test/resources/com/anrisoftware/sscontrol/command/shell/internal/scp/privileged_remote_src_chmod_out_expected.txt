@@ -1,1 +1,0 @@
-o-rwx /var/lib/robobee/tmp

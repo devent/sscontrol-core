@@ -1,2 +1,0 @@
--C -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no user@localhost:/var/lib/robobee/tmp/aaa.txt /tmp/junit/replace_test.txt
--C -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no /tmp/junit/replace_test.txt user@localhost:/var/lib/robobee/tmp/replace_test.txt

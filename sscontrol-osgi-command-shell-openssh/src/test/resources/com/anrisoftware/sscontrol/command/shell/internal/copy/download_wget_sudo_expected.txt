@@ -1,3 +1,0 @@
-mkdir -p /tmp/junit/junit
-chown ./id -u /tmp/junit/junit
-chmod o-rwx /tmp/junit/junit

@@ -1,2 +1,0 @@
-/tmp/aaa.txt /var/lib/robobee/tmp
-/var/lib/robobee/tmp/replace_test.txt /tmp/aaa.txt

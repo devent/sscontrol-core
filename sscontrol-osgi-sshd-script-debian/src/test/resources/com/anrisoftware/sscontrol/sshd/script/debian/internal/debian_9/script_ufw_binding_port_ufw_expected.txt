@@ -1,3 +1,0 @@
-
-status
-allow port 2222 proto tcp

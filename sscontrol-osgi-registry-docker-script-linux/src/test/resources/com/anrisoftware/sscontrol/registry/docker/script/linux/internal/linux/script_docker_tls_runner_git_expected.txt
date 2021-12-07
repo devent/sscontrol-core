@@ -1,1 +1,0 @@
-clone --depth 1 /user/wordpress-app.git .

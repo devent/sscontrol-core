@@ -1,1 +1,0 @@
--r /var/lib/robobee/tmp/wordpress

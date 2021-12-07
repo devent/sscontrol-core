@@ -1,4 +1,0 @@
-mkdir -p /tmp/junit/junit
-chown ./id -u /tmp/junit/junit
-chmod o-rwx /tmp/junit/junit
-mv ./basename https://github.com/coreos/etcd/releases/download/v3.1.0/etcd-v3.1.0-linux-amd64.tar.gz /tmp

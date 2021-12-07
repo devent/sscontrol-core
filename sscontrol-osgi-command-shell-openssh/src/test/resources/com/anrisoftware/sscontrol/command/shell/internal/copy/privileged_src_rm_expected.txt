@@ -1,1 +1,0 @@
-/var/lib/robobee/tmp/aaa.txt

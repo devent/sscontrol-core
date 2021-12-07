@@ -1,4 +1,0 @@
-mkdir -p /tmp/junit/junit
-chown ./id -u /tmp/junit/junit
-chmod o-rwx /tmp/junit/junit
-mv ./basename http://server.com/aaa.txt /tmp
