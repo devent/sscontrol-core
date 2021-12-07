@@ -15,8 +15,6 @@
  */
 package com.anrisoftware.sscontrol.collectd.script.centos.internal.centos_7
 
-import static com.anrisoftware.sscontrol.collectd.script.centos.internal.centos_7.Collectd_Centos_7_Service.*
-
 import javax.inject.Inject
 
 import com.anrisoftware.propertiesutils.ContextProperties
@@ -35,6 +33,10 @@ import groovy.util.logging.Slf4j
 @Slf4j
 class Collectd_Centos_7 extends Collectd_Centos {
 
+    static final String SYSTEM_VERSION = "7";
+
+    static final String SYSTEM_NAME = "centos";
+
     @Inject
     Collectd_Centos_7_Properties propertiesProvider
 
@@ -44,45 +46,45 @@ class Collectd_Centos_7 extends Collectd_Centos {
 
     @Inject
     void setCollectd_5_7_Centos_7_Factory(Collectd_5_8_Centos_7_Factory factory) {
-	this.collectd = factory.create(scriptsRepository, service, target, threads, scriptEnv)
+        this.collectd = factory.create(scriptsRepository, service, target, threads, scriptEnv)
     }
 
     @Inject
     void setSystemdUtilsFactory(SystemdUtilsFactory factory) {
-	this.systemd = factory.create(this)
+        this.systemd = factory.create(this)
     }
 
     @Override
     def run() {
-	systemd.stopServices()
-	installPackages()
-	collectd.deployConfiguration()
-	collectd.configureSELinux()
-	systemd.startServices()
-	systemd.enableServices()
+        systemd.stopServices()
+        installPackages()
+        collectd.deployConfiguration()
+        collectd.configureSELinux()
+        systemd.startServices()
+        systemd.enableServices()
     }
 
     String getCollectdService() {
-	properties.getProperty 'collectd_service', defaultProperties
+        properties.getProperty 'collectd_service', defaultProperties
     }
 
     @Override
     ContextProperties getDefaultProperties() {
-	propertiesProvider.get()
+        propertiesProvider.get()
     }
 
     @Override
     def getLog() {
-	log
+        log
     }
 
     @Override
     String getSystemName() {
-	SYSTEM_NAME
+        SYSTEM_NAME
     }
 
     @Override
     String getSystemVersion() {
-	SYSTEM_VERSION
+        SYSTEM_VERSION
     }
 }

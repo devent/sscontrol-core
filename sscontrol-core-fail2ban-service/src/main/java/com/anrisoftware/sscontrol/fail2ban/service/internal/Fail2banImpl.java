@@ -15,7 +15,6 @@
  */
 package com.anrisoftware.sscontrol.fail2ban.service.internal;
 
-import static com.anrisoftware.sscontrol.fail2ban.service.internal.Fail2banServiceImpl.FAIL2BAN_NAME;
 import static com.anrisoftware.sscontrol.types.misc.external.StringListPropertyUtil.stringListStatement;
 import static org.codehaus.groovy.runtime.InvokerHelper.invokeMethod;
 
@@ -59,6 +58,8 @@ public class Fail2banImpl implements Fail2ban {
     public interface Fail2banImplFactory extends Fail2banService {
 
     }
+
+    private static final String SERVICE_NAME = "fail2ban";
 
     private final Fail2banImplLogger log;
 
@@ -147,7 +148,7 @@ public class Fail2banImpl implements Fail2ban {
 
     @Override
     public String getName() {
-        return FAIL2BAN_NAME;
+        return SERVICE_NAME;
     }
 
     @Override

@@ -25,7 +25,7 @@
     <parent>
         <artifactId>globalpom-groovy-gmavenplus</artifactId>
         <groupId>com.anrisoftware.globalpom</groupId>
-        <version>4.6.0-SNAPSHOT</version>
+        <version>4.6.0</version>
     </parent>
 
     <groupId>com.anrisoftware.sscontrol</groupId>
@@ -56,11 +56,11 @@
         <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
         <sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath>
         <!-- Dependencies -->
-        <project.custom.log.version>4.6.0-SNAPSHOT</project.custom.log.version>
-        <project.custom.resources.version>4.6.0-SNAPSHOT</project.custom.resources.version>
-        <project.custom.globalpom.version>4.6.0-SNAPSHOT</project.custom.globalpom.version>
-        <project.custom.globalpomutils.version>4.6.0-SNAPSHOT</project.custom.globalpomutils.version>
-        <project.custom.propertiesutils.version>4.6.0-SNAPSHOT</project.custom.propertiesutils.version>
+        <project.custom.log.version>4.6.0</project.custom.log.version>
+        <project.custom.resources.version>4.6.0</project.custom.resources.version>
+        <project.custom.globalpom.version>4.6.0</project.custom.globalpom.version>
+        <project.custom.globalpomutils.version>4.6.0</project.custom.globalpomutils.version>
+        <project.custom.propertiesutils.version>4.6.0</project.custom.propertiesutils.version>
     </properties>
 
     <modules>
@@ -80,9 +80,6 @@
         <module>sscontrol-core-crio-script-crio-1-20</module>
         <module>sscontrol-core-crio-service</module>
         <module>sscontrol-core-debug</module>
-        <module>sscontrol-core-docker-script-debian</module>
-        <module>sscontrol-core-docker-script-systemd</module>
-        <module>sscontrol-core-docker-service</module>
         <module>sscontrol-core-etcd-script-debian</module>
         <module>sscontrol-core-etcd-script-upstream</module>
         <module>sscontrol-core-etcd-service</module>
@@ -96,8 +93,6 @@
         <module>sscontrol-core-haproxy-script-debian</module>
         <module>sscontrol-core-haproxy-script-haproxy-1-8</module>
         <module>sscontrol-core-haproxy-service</module>
-        <module>sscontrol-core-inline</module>
-        <module>sscontrol-core-inline-linux</module>
         <module>sscontrol-core-k8s-backup-client</module>
         <module>sscontrol-core-k8s-backup-script-linux</module>
         <module>sscontrol-core-k8s-backup-service</module>
@@ -121,8 +116,6 @@
         <module>sscontrol-core-nfs-script-debian</module>
         <module>sscontrol-core-nfs-script-nfs-1-3</module>
         <module>sscontrol-core-nfs-service</module>
-        <module>sscontrol-core-registry-docker-script-linux</module>
-        <module>sscontrol-core-registry-docker-service</module>
         <module>sscontrol-core-repo-git-script-debian</module>
         <module>sscontrol-core-repo-git-service</module>
         <module>sscontrol-core-script-runner</module>
@@ -157,8 +150,6 @@
         <module>sscontrol-core-utils-system-mappings</module>
         <module>sscontrol-core-utils-tls</module>
         <module>sscontrol-core-utils-ufw-linux</module>
-        <module>sscontrol-core-zimbra-script-centos</module>
-        <module>sscontrol-core-zimbra-service</module>
     </modules>
 
     <developers>

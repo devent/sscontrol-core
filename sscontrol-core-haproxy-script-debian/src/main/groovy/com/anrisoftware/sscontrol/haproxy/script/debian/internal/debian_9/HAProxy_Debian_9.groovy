@@ -15,8 +15,6 @@
  */
 package com.anrisoftware.sscontrol.haproxy.script.debian.internal.debian_9
 
-import static com.anrisoftware.sscontrol.haproxy.script.debian.internal.debian_9.HAProxy_1_8_Debian_9_Service.*
-
 import javax.inject.Inject
 
 import com.anrisoftware.sscontrol.groovy.script.external.ScriptBase
@@ -72,5 +70,4 @@ abstract class HAProxy_Debian_9 extends ScriptBase {
     def getLog() {
         log
     }
-
 }

@@ -15,7 +15,6 @@
  */
 package com.anrisoftware.sscontrol.haproxy.service.internal;
 
-import static com.anrisoftware.sscontrol.haproxy.service.internal.HAProxyServiceImpl.SERVICE_NAME;
 import static com.anrisoftware.sscontrol.types.misc.external.StringListPropertyUtil.stringListStatement;
 import static java.lang.String.format;
 
@@ -28,8 +27,8 @@ import javax.inject.Inject;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-import com.anrisoftware.sscontrol.haproxy.service.external.Proxy;
 import com.anrisoftware.sscontrol.haproxy.service.external.HAProxy;
+import com.anrisoftware.sscontrol.haproxy.service.external.Proxy;
 import com.anrisoftware.sscontrol.haproxy.service.internal.ProxyImpl.ProxyImplFactory;
 import com.anrisoftware.sscontrol.types.host.external.HostServiceProperties;
 import com.anrisoftware.sscontrol.types.host.external.HostServicePropertiesService;
@@ -45,6 +44,8 @@ import com.google.inject.assistedinject.AssistedInject;
  * @since 1.0
  */
 public class HAProxyImpl implements HAProxy {
+
+    private static final String SERVICE_NAME = "haproxy";
 
     private final HAProxyImplLogger log;
 
@@ -63,7 +64,7 @@ public class HAProxyImpl implements HAProxy {
     HAProxyImpl(HAProxyImplLogger log, HostServicePropertiesService propertiesService,
             @Assisted Map<String, Object> args) {
         this.log = log;
-        this.targets = new ArrayList<TargetHost>();
+        this.targets = new ArrayList<>();
         this.serviceProperties = propertiesService.create();
         this.proxies = new ArrayList<>();
         parseArgs(args);

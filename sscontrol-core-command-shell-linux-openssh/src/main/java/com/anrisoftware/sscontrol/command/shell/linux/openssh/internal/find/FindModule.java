@@ -30,8 +30,7 @@ public class FindModule extends AbstractModule {
 
     @Override
     protected void configure() {
-        install(new FactoryModuleBuilder()
-                .implement(FindFiles.class, FindFilesImpl.class)
+        install(new FactoryModuleBuilder().implement(FindFiles.class, FindFilesImpl.class)
                 .build(FindFilesFactory.class));
     }
 

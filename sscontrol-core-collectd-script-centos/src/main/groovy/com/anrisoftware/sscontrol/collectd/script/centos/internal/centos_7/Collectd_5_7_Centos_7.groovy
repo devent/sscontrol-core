@@ -15,8 +15,6 @@
  */
 package com.anrisoftware.sscontrol.collectd.script.centos.internal.centos_7
 
-import static com.anrisoftware.sscontrol.collectd.script.centos.internal.centos_7.Collectd_Centos_7_Service.*
-
 import javax.inject.Inject
 
 import com.anrisoftware.propertiesutils.ContextProperties
@@ -34,6 +32,10 @@ import groovy.util.logging.Slf4j
  */
 @Slf4j
 class Collectd_5_7_Centos_7 extends Collectd_5_8 {
+
+    static final String SYSTEM_VERSION = "7";
+
+    static final String SYSTEM_NAME = "centos";
 
     @Inject
     Collectd_Centos_7_Properties propertiesProvider

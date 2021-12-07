@@ -15,7 +15,6 @@
  */
 package com.anrisoftware.sscontrol.nfs.service.internal;
 
-import static com.anrisoftware.sscontrol.nfs.service.internal.NfsServiceImpl.SERVICE_NAME;
 import static com.anrisoftware.sscontrol.types.misc.external.StringListPropertyUtil.stringListStatement;
 import static java.lang.String.format;
 
@@ -45,6 +44,10 @@ import com.google.inject.assistedinject.AssistedInject;
  */
 public class NfsImpl implements Nfs {
 
+    private static final String SERVICE_NAME = "nfs";
+
+    private static final String NAME_PROPERTY = "service.name";
+
     private final NfsImplLogger log;
 
     private final List<TargetHost> targets;
@@ -61,7 +64,7 @@ public class NfsImpl implements Nfs {
     @AssistedInject
     NfsImpl(NfsImplLogger log, HostServicePropertiesService propertiesService, @Assisted Map<String, Object> args) {
         this.log = log;
-        this.targets = new ArrayList<TargetHost>();
+        this.targets = new ArrayList<>();
         this.serviceProperties = propertiesService.create();
         this.exports = new ArrayList<>();
         parseArgs(args);
@@ -119,7 +122,7 @@ public class NfsImpl implements Nfs {
     public List<Export> getExports() {
         return exports;
     }
-    
+
     @Override
     public String toString() {
         return new ToStringBuilder(this).append("name", getName()).append("hosts", targets).toString();

@@ -15,8 +15,6 @@
  */
 package com.anrisoftware.sscontrol.haproxy.script.debian.internal.debian_9
 
-import static com.anrisoftware.sscontrol.haproxy.script.debian.internal.debian_9.HAProxy_1_8_Debian_9_Service.*
-
 import javax.inject.Inject
 
 import com.anrisoftware.propertiesutils.ContextProperties
@@ -33,6 +31,10 @@ import groovy.util.logging.Slf4j
  */
 @Slf4j
 class HAProxy_1_8_Debian_9 extends HAProxy_Debian_9 {
+
+    static final String SYSTEM_VERSION = "9";
+
+    static final String SYSTEM_NAME = "debian";
 
     @Inject
     HAProxy_1_8_Debian_9_Properties propertiesProvider

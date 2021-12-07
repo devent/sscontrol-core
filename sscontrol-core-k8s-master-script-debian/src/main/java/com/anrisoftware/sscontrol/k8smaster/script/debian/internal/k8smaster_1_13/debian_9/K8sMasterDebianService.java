@@ -15,15 +15,10 @@
  */
 package com.anrisoftware.sscontrol.k8smaster.script.debian.internal.k8smaster_1_13.debian_9;
 
-import static com.google.inject.Guice.createInjector;
-
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 
 import javax.inject.Inject;
-
-import org.osgi.service.component.annotations.Activate;
-import org.osgi.service.component.annotations.Component;
 
 import com.anrisoftware.sscontrol.types.host.external.HostService;
 import com.anrisoftware.sscontrol.types.host.external.HostServiceScript;
@@ -37,7 +32,6 @@ import com.anrisoftware.sscontrol.types.host.external.TargetHost;
  * @author Erwin Müller {@literal <erwin.mueller@deventm.de>}
  * @version 1.0
  */
-@Component(service = HostServiceScriptService.class)
 public class K8sMasterDebianService implements HostServiceScriptService {
 
     static final String SYSTEM_VERSION = "8";
@@ -60,10 +54,4 @@ public class K8sMasterDebianService implements HostServiceScriptService {
             ExecutorService threads, Map<String, Object> env) {
         return scriptFactory.create(repository, service, target, threads, env);
     }
-
-    @Activate
-    protected void start() {
-        createInjector(new K8sMasterDebianModule()).injectMembers(this);
-    }
-
 }

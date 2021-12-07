@@ -17,11 +17,11 @@ package com.anrisoftware.sscontrol.utils.systemmappings.internal;
 
 import static java.lang.String.format;
 
+import java.text.ParseException;
 import java.util.Locale;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
-import org.hamcrest.generator.qdox.parser.ParseException;
 
 import com.anrisoftware.sscontrol.types.host.external.SystemInfo;
 import com.anrisoftware.sscontrol.utils.systemmappings.external.AbstractSystemInfo;
@@ -37,13 +37,13 @@ import com.google.inject.assistedinject.AssistedInject;
 public class DefaultSystemInfoImpl extends AbstractSystemInfo {
 
     @AssistedInject
-    DefaultSystemInfoImpl(SystemNameMappingsProperties mappingsProperties,
-            @Assisted String string) {
+    DefaultSystemInfoImpl(SystemNameMappingsProperties mappingsProperties, @Assisted String string)
+            throws ParseException {
         super(parseSystemInfo(mappingsProperties, string));
     }
 
-    private static SystemInfo parseSystemInfo(
-            SystemNameMappingsProperties mappingsProperties, String string) {
+    private static SystemInfo parseSystemInfo(SystemNameMappingsProperties mappingsProperties, String string)
+            throws ParseException {
         String[] split = StringUtils.split(string, "/");
         String s;
         String n;
@@ -61,9 +61,7 @@ public class DefaultSystemInfoImpl extends AbstractSystemInfo {
             v = split[1];
             s = mappingsProperties.getMapping(n);
         } else {
-            throw new ParseException(
-                    format("Expected system/name/version, got '%s'", string), 0,
-                    0);
+            throw new ParseException(format("Expected system/name/version, got '%s'", string), 0);
         }
         final String version = v.toLowerCase(Locale.ENGLISH);
         final String system = s.toLowerCase(Locale.ENGLISH);
@@ -88,14 +86,11 @@ public class DefaultSystemInfoImpl extends AbstractSystemInfo {
     }
 
     @AssistedInject
-    DefaultSystemInfoImpl(SystemNameMappingsProperties mappingsProperties,
-            @Assisted Map<String, Object> args) {
+    DefaultSystemInfoImpl(SystemNameMappingsProperties mappingsProperties, @Assisted Map<String, Object> args) {
         super(parseArgs(mappingsProperties, args));
     }
 
-    private static SystemInfo parseArgs(
-            SystemNameMappingsProperties mappingsProperties,
-            Map<String, Object> args) {
+    private static SystemInfo parseArgs(SystemNameMappingsProperties mappingsProperties, Map<String, Object> args) {
         final String name = parseName(args);
         final String system = parseSystem(mappingsProperties, name, args);
         final String version = parseVersion(args);
@@ -127,8 +122,7 @@ public class DefaultSystemInfoImpl extends AbstractSystemInfo {
         }
     }
 
-    private static String parseSystem(
-            SystemNameMappingsProperties mappingsProperties, String name,
+    private static String parseSystem(SystemNameMappingsProperties mappingsProperties, String name,
             Map<String, Object> args) {
         Object v = args.get("system");
         if (v != null) {
