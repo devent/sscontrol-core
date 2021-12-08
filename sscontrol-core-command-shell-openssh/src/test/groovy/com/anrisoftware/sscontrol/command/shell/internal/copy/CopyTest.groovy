@@ -16,7 +16,7 @@
 package com.anrisoftware.sscontrol.command.shell.internal.copy
 
 import static com.anrisoftware.globalpom.utils.TestUtils.*
-import static com.anrisoftware.sscontrol.shell.external.utils.UnixTestUtil.*
+import static com.anrisoftware.sscontrol.shell.utils.UnixTestUtil.*
 import static org.junit.jupiter.api.Assumptions.*
 
 import javax.inject.Inject
@@ -32,9 +32,9 @@ import com.anrisoftware.sscontrol.command.copy.external.Copy.CopyFactory
 import com.anrisoftware.sscontrol.command.shell.internal.cmd.CmdModule
 import com.anrisoftware.sscontrol.command.shell.internal.scp.ScpModule
 import com.anrisoftware.sscontrol.command.shell.internal.ssh.SshShellModule
-import com.anrisoftware.sscontrol.shell.external.utils.AbstractCmdTestBase
-import com.anrisoftware.sscontrol.shell.external.utils.CmdUtilsModules
-import com.anrisoftware.sscontrol.shell.external.utils.SshFactory
+import com.anrisoftware.sscontrol.shell.utils.AbstractCmdTestBase
+import com.anrisoftware.sscontrol.shell.utils.CmdUtilsModules
+import com.anrisoftware.sscontrol.shell.utils.SshFactory
 import com.google.inject.Module
 
 import groovy.util.logging.Slf4j

@@ -15,12 +15,12 @@
  */
 package com.anrisoftware.sscontrol.crio.script.debian.debian_10
 
-import static com.anrisoftware.sscontrol.shell.external.utils.Nodes3Port22222AvailableCondition.*
+import static com.anrisoftware.sscontrol.shell.utils.Nodes3Port22222AvailableCondition.*
 
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 
-import com.anrisoftware.sscontrol.shell.external.utils.Nodes3Port22222AvailableCondition
+import com.anrisoftware.sscontrol.shell.utils.Nodes3Port22222AvailableCondition
 
 import groovy.util.logging.Slf4j
 

@@ -19,9 +19,9 @@ import javax.inject.Inject
 
 import com.anrisoftware.sscontrol.groovy.script.ScriptBase
 import com.anrisoftware.sscontrol.haproxy.service.external.HAProxy
-import com.anrisoftware.sscontrol.utils.ufw.linux.external.UfwLinuxUtilsFactory
-import com.anrisoftware.sscontrol.utils.ufw.linux.external.UfwUtils
 import com.anrisoftware.sscontrol.haproxy.service.external.Proxy
+import com.anrisoftware.sscontrol.utils.ufw.linux.UfwLinuxUtilsFactory
+import com.anrisoftware.sscontrol.utils.ufw.linux.UfwUtils
 
 import groovy.util.logging.Slf4j
 

@@ -16,7 +16,7 @@
 package com.anrisoftware.sscontrol.shell.linux.internal
 
 import static com.anrisoftware.globalpom.utils.TestUtils.*
-import static com.anrisoftware.sscontrol.shell.external.utils.UnixTestUtil.*
+import static com.anrisoftware.sscontrol.shell.utils.UnixTestUtil.*
 
 /**
  *

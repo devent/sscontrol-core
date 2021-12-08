@@ -18,7 +18,7 @@ package com.anrisoftware.sscontrol.sshd.script.centos.internal.centos_7
 import javax.inject.Inject
 
 import com.anrisoftware.propertiesutils.ContextProperties
-import com.anrisoftware.sscontrol.sshd.script.openssh.external.Firewalld_Firewall
+import com.anrisoftware.sscontrol.sshd.script.openssh.Firewalld_Firewall
 
 import groovy.util.logging.Slf4j
 

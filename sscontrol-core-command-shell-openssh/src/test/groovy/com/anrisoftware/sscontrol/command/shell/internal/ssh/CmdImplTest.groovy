@@ -16,7 +16,7 @@
 package com.anrisoftware.sscontrol.command.shell.internal.ssh
 
 import static com.anrisoftware.globalpom.utils.TestUtils.*
-import static com.anrisoftware.sscontrol.shell.external.utils.UnixTestUtil.*
+import static com.anrisoftware.sscontrol.shell.utils.UnixTestUtil.*
 import static org.junit.jupiter.api.Assumptions.*
 
 import javax.inject.Inject
@@ -32,7 +32,7 @@ import org.junit.rules.TemporaryFolder
 import com.anrisoftware.globalpom.threads.external.core.Threads
 import com.anrisoftware.sscontrol.command.shell.external.Cmd
 import com.anrisoftware.sscontrol.command.shell.internal.cmd.CmdModule
-import com.anrisoftware.sscontrol.shell.external.utils.CmdUtilsModules
+import com.anrisoftware.sscontrol.shell.utils.CmdUtilsModules
 import com.google.inject.Guice
 import com.google.inject.Injector
 

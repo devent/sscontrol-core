@@ -38,9 +38,9 @@ import com.anrisoftware.sscontrol.services.internal.host.HostServicesModule
 import com.anrisoftware.sscontrol.ssh.service.SshModule
 import com.anrisoftware.sscontrol.types.misc.TypesModule
 import com.anrisoftware.sscontrol.utils.debian.DebianUtilsModule
-import com.anrisoftware.sscontrol.utils.systemd.external.SystemdUtilsModule
+import com.anrisoftware.sscontrol.utils.systemd.SystemdUtilsModule
 import com.anrisoftware.sscontrol.utils.systemmappings.internal.SystemNameMappingsModule
-import com.anrisoftware.sscontrol.utils.ufw.linux.external.UfwUtilsModule
+import com.anrisoftware.sscontrol.utils.ufw.linux.UfwUtilsModule
 
 /**
  *

@@ -16,13 +16,13 @@
 package com.anrisoftware.sscontrol.haproxy.script.debian.internal.debian_9.internal
 
 import static com.anrisoftware.globalpom.utils.TestUtils.*
-import static com.anrisoftware.sscontrol.shell.external.utils.Nodes3Port22222AvailableCondition.*
-import static com.anrisoftware.sscontrol.shell.external.utils.UnixTestUtil.*
+import static com.anrisoftware.sscontrol.shell.utils.Nodes3Port22222AvailableCondition.*
+import static com.anrisoftware.sscontrol.shell.utils.UnixTestUtil.*
 
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 
-import com.anrisoftware.sscontrol.shell.external.utils.Nodes3Port22222AvailableCondition
+import com.anrisoftware.sscontrol.shell.utils.Nodes3Port22222AvailableCondition
 
 import groovy.util.logging.Slf4j
 

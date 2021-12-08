@@ -16,7 +16,7 @@
 package com.anrisoftware.sscontrol.k8s.restore.script.linux.internal.script_1_13
 
 import static com.anrisoftware.globalpom.utils.TestUtils.*
-import static com.anrisoftware.sscontrol.shell.external.utils.UnixTestUtil.*
+import static com.anrisoftware.sscontrol.shell.utils.UnixTestUtil.*
 import static org.junit.jupiter.api.Assumptions.*
 
 import org.junit.jupiter.api.BeforeEach

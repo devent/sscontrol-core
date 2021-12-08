@@ -16,7 +16,7 @@
 package com.anrisoftware.sscontrol.k8smaster.script.debian.internal.k8smaster_1_13.debian_9
 
 import static com.anrisoftware.globalpom.utils.TestUtils.*
-import static com.anrisoftware.sscontrol.shell.external.utils.UnixTestUtil.*
+import static com.anrisoftware.sscontrol.shell.utils.UnixTestUtil.*
 import static com.anrisoftware.sscontrol.utils.debian.Debian_9_TestUtils.*
 
 /**

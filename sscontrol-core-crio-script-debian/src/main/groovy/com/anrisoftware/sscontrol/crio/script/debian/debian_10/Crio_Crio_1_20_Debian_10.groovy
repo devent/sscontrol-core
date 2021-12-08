@@ -21,8 +21,8 @@ import com.anrisoftware.propertiesutils.ContextProperties
 import com.anrisoftware.sscontrol.crio.script.crio_1_20.Crio_1_20
 import com.anrisoftware.sscontrol.utils.debian.DebianUtils
 import com.anrisoftware.sscontrol.utils.debian.Debian_11_UtilsFactory
-import com.anrisoftware.sscontrol.utils.systemd.external.SystemdUtils
-import com.anrisoftware.sscontrol.utils.systemd.external.SystemdUtilsFactory
+import com.anrisoftware.sscontrol.utils.systemd.SystemdUtils
+import com.anrisoftware.sscontrol.utils.systemd.SystemdUtilsFactory
 
 import groovy.util.logging.Slf4j
 

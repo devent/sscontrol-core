@@ -16,13 +16,13 @@
 package com.anrisoftware.sscontrol.nfs.script.debian.internal.debian_9.internal
 
 import static com.anrisoftware.globalpom.utils.TestUtils.*
-import static com.anrisoftware.sscontrol.shell.external.utils.UnixTestUtil.*
-import static com.anrisoftware.sscontrol.shell.external.utils.RobobeeSocketCondition.*
+import static com.anrisoftware.sscontrol.shell.utils.RobobeeSocketCondition.*
+import static com.anrisoftware.sscontrol.shell.utils.UnixTestUtil.*
 
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 
-import com.anrisoftware.sscontrol.shell.external.utils.RobobeeSocketCondition
+import com.anrisoftware.sscontrol.shell.utils.RobobeeSocketCondition
 
 import groovy.util.logging.Slf4j
 

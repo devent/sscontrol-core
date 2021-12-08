@@ -15,7 +15,7 @@
  */
 package com.anrisoftware.sscontrol.etcd.script.debian.internal.debian_10.etcd_3_4
 
-import static com.anrisoftware.sscontrol.shell.external.utils.UnixTestUtil.*
+import static com.anrisoftware.sscontrol.shell.utils.UnixTestUtil.*
 import static com.anrisoftware.sscontrol.utils.debian.Debian_11_TestUtils.*
 
 /**

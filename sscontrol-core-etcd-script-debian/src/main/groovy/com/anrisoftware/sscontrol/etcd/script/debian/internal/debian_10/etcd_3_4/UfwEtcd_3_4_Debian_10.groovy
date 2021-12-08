@@ -20,8 +20,8 @@ import javax.inject.Inject
 import com.anrisoftware.propertiesutils.ContextProperties
 import com.anrisoftware.sscontrol.etcd.service.external.Etcd
 import com.anrisoftware.sscontrol.groovy.script.ScriptBase
-import com.anrisoftware.sscontrol.utils.ufw.linux.external.UfwLinuxUtilsFactory
-import com.anrisoftware.sscontrol.utils.ufw.linux.external.UfwUtils
+import com.anrisoftware.sscontrol.utils.ufw.linux.UfwLinuxUtilsFactory
+import com.anrisoftware.sscontrol.utils.ufw.linux.UfwUtils
 
 import groovy.util.logging.Slf4j
 

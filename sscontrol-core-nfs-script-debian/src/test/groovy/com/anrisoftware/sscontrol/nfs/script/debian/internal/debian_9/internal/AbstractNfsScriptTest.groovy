@@ -16,7 +16,7 @@
 package com.anrisoftware.sscontrol.nfs.script.debian.internal.debian_9.internal
 
 import static com.anrisoftware.globalpom.utils.TestUtils.*
-import static com.anrisoftware.sscontrol.shell.external.utils.UnixTestUtil.*
+import static com.anrisoftware.sscontrol.shell.utils.UnixTestUtil.*
 import static com.anrisoftware.sscontrol.utils.debian.Debian_9_TestUtils.*
 
 /**

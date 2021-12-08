@@ -15,7 +15,7 @@
  */
 package com.anrisoftware.sscontrol.command.shell.internal.replace
 
-import static com.anrisoftware.sscontrol.shell.external.utils.UnixTestUtil.*
+import static com.anrisoftware.sscontrol.shell.utils.UnixTestUtil.*
 
 import javax.inject.Inject
 
@@ -35,9 +35,9 @@ import com.anrisoftware.sscontrol.command.shell.internal.fetch.FetchModule
 import com.anrisoftware.sscontrol.command.shell.internal.replace.ParseSedSyntax.ParseSedSyntaxFactory
 import com.anrisoftware.sscontrol.command.shell.internal.scp.ScpModule
 import com.anrisoftware.sscontrol.command.shell.internal.ssh.SshShellModule
-import com.anrisoftware.sscontrol.shell.external.utils.AbstractCmdTestBase
-import com.anrisoftware.sscontrol.shell.external.utils.CmdUtilsModules
-import com.anrisoftware.sscontrol.shell.external.utils.SshFactory
+import com.anrisoftware.sscontrol.shell.utils.AbstractCmdTestBase
+import com.anrisoftware.sscontrol.shell.utils.CmdUtilsModules
+import com.anrisoftware.sscontrol.shell.utils.SshFactory
 import com.google.inject.Module
 
 import groovy.util.logging.Slf4j

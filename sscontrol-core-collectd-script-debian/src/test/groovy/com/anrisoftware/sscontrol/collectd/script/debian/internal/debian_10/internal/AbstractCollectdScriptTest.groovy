@@ -16,7 +16,7 @@
 package com.anrisoftware.sscontrol.collectd.script.debian.internal.debian_10.internal
 
 import static com.anrisoftware.globalpom.utils.TestUtils.*
-import static com.anrisoftware.sscontrol.shell.external.utils.UnixTestUtil.*
+import static com.anrisoftware.sscontrol.shell.utils.UnixTestUtil.*
 import static com.anrisoftware.sscontrol.utils.debian.Debian_11_TestUtils.*
 
 /**

@@ -18,7 +18,7 @@ package com.anrisoftware.sscontrol.collectd.script.debian.internal.debian_10.int
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 
-import com.anrisoftware.sscontrol.shell.external.utils.Nodes3AvailableCondition
+import com.anrisoftware.sscontrol.shell.utils.Nodes3AvailableCondition
 
 import groovy.util.logging.Slf4j
 

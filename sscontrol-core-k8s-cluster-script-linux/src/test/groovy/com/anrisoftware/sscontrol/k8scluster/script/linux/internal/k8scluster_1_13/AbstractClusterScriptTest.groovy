@@ -16,7 +16,7 @@
 package com.anrisoftware.sscontrol.k8scluster.script.linux.internal.k8scluster_1_13
 
 import static com.anrisoftware.globalpom.utils.TestUtils.*
-import static com.anrisoftware.sscontrol.shell.external.utils.UnixTestUtil.*
+import static com.anrisoftware.sscontrol.shell.utils.UnixTestUtil.*
 
 import javax.inject.Inject
 
@@ -44,7 +44,7 @@ import com.anrisoftware.sscontrol.k8scluster.service.external.K8sClusterFactory
 import com.anrisoftware.sscontrol.k8scluster.service.internal.K8sClusterModule
 import com.anrisoftware.sscontrol.k8skubectl.linux.external.kubectl_1_13.KubectlLinuxModule
 import com.anrisoftware.sscontrol.services.internal.host.HostServicesModule
-import com.anrisoftware.sscontrol.shell.external.utils.AbstractScriptTestBase
+import com.anrisoftware.sscontrol.shell.utils.AbstractScriptTestBase
 import com.anrisoftware.sscontrol.ssh.service.SshModule
 import com.anrisoftware.sscontrol.ssh.service.SshImpl.SshImplFactory
 import com.anrisoftware.sscontrol.tls.internal.TlsModule

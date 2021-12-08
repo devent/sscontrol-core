@@ -20,8 +20,8 @@ import javax.inject.Inject
 import com.anrisoftware.sscontrol.groovy.script.ScriptBase
 import com.anrisoftware.sscontrol.utils.debian.DebianUtils
 import com.anrisoftware.sscontrol.utils.debian.Debian_11_UtilsFactory
-import com.anrisoftware.sscontrol.utils.systemd.external.SystemdUtils
-import com.anrisoftware.sscontrol.utils.systemd.external.SystemdUtilsFactory
+import com.anrisoftware.sscontrol.utils.systemd.SystemdUtils
+import com.anrisoftware.sscontrol.utils.systemd.SystemdUtilsFactory
 
 import groovy.util.logging.Slf4j
 

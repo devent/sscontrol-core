@@ -24,8 +24,8 @@ import com.anrisoftware.sscontrol.etcd.service.external.Etcd
 import com.anrisoftware.sscontrol.groovy.script.ScriptBase
 import com.anrisoftware.sscontrol.tls.external.Tls
 import com.anrisoftware.sscontrol.utils.st.miscrenderers.external.NumberTrueRenderer
-import com.anrisoftware.sscontrol.utils.systemd.external.SystemdUtils
-import com.anrisoftware.sscontrol.utils.systemd.external.SystemdUtilsFactory
+import com.anrisoftware.sscontrol.utils.systemd.SystemdUtils
+import com.anrisoftware.sscontrol.utils.systemd.SystemdUtilsFactory
 
 import groovy.util.logging.Slf4j
 

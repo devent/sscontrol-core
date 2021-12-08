@@ -22,8 +22,8 @@ import javax.inject.Inject
 import com.anrisoftware.propertiesutils.ContextProperties
 import com.anrisoftware.sscontrol.nfs.script.centos.external.Nfs_Centos
 import com.anrisoftware.sscontrol.nfs.script.centos.internal.centos_7.Nfs_1_3_Centos_7_Factory
-import com.anrisoftware.sscontrol.utils.systemd.external.SystemdUtils
-import com.anrisoftware.sscontrol.utils.systemd.external.SystemdUtilsFactory
+import com.anrisoftware.sscontrol.utils.systemd.SystemdUtils
+import com.anrisoftware.sscontrol.utils.systemd.SystemdUtilsFactory
 
 import groovy.util.logging.Slf4j
 

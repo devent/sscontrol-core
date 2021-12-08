@@ -16,8 +16,8 @@
 package com.anrisoftware.sscontrol.ssh.script.linux
 
 import static com.anrisoftware.globalpom.utils.TestUtils.*
-import static com.anrisoftware.sscontrol.shell.external.utils.CmdExecHelper.*
-import static com.anrisoftware.sscontrol.shell.external.utils.UnixTestUtil.*
+import static com.anrisoftware.sscontrol.shell.utils.CmdExecHelper.*
+import static com.anrisoftware.sscontrol.shell.utils.UnixTestUtil.*
 
 import javax.inject.Inject
 
@@ -42,8 +42,8 @@ import com.anrisoftware.sscontrol.command.shell.internal.template.TemplateModule
 import com.anrisoftware.sscontrol.command.shell.internal.templateres.TemplateResModule
 import com.anrisoftware.sscontrol.debug.internal.DebugLoggingModule
 import com.anrisoftware.sscontrol.services.internal.host.HostServicesModule
-import com.anrisoftware.sscontrol.shell.external.utils.AbstractScriptTestBase
-import com.anrisoftware.sscontrol.shell.external.utils.CmdExecHelperModule
+import com.anrisoftware.sscontrol.shell.utils.AbstractScriptTestBase
+import com.anrisoftware.sscontrol.shell.utils.CmdExecHelperModule
 import com.anrisoftware.sscontrol.ssh.service.SshModule
 import com.anrisoftware.sscontrol.ssh.service.SshImpl.SshImplFactory
 import com.anrisoftware.sscontrol.types.host.HostServices

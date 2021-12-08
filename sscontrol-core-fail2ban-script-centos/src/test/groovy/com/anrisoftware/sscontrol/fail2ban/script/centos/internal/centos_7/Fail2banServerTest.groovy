@@ -15,13 +15,13 @@
  */
 package com.anrisoftware.sscontrol.fail2ban.script.centos.internal.centos_7
 
-import static com.anrisoftware.sscontrol.shell.external.utils.MailSocketCondition.*
-import static com.anrisoftware.sscontrol.shell.external.utils.UnixTestUtil.*
+import static com.anrisoftware.sscontrol.shell.utils.MailSocketCondition.*
+import static com.anrisoftware.sscontrol.shell.utils.UnixTestUtil.*
 
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 
-import com.anrisoftware.sscontrol.shell.external.utils.MailSocketCondition
+import com.anrisoftware.sscontrol.shell.utils.MailSocketCondition
 import com.anrisoftware.sscontrol.types.host.HostServiceScript
 
 import groovy.util.logging.Slf4j

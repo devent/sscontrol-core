@@ -15,13 +15,13 @@
  */
 package com.anrisoftware.sscontrol.crio.script.debian.debian_10
 
-import static com.anrisoftware.sscontrol.shell.external.utils.RobobeeSocketCondition.*
-import static com.anrisoftware.sscontrol.shell.external.utils.UnixTestUtil.*
+import static com.anrisoftware.sscontrol.shell.utils.RobobeeSocketCondition.*
+import static com.anrisoftware.sscontrol.shell.utils.UnixTestUtil.*
 
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 
-import com.anrisoftware.sscontrol.shell.external.utils.RobobeeSocketCondition
+import com.anrisoftware.sscontrol.shell.utils.RobobeeSocketCondition
 
 import groovy.util.logging.Slf4j
 

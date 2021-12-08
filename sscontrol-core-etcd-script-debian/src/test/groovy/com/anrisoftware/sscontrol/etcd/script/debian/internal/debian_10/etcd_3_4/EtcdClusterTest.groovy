@@ -16,8 +16,8 @@
 package com.anrisoftware.sscontrol.etcd.script.debian.internal.debian_10.etcd_3_4
 
 import static com.anrisoftware.globalpom.utils.TestUtils.*
-import static com.anrisoftware.sscontrol.shell.external.utils.UnixTestUtil.*
-import static com.anrisoftware.sscontrol.shell.external.utils.Nodes3AvailableCondition.*
+import static com.anrisoftware.sscontrol.shell.utils.Nodes3AvailableCondition.*
+import static com.anrisoftware.sscontrol.shell.utils.UnixTestUtil.*
 import static org.junit.jupiter.api.Assumptions.*
 
 import org.junit.jupiter.api.BeforeEach
@@ -25,7 +25,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.junit.jupiter.migrationsupport.rules.EnableRuleMigrationSupport
 
-import com.anrisoftware.sscontrol.shell.external.utils.Nodes3AvailableCondition
+import com.anrisoftware.sscontrol.shell.utils.Nodes3AvailableCondition
 
 import groovy.util.logging.Slf4j
 

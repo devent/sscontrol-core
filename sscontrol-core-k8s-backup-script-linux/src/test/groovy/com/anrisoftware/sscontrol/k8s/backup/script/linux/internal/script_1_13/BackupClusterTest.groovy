@@ -16,8 +16,8 @@
 package com.anrisoftware.sscontrol.k8s.backup.script.linux.internal.script_1_13
 
 import static com.anrisoftware.globalpom.utils.TestUtils.*
-import static com.anrisoftware.sscontrol.shell.external.utils.UnixTestUtil.*
-import static com.anrisoftware.sscontrol.shell.external.utils.RobobeeSocketCondition.*
+import static com.anrisoftware.sscontrol.shell.utils.RobobeeSocketCondition.*
+import static com.anrisoftware.sscontrol.shell.utils.UnixTestUtil.*
 import static org.junit.jupiter.api.Assumptions.*
 
 import org.junit.Rule
@@ -27,7 +27,7 @@ import org.junit.jupiter.api.extension.ExtendWith
 import org.junit.jupiter.migrationsupport.rules.EnableRuleMigrationSupport
 import org.junit.rules.TemporaryFolder
 
-import com.anrisoftware.sscontrol.shell.external.utils.RobobeeSocketCondition
+import com.anrisoftware.sscontrol.shell.utils.RobobeeSocketCondition
 import com.anrisoftware.sscontrol.types.host.HostServiceScript
 
 import groovy.util.logging.Slf4j

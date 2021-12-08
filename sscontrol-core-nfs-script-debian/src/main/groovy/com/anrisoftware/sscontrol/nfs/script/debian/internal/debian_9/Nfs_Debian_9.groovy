@@ -22,8 +22,8 @@ import javax.inject.Inject
 import com.anrisoftware.propertiesutils.ContextProperties
 import com.anrisoftware.sscontrol.nfs.script.debian.external.Nfs_Debian
 import com.anrisoftware.sscontrol.nfs.script.debian.internal.debian_9.Nfs_1_3_Debian_9_Factory
-import com.anrisoftware.sscontrol.utils.systemd.external.SystemdUtils
-import com.anrisoftware.sscontrol.utils.systemd.external.SystemdUtilsFactory
+import com.anrisoftware.sscontrol.utils.systemd.SystemdUtils
+import com.anrisoftware.sscontrol.utils.systemd.SystemdUtilsFactory
 
 import groovy.util.logging.Slf4j
 

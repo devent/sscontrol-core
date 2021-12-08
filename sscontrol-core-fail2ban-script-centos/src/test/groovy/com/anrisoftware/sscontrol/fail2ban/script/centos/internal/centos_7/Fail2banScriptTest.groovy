@@ -16,8 +16,8 @@
 package com.anrisoftware.sscontrol.fail2ban.script.centos.internal.centos_7
 
 import static com.anrisoftware.globalpom.utils.TestUtils.*
-import static com.anrisoftware.sscontrol.shell.external.utils.LocalhostSocketCondition.*
-import static com.anrisoftware.sscontrol.shell.external.utils.UnixTestUtil.*
+import static com.anrisoftware.sscontrol.shell.utils.LocalhostSocketCondition.*
+import static com.anrisoftware.sscontrol.shell.utils.UnixTestUtil.*
 
 import org.apache.commons.io.IOUtils
 import org.junit.jupiter.api.Test
@@ -25,7 +25,7 @@ import org.junit.jupiter.api.condition.EnabledIfSystemProperty
 import org.junit.jupiter.api.extension.ExtendWith
 import org.junit.jupiter.migrationsupport.rules.EnableRuleMigrationSupport
 
-import com.anrisoftware.sscontrol.shell.external.utils.LocalhostSocketCondition
+import com.anrisoftware.sscontrol.shell.utils.LocalhostSocketCondition
 
 import groovy.util.logging.Slf4j
 

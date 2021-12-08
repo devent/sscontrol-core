@@ -38,8 +38,8 @@ import com.anrisoftware.sscontrol.services.internal.host.HostServicesModule
 import com.anrisoftware.sscontrol.services.internal.host.HostServicesImpl.HostServicesImplFactory
 import com.anrisoftware.sscontrol.services.internal.targets.TargetsModule
 import com.anrisoftware.sscontrol.services.internal.targets.TargetsServiceModule
-import com.anrisoftware.sscontrol.shell.external.utils.RobobeeScriptModule
-import com.anrisoftware.sscontrol.shell.external.utils.RobobeeScript.RobobeeScriptFactory
+import com.anrisoftware.sscontrol.shell.utils.RobobeeScriptModule
+import com.anrisoftware.sscontrol.shell.utils.RobobeeScript.RobobeeScriptFactory
 import com.anrisoftware.sscontrol.ssh.service.SshModule
 import com.anrisoftware.sscontrol.ssh.service.SshImpl.SshImplFactory
 import com.anrisoftware.sscontrol.tls.internal.TlsModule

@@ -15,7 +15,7 @@
  */
 package com.anrisoftware.sscontrol.groovy.script
 
-import static com.anrisoftware.sscontrol.shell.external.utils.UnixTestUtil.*
+import static com.anrisoftware.sscontrol.shell.utils.UnixTestUtil.*
 
 import org.junit.jupiter.api.Test
 

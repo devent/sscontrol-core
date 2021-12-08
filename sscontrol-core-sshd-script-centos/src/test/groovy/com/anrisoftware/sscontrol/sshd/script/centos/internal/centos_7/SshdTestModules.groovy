@@ -37,9 +37,9 @@ import com.anrisoftware.sscontrol.sshd.service.SshdModule
 import com.anrisoftware.sscontrol.tls.internal.TlsModule
 import com.anrisoftware.sscontrol.types.misc.TypesModule
 import com.anrisoftware.sscontrol.utils.centos.external.CentosUtilsModule
-import com.anrisoftware.sscontrol.utils.systemd.external.SystemdUtilsModule
+import com.anrisoftware.sscontrol.utils.systemd.SystemdUtilsModule
 import com.anrisoftware.sscontrol.utils.systemmappings.internal.SystemNameMappingsModule
-import com.anrisoftware.sscontrol.utils.ufw.linux.external.UfwUtilsModule
+import com.anrisoftware.sscontrol.utils.ufw.linux.UfwUtilsModule
 
 /**
  *

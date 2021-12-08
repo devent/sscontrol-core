@@ -15,7 +15,7 @@
  */
 package com.anrisoftware.sscontrol.fail2ban.script.debian.debian_11
 
-import static com.anrisoftware.sscontrol.shell.external.utils.UnixTestUtil.*
+import static com.anrisoftware.sscontrol.shell.utils.UnixTestUtil.*
 import static com.anrisoftware.sscontrol.utils.debian.Debian_11_TestUtils.*
 
 import org.apache.commons.io.IOUtils
