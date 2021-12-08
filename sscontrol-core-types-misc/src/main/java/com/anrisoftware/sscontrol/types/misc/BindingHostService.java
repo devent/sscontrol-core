@@ -13,25 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.anrisoftware.sscontrol.types.misc.external;
-
-import javax.annotation.concurrent.Immutable;
+package com.anrisoftware.sscontrol.types.misc;
 
 /**
- * User name and password credentials.
+ * Binding host and port service.
  *
  * @author Erwin Müller, erwin.mueller@deventm.de
  * @since 1.0
  */
-@Immutable
-public interface UserPassword {
+public interface BindingHostService {
 
-    String getName();
+    BindingHost create();
 
-    String getPassword();
-
-    UserPassword changeName(String name);
-
-    UserPassword changePassword(String password);
-
+    BindingHost create(BindingHost binding);
 }

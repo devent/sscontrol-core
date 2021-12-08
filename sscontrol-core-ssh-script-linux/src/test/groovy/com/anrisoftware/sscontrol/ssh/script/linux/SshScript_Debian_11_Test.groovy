@@ -47,7 +47,7 @@ import com.anrisoftware.sscontrol.shell.external.utils.CmdExecHelperModule
 import com.anrisoftware.sscontrol.ssh.service.SshModule
 import com.anrisoftware.sscontrol.ssh.service.SshImpl.SshImplFactory
 import com.anrisoftware.sscontrol.types.host.HostServices
-import com.anrisoftware.sscontrol.types.misc.internal.TypesModule
+import com.anrisoftware.sscontrol.types.misc.TypesModule
 import com.anrisoftware.sscontrol.utils.debian.Debian_11_TestUtils
 import com.anrisoftware.sscontrol.utils.systemmappings.internal.SystemNameMappingsModule
 

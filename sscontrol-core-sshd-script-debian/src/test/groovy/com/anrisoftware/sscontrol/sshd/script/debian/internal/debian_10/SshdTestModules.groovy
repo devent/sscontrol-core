@@ -36,7 +36,7 @@ import com.anrisoftware.sscontrol.ssh.service.SshModule
 import com.anrisoftware.sscontrol.sshd.script.debian.internal.debian_10.SshdDebianModule
 import com.anrisoftware.sscontrol.sshd.service.SshdModule
 import com.anrisoftware.sscontrol.tls.internal.TlsModule
-import com.anrisoftware.sscontrol.types.misc.internal.TypesModule
+import com.anrisoftware.sscontrol.types.misc.TypesModule
 import com.anrisoftware.sscontrol.utils.debian.DebianUtilsModule
 import com.anrisoftware.sscontrol.utils.systemd.external.SystemdUtilsModule
 import com.anrisoftware.sscontrol.utils.systemmappings.internal.SystemNameMappingsModule

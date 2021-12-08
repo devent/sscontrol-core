@@ -15,7 +15,7 @@
  */
 package com.anrisoftware.sscontrol.etcd.service.internal;
 
-import static com.anrisoftware.sscontrol.types.misc.external.StringListPropertyUtil.stringListStatement;
+import static com.anrisoftware.sscontrol.types.misc.StringListPropertyUtil.stringListStatement;
 import static java.lang.String.format;
 import static org.codehaus.groovy.runtime.InvokerHelper.invokeMethod;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -52,8 +52,8 @@ import com.anrisoftware.sscontrol.tls.external.Tls.TlsFactory;
 import com.anrisoftware.sscontrol.types.host.HostServiceProperties;
 import com.anrisoftware.sscontrol.types.host.HostServicePropertiesService;
 import com.anrisoftware.sscontrol.types.host.TargetHost;
-import com.anrisoftware.sscontrol.types.misc.external.DebugLogging;
-import com.anrisoftware.sscontrol.types.misc.external.StringListPropertyUtil.ListProperty;
+import com.anrisoftware.sscontrol.types.misc.DebugLogging;
+import com.anrisoftware.sscontrol.types.misc.StringListPropertyUtil.ListProperty;
 import com.anrisoftware.sscontrol.types.ssh.external.SshHost;
 import com.google.inject.assistedinject.Assisted;
 

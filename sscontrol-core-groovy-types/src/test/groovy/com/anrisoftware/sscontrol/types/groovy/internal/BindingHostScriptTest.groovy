@@ -24,9 +24,9 @@ import org.junit.jupiter.api.Test
 
 import com.anrisoftware.globalpom.core.strings.StringsModule
 import com.anrisoftware.sscontrol.types.groovy.internal.BindingHostImpl.BindingHostImplFactory
-import com.anrisoftware.sscontrol.types.misc.external.BindingHost
-import com.anrisoftware.sscontrol.types.misc.external.BindingHost.Host
-import com.anrisoftware.sscontrol.types.misc.internal.TypesModule
+import com.anrisoftware.sscontrol.types.misc.BindingHost
+import com.anrisoftware.sscontrol.types.misc.TypesModule
+import com.anrisoftware.sscontrol.types.misc.BindingHost.Host
 import com.google.inject.Guice
 
 import groovy.util.logging.Slf4j

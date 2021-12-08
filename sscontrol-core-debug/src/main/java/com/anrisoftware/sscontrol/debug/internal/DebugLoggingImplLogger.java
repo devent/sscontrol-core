@@ -21,7 +21,7 @@ import static com.anrisoftware.sscontrol.debug.internal.DebugLoggingImplLogger.m
 import javax.inject.Singleton;
 
 import com.anrisoftware.globalpom.log.AbstractLogger;
-import com.anrisoftware.sscontrol.types.misc.external.DebugModule;
+import com.anrisoftware.sscontrol.types.misc.DebugModule;
 
 /**
  * Logging for {@link DebugLoggingImpl}.

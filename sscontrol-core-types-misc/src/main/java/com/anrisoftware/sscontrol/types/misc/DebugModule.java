@@ -13,15 +13,41 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.anrisoftware.sscontrol.types.misc.external;
+package com.anrisoftware.sscontrol.types.misc;
+
+import java.util.Map;
 
 /**
- * Creates the user with a password.
+ * Debug logging module.
  *
  * @author Erwin Müller, erwin.mueller@deventm.de
  * @since 1.0
  */
-public interface UserPasswordService {
+public interface DebugModule {
 
-    UserPassword create(String name, String password);
+    /**
+     * Returns a new module with the new name.
+     */
+    DebugModule rename(String name);
+
+    /**
+     * Returns the name of the module.
+     */
+    String getName();
+
+    /**
+     * Returns the logging level.
+     */
+    int getLevel();
+
+    /**
+     * Returns the properties.
+     */
+    Map<String, Object> getProperties();
+
+    /**
+     * Returns a new module with the put property value.
+     */
+    DebugModule putProperty(String property, Object value);
+
 }

@@ -15,7 +15,7 @@
  */
 package com.anrisoftware.sscontrol.fail2ban.service.internal;
 
-import static com.anrisoftware.sscontrol.types.misc.external.StringListPropertyUtil.stringListStatement;
+import static com.anrisoftware.sscontrol.types.misc.StringListPropertyUtil.stringListStatement;
 import static org.codehaus.groovy.runtime.InvokerHelper.invokeMethod;
 
 import java.text.ParseException;
@@ -30,7 +30,7 @@ import com.anrisoftware.globalpom.core.arrays.ToList;
 import com.anrisoftware.sscontrol.fail2ban.service.external.Banning;
 import com.anrisoftware.sscontrol.fail2ban.service.external.Jail;
 import com.anrisoftware.sscontrol.fail2ban.service.internal.BanningImpl.BanningImplFactory;
-import com.anrisoftware.sscontrol.types.misc.external.StringListPropertyUtil.ListProperty;
+import com.anrisoftware.sscontrol.types.misc.StringListPropertyUtil.ListProperty;
 import com.google.inject.assistedinject.Assisted;
 import com.google.inject.assistedinject.AssistedInject;
 

@@ -13,10 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.anrisoftware.sscontrol.types.misc.internal;
+package com.anrisoftware.sscontrol.types.misc;
 
-import com.anrisoftware.sscontrol.types.misc.external.UserPassword;
-import com.anrisoftware.sscontrol.types.misc.external.UserPasswordService;
 import com.google.inject.AbstractModule;
 
 public class TypesModule extends AbstractModule {

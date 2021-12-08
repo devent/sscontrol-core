@@ -21,7 +21,7 @@ import static com.anrisoftware.sscontrol.types.groovy.internal.BindingHostImplLo
 import javax.inject.Singleton;
 
 import com.anrisoftware.globalpom.log.AbstractLogger;
-import com.anrisoftware.sscontrol.types.misc.external.BindingHost.Host;
+import com.anrisoftware.sscontrol.types.misc.BindingHost.Host;
 
 /**
  * Logging for {@link BindingHostImpl}.

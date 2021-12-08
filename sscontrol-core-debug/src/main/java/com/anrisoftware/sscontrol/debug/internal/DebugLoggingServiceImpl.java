@@ -19,7 +19,7 @@ import javax.inject.Inject;
 
 import com.anrisoftware.sscontrol.debug.external.DebugLoggingService;
 import com.anrisoftware.sscontrol.debug.internal.DebugLoggingImpl.DebugLoggingImplFactory;
-import com.anrisoftware.sscontrol.types.misc.external.DebugLogging;
+import com.anrisoftware.sscontrol.types.misc.DebugLogging;
 
 /**
  * Creates the debug logging.

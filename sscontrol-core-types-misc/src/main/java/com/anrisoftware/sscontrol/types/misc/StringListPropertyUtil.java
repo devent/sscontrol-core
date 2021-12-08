@@ -13,65 +13,65 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.anrisoftware.sscontrol.types.misc.external;
+package com.anrisoftware.sscontrol.types.misc;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 /**
- *
+ * 
  *
  * @author Erwin Müller {@literal <erwin.mueller@deventm.de>}
  * @version 1.0
  */
-public class GeneticListPropertyUtil {
+public class StringListPropertyUtil {
 
     /**
-     *
+     * 
      *
      * @author Erwin Müller {@literal <erwin.mueller@deventm.de>}
      * @version 1.0
      */
-    public interface GeneticListProperty<T> {
+    public interface ListProperty {
 
-        void add(T property);
+        void add(String property);
     }
 
     /**
      * Provides the list property statement.
-     *
+     * 
      * <pre>
-     * property << obj
+     * property << 'name = value'
      * </pre>
      */
-    @SuppressWarnings("serial")
-    public static <T> List<T> geneticListStatement(
-            final GeneticListProperty<T> property) {
-        return new ArrayList<T>() {
+    @SuppressWarnings({ "serial", "rawtypes", "unchecked" })
+    public static List<String> stringListStatement(
+            final ListProperty property) {
+        return new ArrayList() {
 
             @Override
-            public boolean add(T e) {
-                property.add(e);
+            public boolean add(Object e) {
+                property.add(e.toString());
                 return true;
             }
 
             @Override
-            public void add(int index, T element) {
-                property.add(element);
+            public void add(int index, Object element) {
+                property.add(element.toString());
             }
 
             @Override
-            public boolean addAll(Collection<? extends T> c) {
-                for (T string : c) {
+            public boolean addAll(Collection c) {
+                for (Object string : c) {
                     add(string);
                 }
                 return true;
             }
 
             @Override
-            public boolean addAll(int index, Collection<? extends T> c) {
-                for (T string : c) {
+            public boolean addAll(int index, Collection c) {
+                for (Object string : c) {
                     add(string);
                 }
                 return true;

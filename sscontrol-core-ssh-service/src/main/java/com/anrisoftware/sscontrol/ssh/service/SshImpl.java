@@ -15,7 +15,7 @@
  */
 package com.anrisoftware.sscontrol.ssh.service;
 
-import static com.anrisoftware.sscontrol.types.misc.external.StringListPropertyUtil.stringListStatement;
+import static com.anrisoftware.sscontrol.types.misc.StringListPropertyUtil.stringListStatement;
 import static org.codehaus.groovy.runtime.InvokerHelper.invokeMethod;
 
 import java.net.URI;
@@ -37,8 +37,8 @@ import com.anrisoftware.sscontrol.ssh.service.SshHostImpl.SshHostImplFactory;
 import com.anrisoftware.sscontrol.types.host.HostServiceProperties;
 import com.anrisoftware.sscontrol.types.host.HostServicePropertiesService;
 import com.anrisoftware.sscontrol.types.host.TargetHost;
-import com.anrisoftware.sscontrol.types.misc.external.DebugLogging;
-import com.anrisoftware.sscontrol.types.misc.external.StringListPropertyUtil.ListProperty;
+import com.anrisoftware.sscontrol.types.misc.DebugLogging;
+import com.anrisoftware.sscontrol.types.misc.StringListPropertyUtil.ListProperty;
 import com.anrisoftware.sscontrol.types.ssh.external.Ssh;
 import com.anrisoftware.sscontrol.types.ssh.external.SshHost;
 import com.google.inject.assistedinject.Assisted;

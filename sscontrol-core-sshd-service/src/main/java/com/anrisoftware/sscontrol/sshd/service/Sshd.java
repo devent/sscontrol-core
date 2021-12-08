@@ -18,7 +18,7 @@ package com.anrisoftware.sscontrol.sshd.service;
 import java.util.List;
 
 import com.anrisoftware.sscontrol.types.host.HostService;
-import com.anrisoftware.sscontrol.types.misc.external.DebugLogging;
+import com.anrisoftware.sscontrol.types.misc.DebugLogging;
 
 /**
  * Sshd service.

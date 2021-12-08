@@ -13,41 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.anrisoftware.sscontrol.types.misc.external;
+package com.anrisoftware.sscontrol.types.misc;
 
-import java.util.Map;
+import javax.annotation.concurrent.Immutable;
 
 /**
- * Debug logging module.
+ * User name and password credentials.
  *
  * @author Erwin Müller, erwin.mueller@deventm.de
  * @since 1.0
  */
-public interface DebugModule {
+@Immutable
+public interface UserPassword {
 
-    /**
-     * Returns a new module with the new name.
-     */
-    DebugModule rename(String name);
-
-    /**
-     * Returns the name of the module.
-     */
     String getName();
 
-    /**
-     * Returns the logging level.
-     */
-    int getLevel();
+    String getPassword();
 
-    /**
-     * Returns the properties.
-     */
-    Map<String, Object> getProperties();
+    UserPassword changeName(String name);
 
-    /**
-     * Returns a new module with the put property value.
-     */
-    DebugModule putProperty(String property, Object value);
+    UserPassword changePassword(String password);
 
 }

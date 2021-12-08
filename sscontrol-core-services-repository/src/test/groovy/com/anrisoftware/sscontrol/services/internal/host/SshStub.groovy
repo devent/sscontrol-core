@@ -22,7 +22,7 @@ import org.apache.commons.lang3.StringUtils
 import com.anrisoftware.sscontrol.types.host.HostService
 import com.anrisoftware.sscontrol.types.host.HostServiceProperties
 import com.anrisoftware.sscontrol.types.host.TargetHost
-import com.anrisoftware.sscontrol.types.misc.external.DebugLogging
+import com.anrisoftware.sscontrol.types.misc.DebugLogging
 import com.anrisoftware.sscontrol.types.ssh.external.Ssh
 import com.anrisoftware.sscontrol.types.ssh.external.SshHost
 import com.anrisoftware.sscontrol.types.ssh.external.TargetServiceService

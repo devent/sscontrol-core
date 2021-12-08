@@ -16,7 +16,7 @@
 package com.anrisoftware.sscontrol.types.ssh.external;
 
 import com.anrisoftware.sscontrol.types.host.TargetHostService;
-import com.anrisoftware.sscontrol.types.misc.external.DebugLogging;
+import com.anrisoftware.sscontrol.types.misc.DebugLogging;
 
 /**
  * <i>Ssh</i> script service.

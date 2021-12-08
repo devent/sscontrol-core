@@ -15,7 +15,7 @@
  */
 package com.anrisoftware.sscontrol.k8smaster.service.internal;
 
-import static com.anrisoftware.sscontrol.types.misc.external.StringListPropertyUtil.stringListStatement;
+import static com.anrisoftware.sscontrol.types.misc.StringListPropertyUtil.stringListStatement;
 import static java.lang.String.format;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -54,10 +54,10 @@ import com.anrisoftware.sscontrol.tls.external.Tls.TlsFactory;
 import com.anrisoftware.sscontrol.types.cluster.external.ClusterHost;
 import com.anrisoftware.sscontrol.types.host.HostServiceProperties;
 import com.anrisoftware.sscontrol.types.host.TargetHost;
-import com.anrisoftware.sscontrol.types.misc.external.DebugLogging;
-import com.anrisoftware.sscontrol.types.misc.external.GeneticListPropertyUtil;
-import com.anrisoftware.sscontrol.types.misc.external.GeneticListPropertyUtil.GeneticListProperty;
-import com.anrisoftware.sscontrol.types.misc.external.StringListPropertyUtil.ListProperty;
+import com.anrisoftware.sscontrol.types.misc.DebugLogging;
+import com.anrisoftware.sscontrol.types.misc.GeneticListPropertyUtil;
+import com.anrisoftware.sscontrol.types.misc.GeneticListPropertyUtil.GeneticListProperty;
+import com.anrisoftware.sscontrol.types.misc.StringListPropertyUtil.ListProperty;
 import com.google.inject.assistedinject.Assisted;
 
 /**

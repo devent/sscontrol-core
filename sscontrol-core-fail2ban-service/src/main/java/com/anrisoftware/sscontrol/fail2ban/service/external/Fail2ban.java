@@ -18,7 +18,7 @@ package com.anrisoftware.sscontrol.fail2ban.service.external;
 import java.util.List;
 
 import com.anrisoftware.sscontrol.types.host.HostService;
-import com.anrisoftware.sscontrol.types.misc.external.DebugLogging;
+import com.anrisoftware.sscontrol.types.misc.DebugLogging;
 
 /**
  * <i>Fail2ban</i> service.

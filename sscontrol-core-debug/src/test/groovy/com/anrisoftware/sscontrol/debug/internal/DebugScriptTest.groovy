@@ -24,8 +24,8 @@ import org.junit.jupiter.api.Test
 
 import com.anrisoftware.globalpom.core.strings.StringsModule
 import com.anrisoftware.sscontrol.debug.internal.DebugLoggingImpl.DebugLoggingImplFactory
-import com.anrisoftware.sscontrol.types.misc.external.DebugLogging
-import com.anrisoftware.sscontrol.types.misc.internal.TypesModule
+import com.anrisoftware.sscontrol.types.misc.DebugLogging
+import com.anrisoftware.sscontrol.types.misc.TypesModule
 import com.google.inject.Guice
 
 import groovy.util.logging.Slf4j

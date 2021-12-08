@@ -13,17 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.anrisoftware.sscontrol.types.misc.external;
+package com.anrisoftware.sscontrol.types.misc;
 
 /**
- * Binding host and port service.
+ * Creates the user with a password.
  *
  * @author Erwin Müller, erwin.mueller@deventm.de
  * @since 1.0
  */
-public interface BindingHostService {
+public interface UserPasswordService {
 
-    BindingHost create();
-
-    BindingHost create(BindingHost binding);
+    UserPassword create(String name, String password);
 }

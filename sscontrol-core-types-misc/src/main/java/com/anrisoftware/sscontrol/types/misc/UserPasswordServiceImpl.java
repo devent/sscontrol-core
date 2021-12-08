@@ -13,43 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.anrisoftware.sscontrol.types.misc.external;
+package com.anrisoftware.sscontrol.types.misc;
 
 /**
- * Named binding address.
+ * Creates the user with a password.
  *
- * @author Erwin Mueller, erwin.mueller@deventm.org
+ * @author Erwin Müller, erwin.mueller@deventm.de
  * @since 1.0
  */
-public enum BindingAddress {
+public class UserPasswordServiceImpl implements UserPasswordService {
 
-	/**
-	 * Loopback address {@code 127.0.0.1}
-	 */
-	loopback("127.0.0.1"),
+    @Override
+    public UserPassword create(String name, String password) {
+        return new UserPasswordImpl(name, password);
+    }
 
-	/**
-	 * Local host address {@code 127.0.0.1}
-	 */
-	local("127.0.0.1"),
-
-	/**
-	 * All address {@code 0.0.0.0}
-	 */
-	all("0.0.0.0");
-
-    private String address;
-
-	private BindingAddress(String address) {
-        this.address = address;
-	}
-
-    public String getAddress() {
-		return address;
-	}
-
-	@Override
-	public String toString() {
-        return address;
-	}
 }

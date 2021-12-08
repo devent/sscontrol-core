@@ -28,8 +28,8 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import com.anrisoftware.sscontrol.nfs.service.external.Export;
 import com.anrisoftware.sscontrol.nfs.service.external.Host;
 import com.anrisoftware.sscontrol.nfs.service.internal.HostImpl.HostImplFactory;
-import com.anrisoftware.sscontrol.types.misc.external.StringListPropertyUtil;
-import com.anrisoftware.sscontrol.types.misc.external.StringListPropertyUtil.ListProperty;
+import com.anrisoftware.sscontrol.types.misc.StringListPropertyUtil;
+import com.anrisoftware.sscontrol.types.misc.StringListPropertyUtil.ListProperty;
 import com.google.inject.assistedinject.Assisted;
 
 /**
