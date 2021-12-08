@@ -19,7 +19,7 @@ import javax.inject.Inject
 
 import com.anrisoftware.propertiesutils.ContextProperties
 import com.anrisoftware.sscontrol.sshd.script.openssh.external.SshdSystemd
-import com.anrisoftware.sscontrol.sshd.service.external.Sshd
+import com.anrisoftware.sscontrol.sshd.service.Sshd
 import com.anrisoftware.sscontrol.utils.debian.DebianUtils
 import com.anrisoftware.sscontrol.utils.debian.Debian_11_UtilsFactory
 

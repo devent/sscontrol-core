@@ -27,7 +27,7 @@ import com.anrisoftware.sscontrol.runner.test.external.AbstractRunnerTestBase
 import com.anrisoftware.sscontrol.ssh.script.linux.Ssh_Linux_Factory
 import com.anrisoftware.sscontrol.ssh.script.linux.Ssh_Linux_Module
 import com.anrisoftware.sscontrol.ssh.service.SshImpl.SshImplFactory
-import com.anrisoftware.sscontrol.sshd.service.internal.SshdImpl.SshdImplFactory
+import com.anrisoftware.sscontrol.sshd.service.SshdImpl.SshdImplFactory
 import com.anrisoftware.sscontrol.types.host.HostServices
 
 /**

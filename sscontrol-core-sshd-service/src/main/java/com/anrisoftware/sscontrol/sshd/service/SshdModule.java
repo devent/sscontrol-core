@@ -13,11 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.anrisoftware.sscontrol.sshd.service.internal;
+package com.anrisoftware.sscontrol.sshd.service;
 
-import com.anrisoftware.sscontrol.sshd.service.external.Binding;
-import com.anrisoftware.sscontrol.sshd.service.internal.BindingImpl.BindingImplFactory;
-import com.anrisoftware.sscontrol.sshd.service.internal.SshdImpl.SshdImplFactory;
+import com.anrisoftware.sscontrol.sshd.service.BindingImpl.BindingImplFactory;
+import com.anrisoftware.sscontrol.sshd.service.SshdImpl.SshdImplFactory;
 import com.anrisoftware.sscontrol.types.host.HostService;
 import com.google.inject.AbstractModule;
 import com.google.inject.assistedinject.FactoryModuleBuilder;

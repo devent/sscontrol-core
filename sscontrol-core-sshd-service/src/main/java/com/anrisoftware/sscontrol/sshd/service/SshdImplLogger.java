@@ -13,15 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.anrisoftware.sscontrol.sshd.service.internal;
+package com.anrisoftware.sscontrol.sshd.service;
 
-import static com.anrisoftware.sscontrol.sshd.service.internal.SshdImplLogger.m.addAllowUser;
-import static com.anrisoftware.sscontrol.sshd.service.internal.SshdImplLogger.m.bindingSet;
+import static com.anrisoftware.sscontrol.sshd.service.SshdImplLogger.m.addAllowUser;
+import static com.anrisoftware.sscontrol.sshd.service.SshdImplLogger.m.bindingSet;
 
 import javax.inject.Singleton;
 
 import com.anrisoftware.globalpom.log.AbstractLogger;
-import com.anrisoftware.sscontrol.sshd.service.external.Binding;
 
 /**
  * Logging for {@link SshdImpl}.

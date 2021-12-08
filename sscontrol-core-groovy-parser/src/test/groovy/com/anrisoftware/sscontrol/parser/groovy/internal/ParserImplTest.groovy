@@ -34,8 +34,8 @@ import com.anrisoftware.sscontrol.services.internal.targets.TargetsModule
 import com.anrisoftware.sscontrol.services.internal.targets.TargetsServiceModule
 import com.anrisoftware.sscontrol.ssh.service.SshModule
 import com.anrisoftware.sscontrol.ssh.service.SshImpl.SshImplFactory
-import com.anrisoftware.sscontrol.sshd.service.internal.SshdModule
-import com.anrisoftware.sscontrol.sshd.service.internal.SshdImpl.SshdImplFactory
+import com.anrisoftware.sscontrol.sshd.service.SshdModule
+import com.anrisoftware.sscontrol.sshd.service.SshdImpl.SshdImplFactory
 import com.anrisoftware.sscontrol.types.misc.internal.TypesModule
 import com.anrisoftware.sscontrol.utils.systemmappings.internal.SystemNameMappingsModule
 import com.google.inject.Guice
