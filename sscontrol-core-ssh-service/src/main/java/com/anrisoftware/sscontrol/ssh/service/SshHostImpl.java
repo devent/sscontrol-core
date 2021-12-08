@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.anrisoftware.sscontrol.ssh.service.internal;
+package com.anrisoftware.sscontrol.ssh.service;
 
 import static org.apache.commons.lang3.StringUtils.split;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.isEmptyString;
+import static org.hamcrest.Matchers.emptyString;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.notNullValue;
 
@@ -164,7 +164,7 @@ public class SshHostImpl implements SshHost {
     private String parseHost(Map<String, Object> args) {
         Object v = args.get("host");
         assertThat("host=null", v, notNullValue());
-        assertThat("host=empty", v.toString(), not(isEmptyString()));
+        assertThat("host=empty", v.toString(), not(emptyString()));
         if (v instanceof URI) {
             URI uri = (URI) v;
             this.port = uri.getPort() != -1 ? uri.getPort() : null;

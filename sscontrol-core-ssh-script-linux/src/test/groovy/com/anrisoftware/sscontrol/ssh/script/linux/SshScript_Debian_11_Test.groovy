@@ -13,12 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.anrisoftware.sscontrol.ssh.script.linux.internal
+package com.anrisoftware.sscontrol.ssh.script.linux
 
 import static com.anrisoftware.globalpom.utils.TestUtils.*
 import static com.anrisoftware.sscontrol.shell.external.utils.CmdExecHelper.*
 import static com.anrisoftware.sscontrol.shell.external.utils.UnixTestUtil.*
-import static com.anrisoftware.sscontrol.utils.debian.Debian_11_TestUtils.*
 
 import javax.inject.Inject
 
@@ -45,11 +44,11 @@ import com.anrisoftware.sscontrol.debug.internal.DebugLoggingModule
 import com.anrisoftware.sscontrol.services.internal.host.HostServicesModule
 import com.anrisoftware.sscontrol.shell.external.utils.AbstractScriptTestBase
 import com.anrisoftware.sscontrol.shell.external.utils.CmdExecHelperModule
-import com.anrisoftware.sscontrol.ssh.script.linux.external.Ssh_Linux_Factory
-import com.anrisoftware.sscontrol.ssh.service.internal.SshModule
-import com.anrisoftware.sscontrol.ssh.service.internal.SshImpl.SshImplFactory
+import com.anrisoftware.sscontrol.ssh.service.SshModule
+import com.anrisoftware.sscontrol.ssh.service.SshImpl.SshImplFactory
 import com.anrisoftware.sscontrol.types.host.HostServices
 import com.anrisoftware.sscontrol.types.misc.internal.TypesModule
+import com.anrisoftware.sscontrol.utils.debian.Debian_11_TestUtils
 import com.anrisoftware.sscontrol.utils.systemmappings.internal.SystemNameMappingsModule
 
 import groovy.util.logging.Slf4j
@@ -63,7 +62,7 @@ import groovy.util.logging.Slf4j
 @Slf4j
 @EnableRuleMigrationSupport
 @EnabledIfSystemProperty(named = "project.custom.local.tests.enabled", matches = "true")
-class SshScript_Debian_9_Test extends AbstractScriptTestBase {
+class SshScript_Debian_11_Test extends AbstractScriptTestBase {
 
     @Inject
     SshImplFactory sshFactory
@@ -84,7 +83,7 @@ service "ssh", host: "localhost"
                 HostServices services = args.services
                 def targets = services.targets.getHosts 'default'
                 assert targets[0].system.name == 'debian'
-                assert targets[0].system.version == '9'
+                assert targets[0].system.version == '11'
             },
         ]
         doTest test
@@ -119,7 +118,7 @@ service "ssh", host: "localhost", socket: "$socketFile"
 
     @Override
     void createDummyCommands(File dir) {
-        createCommand catCommand, dir, "cat"
+        createCommand Debian_11_TestUtils.catCommand, dir, "cat"
         createEchoCommands dir, [
             'mkdir',
             'chown',

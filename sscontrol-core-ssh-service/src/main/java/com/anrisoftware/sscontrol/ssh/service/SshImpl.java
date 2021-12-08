@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.anrisoftware.sscontrol.ssh.service.internal;
+package com.anrisoftware.sscontrol.ssh.service;
 
 import static com.anrisoftware.sscontrol.types.misc.external.StringListPropertyUtil.stringListStatement;
 import static org.codehaus.groovy.runtime.InvokerHelper.invokeMethod;
@@ -33,8 +33,7 @@ import org.codehaus.groovy.runtime.InvokerHelper;
 
 import com.anrisoftware.globalpom.core.resources.ToURI;
 import com.anrisoftware.sscontrol.debug.external.DebugLoggingService;
-import com.anrisoftware.sscontrol.ssh.service.external.SshService;
-import com.anrisoftware.sscontrol.ssh.service.internal.SshHostImpl.SshHostImplFactory;
+import com.anrisoftware.sscontrol.ssh.service.SshHostImpl.SshHostImplFactory;
 import com.anrisoftware.sscontrol.types.host.HostServiceProperties;
 import com.anrisoftware.sscontrol.types.host.HostServicePropertiesService;
 import com.anrisoftware.sscontrol.types.host.TargetHost;

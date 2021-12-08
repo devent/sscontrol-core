@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.anrisoftware.sscontrol.ssh.service.internal;
+package com.anrisoftware.sscontrol.ssh.service;
 
-import static com.anrisoftware.sscontrol.ssh.service.internal.SshImplLogger.m.groupSet;
-import static com.anrisoftware.sscontrol.ssh.service.internal.SshImplLogger.m.hostAdded;
+import static com.anrisoftware.sscontrol.ssh.service.SshImplLogger.m.groupSet;
+import static com.anrisoftware.sscontrol.ssh.service.SshImplLogger.m.hostAdded;
 
 import javax.inject.Singleton;
 

@@ -13,31 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.anrisoftware.sscontrol.ssh.service.internal;
+package com.anrisoftware.sscontrol.ssh.script.linux;
 
-import com.anrisoftware.sscontrol.ssh.service.internal.SshHostImpl.SshHostImplFactory;
-import com.anrisoftware.sscontrol.ssh.service.internal.SshImpl.SshImplFactory;
-import com.anrisoftware.sscontrol.types.host.HostService;
-import com.anrisoftware.sscontrol.types.ssh.external.SshHost;
+import com.anrisoftware.sscontrol.ssh.script.linux.internal.SshLinux;
+import com.anrisoftware.sscontrol.types.host.HostServiceScript;
 import com.google.inject.AbstractModule;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 
 /**
- * <i>Ssh</i> script module.
+ *
  *
  * @author Erwin Müller {@literal <erwin.mueller@deventm.de>}
  * @version 1.0
  */
-public class SshModule extends AbstractModule {
+public class Ssh_Linux_Module extends AbstractModule {
 
     @Override
     protected void configure() {
-        install(new FactoryModuleBuilder()
-                .implement(HostService.class, SshImpl.class)
-                .build(SshImplFactory.class));
-        install(new FactoryModuleBuilder()
-                .implement(SshHost.class, SshHostImpl.class)
-                .build(SshHostImplFactory.class));
+        install(new FactoryModuleBuilder().implement(HostServiceScript.class, SshLinux.class)
+                .build(Ssh_Linux_Factory.class));
     }
 
 }

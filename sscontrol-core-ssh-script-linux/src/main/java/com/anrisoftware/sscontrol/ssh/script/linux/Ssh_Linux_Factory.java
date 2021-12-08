@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.anrisoftware.sscontrol.ssh.script.linux.external;
+package com.anrisoftware.sscontrol.ssh.script.linux;
 
 import com.anrisoftware.sscontrol.types.host.HostServiceScriptFactory;
 
