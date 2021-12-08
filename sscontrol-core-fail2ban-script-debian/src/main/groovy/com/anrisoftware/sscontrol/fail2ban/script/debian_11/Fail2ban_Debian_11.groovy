@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.anrisoftware.sscontrol.fail2ban.script.debian.debian_11
+package com.anrisoftware.sscontrol.fail2ban.script.debian_11
 
 import javax.inject.Inject
 
-import com.anrisoftware.sscontrol.fail2ban.script.debian.debian.Fail2ban_11_Debian
+import com.anrisoftware.sscontrol.fail2ban.script.debian.Fail2ban_0_11_Debian
 import com.anrisoftware.sscontrol.fail2ban.script.fail2ban_0_x.Jail_0_x
 import com.anrisoftware.sscontrol.utils.debian.DebianUtils
 import com.anrisoftware.sscontrol.utils.debian.Debian_11_UtilsFactory
@@ -31,7 +31,7 @@ import groovy.util.logging.Slf4j
  * @since 1.0
  */
 @Slf4j
-class Fail2ban_Debian_11 extends Fail2ban_11_Debian {
+class Fail2ban_Debian_11 extends Fail2ban_0_11_Debian {
 
     @Inject
     Fail2ban_Debian_11_Properties debianPropertiesProvider

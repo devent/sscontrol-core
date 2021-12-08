@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.anrisoftware.sscontrol.fail2ban.script.debian.debian_11
+package com.anrisoftware.sscontrol.fail2ban.script.debian_11
 
 import javax.inject.Inject
 
@@ -21,7 +21,7 @@ import com.anrisoftware.resources.templates.external.Templates
 import com.anrisoftware.resources.templates.external.TemplatesFactory
 import com.anrisoftware.resources.texts.external.Texts
 import com.anrisoftware.resources.texts.external.TextsFactory
-import com.anrisoftware.sscontrol.fail2ban.script.debian.debian.Ufw_Jail_0_11_Debian
+import com.anrisoftware.sscontrol.fail2ban.script.debian.Ufw_Jail_0_11_Debian
 import com.anrisoftware.sscontrol.utils.debian.DebianUtils
 import com.anrisoftware.sscontrol.utils.debian.Debian_11_UtilsFactory
 

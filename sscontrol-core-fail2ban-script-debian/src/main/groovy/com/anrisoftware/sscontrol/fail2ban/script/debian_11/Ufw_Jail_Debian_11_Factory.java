@@ -13,22 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.anrisoftware.sscontrol.fail2ban.script.debian.debian_11;
+package com.anrisoftware.sscontrol.fail2ban.script.debian_11;
 
-import com.anrisoftware.propertiesutils.AbstractContextPropertiesProvider
+import com.anrisoftware.sscontrol.types.host.HostServiceScriptFactory;
 
 /**
- * Fail2ban Debian 11 properties provider from
- * {@code "/fail2ban_debian_11.properties"}.
+ * Factory for {@link Ufw_Jail_Debian_11}
  *
- * @author Erwin Mueller, erwin.mueller@deventm.org
- * @since 1.0
+ * @author Erwin Müller {@literal <erwin.mueller@deventm.de>}
+ * @version 1.0
  */
-class Fail2ban_Debian_11_Properties extends AbstractContextPropertiesProvider {
-
-    private static final URL RESOURCE = Fail2ban_Debian_11_Properties.class.getResource("/fail2ban_debian_11.properties");
-
-    Fail2ban_Debian_11_Properties() {
-        super(Fail2ban_Debian_11_Properties.class, RESOURCE);
-    }
+public interface Ufw_Jail_Debian_11_Factory extends HostServiceScriptFactory {
 }

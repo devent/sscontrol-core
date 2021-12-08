@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.anrisoftware.sscontrol.fail2ban.script.debian.debian_11
+package com.anrisoftware.sscontrol.fail2ban.script.debian_11
 
 import static com.anrisoftware.globalpom.utils.TestUtils.*
 
@@ -21,6 +21,7 @@ import javax.inject.Inject
 
 import org.junit.jupiter.api.BeforeEach
 
+import com.anrisoftware.sscontrol.fail2ban.script.debian_11.Fail2ban_Debian_11_Factory
 import com.anrisoftware.sscontrol.fail2ban.service.internal.Fail2banImpl.Fail2banImplFactory
 import com.anrisoftware.sscontrol.runner.groovy.internal.RunnerModule
 import com.anrisoftware.sscontrol.runner.groovy.internal.RunScriptImpl.RunScriptImplFactory

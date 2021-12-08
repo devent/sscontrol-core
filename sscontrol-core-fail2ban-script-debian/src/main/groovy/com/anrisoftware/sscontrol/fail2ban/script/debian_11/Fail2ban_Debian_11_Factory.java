@@ -13,15 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.anrisoftware.sscontrol.fail2ban.script.debian.debian_11;
+package com.anrisoftware.sscontrol.fail2ban.script.debian_11;
 
 import com.anrisoftware.sscontrol.types.host.HostServiceScriptFactory;
 
 /**
- * Factory for {@link Ufw_Jail_Debian_11}
+ *
  *
  * @author Erwin Müller {@literal <erwin.mueller@deventm.de>}
  * @version 1.0
  */
-public interface Ufw_Jail_Debian_11_Factory extends HostServiceScriptFactory {
+public interface Fail2ban_Debian_11_Factory extends HostServiceScriptFactory {
+
 }

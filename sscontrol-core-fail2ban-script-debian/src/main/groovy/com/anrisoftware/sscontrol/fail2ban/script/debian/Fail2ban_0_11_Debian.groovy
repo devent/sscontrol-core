@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.anrisoftware.sscontrol.fail2ban.script.debian.debian
+package com.anrisoftware.sscontrol.fail2ban.script.debian
 
 import javax.inject.Inject
 
-import com.anrisoftware.sscontrol.fail2ban.script.fail2ban_0_11.Ufw_Jail_0_11
+import com.anrisoftware.sscontrol.fail2ban.script.fail2ban_0_11.Fail2ban_0_11
 import com.anrisoftware.sscontrol.utils.debian.DebianUtils
 import com.anrisoftware.sscontrol.utils.systemd.SystemdUtils
 import com.anrisoftware.sscontrol.utils.systemd.SystemdUtilsFactory
@@ -25,19 +25,19 @@ import com.anrisoftware.sscontrol.utils.systemd.SystemdUtilsFactory
 import groovy.util.logging.Slf4j
 
 /**
+ * Configures the <i>Fail2ban</i> service.
  *
- *
- * @author Erwin Müller <erwin.mueller@deventm.de>
- * @version 1.0
+ * @author Erwin Müller, erwin.mueller@deventm.de
+ * @since 1.0
  */
 @Slf4j
-abstract class Ufw_Jail_0_11_Debian extends Ufw_Jail_0_11 {
+abstract class Fail2ban_0_11_Debian extends Fail2ban_0_11 {
 
     abstract DebianUtils getDebian()
 
     SystemdUtils systemd
 
-    def installPackages() {
+    void installPackages() {
         debian.installPackages()
     }
 

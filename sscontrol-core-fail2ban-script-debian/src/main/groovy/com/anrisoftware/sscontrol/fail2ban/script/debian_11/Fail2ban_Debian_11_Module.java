@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.anrisoftware.sscontrol.fail2ban.script.debian.debian_11;
+package com.anrisoftware.sscontrol.fail2ban.script.debian_11;
 
 import com.anrisoftware.sscontrol.types.host.HostServiceScript;
 import com.google.inject.AbstractModule;
