@@ -24,6 +24,8 @@ import org.apache.commons.io.IOUtils
 
 import com.anrisoftware.globalpom.core.strings.StringsModule
 import com.anrisoftware.globalpom.core.textmatch.tokentemplate.TokensTemplateModule
+import com.anrisoftware.resources.binary.internal.resources.BinaryResourceModule
+import com.anrisoftware.resources.texts.internal.texts.TextsResourcesDefaultModule
 import com.anrisoftware.sscontrol.command.shell.internal.cmd.CmdModule
 import com.anrisoftware.sscontrol.command.shell.internal.copy.CopyModule
 import com.anrisoftware.sscontrol.command.shell.internal.facts.FactsModule
@@ -171,6 +173,8 @@ abstract class AbstractRunnerTestBase extends AbstractScriptTestBase {
             new TokensTemplateModule(),
             new TemplateResModule(),
             new StModule(),
+            new TextsResourcesDefaultModule(),
+            new BinaryResourceModule(),
         ]
     }
 }
