@@ -18,20 +18,33 @@
 -->
 <configuration>
 
+	<timestamp key="bySecond" datePattern="yyyyMMdd'T'HHmmss"/>
+
 	<appender name="TESTING_STYLE" class="ch.qos.logback.core.ConsoleAppender">
 		<target>System.err</target>
 		<encoder>
-			<pattern>[%level] %-4relative [%thread] %logger{0} - %msg%n%rEx{short}</pattern>
-			<immediateFlush>true</immediateFlush>
+			<pattern>[%-5level] %d [%thread] %logger{0} - %msg%n%rEx{short}</pattern>
 		</encoder>
+		<immediateFlush>true</immediateFlush>
 	</appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>${java.io.tmpdir}/robobee-crio-${bySecond}.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>[%-5level] %d [%thread] %logger{0} - %msg%n%rEx{short}</pattern>
+        </encoder>
+    </appender>
 
 	<root level="ERROR">
 		<appender-ref ref="TESTING_STYLE" />
+        <appender-ref ref="FILE" />
 	</root>
 
-    <logger name="com.anrisoftware" level="TRACE" />
-    <logger name="com.anrisoftware.globalpom.exec.scriptprocess" level="TRACE" />
-    <logger name="com.anrisoftware.sscontrol" level="TRACE" />
+    <logger name="com.anrisoftware" level="INFO" />
+    <logger name="com.anrisoftware.globalpom.exec" level="DEBUG" />
+    <logger name="com.anrisoftware.sscontrol" level="INFO" />
+    <logger name="com.anrisoftware.sscontrol.groovy.script.external" level="DEBUG" />
+    <logger name="com.anrisoftware.globalpom.exec.internal.runcommands" level="INFO" />
 
 </configuration>

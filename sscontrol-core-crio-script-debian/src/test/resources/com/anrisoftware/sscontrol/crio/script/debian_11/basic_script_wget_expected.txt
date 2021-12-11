@@ -1,0 +1,2 @@
+-O https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/Debian_11/Release.key
+-O https://download.opensuse.org/repositories/devel:kubic:libcontainers:stable:cri-o:1.22/Debian_11/Release.key

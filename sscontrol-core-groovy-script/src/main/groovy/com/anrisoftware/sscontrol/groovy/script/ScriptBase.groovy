@@ -46,10 +46,10 @@ import com.anrisoftware.sscontrol.command.shell.external.Shell.ShellFactory
 import com.anrisoftware.sscontrol.template.external.Template
 import com.anrisoftware.sscontrol.template.external.Template.TemplateFactory
 import com.anrisoftware.sscontrol.types.host.HostService
+import com.anrisoftware.sscontrol.types.host.HostServiceFactory
 import com.anrisoftware.sscontrol.types.host.HostServiceProperties
 import com.anrisoftware.sscontrol.types.host.HostServiceScript
 import com.anrisoftware.sscontrol.types.host.HostServiceScriptFactory
-import com.anrisoftware.sscontrol.types.host.HostServiceFactory
 import com.anrisoftware.sscontrol.types.host.HostServices
 import com.anrisoftware.sscontrol.types.host.SystemInfo
 import com.anrisoftware.sscontrol.types.host.TargetHost
@@ -676,7 +676,7 @@ abstract class ScriptBase extends Script implements HostServiceScript {
      * @see #getDefaultProperties()
      */
     File getConfigFile() {
-        def file = getFileProperty "config_file", configDir
+        etFileProperty "config_file", configDir
     }
 
     URI getArchive() {

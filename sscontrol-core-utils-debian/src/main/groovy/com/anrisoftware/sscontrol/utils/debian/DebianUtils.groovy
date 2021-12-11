@@ -238,12 +238,18 @@ sudo bash -c 'echo "deb ${args.url} ${args.name} ${args.comp}" > ${args.file}'
 
     /**
      * Adds the apt packages repository without the distribution name or repository component.
+     * For example for the cri-o repository:
+     * <pre>
+     * <code>
+     * deb https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/Debian_11/ /
+     * </code>
+     * </pre>
      *
      * @param args
      * <ul>
-     * <li>key: repository key;
-     * <li>url: repository URL;
-     * <li>file: repository list file;
+     * <li>key: repository key; if not set then the value from {@code HostServiceScript#packagesRepositoryKey} will be used; if this is not set then the value from {@code #packagesRepositoryKey} will be used.
+     * <li>url: repository URL; if not set then the value from {@code HostServiceScript#packagesRepositoryUrl} will be used; if this is not set then the value from {@code #packagesRepositoryUrl} will be used.
+     * <li>file: repository list file; if not set then the value from {@code HostServiceScript#packagesRepositoryListFile} will be used; if this is not set then the value from {@code #packagesRepositoryListFile} will be used.
      * <li>target: the target, defaults to {@code script#target};
      * </ul>
      *
