@@ -8,8 +8,10 @@
 /bin/bash -s
 /bin/bash -s
 /bin/bash -s
+/bin/bash -s
 bash -c cat  | apt-key add -
 bash -c echo "deb https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/Debian_11/ /" > /tmp/junit/junit/etc/apt/sources.list.d/libcontainers.list
+/bin/bash -s
 /bin/bash -s
 bash -c cat  | apt-key add -
 bash -c echo "deb https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable:/cri-o:/1.22:/1.22.1/Debian_11/ /" > /tmp/junit/junit/etc/apt/sources.list.d/cri-o.list

@@ -16,7 +16,7 @@
 package com.anrisoftware.sscontrol.crio.service;
 
 /**
- * Creates the NFS service.
+ * Creates the cri-o service.
  *
  * @author Erwin Müller, erwin.mueller@deventm.de
  * @since 1.0
