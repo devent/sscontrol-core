@@ -1,7 +1,11 @@
 update
+-y install apt-transport-https
+-y install ca-certificates
+update
 -y install gnupg
 update
 -y install gnupg
 update
 -y install cri-o
 -y install cri-o-runc
+-y install conntrack

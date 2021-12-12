@@ -49,8 +49,9 @@ service "crio", version: "1.22"
             expected: { Map args ->
                 assertStringResource CrioServerTest, readRemoteFile('/etc/modules-load.d/crio.conf'), "${args.test.name}_crio_conf_expected.txt"
                 assertStringResource CrioServerTest, readRemoteFile('/etc/sysctl.d/99-kubernetes-cri.conf'), "${args.test.name}_99_kubernetes_cri_conf_expected.txt"
-                assertStringResource CrioServerTest, readRemoteFile('/etc/apt/sources.list.d/crio.list'), "${args.test.name}_crio_list_expected.txt"
+                assertStringResource CrioServerTest, readRemoteFile('/etc/apt/sources.list.d/cri-o.list'), "${args.test.name}_crio_list_expected.txt"
                 assertStringResource CrioServerTest, readRemoteFile('/etc/apt/sources.list.d/libcontainers.list'), "${args.test.name}_libcontainers_list_expected.txt"
+                assertStringResource CrioServerTest, readRemoteFile('/etc/crio/crio.conf.d/02-cgroup-manager.conf'), "${args.test.name}_cgroup_manager_conf_expected.txt"
             },
         ]
         doTest test

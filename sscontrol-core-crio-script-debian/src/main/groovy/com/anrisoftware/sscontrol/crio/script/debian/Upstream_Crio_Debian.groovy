@@ -36,6 +36,9 @@ abstract class Upstream_Crio_Debian extends ScriptBase {
      * Installs cri-o from the upstream repository.
      */
     def installCrio() {
+        debian.checkPackages(additionalPackages) ? { }() : {
+            debian.installPackages(additionalPackages)
+        }()
         debian.checkPackages() ? { }() : {
             debian.addPackagesRepositoryAlternative(key: libcontainersRepositoryKey, url: libcontainersPepositoryUrl, file: libcontainersRepositoryListFile)
             debian.addPackagesRepositoryAlternative(key: crioRepositoryKey, url: crioPepositoryUrl, file: crioRepositoryListFile)
@@ -48,6 +51,20 @@ abstract class Upstream_Crio_Debian extends ScriptBase {
      * @return DebianUtils
      */
     abstract DebianUtils getDebian()
+
+    /**
+     * Returns the additional packages of the service.
+     * For example {@code "apt-transport-https, ca-certificates"}.
+     *
+     * <ul>
+     * <li>profile property {@code additional_packages}</li>
+     * </ul>
+     *
+     * @see #getDefaultProperties()
+     */
+    List getAdditionalPackages() {
+        properties.getListProperty "additional_packages", defaultProperties
+    }
 
     /**
      * For example <code>/etc/apt/sources.list.d/libcontainers.list</code>
