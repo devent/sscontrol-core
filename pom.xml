@@ -77,7 +77,7 @@
         <module>sscontrol-core-command-shell-openssh</module>
         <module>sscontrol-core-command-template</module>
         <module>sscontrol-core-crio-script-debian</module>
-        <module>sscontrol-core-crio-script-crio-1-20</module>
+        <module>sscontrol-core-crio-script-crio-1-x</module>
         <module>sscontrol-core-crio-service</module>
         <module>sscontrol-core-debug</module>
         <module>sscontrol-core-etcd-script-debian</module>
@@ -142,6 +142,7 @@
         <module>sscontrol-core-types-ssh</module>
         <module>sscontrol-core-utils-centos</module>
         <module>sscontrol-core-utils-debian</module>
+        <module>sscontrol-core-utils-grub</module>
         <module>sscontrol-core-utils-iniconfig</module>
         <module>sscontrol-core-utils-st-base64renderer</module>
         <module>sscontrol-core-utils-st-durationrenderer</module>

@@ -28,9 +28,9 @@
         <version>0.14.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>sscontrol-core-crio-script-crio-1-20</artifactId>
-    <name>sscontrol-core - crio-script-crio-1-20</name>
-    <description>CRI-O 1.20.</description>
+    <artifactId>sscontrol-core-crio-script-crio-1-x</artifactId>
+    <name>sscontrol-core - crio-script-crio-1-x</name>
+    <description>CRI-O 1.x.</description>
 
     <properties>
     </properties>

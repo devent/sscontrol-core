@@ -28,30 +28,18 @@
         <version>0.14.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>sscontrol-core-crio-script-debian</artifactId>
-    <name>sscontrol-core - crio-script-debian</name>
-    <description>CRI-O for Debian.</description>
+    <artifactId>sscontrol-core-utils-grub</artifactId>
+    <name>sscontrol-core - utils-grub</name>
+    <description>Grub utilities.</description>
 
     <properties>
     </properties>
 
     <dependencies>
-
         <!-- test dependencies -->
         <dependency>
             <groupId>com.anrisoftware.globalpom</groupId>
             <artifactId>globalpom-groovytestutils</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-migrationsupport</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.anrisoftware.sscontrol</groupId>
-            <artifactId>sscontrol-core-shell-test</artifactId>
-            <version>0.14.0-SNAPSHOT</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -62,31 +50,7 @@
         </dependency>
         <dependency>
             <groupId>com.anrisoftware.sscontrol</groupId>
-            <artifactId>sscontrol-core-services-repository</artifactId>
-            <version>0.14.0-SNAPSHOT</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.anrisoftware.sscontrol</groupId>
-            <artifactId>sscontrol-core-ssh-service</artifactId>
-            <version>0.14.0-SNAPSHOT</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.anrisoftware.sscontrol</groupId>
-            <artifactId>sscontrol-core-ssh-script-linux</artifactId>
-            <version>0.14.0-SNAPSHOT</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.anrisoftware.sscontrol</groupId>
-            <artifactId>sscontrol-core-script-runner-test</artifactId>
-            <version>0.14.0-SNAPSHOT</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.anrisoftware.sscontrol</groupId>
-            <artifactId>sscontrol-core-script-runner</artifactId>
+            <artifactId>sscontrol-core-shell-test</artifactId>
             <version>0.14.0-SNAPSHOT</version>
             <scope>test</scope>
         </dependency>
@@ -94,27 +58,32 @@
         <!-- own bundles -->
         <dependency>
             <groupId>com.anrisoftware.sscontrol</groupId>
-            <artifactId>sscontrol-core-groovy-script</artifactId>
+            <artifactId>sscontrol-core-command-copy</artifactId>
             <version>0.14.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.anrisoftware.sscontrol</groupId>
-            <artifactId>sscontrol-core-crio-service</artifactId>
+            <artifactId>sscontrol-core-command-facts</artifactId>
             <version>0.14.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.anrisoftware.sscontrol</groupId>
-            <artifactId>sscontrol-core-crio-script-crio-1-x</artifactId>
+            <artifactId>sscontrol-core-command-fetch</artifactId>
             <version>0.14.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.anrisoftware.sscontrol</groupId>
-            <artifactId>sscontrol-core-utils-debian</artifactId>
+            <artifactId>sscontrol-core-command-replace</artifactId>
             <version>0.14.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.anrisoftware.sscontrol</groupId>
-            <artifactId>sscontrol-core-utils-systemd</artifactId>
+            <artifactId>sscontrol-core-command-shell</artifactId>
+            <version>0.14.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.anrisoftware.sscontrol</groupId>
+            <artifactId>sscontrol-core-command-template</artifactId>
             <version>0.14.0-SNAPSHOT</version>
         </dependency>
 
@@ -122,6 +91,10 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy</artifactId>
         </dependency>
         <dependency>
             <groupId>com.google.inject</groupId>
@@ -136,10 +109,13 @@
             <artifactId>jsr305</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.codehaus.groovy</groupId>
-            <artifactId>groovy</artifactId>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>com.anrisoftware.resources</groupId>
+            <artifactId>resources-templates</artifactId>
+        </dependency>
     </dependencies>
 
 </project>
