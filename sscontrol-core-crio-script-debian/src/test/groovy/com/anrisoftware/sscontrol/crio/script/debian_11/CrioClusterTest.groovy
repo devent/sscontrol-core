@@ -45,15 +45,15 @@ service "ssh" with {
     host "robobee@node-1.robobee-test.test", socket: sockets.nodes[1]
     host "robobee@node-2.robobee-test.test", socket: sockets.nodes[2]
 }
-service "crio", version: "1.20"
+service "crio", version: "1.22"
 ''',
             scriptVars: [sockets: nodesSockets],
             expectedServicesSize: 2,
             generatedDir: folder.newFolder(),
             expected: { Map args ->
-                assertStringResource CrioClusterTest, remoteCommand('sudo systemctl status crio', 'node-0.robobee-test.test'), "${args.test.name}_systemctl_status_crio_node_0_expected.txt"
-                assertStringResource CrioClusterTest, remoteCommand('sudo systemctl status crio', 'node-1.robobee-test.test'), "${args.test.name}_systemctl_status_crio_node_1_expected.txt"
-                assertStringResource CrioClusterTest, remoteCommand('sudo systemctl status crio', 'node-2.robobee-test.test'), "${args.test.name}_systemctl_status_crio_node_2_expected.txt"
+                assertStringStartsWithResource CrioClusterTest, remoteCommand('sudo systemctl status crio', 'node-0.robobee-test.test'), "${args.test.name}_systemctl_status_crio_node_0_expected.txt"
+                assertStringStartsWithResource CrioClusterTest, remoteCommand('sudo systemctl status crio', 'node-1.robobee-test.test'), "${args.test.name}_systemctl_status_crio_node_1_expected.txt"
+                assertStringStartsWithResource CrioClusterTest, remoteCommand('sudo systemctl status crio', 'node-2.robobee-test.test'), "${args.test.name}_systemctl_status_crio_node_2_expected.txt"
             },
         ]
         doTest test

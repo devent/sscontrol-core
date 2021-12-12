@@ -24,6 +24,8 @@ import org.apache.commons.io.IOUtils
 import com.jcabi.ssh.Shell
 import com.jcabi.ssh.Ssh
 
+import groovy.util.logging.Slf4j
+
 
 /**
  *
@@ -31,6 +33,7 @@ import com.jcabi.ssh.Ssh
  * @author Erwin Müller <erwin.mueller@deventm.de>
  * @version 1.0
  */
+@Slf4j
 class UnixTestUtil {
 
     static void assumeSocketExists(def socket) {
@@ -118,6 +121,17 @@ class UnixTestUtil {
         def resource = context.getResource(res)
         assert resource != null : "Resource not found: ${context}#${res}"
         assertStringContent string, resourceToString(resource)
+    }
+
+    static assertStringStartsWithResource(Class context, String string, String res, int offset = 0) {
+        def resource = context.getResource(res)
+        assert resource != null : "Resource not found: ${context}#${res}"
+        def expected = resourceToString(resource)
+        def starts = string.startsWith(expected, offset)
+        if (!starts) {
+            log.error "String A: \n>>>\n{}<<<EOL', string B: \n>>>\n{}<<<EOL.", string, expected
+            assert false : "The string A does not start with string B. A:``$string'' B:``$expected''"
+        }
     }
 
     static String readRemoteFile(String file, String host='robobee-test', int port=22, String user='robobee', URL key=robobeeKey) {

@@ -1,1 +1,2 @@
-deb https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/Debian_Testing/ /
+● crio.service - Container Runtime Interface for OCI (CRI-O)
+     Loaded: loaded (/lib/systemd/system/crio.service; enabled; vendor preset: enabled)
