@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.anrisoftware.sscontrol.utils.debian;
+package com.anrisoftware.sscontrol.utils.grub;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
@@ -24,12 +24,12 @@ import com.google.inject.assistedinject.FactoryModuleBuilder;
  * @author Erwin Müller {@literal <erwin.mueller@deventm.de>}
  * @version 1.0
  */
-public class DebianUtilsModule extends AbstractModule {
+public class GrubUtilsModule extends AbstractModule {
 
     @Override
     protected void configure() {
-        install(new FactoryModuleBuilder().implement(DebianUtils.class, Debian_11_Utils.class)
-                .build(Debian_11_UtilsFactory.class));
+        install(new FactoryModuleBuilder().implement(GrubUtils.class, Grub_2_Utils.class)
+                .build(Grub_2_UtilsFactory.class));
     }
 
 }

@@ -13,22 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.anrisoftware.sscontrol.utils.debian
+package com.anrisoftware.sscontrol.utils.grub
 
 import com.anrisoftware.propertiesutils.AbstractContextPropertiesProvider
 
 /**
- * Debian 11 properties provider from
- * {@code "/debian_11_utils.properties"}.
+ * Grub 2 properties provider from
+ * {@code "/grub_2_utils.properties"}.
  *
  * @author Erwin Mueller, erwin.mueller@deventm.org
  * @since 1.0
  */
-class Debian_11_Properties extends AbstractContextPropertiesProvider {
+class Grub_2_Properties extends AbstractContextPropertiesProvider {
 
-    private static final URL RESOURCE = Debian_11_Properties.class.getResource("/debian_11_utils.properties")
+    private static final URL RESOURCE = Grub_2_Properties.class.getResource("/grub_2_utils.properties")
 
-    Debian_11_Properties() {
-        super(Debian_11_Properties.class, RESOURCE)
+    Grub_2_Properties() {
+        super(Grub_2_Properties.class, RESOURCE)
     }
 }

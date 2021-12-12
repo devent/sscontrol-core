@@ -30,13 +30,13 @@ import com.anrisoftware.sscontrol.command.shell.internal.ssh.SshShellModule
 import com.anrisoftware.sscontrol.command.shell.internal.st.StModule
 import com.anrisoftware.sscontrol.command.shell.internal.template.TemplateModule
 import com.anrisoftware.sscontrol.command.shell.internal.templateres.TemplateResModule
-import com.anrisoftware.sscontrol.crio.script.debian_11.Crio_1_22_Debian_11_Module
 import com.anrisoftware.sscontrol.crio.service.CrioModule
 import com.anrisoftware.sscontrol.debug.internal.DebugLoggingModule
 import com.anrisoftware.sscontrol.services.internal.host.HostServicesModule
 import com.anrisoftware.sscontrol.ssh.service.SshModule
 import com.anrisoftware.sscontrol.types.misc.TypesModule
 import com.anrisoftware.sscontrol.utils.debian.DebianUtilsModule
+import com.anrisoftware.sscontrol.utils.grub.GrubUtilsModule
 import com.anrisoftware.sscontrol.utils.systemd.SystemdUtilsModule
 import com.anrisoftware.sscontrol.utils.systemmappings.internal.SystemNameMappingsModule
 import com.anrisoftware.sscontrol.utils.ufw.linux.UfwUtilsModule
@@ -55,6 +55,7 @@ class CrioModules {
             new CrioModule(),
             new Crio_1_22_Debian_11_Module(),
             new DebianUtilsModule(),
+            new GrubUtilsModule(),
             new UfwUtilsModule(),
             new SystemdUtilsModule(),
             new DebugLoggingModule(),

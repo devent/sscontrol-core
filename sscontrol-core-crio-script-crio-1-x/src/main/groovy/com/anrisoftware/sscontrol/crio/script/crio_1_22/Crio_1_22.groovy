@@ -138,6 +138,34 @@ abstract class Crio_1_22 extends ScriptBase {
         getScriptProperty 'cgroup_manager'
     }
 
+    /**
+     * Returns to use the systemd unified cgroup hierarchy.
+     * For example {@code "true"}.
+     *
+     * <ul>
+     * <li>profile property {@code use_systemd_unified_cgroup_hierarchy}</li>
+     * </ul>
+     *
+     * @see #getDefaultProperties()
+     */
+    boolean isSystemUseUnifiedCgroupHierarchy() {
+        getScriptBooleanProperty "use_systemd_unified_cgroup_hierarchy"
+    }
+
+    /**
+     * Returns the command line to enable the systemd unified cgroup hierarchy.
+     * For example {@code "systemd.unified_cgroup_hierarchy=1"}.
+     *
+     * <ul>
+     * <li>profile property {@code systemd_unified_cgroup_hierarchy}</li>
+     * </ul>
+     *
+     * @see #getDefaultProperties()
+     */
+    String getSystemdUnifiedCgroupHierarchy() {
+        getScriptProperty "systemd_unified_cgroup_hierarchy"
+    }
+
     @Override
     def getLog() {
         log

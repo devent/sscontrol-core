@@ -1045,8 +1045,8 @@ echo \$file
         return file
     }
 
-    def getScriptProperty(String name) {
-        properties.getProperty name, defaultProperties
+    def getScriptProperty(String name, ContextProperties defaults=defaultProperties) {
+        properties.getProperty name, defaults
     }
 
     Map getScriptProperties() {

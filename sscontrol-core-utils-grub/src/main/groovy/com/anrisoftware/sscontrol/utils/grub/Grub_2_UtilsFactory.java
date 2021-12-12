@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.anrisoftware.sscontrol.utils.debian;
+package com.anrisoftware.sscontrol.utils.grub;
 
 import com.anrisoftware.sscontrol.types.host.HostServiceScript;
 
@@ -23,7 +23,7 @@ import com.anrisoftware.sscontrol.types.host.HostServiceScript;
  * @author Erwin Müller {@literal <erwin.mueller@deventm.de>}
  * @version 1.0
  */
-public interface Debian_11_UtilsFactory {
+public interface Grub_2_UtilsFactory {
 
-    DebianUtils create(HostServiceScript script);
+    GrubUtils create(HostServiceScript script);
 }

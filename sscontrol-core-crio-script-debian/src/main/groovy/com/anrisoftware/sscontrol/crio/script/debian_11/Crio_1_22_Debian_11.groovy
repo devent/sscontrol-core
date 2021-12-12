@@ -18,9 +18,6 @@ package com.anrisoftware.sscontrol.crio.script.debian_11
 import javax.inject.Inject
 
 import com.anrisoftware.propertiesutils.ContextProperties
-import com.anrisoftware.sscontrol.crio.script.debian_11.Crio_1_22_Debian_11_Service
-import com.anrisoftware.sscontrol.crio.script.debian_11.Crio_Crio_1_22_Debian_11_Factory
-import com.anrisoftware.sscontrol.crio.script.debian_11.Upstream_Crio_Debian_11_Factory
 import com.anrisoftware.sscontrol.groovy.script.ScriptBase
 
 import groovy.util.logging.Slf4j

@@ -26,10 +26,13 @@ import static com.anrisoftware.sscontrol.utils.debian.Debian_11_TestUtils.*
  */
 abstract class AbstractCrioScriptTest extends AbstractCrioRunnerTest {
 
+    static final grubDefaultFile = AbstractCrioScriptTest.class.getResource("grub_default.txt")
+
     @Override
     void createDummyCommands(File dir) {
         createCommand catCommand, dir, 'cat'
         createCommand grepCommand, dir, 'grep'
+        createFile grubDefaultFile, new File(dir, "etc/default"), 'grub'
         createEchoCommands dir, [
             'mkdir',
             'chown',
@@ -48,6 +51,7 @@ abstract class AbstractCrioScriptTest extends AbstractCrioRunnerTest {
             'dpkg',
             'wget',
             'modprobe',
+            'sed',
         ]
     }
 }

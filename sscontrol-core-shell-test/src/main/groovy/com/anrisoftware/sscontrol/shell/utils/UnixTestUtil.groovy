@@ -77,6 +77,7 @@ class UnixTestUtil {
     }
 
     static String createFile(URL resource, File dir, String name) {
+        dir.mkdirs()
         def file = new File(dir, name)
         def stream = new FileOutputStream(file)
         IOUtils.copy resource.openStream(), stream
