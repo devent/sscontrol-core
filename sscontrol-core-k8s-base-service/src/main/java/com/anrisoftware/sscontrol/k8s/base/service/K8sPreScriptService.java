@@ -18,7 +18,7 @@ package com.anrisoftware.sscontrol.k8s.base.service;
 import com.anrisoftware.sscontrol.types.host.PreHostFactory;
 
 /**
- * <i>K8s-Master</i> pre-script service.
+ * Kubernetes control pre-script service.
  *
  * @author Erwin Mueller, erwin.mueller@deventm.org
  * @since 1.0

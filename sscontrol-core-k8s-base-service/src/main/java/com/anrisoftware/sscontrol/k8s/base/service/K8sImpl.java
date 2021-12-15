@@ -45,7 +45,7 @@ import com.anrisoftware.sscontrol.types.misc.StringListPropertyUtil.ListProperty
 import com.google.inject.assistedinject.Assisted;
 
 /**
- * <i>K8s-Master</i> script service.
+ * Kubernetes service.
  *
  * @author Erwin Müller, erwin.mueller@deventm.de
  * @since 1.0
@@ -67,6 +67,8 @@ public class K8sImpl implements K8s {
     private final HostServiceProperties serviceProperties;
 
     private final K8sImplLogger log;
+
+    private final String name;
 
     private DebugLogging debug;
 
@@ -91,8 +93,10 @@ public class K8sImpl implements K8s {
     private Map<String, Object> kubelet;
 
     @Inject
-    K8sImpl(K8sImplLogger log, HostServicePropertiesService propertiesService, @Assisted Map<String, Object> args) {
+    K8sImpl(K8sImplLogger log, HostServicePropertiesService propertiesService, @Assisted String name,
+            @Assisted Map<String, Object> args) {
         this.log = log;
+        this.name = name;
         this.targets = new ArrayList<>();
         this.serviceProperties = propertiesService.create();
         this.labels = new HashMap<>();
@@ -303,7 +307,7 @@ public class K8sImpl implements K8s {
 
     @Override
     public String getName() {
-        return "k8s-master";
+        return name;
     }
 
     @Override

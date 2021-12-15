@@ -13,19 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.anrisoftware.sscontrol.k8s.base.service;
+package com.anrisoftware.sscontrol.k8s.control.service;
 
-import java.util.Map;
+import java.net.UnknownHostException;
 
-import com.anrisoftware.sscontrol.types.host.HostService;
+import com.anrisoftware.sscontrol.types.app.external.AppException;
+import com.anrisoftware.sscontrol.types.host.TargetHost;
 
 /**
- * Kubernetes service.
+ * Thrown if the host could not be found for the target.
  *
- * @author Erwin Müller, erwin.mueller@deventm.de
- * @since 1.0
+ * @author Erwin Müller {@literal <erwin.mueller@deventm.de>}
+ * @version 1.0
  */
-public interface K8sService {
+@SuppressWarnings("serial")
+public class UnknownHostForTargetException extends AppException {
 
-    HostService create(String name, Map<String, Object> args);
+    public UnknownHostForTargetException(UnknownHostException e,
+            TargetHost host) {
+        super("Unknown host for target", e);
+        addContextValue("host", host);
+    }
+
 }

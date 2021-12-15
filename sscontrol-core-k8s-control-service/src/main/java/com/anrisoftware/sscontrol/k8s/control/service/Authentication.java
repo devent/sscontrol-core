@@ -13,19 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.anrisoftware.sscontrol.k8s.base.service;
-
-import java.util.Map;
-
-import com.anrisoftware.sscontrol.types.host.HostService;
+package com.anrisoftware.sscontrol.k8s.control.service;
 
 /**
- * Kubernetes service.
+ * Authentication.
  *
- * @author Erwin Müller, erwin.mueller@deventm.de
- * @since 1.0
+ * @author Erwin Müller {@literal <erwin.mueller@deventm.de>}
+ * @version 1.0
  */
-public interface K8sService {
+public interface Authentication {
 
-    HostService create(String name, Map<String, Object> args);
+    String getType();
 }

@@ -23,7 +23,7 @@ import com.anrisoftware.sscontrol.types.host.TargetHost;
 import com.anrisoftware.sscontrol.types.misc.DebugLogging;
 
 /**
- * <i>K8s</i> service.
+ * Kubernetes service.
  *
  * @author Erwin Müller, erwin.mueller@deventm.de
  * @since 1.0

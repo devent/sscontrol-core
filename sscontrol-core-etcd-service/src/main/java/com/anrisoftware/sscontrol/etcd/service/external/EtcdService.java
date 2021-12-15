@@ -18,7 +18,7 @@ package com.anrisoftware.sscontrol.etcd.service.external;
 import com.anrisoftware.sscontrol.types.host.HostServiceFactory;
 
 /**
- * <i>K8s-Master</i> service.
+ * Kubernetes control service.
  *
  * @author Erwin Müller, erwin.mueller@deventm.de
  * @since 1.0

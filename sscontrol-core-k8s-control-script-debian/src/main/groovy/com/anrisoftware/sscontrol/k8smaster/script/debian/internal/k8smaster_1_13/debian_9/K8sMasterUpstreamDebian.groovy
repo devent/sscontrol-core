@@ -22,10 +22,10 @@ import javax.inject.Inject
 
 import com.anrisoftware.propertiesutils.ContextProperties
 import com.anrisoftware.sscontrol.k8s.base.service.CanalPlugin
-import com.anrisoftware.sscontrol.k8sbase.script.upstream.debian.external.k8s_1_13.debian.debian_9.AbstractK8sUpstreamDebian
+import com.anrisoftware.sscontrol.k8s.control.service.K8sControl
+import com.anrisoftware.sscontrol.k8sbase.script.upstream.debian.k8s_1_2x.debian_11.AbstractK8sUpstreamDebian
 import com.anrisoftware.sscontrol.k8skubectl.linux.external.kubectl_1_13.AbstractKubectlLinux
 import com.anrisoftware.sscontrol.k8smaster.script.debian.internal.k8smaster_1_13.debian_9.KubectlClusterDebianFactory
-import com.anrisoftware.sscontrol.k8smaster.service.K8sMaster
 
 import groovy.util.logging.Slf4j
 
@@ -71,7 +71,7 @@ class K8sMasterUpstreamDebian extends AbstractK8sUpstreamDebian {
     }
 
     def setupClusterDefaults() {
-        K8sMaster service = service
+        K8sControl service = service
         super.setupClusterDefaults()
         if (!service.cluster.name) {
             service.cluster.name = 'master'
@@ -85,7 +85,7 @@ class K8sMasterUpstreamDebian extends AbstractK8sUpstreamDebian {
 
     def setupMiscDefaults() {
         super.setupMiscDefaults()
-        K8sMaster service = service
+        K8sControl service = service
         if (service.ca.cert) {
             service.ca.certName = scriptProperties.default_kubernetes_ca_cert_name
         }
@@ -96,7 +96,7 @@ class K8sMasterUpstreamDebian extends AbstractK8sUpstreamDebian {
 
     def setupClusterApiDefaults() {
         log.debug 'Setup cluster api defaults for {}', service
-        K8sMaster service = service
+        K8sControl service = service
         if (!service.cluster.port) {
             service.cluster.port = scriptNumberProperties.default_api_port_secure
         }
@@ -107,7 +107,7 @@ class K8sMasterUpstreamDebian extends AbstractK8sUpstreamDebian {
 
     def setupBindDefaults() {
         log.debug 'Setup bind defaults for {}', service
-        K8sMaster service = service
+        K8sControl service = service
         if (!service.binding.insecureAddress) {
             service.binding.insecureAddress = scriptProperties.default_bind_insecure_address
         }
@@ -127,7 +127,7 @@ class K8sMasterUpstreamDebian extends AbstractK8sUpstreamDebian {
      */
     def installNetwork() {
         log.debug 'Installs pod network for {}', service
-        K8sMaster service = service
+        K8sControl service = service
         if (havePluginCanal) {
             installCanalNetwork()
         }
@@ -135,7 +135,7 @@ class K8sMasterUpstreamDebian extends AbstractK8sUpstreamDebian {
 
     def installCanalNetwork() {
         log.debug 'Installs canal as the pod network for {}', service
-        K8sMaster service = service
+        K8sControl service = service
         CanalPlugin canal = service.plugins.canal
         withRemoteTempFile { File tmp ->
             def replace = ""

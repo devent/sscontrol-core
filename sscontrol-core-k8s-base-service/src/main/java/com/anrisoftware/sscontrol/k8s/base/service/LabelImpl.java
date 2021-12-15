@@ -17,7 +17,7 @@ package com.anrisoftware.sscontrol.k8s.base.service;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.emptyString;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.notNullValue;
 
 import java.util.Map;
@@ -46,7 +46,7 @@ public class LabelImpl implements Label {
     }
 
     public void setKey(String key) {
-        assertThat("key=null", key, is(emptyString()));
+        assertThat("key=null", key, not(emptyString()));
         this.key = key;
     }
 
