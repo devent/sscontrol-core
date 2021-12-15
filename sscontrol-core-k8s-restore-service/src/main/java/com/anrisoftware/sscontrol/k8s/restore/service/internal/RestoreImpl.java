@@ -38,9 +38,9 @@ import com.anrisoftware.sscontrol.k8s.restore.service.internal.ClientImpl.Client
 import com.anrisoftware.sscontrol.k8s.restore.service.internal.DirSourceImpl.DirSourceImplFactory;
 import com.anrisoftware.sscontrol.k8s.restore.service.internal.ServiceImpl.ServiceImplFactory;
 import com.anrisoftware.sscontrol.k8s.restore.service.internal.SourceImpl.SourceImplFactory;
-import com.anrisoftware.sscontrol.types.cluster.external.ClusterHost;
 import com.anrisoftware.sscontrol.types.host.HostServiceProperties;
 import com.anrisoftware.sscontrol.types.host.HostServicePropertiesService;
+import com.anrisoftware.sscontrol.types.cluster.ClusterHost;
 import com.anrisoftware.sscontrol.types.host.HostServiceFactory;
 import com.anrisoftware.sscontrol.types.host.TargetHost;
 import com.anrisoftware.sscontrol.types.misc.GeneticListPropertyUtil;

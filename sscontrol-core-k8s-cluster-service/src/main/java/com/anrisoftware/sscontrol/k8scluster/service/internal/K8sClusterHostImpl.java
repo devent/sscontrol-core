@@ -28,9 +28,9 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import com.anrisoftware.sscontrol.k8scluster.service.external.K8sCluster;
 import com.anrisoftware.sscontrol.k8scluster.service.external.K8sClusterHost;
-import com.anrisoftware.sscontrol.tls.external.Tls;
-import com.anrisoftware.sscontrol.types.cluster.external.Credentials;
-import com.anrisoftware.sscontrol.types.cluster.external.CredentialsCert;
+import com.anrisoftware.sscontrol.tls.Tls;
+import com.anrisoftware.sscontrol.types.cluster.Credentials;
+import com.anrisoftware.sscontrol.types.cluster.CredentialsCert;
 import com.anrisoftware.sscontrol.types.host.TargetHost;
 import com.google.inject.assistedinject.Assisted;
 

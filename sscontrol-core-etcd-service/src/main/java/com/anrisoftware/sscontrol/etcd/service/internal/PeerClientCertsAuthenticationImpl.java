@@ -20,7 +20,7 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import com.anrisoftware.sscontrol.etcd.service.external.AuthenticationFactory;
-import com.anrisoftware.sscontrol.tls.external.Tls.TlsFactory;
+import com.anrisoftware.sscontrol.tls.Tls.TlsFactory;
 import com.google.inject.assistedinject.Assisted;
 
 /**

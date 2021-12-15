@@ -106,8 +106,8 @@
         <module>sscontrol-core-k8s-from-repository-script-linux</module>
         <module>sscontrol-core-k8s-from-repository-service</module>
         <module>sscontrol-core-k8s-kubectl-linux</module>
-        <module>sscontrol-core-k8s-master-script-debian</module>
-        <module>sscontrol-core-k8s-master-service</module>
+        <module>sscontrol-core-k8s-control-script-debian</module>
+        <module>sscontrol-core-k8s-control-service</module>
         <module>sscontrol-core-k8s-node-script-debian</module>
         <module>sscontrol-core-k8s-node-service</module>
         <module>sscontrol-core-k8s-restore-script-linux</module>

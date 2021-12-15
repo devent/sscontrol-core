@@ -31,10 +31,10 @@ import com.anrisoftware.globalpom.core.resources.ResourcesModule
 import com.anrisoftware.globalpom.core.strings.StringsModule
 import com.anrisoftware.propertiesutils.PropertiesUtilsModule
 import com.anrisoftware.sscontrol.debug.internal.DebugLoggingModule
+import com.anrisoftware.sscontrol.k8s.base.service.K8sModule
 import com.anrisoftware.sscontrol.k8s.fromhelm.service.external.FromHelm
 import com.anrisoftware.sscontrol.k8s.fromhelm.service.internal.FromHelmModule
 import com.anrisoftware.sscontrol.k8s.fromhelm.service.internal.FromHelmImpl.FromHelmImplFactory
-import com.anrisoftware.sscontrol.k8sbase.base.service.internal.K8sModule
 import com.anrisoftware.sscontrol.properties.internal.HostServicePropertiesServiceModule
 import com.anrisoftware.sscontrol.properties.internal.PropertiesModule
 import com.anrisoftware.sscontrol.repo.git.service.internal.GitRepoModule
@@ -46,7 +46,7 @@ import com.anrisoftware.sscontrol.services.internal.targets.TargetsServiceModule
 import com.anrisoftware.sscontrol.shell.utils.RobobeeScriptModule
 import com.anrisoftware.sscontrol.shell.utils.SshFactory
 import com.anrisoftware.sscontrol.shell.utils.RobobeeScript.RobobeeScriptFactory
-import com.anrisoftware.sscontrol.tls.internal.TlsModule
+import com.anrisoftware.sscontrol.tls.TlsModule
 import com.anrisoftware.sscontrol.types.host.HostServices
 import com.anrisoftware.sscontrol.types.misc.TypesModule
 import com.anrisoftware.sscontrol.utils.systemmappings.internal.SystemNameMappingsModule

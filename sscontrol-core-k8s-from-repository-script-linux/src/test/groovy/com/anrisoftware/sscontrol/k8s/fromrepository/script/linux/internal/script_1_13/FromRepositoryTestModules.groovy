@@ -32,8 +32,8 @@ import com.anrisoftware.sscontrol.command.shell.internal.template.TemplateModule
 import com.anrisoftware.sscontrol.command.shell.internal.templateres.TemplateResModule
 import com.anrisoftware.sscontrol.command.shell.linux.openssh.internal.find.FindModule
 import com.anrisoftware.sscontrol.debug.internal.DebugLoggingModule
+import com.anrisoftware.sscontrol.k8s.base.service.K8sModule
 import com.anrisoftware.sscontrol.k8s.fromrepository.service.internal.FromRepositoryModule
-import com.anrisoftware.sscontrol.k8sbase.base.service.internal.K8sModule
 import com.anrisoftware.sscontrol.k8scluster.script.linux.internal.k8scluster_1_13.K8sClusterLinuxModule
 import com.anrisoftware.sscontrol.k8scluster.script.linux.internal.k8scluster_1_13.K8sClusterLinuxServiceModule
 import com.anrisoftware.sscontrol.k8scluster.service.internal.K8sClusterModule
@@ -44,7 +44,7 @@ import com.anrisoftware.sscontrol.repo.git.script.debian.internal.debian_9.GitRe
 import com.anrisoftware.sscontrol.repo.git.service.internal.GitRepoModule
 import com.anrisoftware.sscontrol.services.internal.host.HostServicesModule
 import com.anrisoftware.sscontrol.ssh.service.SshModule
-import com.anrisoftware.sscontrol.tls.internal.TlsModule
+import com.anrisoftware.sscontrol.tls.TlsModule
 import com.anrisoftware.sscontrol.types.misc.TypesModule
 import com.anrisoftware.sscontrol.utils.debian.DebianUtilsModule
 import com.anrisoftware.sscontrol.utils.systemmappings.internal.SystemNameMappingsModule

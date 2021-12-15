@@ -17,7 +17,7 @@ package com.anrisoftware.sscontrol.k8scluster.service.external;
 
 import java.util.List;
 
-import com.anrisoftware.sscontrol.types.cluster.external.Credentials;
+import com.anrisoftware.sscontrol.types.cluster.Credentials;
 import com.anrisoftware.sscontrol.types.host.TargetHost;
 
 /**

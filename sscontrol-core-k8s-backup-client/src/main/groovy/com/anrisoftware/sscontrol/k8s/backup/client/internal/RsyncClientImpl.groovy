@@ -28,7 +28,7 @@ import com.anrisoftware.sscontrol.k8s.backup.client.external.Client
 import com.anrisoftware.sscontrol.k8s.backup.client.external.Destination
 import com.anrisoftware.sscontrol.k8s.backup.client.external.RsyncClient
 import com.anrisoftware.sscontrol.k8s.backup.client.external.Service
-import com.anrisoftware.sscontrol.types.cluster.external.ClusterHost
+import com.anrisoftware.sscontrol.types.cluster.ClusterHost
 import com.google.inject.assistedinject.Assisted
 
 /**

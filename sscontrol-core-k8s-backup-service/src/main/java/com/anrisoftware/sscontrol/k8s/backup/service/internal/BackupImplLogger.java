@@ -28,7 +28,7 @@ import com.anrisoftware.globalpom.log.AbstractLogger;
 import com.anrisoftware.sscontrol.k8s.backup.client.external.Client;
 import com.anrisoftware.sscontrol.k8s.backup.client.external.Destination;
 import com.anrisoftware.sscontrol.k8s.backup.client.external.Service;
-import com.anrisoftware.sscontrol.types.cluster.external.ClusterHost;
+import com.anrisoftware.sscontrol.types.cluster.ClusterHost;
 
 /**
  * Logging for {@link BackupImpl}.

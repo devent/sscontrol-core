@@ -24,11 +24,11 @@ import com.anrisoftware.globalpom.exec.external.core.ProcessTask
 import com.anrisoftware.resources.templates.external.TemplateResource
 import com.anrisoftware.resources.templates.external.TemplatesFactory
 import com.anrisoftware.sscontrol.groovy.script.ScriptBase
-import com.anrisoftware.sscontrol.tls.external.Tls
-import com.anrisoftware.sscontrol.tls.external.Tls.TlsFactory
-import com.anrisoftware.sscontrol.types.cluster.external.ClusterHost
-import com.anrisoftware.sscontrol.types.cluster.external.ClusterService
-import com.anrisoftware.sscontrol.types.cluster.external.Credentials
+import com.anrisoftware.sscontrol.tls.Tls
+import com.anrisoftware.sscontrol.tls.Tls.TlsFactory
+import com.anrisoftware.sscontrol.types.cluster.ClusterHost
+import com.anrisoftware.sscontrol.types.cluster.ClusterService
+import com.anrisoftware.sscontrol.types.cluster.Credentials
 import com.anrisoftware.sscontrol.utils.st.base64renderer.external.UriBase64Renderer
 
 import groovy.util.logging.Slf4j

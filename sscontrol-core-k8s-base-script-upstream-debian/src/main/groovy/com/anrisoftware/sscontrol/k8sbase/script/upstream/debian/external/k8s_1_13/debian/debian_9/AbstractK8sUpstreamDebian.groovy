@@ -17,8 +17,8 @@ package com.anrisoftware.sscontrol.k8sbase.script.upstream.debian.external.k8s_1
 
 import javax.inject.Inject
 
-import com.anrisoftware.sscontrol.k8sbase.base.service.external.K8s
-import com.anrisoftware.sscontrol.k8sbase.script.upstream.external.k8s_1_13.linux.AbstractK8sUpstreamLinux
+import com.anrisoftware.sscontrol.k8s.base.service.K8s
+import com.anrisoftware.sscontrol.k8sbase.script.upstream.k8s_1_2x.linux.AbstractK8sUpstreamLinux
 import com.anrisoftware.sscontrol.utils.debian.DebianUtils
 import com.anrisoftware.sscontrol.utils.debian.Debian_11_UtilsFactory
 

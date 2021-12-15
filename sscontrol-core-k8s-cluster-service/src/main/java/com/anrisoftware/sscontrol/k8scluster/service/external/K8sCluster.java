@@ -15,7 +15,7 @@
  */
 package com.anrisoftware.sscontrol.k8scluster.service.external;
 
-import com.anrisoftware.sscontrol.types.cluster.external.ClusterTargetService;
+import com.anrisoftware.sscontrol.types.cluster.ClusterTargetService;
 
 /**
  * Kubernetes cluster target service. Contains the {@link Cluster} and

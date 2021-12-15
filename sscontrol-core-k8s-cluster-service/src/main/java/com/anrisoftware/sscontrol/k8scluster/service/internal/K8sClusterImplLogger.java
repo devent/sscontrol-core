@@ -24,7 +24,7 @@ import javax.inject.Singleton;
 import com.anrisoftware.globalpom.log.AbstractLogger;
 import com.anrisoftware.sscontrol.k8scluster.service.external.Cluster;
 import com.anrisoftware.sscontrol.k8scluster.service.external.Context;
-import com.anrisoftware.sscontrol.types.cluster.external.Credentials;
+import com.anrisoftware.sscontrol.types.cluster.Credentials;
 
 /**
  * Logging for {@link K8sClusterImpl}.

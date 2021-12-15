@@ -18,7 +18,7 @@ package com.anrisoftware.sscontrol.k8s.restore.script.linux.internal.script_1_13
 import com.anrisoftware.sscontrol.groovy.script.ScriptBase;
 import com.anrisoftware.sscontrol.k8s.backup.client.external.BackupWorker;
 import com.anrisoftware.sscontrol.k8s.backup.client.external.Deployment;
-import com.anrisoftware.sscontrol.types.cluster.external.ClusterService;
+import com.anrisoftware.sscontrol.types.cluster.ClusterService;
 import com.google.inject.assistedinject.Assisted;
 
 /**

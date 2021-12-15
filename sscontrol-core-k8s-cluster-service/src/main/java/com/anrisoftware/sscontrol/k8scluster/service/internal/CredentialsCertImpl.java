@@ -20,9 +20,9 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import com.anrisoftware.sscontrol.k8scluster.service.external.CredentialsCertFactory;
-import com.anrisoftware.sscontrol.tls.external.Tls;
-import com.anrisoftware.sscontrol.tls.external.Tls.TlsFactory;
-import com.anrisoftware.sscontrol.types.cluster.external.CredentialsCert;
+import com.anrisoftware.sscontrol.tls.Tls;
+import com.anrisoftware.sscontrol.tls.Tls.TlsFactory;
+import com.anrisoftware.sscontrol.types.cluster.CredentialsCert;
 import com.google.inject.assistedinject.Assisted;
 
 /**

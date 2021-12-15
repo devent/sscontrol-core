@@ -33,10 +33,10 @@ import javax.inject.Inject;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import com.anrisoftware.sscontrol.services.internal.host.ScriptsMap.ScriptsMapFactory;
-import com.anrisoftware.sscontrol.types.cluster.external.ClusterTargetService;
-import com.anrisoftware.sscontrol.types.cluster.external.ClusterHost;
-import com.anrisoftware.sscontrol.types.cluster.external.Clusters;
-import com.anrisoftware.sscontrol.types.cluster.external.ClustersService;
+import com.anrisoftware.sscontrol.types.cluster.ClusterHost;
+import com.anrisoftware.sscontrol.types.cluster.ClusterTargetService;
+import com.anrisoftware.sscontrol.types.cluster.Clusters;
+import com.anrisoftware.sscontrol.types.cluster.ClustersService;
 import com.anrisoftware.sscontrol.types.host.HostService;
 import com.anrisoftware.sscontrol.types.host.HostServiceScriptFactory;
 import com.anrisoftware.sscontrol.types.host.HostServiceFactory;

@@ -33,7 +33,7 @@ import com.anrisoftware.sscontrol.k8s.backup.client.external.ErrorScalingDeployE
 import com.anrisoftware.sscontrol.k8s.backup.client.external.Service
 import com.anrisoftware.sscontrol.k8s.backup.client.external.WaitScalingTimeoutException
 import com.anrisoftware.sscontrol.k8s.backup.client.external.WaitScalingUnexpectedException
-import com.anrisoftware.sscontrol.types.cluster.external.ClusterHost
+import com.anrisoftware.sscontrol.types.cluster.ClusterHost
 import com.google.inject.assistedinject.Assisted
 
 import groovy.json.JsonSlurper

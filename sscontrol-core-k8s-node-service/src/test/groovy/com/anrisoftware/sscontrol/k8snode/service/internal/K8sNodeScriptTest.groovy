@@ -29,7 +29,7 @@ import com.anrisoftware.globalpom.core.resources.ResourcesModule
 import com.anrisoftware.globalpom.core.strings.StringsModule
 import com.anrisoftware.propertiesutils.PropertiesUtilsModule
 import com.anrisoftware.sscontrol.debug.internal.DebugLoggingModule
-import com.anrisoftware.sscontrol.k8sbase.base.service.internal.K8sModule
+import com.anrisoftware.sscontrol.k8s.base.service.K8sModule
 import com.anrisoftware.sscontrol.k8snode.service.external.K8sNode
 import com.anrisoftware.sscontrol.k8snode.service.internal.K8sNodeImpl.K8sNodeImplFactory
 import com.anrisoftware.sscontrol.properties.internal.HostServicePropertiesServiceModule
@@ -42,7 +42,7 @@ import com.anrisoftware.sscontrol.shell.utils.RobobeeScriptModule
 import com.anrisoftware.sscontrol.shell.utils.RobobeeScript.RobobeeScriptFactory
 import com.anrisoftware.sscontrol.ssh.service.SshModule
 import com.anrisoftware.sscontrol.ssh.service.SshImpl.SshImplFactory
-import com.anrisoftware.sscontrol.tls.internal.TlsModule
+import com.anrisoftware.sscontrol.tls.TlsModule
 import com.anrisoftware.sscontrol.types.host.HostServices
 import com.anrisoftware.sscontrol.types.misc.TypesModule
 import com.anrisoftware.sscontrol.types.ssh.external.Ssh

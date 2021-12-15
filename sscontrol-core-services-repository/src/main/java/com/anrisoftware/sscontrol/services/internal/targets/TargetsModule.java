@@ -23,7 +23,7 @@ import com.anrisoftware.sscontrol.services.internal.repo.ReposImpl;
 import com.anrisoftware.sscontrol.services.internal.repo.ReposImpl.ReposImplFactory;
 import com.anrisoftware.sscontrol.services.internal.ssh.TargetsImpl;
 import com.anrisoftware.sscontrol.services.internal.ssh.TargetsImpl.TargetsImplFactory;
-import com.anrisoftware.sscontrol.types.cluster.external.Clusters;
+import com.anrisoftware.sscontrol.types.cluster.Clusters;
 import com.anrisoftware.sscontrol.types.registry.external.Registries;
 import com.anrisoftware.sscontrol.types.repo.external.Repos;
 import com.anrisoftware.sscontrol.types.ssh.external.Targets;

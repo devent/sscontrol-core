@@ -20,7 +20,7 @@ import static com.anrisoftware.sscontrol.etcd.service.internal.ClientImplLogger.
 import javax.inject.Singleton;
 
 import com.anrisoftware.globalpom.log.AbstractLogger;
-import com.anrisoftware.sscontrol.tls.external.Tls;
+import com.anrisoftware.sscontrol.tls.Tls;
 
 /**
  * Logging for {@link ClientImpl}.

@@ -27,7 +27,7 @@ import java.util.List;
 import javax.inject.Singleton;
 
 import com.anrisoftware.globalpom.log.AbstractLogger;
-import com.anrisoftware.sscontrol.types.cluster.external.ClusterHost;
+import com.anrisoftware.sscontrol.types.cluster.ClusterHost;
 import com.anrisoftware.sscontrol.types.host.HostService;
 import com.anrisoftware.sscontrol.types.host.HostServiceFactory;
 import com.anrisoftware.sscontrol.types.registry.external.RegistryHost;

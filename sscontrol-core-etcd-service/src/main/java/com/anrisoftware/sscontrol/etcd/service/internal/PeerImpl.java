@@ -38,8 +38,8 @@ import com.anrisoftware.sscontrol.etcd.service.external.BindingFactory;
 import com.anrisoftware.sscontrol.etcd.service.external.Cluster;
 import com.anrisoftware.sscontrol.etcd.service.external.Peer;
 import com.anrisoftware.sscontrol.etcd.service.internal.ClusterImpl.ClusterImplFactory;
-import com.anrisoftware.sscontrol.tls.external.Tls;
-import com.anrisoftware.sscontrol.tls.external.Tls.TlsFactory;
+import com.anrisoftware.sscontrol.tls.Tls;
+import com.anrisoftware.sscontrol.tls.Tls.TlsFactory;
 import com.anrisoftware.sscontrol.types.misc.StringListPropertyUtil.ListProperty;
 import com.google.inject.assistedinject.Assisted;
 

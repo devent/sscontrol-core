@@ -15,7 +15,7 @@
  */
 package com.anrisoftware.sscontrol.k8s.backup.client.external;
 
-import com.anrisoftware.sscontrol.types.cluster.external.ClusterHost;
+import com.anrisoftware.sscontrol.types.cluster.ClusterHost;
 
 /**
  *

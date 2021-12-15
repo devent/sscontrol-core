@@ -34,14 +34,14 @@ import com.anrisoftware.sscontrol.command.shell.linux.openssh.internal.find.Find
 import com.anrisoftware.sscontrol.debug.internal.DebugLoggingModule
 import com.anrisoftware.sscontrol.k8s.backup.client.internal.BackupClientModule
 import com.anrisoftware.sscontrol.k8s.backup.service.internal.BackupModule
-import com.anrisoftware.sscontrol.k8sbase.base.service.internal.K8sModule
+import com.anrisoftware.sscontrol.k8s.base.service.K8sModule
 import com.anrisoftware.sscontrol.k8scluster.script.linux.internal.k8scluster_1_13.K8sClusterLinuxModule
 import com.anrisoftware.sscontrol.k8scluster.script.linux.internal.k8scluster_1_13.K8sClusterLinuxServiceModule
 import com.anrisoftware.sscontrol.k8scluster.service.internal.K8sClusterModule
 import com.anrisoftware.sscontrol.k8skubectl.linux.external.kubectl_1_13.KubectlLinuxModule
 import com.anrisoftware.sscontrol.services.internal.host.HostServicesModule
 import com.anrisoftware.sscontrol.ssh.service.SshModule
-import com.anrisoftware.sscontrol.tls.internal.TlsModule
+import com.anrisoftware.sscontrol.tls.TlsModule
 import com.anrisoftware.sscontrol.types.misc.TypesModule
 import com.anrisoftware.sscontrol.utils.systemmappings.internal.SystemNameMappingsModule
 

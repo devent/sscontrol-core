@@ -29,7 +29,7 @@ import com.anrisoftware.globalpom.log.AbstractLogger;
 import com.anrisoftware.sscontrol.etcd.service.external.Authentication;
 import com.anrisoftware.sscontrol.etcd.service.external.Binding;
 import com.anrisoftware.sscontrol.etcd.service.external.Cluster;
-import com.anrisoftware.sscontrol.tls.external.Tls;
+import com.anrisoftware.sscontrol.tls.Tls;
 
 /**
  * Logging for {@link PeerImpl}.

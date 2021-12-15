@@ -21,7 +21,7 @@ import com.anrisoftware.sscontrol.k8s.backup.client.external.Client;
 import com.anrisoftware.sscontrol.k8s.backup.client.external.Destination;
 import com.anrisoftware.sscontrol.k8s.backup.client.external.Service;
 import com.anrisoftware.sscontrol.k8s.backup.client.external.Source;
-import com.anrisoftware.sscontrol.types.cluster.external.ClusterService;
+import com.anrisoftware.sscontrol.types.cluster.ClusterService;
 
 /**
  * Backup service.

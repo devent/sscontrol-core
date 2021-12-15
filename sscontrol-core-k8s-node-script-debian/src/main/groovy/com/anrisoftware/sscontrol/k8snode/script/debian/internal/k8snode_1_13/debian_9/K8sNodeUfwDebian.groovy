@@ -18,7 +18,7 @@ package com.anrisoftware.sscontrol.k8snode.script.debian.internal.k8snode_1_13.d
 import javax.inject.Inject
 
 import com.anrisoftware.propertiesutils.ContextProperties
-import com.anrisoftware.sscontrol.k8sbase.script.upstream.external.k8s_1_13.linux.AbstractK8sUfwLinux
+import com.anrisoftware.sscontrol.k8sbase.script.upstream.k8s_1_2x.linux.AbstractK8sUfwLinux
 
 import groovy.util.logging.Slf4j
 

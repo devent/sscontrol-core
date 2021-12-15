@@ -22,17 +22,17 @@ import javax.inject.Inject;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-import com.anrisoftware.sscontrol.k8sbase.base.service.external.Cluster;
-import com.anrisoftware.sscontrol.k8sbase.base.service.external.K8s;
-import com.anrisoftware.sscontrol.k8sbase.base.service.external.Kubelet;
-import com.anrisoftware.sscontrol.k8sbase.base.service.external.Label;
-import com.anrisoftware.sscontrol.k8sbase.base.service.external.Plugin;
-import com.anrisoftware.sscontrol.k8sbase.base.service.external.Taint;
-import com.anrisoftware.sscontrol.k8sbase.base.service.internal.K8sImpl.K8sImplFactory;
+import com.anrisoftware.sscontrol.k8s.base.service.Cluster;
+import com.anrisoftware.sscontrol.k8s.base.service.K8s;
+import com.anrisoftware.sscontrol.k8s.base.service.Kubelet;
+import com.anrisoftware.sscontrol.k8s.base.service.Label;
+import com.anrisoftware.sscontrol.k8s.base.service.Plugin;
+import com.anrisoftware.sscontrol.k8s.base.service.Taint;
+import com.anrisoftware.sscontrol.k8s.base.service.K8sImpl.K8sImplFactory;
 import com.anrisoftware.sscontrol.k8snode.service.external.K8sNode;
 import com.anrisoftware.sscontrol.k8snode.service.external.K8sNodeService;
-import com.anrisoftware.sscontrol.tls.external.Tls;
-import com.anrisoftware.sscontrol.types.cluster.external.ClusterHost;
+import com.anrisoftware.sscontrol.tls.Tls;
+import com.anrisoftware.sscontrol.types.cluster.ClusterHost;
 import com.anrisoftware.sscontrol.types.host.HostServiceProperties;
 import com.anrisoftware.sscontrol.types.host.TargetHost;
 import com.anrisoftware.sscontrol.types.misc.DebugLogging;

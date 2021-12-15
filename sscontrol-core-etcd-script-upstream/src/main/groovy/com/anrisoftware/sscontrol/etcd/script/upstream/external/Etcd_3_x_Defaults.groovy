@@ -20,7 +20,7 @@ import javax.inject.Inject
 import com.anrisoftware.sscontrol.etcd.service.external.BindingFactory
 import com.anrisoftware.sscontrol.etcd.service.external.Etcd
 import com.anrisoftware.sscontrol.groovy.script.ScriptBase
-import com.anrisoftware.sscontrol.tls.external.Tls
+import com.anrisoftware.sscontrol.tls.Tls
 
 import groovy.util.logging.Slf4j
 

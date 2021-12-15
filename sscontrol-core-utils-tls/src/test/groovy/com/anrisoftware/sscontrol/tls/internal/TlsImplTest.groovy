@@ -23,8 +23,9 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
 import com.anrisoftware.globalpom.core.resources.ResourcesModule
-import com.anrisoftware.sscontrol.tls.external.Tls
-import com.anrisoftware.sscontrol.tls.external.Tls.TlsFactory
+import com.anrisoftware.sscontrol.tls.Tls
+import com.anrisoftware.sscontrol.tls.TlsModule
+import com.anrisoftware.sscontrol.tls.Tls.TlsFactory
 import com.google.inject.Guice
 
 import groovy.util.logging.Slf4j

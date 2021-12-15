@@ -38,9 +38,9 @@ import com.anrisoftware.sscontrol.k8s.backup.service.internal.ClientImpl.ClientI
 import com.anrisoftware.sscontrol.k8s.backup.service.internal.DirDestinationImpl.DirDestinationImplFactory;
 import com.anrisoftware.sscontrol.k8s.backup.service.internal.ServiceImpl.ServiceImplFactory;
 import com.anrisoftware.sscontrol.k8s.backup.service.internal.SourceImpl.SourceImplFactory;
-import com.anrisoftware.sscontrol.types.cluster.external.ClusterHost;
 import com.anrisoftware.sscontrol.types.host.HostServiceProperties;
 import com.anrisoftware.sscontrol.types.host.HostServicePropertiesService;
+import com.anrisoftware.sscontrol.types.cluster.ClusterHost;
 import com.anrisoftware.sscontrol.types.host.HostServiceFactory;
 import com.anrisoftware.sscontrol.types.host.TargetHost;
 import com.anrisoftware.sscontrol.types.misc.StringListPropertyUtil.ListProperty;

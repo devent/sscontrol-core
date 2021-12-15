@@ -39,7 +39,7 @@ import com.anrisoftware.sscontrol.command.shell.internal.st.StModule
 import com.anrisoftware.sscontrol.command.shell.internal.template.TemplateModule
 import com.anrisoftware.sscontrol.command.shell.internal.templateres.TemplateResModule
 import com.anrisoftware.sscontrol.debug.internal.DebugLoggingModule
-import com.anrisoftware.sscontrol.k8sbase.base.service.internal.K8sModule
+import com.anrisoftware.sscontrol.k8s.base.service.K8sModule
 import com.anrisoftware.sscontrol.k8scluster.service.external.K8sClusterFactory
 import com.anrisoftware.sscontrol.k8scluster.service.internal.K8sClusterModule
 import com.anrisoftware.sscontrol.k8skubectl.linux.external.kubectl_1_13.KubectlLinuxModule
@@ -47,7 +47,7 @@ import com.anrisoftware.sscontrol.services.internal.host.HostServicesModule
 import com.anrisoftware.sscontrol.shell.utils.AbstractScriptTestBase
 import com.anrisoftware.sscontrol.ssh.service.SshModule
 import com.anrisoftware.sscontrol.ssh.service.SshImpl.SshImplFactory
-import com.anrisoftware.sscontrol.tls.internal.TlsModule
+import com.anrisoftware.sscontrol.tls.TlsModule
 import com.anrisoftware.sscontrol.types.host.HostServices
 import com.anrisoftware.sscontrol.types.misc.TypesModule
 import com.anrisoftware.sscontrol.utils.systemmappings.internal.SystemNameMappingsModule

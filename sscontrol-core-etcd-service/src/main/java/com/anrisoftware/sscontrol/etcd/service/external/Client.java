@@ -15,7 +15,7 @@
  */
 package com.anrisoftware.sscontrol.etcd.service.external;
 
-import com.anrisoftware.sscontrol.tls.external.Tls;
+import com.anrisoftware.sscontrol.tls.Tls;
 
 /**
  * <i>Etcd</i> client.

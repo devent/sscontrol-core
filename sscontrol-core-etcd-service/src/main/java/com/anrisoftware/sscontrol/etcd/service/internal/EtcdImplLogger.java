@@ -34,7 +34,7 @@ import com.anrisoftware.sscontrol.etcd.service.external.Client;
 import com.anrisoftware.sscontrol.etcd.service.external.Gateway;
 import com.anrisoftware.sscontrol.etcd.service.external.Peer;
 import com.anrisoftware.sscontrol.etcd.service.external.Proxy;
-import com.anrisoftware.sscontrol.tls.external.Tls;
+import com.anrisoftware.sscontrol.tls.Tls;
 
 /**
  * Logging for {@link EtcdImpl}.

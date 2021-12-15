@@ -47,8 +47,8 @@ import com.anrisoftware.sscontrol.etcd.service.internal.ClientImpl.ClientImplFac
 import com.anrisoftware.sscontrol.etcd.service.internal.GatewayImpl.GatewayImplFactory;
 import com.anrisoftware.sscontrol.etcd.service.internal.PeerImpl.PeerImplFactory;
 import com.anrisoftware.sscontrol.etcd.service.internal.ProxyImpl.ProxyImplFactory;
-import com.anrisoftware.sscontrol.tls.external.Tls;
-import com.anrisoftware.sscontrol.tls.external.Tls.TlsFactory;
+import com.anrisoftware.sscontrol.tls.Tls;
+import com.anrisoftware.sscontrol.tls.Tls.TlsFactory;
 import com.anrisoftware.sscontrol.types.host.HostServiceProperties;
 import com.anrisoftware.sscontrol.types.host.HostServicePropertiesService;
 import com.anrisoftware.sscontrol.types.host.TargetHost;

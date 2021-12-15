@@ -23,8 +23,8 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import com.anrisoftware.sscontrol.etcd.service.external.BindingFactory;
 import com.anrisoftware.sscontrol.etcd.service.external.Client;
-import com.anrisoftware.sscontrol.tls.external.Tls;
-import com.anrisoftware.sscontrol.tls.external.Tls.TlsFactory;
+import com.anrisoftware.sscontrol.tls.Tls;
+import com.anrisoftware.sscontrol.tls.Tls.TlsFactory;
 import com.google.inject.assistedinject.Assisted;
 
 /**

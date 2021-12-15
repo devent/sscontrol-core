@@ -19,7 +19,7 @@ import static org.hamcrest.Matchers.*
 
 import org.joda.time.Duration
 
-import com.anrisoftware.sscontrol.types.cluster.external.ClusterService
+import com.anrisoftware.sscontrol.types.cluster.ClusterService
 
 /**
  *
