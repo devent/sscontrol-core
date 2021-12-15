@@ -25,8 +25,8 @@ import org.apache.commons.io.IOUtils
 import org.junit.jupiter.api.BeforeEach
 
 import com.anrisoftware.sscontrol.k8s.fromrepository.service.internal.FromRepositoryImpl.FromRepositoryImplFactory
-import com.anrisoftware.sscontrol.k8scluster.script.linux.internal.k8scluster_1_13.K8sClusterLinuxFactory
-import com.anrisoftware.sscontrol.k8scluster.service.external.K8sClusterFactory
+import com.anrisoftware.sscontrol.k8scluster.script.linux.k8scluster_1_2x.K8sClusterLinuxFactory
+import com.anrisoftware.sscontrol.k8scluster.service.K8sClusterFactory
 import com.anrisoftware.sscontrol.registry.docker.script.linux.internal.linux.DockerRegistryLinuxFactory
 import com.anrisoftware.sscontrol.registry.docker.service.internal.DockerRegistryImpl.DockerRegistryImplFactory
 import com.anrisoftware.sscontrol.repo.git.script.debian.internal.debian_9.GitRepoDebianFactory

@@ -33,8 +33,8 @@ import com.anrisoftware.sscontrol.command.shell.internal.templateres.TemplateRes
 import com.anrisoftware.sscontrol.debug.internal.DebugLoggingModule
 import com.anrisoftware.sscontrol.k8s.base.service.K8sModule
 import com.anrisoftware.sscontrol.k8sbase.script.upstream.k8s_1_2x.linux.K8sUpstreamModule
-import com.anrisoftware.sscontrol.k8scluster.script.linux.internal.k8scluster_1_13.K8sClusterLinuxModule
-import com.anrisoftware.sscontrol.k8scluster.service.internal.K8sClusterModule
+import com.anrisoftware.sscontrol.k8scluster.script.linux.k8scluster_1_2x.K8sClusterLinuxModule
+import com.anrisoftware.sscontrol.k8scluster.service.K8sClusterModule
 import com.anrisoftware.sscontrol.k8skubectl.linux.external.kubectl_1_13.KubectlLinuxModule
 import com.anrisoftware.sscontrol.k8smaster.service.K8sMasterModule
 import com.anrisoftware.sscontrol.services.internal.host.HostServicesModule

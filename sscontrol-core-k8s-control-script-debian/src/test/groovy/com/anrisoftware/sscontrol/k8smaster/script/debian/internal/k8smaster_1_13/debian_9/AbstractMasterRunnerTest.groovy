@@ -21,8 +21,8 @@ import javax.inject.Inject
 
 import org.junit.jupiter.api.BeforeEach
 
-import com.anrisoftware.sscontrol.k8scluster.script.linux.internal.k8scluster_1_13.K8sClusterLinuxFactory
-import com.anrisoftware.sscontrol.k8scluster.service.external.K8sClusterFactory
+import com.anrisoftware.sscontrol.k8scluster.script.linux.k8scluster_1_2x.K8sClusterLinuxFactory
+import com.anrisoftware.sscontrol.k8scluster.service.K8sClusterFactory
 import com.anrisoftware.sscontrol.k8smaster.service.K8sMasterImpl.K8sMasterImplFactory
 import com.anrisoftware.sscontrol.runner.groovy.internal.RunnerModule
 import com.anrisoftware.sscontrol.runner.groovy.internal.RunScriptImpl.RunScriptImplFactory

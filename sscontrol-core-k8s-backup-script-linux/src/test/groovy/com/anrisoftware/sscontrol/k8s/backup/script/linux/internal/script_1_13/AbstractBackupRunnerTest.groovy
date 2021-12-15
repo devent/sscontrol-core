@@ -24,7 +24,7 @@ import org.apache.commons.io.IOUtils
 import org.junit.jupiter.api.BeforeEach
 
 import com.anrisoftware.sscontrol.k8s.backup.service.internal.BackupImpl.BackupImplFactory
-import com.anrisoftware.sscontrol.k8scluster.service.external.K8sClusterFactory
+import com.anrisoftware.sscontrol.k8scluster.service.K8sClusterFactory
 import com.anrisoftware.sscontrol.runner.groovy.internal.RunnerModule
 import com.anrisoftware.sscontrol.runner.groovy.internal.RunScriptImpl.RunScriptImplFactory
 import com.anrisoftware.sscontrol.runner.test.external.AbstractRunnerTestBase
