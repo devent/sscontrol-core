@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.anrisoftware.sscontrol.ssh.service.internal
+package com.anrisoftware.sscontrol.ssh.service
 
 import com.anrisoftware.sscontrol.types.host.SystemInfo
 import com.anrisoftware.sscontrol.types.ssh.external.SshHost
