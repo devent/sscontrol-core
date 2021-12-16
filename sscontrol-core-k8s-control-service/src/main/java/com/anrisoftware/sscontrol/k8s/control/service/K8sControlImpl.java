@@ -95,6 +95,8 @@ public class K8sControlImpl implements K8sControl {
 
     private final TlsFactory tlsFactory;
 
+    private String podNetworkCidr;
+
     @Inject
     K8sControlImpl(K8sControlImplLogger log, K8sImplFactory k8sFactory, BindingImplFactory bindingFactory,
             AccountImplFactory accountFactory, TlsFactory tlsFactory, @Assisted Map<String, Object> args) {
@@ -232,6 +234,24 @@ public class K8sControlImpl implements K8sControl {
                 addNode(property);
             }
         });
+    }
+
+    /**
+     * <pre>
+     * podNetworkCidr "10.217.0.0/16"
+     * </pre>
+     */
+    public void podNetworkCidr(String podNetworkCidr) {
+        setPodNetworkCidr(podNetworkCidr);
+    }
+
+    public void setPodNetworkCidr(String podNetworkCidr) {
+        this.podNetworkCidr = podNetworkCidr;
+    }
+
+    @Override
+    public String getPodNetworkCidr() {
+        return podNetworkCidr;
     }
 
     @Override

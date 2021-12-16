@@ -45,9 +45,14 @@ public interface K8sControl extends K8s {
     Account getAccount();
 
     /**
-     * Returns the list of kubernetes nodes.
+     * Returns the list of Kubernetes nodes.
      */
     List<Object> getNodes();
+
+    /**
+     * Returns the pod-network-cidr for the network plugin.
+     */
+    String getPodNetworkCidr();
 
     /**
      * Returns the CA certificates for signing generated TLS certificates.
