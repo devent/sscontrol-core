@@ -35,12 +35,15 @@ abstract class AbstractControlScriptTest extends AbstractControlRunnerTest {
 
     static final URL kubeadmCommand = AbstractControlScriptTest.class.getResource('script_kubeadm_command.txt')
 
+    static final URL fstabSwapFile = AbstractControlScriptTest.class.getResource('fstab_swap.txt')
+
     void createDummyCommands(File dir) {
         createCommand catCommand, dir, "cat"
         createCommand grepCommand, dir, 'grep'
         createCommand whichufwnotfoundCommand, dir, 'which'
         createCommand kubeadmCommand, dir, 'kubeadm'
         new File(dir, "/etc/apt/sources.list.d").mkdirs()
+        createFile fstabSwapFile, new File(dir, "/etc"), 'fstab'
         createIdCommand dir
         createEchoCommands dir, [
             'mkdir',
@@ -65,7 +68,8 @@ abstract class AbstractControlScriptTest extends AbstractControlRunnerTest {
             'kubectl',
             'ufw',
             'modprobe',
-            'sed'
+            'sed',
+            'swapoff'
         ]
     }
 }

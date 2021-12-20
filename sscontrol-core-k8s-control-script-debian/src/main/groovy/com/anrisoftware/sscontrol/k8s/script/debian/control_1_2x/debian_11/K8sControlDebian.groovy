@@ -61,6 +61,9 @@ class K8sControlDebian extends ScriptBase {
         ufwFactory.create(scriptsRepository, service, target, threads, scriptEnv).run()
         upstream.installKubeadm()
         upstream.createConfig()
+        if (disableSwap) {
+            disableSwap()
+        }
         upstream.installKube()
         upstream.setupKubectl()
         upstream.waitNodeAvailable()
@@ -78,5 +81,54 @@ class K8sControlDebian extends ScriptBase {
     @Override
     def getLog() {
         log
+    }
+
+    /**
+     * Disables the swap.
+     */
+    def disableSwap() {
+        replace privileged: true, dest: fstabFile, escape: false, append: false with {
+            line search: "((#?).*${fstabSwapName}.*)", replace: '#$3'
+            it
+        }()
+        shell privileged: true, """
+swapoff -a
+""" call()
+    }
+
+    /**
+     * Returns if swap should be disabled,
+     * for example {@code true}
+     *
+     * <ul>
+     * <li>profile property {@code disable_swap}</li>
+     * </ul>
+     */
+    Boolean getDisableSwap() {
+        getScriptBooleanProperty 'disable_swap'
+    }
+
+    /**
+     * Returns the fstab file to disable swap,
+     * for example {@code /etc/fstab}
+     *
+     * <ul>
+     * <li>profile property {@code fstab_file}</li>
+     * </ul>
+     */
+    File getFstabFile() {
+        getScriptFileProperty 'fstab_file'
+    }
+
+    /**
+     * Returns the fstab swap name,
+     * for example {@code "swap"}
+     *
+     * <ul>
+     * <li>profile property {@code fstab_swap_name}</li>
+     * </ul>
+     */
+    String getFstabSwapName() {
+        getScriptProperty 'fstab_swap_name'
     }
 }

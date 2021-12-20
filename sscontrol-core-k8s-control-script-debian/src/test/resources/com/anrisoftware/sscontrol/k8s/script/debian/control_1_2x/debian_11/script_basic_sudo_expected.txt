@@ -11,6 +11,11 @@ apt-mark hold kubeadm kubelet kubectl
 /bin/bash -s
 /bin/bash -s
 /bin/bash -s
+/bin/bash -s
+/bin/bash -s
+/bin/bash -s
+/bin/bash -s
+/bin/bash -s
 cp /etc/kubernetes/admin.conf /home/user/.kube/config
 chown 1000:1000 /home/user/.kube/config
 /bin/bash -s

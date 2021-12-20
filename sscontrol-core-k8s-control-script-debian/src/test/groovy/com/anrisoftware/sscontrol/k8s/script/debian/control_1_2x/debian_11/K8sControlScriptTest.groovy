@@ -64,6 +64,8 @@ service "k8s-control", clusterName: "andrea-cluster-1"
                 assertFileResource K8sControlScriptTest, dir, "sudo.out", "${args.test.name}_sudo_expected.txt"
                 assertFileResource K8sControlScriptTest, dir, "kubeadm.out", "${args.test.name}_kubeadm_expected.txt"
                 assertFileResource K8sControlScriptTest, gen, "kubeadm.yaml", "${args.test.name}_kubeadm_yaml_expected.txt"
+                assertFileResource K8sControlScriptTest, dir, "etc/fstab", "${args.test.name}_fstab_expected.txt"
+                assertFileResource K8sControlScriptTest, dir, "swapoff.out", "${args.test.name}_swapoff_expected.txt"
                 //assertFileResource K8sControlScriptTest, dir, "kubectl.out", "${args.test.name}_kubectl_expected.txt"
             },
         ]

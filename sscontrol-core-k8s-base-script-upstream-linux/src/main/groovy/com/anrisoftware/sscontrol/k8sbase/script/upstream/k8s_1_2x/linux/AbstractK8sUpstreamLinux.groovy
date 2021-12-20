@@ -80,7 +80,7 @@ abstract class AbstractK8sUpstreamLinux extends ScriptBase {
     def setupLabelsDefaults() {
         log.debug 'Setup default labels for {}', service
         K8s service = service
-        def name = service.cluster.name
+        def name = service.nodeName
         def label = robobeeLabelNode
         service.label key: label, value: name
     }

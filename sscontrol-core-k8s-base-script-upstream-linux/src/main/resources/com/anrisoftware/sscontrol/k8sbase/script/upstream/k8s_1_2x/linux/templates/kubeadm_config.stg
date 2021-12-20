@@ -3,7 +3,7 @@ apiVersion: kubeadm.k8s.io/v1beta3
 kind: InitConfiguration
 nodeRegistration:
   kubeletExtraArgs:
-    node-labels: "<parent.robobeeLabelNode>"
+    node-labels: "<parent.robobeeLabelNode>=<parent.service.nodeName>"
 ---
 apiVersion: kubeadm.k8s.io/v1beta3
 kind: ClusterConfiguration
@@ -12,7 +12,6 @@ apiServer:
 <if(parent.service.allowPrivileged)>
     allow-privileged: "<parent.service.allowPrivileged>"
 <endif>
-apiVersion: kubeadm.k8s.io/v1beta3
 <if(parent.service.clusterName)>
 clusterName: "<parent.service.clusterName>"
 <endif>
