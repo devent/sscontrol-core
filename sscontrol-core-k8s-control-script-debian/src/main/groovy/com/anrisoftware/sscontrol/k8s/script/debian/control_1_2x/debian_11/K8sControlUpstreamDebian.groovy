@@ -18,9 +18,8 @@ package com.anrisoftware.sscontrol.k8s.script.debian.control_1_2x.debian_11
 import javax.inject.Inject
 
 import com.anrisoftware.propertiesutils.ContextProperties
-import com.anrisoftware.sscontrol.k8s.control.service.K8sControl
+import com.anrisoftware.sscontrol.k8s.kubectl.linux.kubectl_1_2x.AbstractKubectlLinux
 import com.anrisoftware.sscontrol.k8sbase.script.upstream.debian.k8s_1_2x.debian_11.AbstractK8sUpstreamDebian
-import com.anrisoftware.sscontrol.k8skubectl.linux.external.kubectl_1_13.AbstractKubectlLinux
 
 import groovy.util.logging.Slf4j
 
@@ -46,75 +45,15 @@ class K8sControlUpstreamDebian extends AbstractK8sUpstreamDebian {
     def setupDefaults() {
         setupMiscDefaults()
         setupLabelsDefaults()
-        setupApiServersDefaults()
-        setupClusterDefaults()
-        setupClusterHostDefaults()
-        setupClusterApiDefaults()
-        setupBindDefaults()
-        setupKubeletDefaults()
-        setupPluginsDefaults()
-        setupKernelParameter()
     }
 
-    def createService() {
-        createDirectories()
-        uploadK8sCertificates()
-        uploadEtcdCertificates()
+    def createConfig() {
         createKubeadmConfig()
-        createKubeletConfig()
-        restartKubelet()
-    }
-
-    def setupClusterDefaults() {
-        K8sControl service = service
-        super.setupClusterDefaults()
-        if (!service.cluster.name) {
-            service.cluster.name = 'master'
-        }
     }
 
     def postInstall() {
         applyLabels()
         applyTaints()
-    }
-
-    def setupMiscDefaults() {
-        super.setupMiscDefaults()
-        K8sControl service = service
-        if (service.ca.cert) {
-            service.ca.certName = scriptProperties.default_kubernetes_ca_cert_name
-        }
-        if (service.ca.key) {
-            service.ca.keyName = scriptProperties.default_kubernetes_ca_key_name
-        }
-    }
-
-    def setupClusterApiDefaults() {
-        log.debug 'Setup cluster api defaults for {}', service
-        K8sControl service = service
-        if (!service.cluster.port) {
-            service.cluster.port = scriptNumberProperties.default_api_port_secure
-        }
-        if (!service.cluster.protocol) {
-            service.cluster.protocol = scriptProperties.default_api_protocol_secure
-        }
-    }
-
-    def setupBindDefaults() {
-        log.debug 'Setup bind defaults for {}', service
-        K8sControl service = service
-        if (!service.binding.insecureAddress) {
-            service.binding.insecureAddress = scriptProperties.default_bind_insecure_address
-        }
-        if (!service.binding.secureAddress) {
-            service.binding.secureAddress = scriptProperties.default_bind_secure_address
-        }
-        if (!service.binding.port) {
-            service.binding.port = scriptNumberProperties.default_bind_port
-        }
-        if (!service.binding.insecurePort) {
-            service.binding.insecurePort = scriptNumberProperties.default_bind_insecure_port
-        }
     }
 
     @Inject

@@ -22,10 +22,8 @@ import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.notNullValue;
 
 import java.io.File;
-import java.net.InetAddress;
 import java.net.URI;
 import java.net.URL;
-import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -127,11 +125,6 @@ public class SshHostImpl implements SshHost {
     @Override
     public File getSocket() {
         return socket;
-    }
-
-    @Override
-    public String getHostAddress() throws UnknownHostException {
-        return InetAddress.getByName(host).getHostAddress();
     }
 
     @Override

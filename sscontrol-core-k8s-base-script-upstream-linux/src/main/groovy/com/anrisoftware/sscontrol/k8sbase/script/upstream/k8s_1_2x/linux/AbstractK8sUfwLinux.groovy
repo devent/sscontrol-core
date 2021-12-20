@@ -19,7 +19,6 @@ import javax.inject.Inject
 
 import com.anrisoftware.sscontrol.groovy.script.ScriptBase
 import com.anrisoftware.sscontrol.k8s.base.service.K8s
-import com.anrisoftware.sscontrol.types.host.TargetHost
 import com.anrisoftware.sscontrol.types.ssh.external.TargetsAddressListFactory
 import com.anrisoftware.sscontrol.types.ssh.external.TargetsListFactory
 import com.anrisoftware.sscontrol.utils.ufw.linux.UfwLinuxUtilsFactory
@@ -54,7 +53,6 @@ abstract class AbstractK8sUfwLinux extends ScriptBase {
         if (!ufwAvailable) {
             return
         }
-        updatePodNetwork()
         openPublicPorts()
         openNodesPorts()
     }
@@ -63,7 +61,7 @@ abstract class AbstractK8sUfwLinux extends ScriptBase {
      * Checks that UFW client is available.
      */
     boolean isUfwAvailable() {
-        if (!ufw.ufwActive) {
+        if (!ufw.active) {
             log.debug 'No Ufw available, nothing to do.'
             return false
         } else {
@@ -72,19 +70,13 @@ abstract class AbstractK8sUfwLinux extends ScriptBase {
     }
 
     /**
-     * Updates the firewall for the pod network.
-     */
-    def updatePodNetwork() {
-        K8s service = this.service
-        ufw.allowFromToAllPorts service.cluster.podRange, advertiseAddress, this
-    }
-
-    /**
      * Opens the public ports.
      */
     def openPublicPorts() {
         K8s service = this.service
-        ufw.allowPortsToNetwork publicTcpPorts, advertiseAddress, this
+        service.targets.forEach {
+            ufw.allowPortsToNetwork publicTcpPorts, it.hostAddress, this
+        }
     }
 
     /**
@@ -93,20 +85,7 @@ abstract class AbstractK8sUfwLinux extends ScriptBase {
     def openNodesPorts() {
         K8s service = this.service
         if (service.hasProperty("nodes")) {
-            if (service.plugins.containsKey("canal")) {
-                ufw.allowUdpPortsOnNodes nodes, nodesAddresses, canalPrivateUdpPorts, this
-            }
             ufw.allowTcpPortsOnNodes nodes, nodesAddresses, privateTcpPorts, this
-        }
-    }
-
-    String getAdvertiseAddress() {
-        K8s service = this.service
-        def advertiseAddress = service.cluster.advertiseAddress
-        if (advertiseAddress instanceof TargetHost) {
-            return advertiseAddress.hostAddress
-        } else {
-            return advertiseAddress.toString()
         }
     }
 
@@ -116,10 +95,6 @@ abstract class AbstractK8sUfwLinux extends ScriptBase {
 
     List getPrivateTcpPorts() {
         getScriptListProperty 'private_tcp_ports'
-    }
-
-    List getCanalPrivateUdpPorts() {
-        getScriptListProperty 'canal_private_udp_ports'
     }
 
     List getNodes() {

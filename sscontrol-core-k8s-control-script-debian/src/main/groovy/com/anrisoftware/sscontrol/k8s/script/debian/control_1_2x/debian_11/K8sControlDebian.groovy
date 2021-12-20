@@ -60,14 +60,13 @@ class K8sControlDebian extends ScriptBase {
         upstream.setupDefaults()
         ufwFactory.create(scriptsRepository, service, target, threads, scriptEnv).run()
         upstream.installKubeadm()
-        upstream.createService()
+        upstream.createConfig()
         upstream.installKube()
         upstream.setupKubectl()
         upstream.waitNodeAvailable()
         upstream.postInstall()
         def joinCommand = upstream.joinCommand
         states << [kubeadmJoinCommand: joinCommand]
-        upstream.installNetwork()
         upstream.waitNodeReady()
     }
 

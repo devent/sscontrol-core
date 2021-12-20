@@ -34,7 +34,7 @@ import com.anrisoftware.sscontrol.command.shell.linux.openssh.internal.find.Find
 import com.anrisoftware.sscontrol.debug.internal.DebugLoggingModule
 import com.anrisoftware.sscontrol.k8s.base.service.K8sModule
 import com.anrisoftware.sscontrol.k8s.fromhelm.service.internal.FromHelmModule
-import com.anrisoftware.sscontrol.k8skubectl.linux.external.kubectl_1_13.KubectlLinuxModule
+import com.anrisoftware.sscontrol.k8s.kubectl.linux.kubectl_1_2x.KubectlLinuxModule
 import com.anrisoftware.sscontrol.registry.docker.script.linux.internal.linux.DockerRegistryLinuxModule
 import com.anrisoftware.sscontrol.registry.docker.service.internal.DockerRegistryModule
 import com.anrisoftware.sscontrol.repo.git.script.debian.internal.debian_9.GitRepoDebianModule

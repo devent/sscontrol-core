@@ -24,11 +24,10 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import com.anrisoftware.sscontrol.k8s.base.service.Cluster;
 import com.anrisoftware.sscontrol.k8s.base.service.K8s;
+import com.anrisoftware.sscontrol.k8s.base.service.K8sImpl.K8sImplFactory;
 import com.anrisoftware.sscontrol.k8s.base.service.Kubelet;
 import com.anrisoftware.sscontrol.k8s.base.service.Label;
-import com.anrisoftware.sscontrol.k8s.base.service.Plugin;
 import com.anrisoftware.sscontrol.k8s.base.service.Taint;
-import com.anrisoftware.sscontrol.k8s.base.service.K8sImpl.K8sImplFactory;
 import com.anrisoftware.sscontrol.k8snode.service.external.K8sNode;
 import com.anrisoftware.sscontrol.k8snode.service.external.K8sNodeService;
 import com.anrisoftware.sscontrol.tls.Tls;
@@ -60,7 +59,7 @@ public class K8sNodeImpl implements K8sNode {
 
     @Inject
     K8sNodeImpl(K8sImplFactory k8sFactory, @Assisted Map<String, Object> args) {
-        this.k8s = (K8s) k8sFactory.create(args);
+        this.k8s = (K8s) k8sFactory.create("k8s-node", args);
     }
 
     /**

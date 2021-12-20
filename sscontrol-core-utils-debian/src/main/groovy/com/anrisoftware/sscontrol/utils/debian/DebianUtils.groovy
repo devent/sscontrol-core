@@ -145,6 +145,7 @@ abstract class DebianUtils {
      * <li>timeout: the Duration timeout, defaults to timeoutLong.
      * <li>checkInstalled: set to true to check if the package is already installed. Defaults to true.
      * <li>update: set to true to first update the repositories. Defaults to false.
+     * <li>hold: set to true to prevent the packages from being automatically upgraded or removed. Defaults to false.
      * </ul>
      */
     void installPackages(Map args) {
@@ -160,6 +161,7 @@ abstract class DebianUtils {
         a.vars.nameInstalled = grepPackageNameInstalled
         a.vars.checkInstalled = a.vars.checkInstalled != null ? a.vars.checkInstalled : true
         a.vars.update = a.vars.update != null ? a.vars.update : defaultUpdatePackages
+        a.vars.hold = a.vars.hold != null ? a.vars.hold : false
         a.resource = commandsTemplate
         a.name = 'installPackage'
         a.parent = this

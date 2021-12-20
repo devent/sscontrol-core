@@ -17,7 +17,6 @@ package com.anrisoftware.sscontrol.k8sbase.script.upstream.debian.k8s_1_2x.debia
 
 import javax.inject.Inject
 
-import com.anrisoftware.sscontrol.k8s.base.service.K8s
 import com.anrisoftware.sscontrol.k8sbase.script.upstream.k8s_1_2x.linux.AbstractK8sUpstreamLinux
 import com.anrisoftware.sscontrol.utils.debian.DebianUtils
 import com.anrisoftware.sscontrol.utils.debian.Debian_11_UtilsFactory
@@ -40,37 +39,15 @@ abstract class AbstractK8sUpstreamDebian extends AbstractK8sUpstreamLinux {
         this.debian = factory.create this
     }
 
-    /**
-     * Restarts kubelet after the configuration was deployed.
-     */
-    def restartKubelet() {
-        shell privileged: true, timeout: timeoutShort, """
-systemctl daemon-reload
-systemctl restart kubelet
-systemctl status kubelet
-""" call()
-    }
-
     def installKubeadm() {
-        shell privileged: true, timeout: timeoutLong, """
-apt-get update && apt-get install -y apt-transport-https
-curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
-cat <<EOF >${aptKubernetesListFile}
-deb http://apt.kubernetes.io/ kubernetes-xenial main
-EOF
+        withRemoteTempFile {
+            shell privileged: false, timeout: timeoutLong, """
+curl -fsSLo $it ${kubernetesRepositoryKey}
+sudo mv $it ${kubernetesRepositoryKeyringFile}
+echo "deb [signed-by=${kubernetesRepositoryKeyringFile}] ${kubernetesRepositoryUrl} ${kubernetesRepositoryDist} ${kubernetesRepositoryComponent}" | sudo tee ${kubernetesRepositoryListFile}
 """ call()
-        debian.installPackages packages: kubeadmPackages, update: true
-    }
-
-    def installPlugins() {
-        K8s service = service
-        if (service.plugins.containsKey("nfs-client")) {
-            installNfsClinetPlugin()
         }
-    }
-
-    def installNfsClinetPlugin() {
-        debian.installPackages getScriptListProperty("nfs_client_packages")
+        debian.installPackages packages: kubeadmPackages, update: true, hold: true
     }
 
     @Override

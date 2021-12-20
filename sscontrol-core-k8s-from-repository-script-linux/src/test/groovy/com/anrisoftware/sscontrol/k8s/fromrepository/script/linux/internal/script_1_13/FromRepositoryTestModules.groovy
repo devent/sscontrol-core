@@ -34,10 +34,10 @@ import com.anrisoftware.sscontrol.command.shell.linux.openssh.internal.find.Find
 import com.anrisoftware.sscontrol.debug.internal.DebugLoggingModule
 import com.anrisoftware.sscontrol.k8s.base.service.K8sModule
 import com.anrisoftware.sscontrol.k8s.fromrepository.service.internal.FromRepositoryModule
+import com.anrisoftware.sscontrol.k8s.kubectl.linux.kubectl_1_2x.KubectlLinuxModule
 import com.anrisoftware.sscontrol.k8scluster.script.linux.k8scluster_1_2x.K8sClusterLinuxModule
 import com.anrisoftware.sscontrol.k8scluster.script.linux.k8scluster_1_2x.K8sClusterLinuxServiceModule
 import com.anrisoftware.sscontrol.k8scluster.service.K8sClusterModule
-import com.anrisoftware.sscontrol.k8skubectl.linux.external.kubectl_1_13.KubectlLinuxModule
 import com.anrisoftware.sscontrol.registry.docker.script.linux.internal.linux.DockerRegistryLinuxModule
 import com.anrisoftware.sscontrol.registry.docker.service.internal.DockerRegistryModule
 import com.anrisoftware.sscontrol.repo.git.script.debian.internal.debian_9.GitRepoDebianModule

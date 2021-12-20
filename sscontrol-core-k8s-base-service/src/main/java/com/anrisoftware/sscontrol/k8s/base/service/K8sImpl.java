@@ -92,6 +92,8 @@ public class K8sImpl implements K8s {
 
     private Map<String, Object> kubelet;
 
+    private String nodeName;
+
     @Inject
     K8sImpl(K8sImplLogger log, HostServicePropertiesService propertiesService, @Assisted String name,
             @Assisted Map<String, Object> args) {
@@ -109,17 +111,31 @@ public class K8sImpl implements K8s {
         parseArgs(args);
     }
 
-    @Inject
-    public void setDebugService(DebugLoggingService debugService) {
-        this.debug = debugService.create();
-    }
-
     @Override
     public void target(Map<String, Object> args) {
         Object v = args.get("target");
         @SuppressWarnings("unchecked")
         List<TargetHost> l = InvokerHelper.asList(v);
         targets.addAll(l);
+    }
+
+    public void nodeName(String name) {
+        setNodeName(name);
+    }
+
+    @Override
+    public void setNodeName(String name) {
+        this.nodeName = name;
+    }
+
+    @Override
+    public String getNodeName() {
+        return nodeName;
+    }
+
+    @Inject
+    public void setDebugService(DebugLoggingService debugService) {
+        this.debug = debugService.create();
     }
 
     @Override
@@ -347,6 +363,7 @@ public class K8sImpl implements K8s {
     private void parseArgs(Map<String, Object> args) {
         parseTargets(args);
         parseClusters(args);
+        parseName(args);
     }
 
     @SuppressWarnings("unchecked")
@@ -362,6 +379,13 @@ public class K8sImpl implements K8s {
         Object v = args.get("clusters");
         if (v != null) {
             addClusterHosts((List<ClusterHost>) v);
+        }
+    }
+
+    private void parseName(Map<String, Object> args) {
+        Object v = args.get("name");
+        if (v != null) {
+            setNodeName(v.toString());
         }
     }
 

@@ -95,7 +95,13 @@ public class K8sControlImpl implements K8sControl {
 
     private final TlsFactory tlsFactory;
 
+    private Boolean allowPrivileged;
+
     private String podNetworkCidr;
+
+    private Boolean allocateNodeCidrs;
+
+    private String clusterName;
 
     @Inject
     K8sControlImpl(K8sControlImplLogger log, K8sImplFactory k8sFactory, BindingImplFactory bindingFactory,
@@ -236,24 +242,6 @@ public class K8sControlImpl implements K8sControl {
         });
     }
 
-    /**
-     * <pre>
-     * podNetworkCidr "10.217.0.0/16"
-     * </pre>
-     */
-    public void podNetworkCidr(String podNetworkCidr) {
-        setPodNetworkCidr(podNetworkCidr);
-    }
-
-    public void setPodNetworkCidr(String podNetworkCidr) {
-        this.podNetworkCidr = podNetworkCidr;
-    }
-
-    @Override
-    public String getPodNetworkCidr() {
-        return podNetworkCidr;
-    }
-
     @Override
     public Binding getBinding() {
         return binding;
@@ -299,12 +287,58 @@ public class K8sControlImpl implements K8sControl {
     }
 
     @Override
+    public void privileged(Boolean allow) {
+        setAllowPrivileged(allow);
+    }
+
+    @Override
+    public void setAllowPrivileged(boolean allow) {
+        this.allowPrivileged = allow;
+    }
+
+    @Override
+    public Boolean isAllowPrivileged() {
+        return allowPrivileged;
+    }
+
+    @Override
+    public void podNetworkCidr(String cidr) {
+        setPodNetworkCidr(cidr);
+    }
+
+    @Override
+    public void setPodNetworkCidr(String cidr) {
+        this.podNetworkCidr = cidr;
+    }
+
+    @Override
+    public String getPodNetworkCidr() {
+        return podNetworkCidr;
+    }
+
+    @Override
+    public void allocateNodeCidrs(boolean allocate) {
+        setAllocateNodeCidrs(allocate);
+    }
+
+    @Override
+    public void setAllocateNodeCidrs(Boolean allocate) {
+        this.allocateNodeCidrs = allocate;
+    }
+
+    @Override
+    public Boolean isAllocateNodeCidrs() {
+        return allocateNodeCidrs;
+    }
+
+    @Override
     public String toString() {
         return new ToStringBuilder(this).append("name", getName()).append("targets", getTargets()).toString();
     }
 
     private void parseArgs(Map<String, Object> args) {
         parseNodes(args);
+        parseClusterName(args);
     }
 
     private void parseNodes(Map<String, Object> args) {
@@ -312,6 +346,27 @@ public class K8sControlImpl implements K8sControl {
         if (v != null) {
             addNode(v);
         }
+    }
+
+    private void parseClusterName(Map<String, Object> args) {
+        Object v = args.get("clusterName");
+        if (v != null) {
+            setClusterName(v.toString());
+        }
+    }
+
+    public void clusterName(String clusterName) {
+        setClusterName(clusterName);
+    }
+
+    @Override
+    public void setClusterName(String clusterName) {
+        this.clusterName = clusterName;
+    }
+
+    @Override
+    public String getClusterName() {
+        return clusterName;
     }
 
 }

@@ -15,11 +15,6 @@
  */
 package com.anrisoftware.sscontrol.shell.utils;
 
-import static org.junit.jupiter.api.extension.ConditionEvaluationResult.*
-import org.junit.jupiter.api.extension.ConditionEvaluationResult;
-import org.junit.jupiter.api.extension.ExecutionCondition;
-import org.junit.jupiter.api.extension.ExtensionContext;
-
 /**
  * Checks that a socket to robobee@robobee-test is available for tests.
  *
@@ -28,10 +23,9 @@ import org.junit.jupiter.api.extension.ExtensionContext;
  */
 class RobobeeSocketCondition extends AbstractSocketsCondition {
 
-    static final String robobeeSocket = '/tmp/robobee@robobee-test:22'
+    static final String robobeeSocket = '/tmp/robobee@robobee-3-test:22'
 
     RobobeeSocketCondition() {
         super([robobeeSocket])
     }
-
 }

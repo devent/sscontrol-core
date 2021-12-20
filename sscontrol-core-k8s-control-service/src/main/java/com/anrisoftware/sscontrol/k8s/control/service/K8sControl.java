@@ -29,6 +29,10 @@ import com.anrisoftware.sscontrol.tls.Tls;
  */
 public interface K8sControl extends K8s {
 
+    void setClusterName(String clusterName);
+
+    String getClusterName();
+
     List<Authentication> getAuthentications();
 
     List<Authorization> getAuthorizations();
@@ -50,9 +54,43 @@ public interface K8sControl extends K8s {
     List<Object> getNodes();
 
     /**
-     * Returns the pod-network-cidr for the network plugin.
+     * Set allow privileged containers.
+     *
+     * <pre>
+     * privileged true
+     * </pre>
      */
+    void privileged(Boolean allow);
+
+    void setAllowPrivileged(boolean allow);
+
+    Boolean isAllowPrivileged();
+
+    /**
+     * Sets the pod network CIDR.
+     *
+     * <pre>
+     * podNetworkCidr "192.168.0.0/16"
+     * </pre>
+     */
+    void podNetworkCidr(String cidr);
+
+    void setPodNetworkCidr(String cidr);
+
     String getPodNetworkCidr();
+
+    /**
+     * Sets should CIDRs for Pods be allocated and set on the cloud provider.
+     *
+     * <pre>
+     * allocateNodeCidrs true
+     * </pre>
+     */
+    void allocateNodeCidrs(boolean allocate);
+
+    void setAllocateNodeCidrs(Boolean allocate);
+
+    Boolean isAllocateNodeCidrs();
 
     /**
      * Returns the CA certificates for signing generated TLS certificates.

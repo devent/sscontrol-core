@@ -13,31 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.anrisoftware.sscontrol.types.host;
+package com.anrisoftware.sscontrol.k8s.kubectl.linux.kubectl_1_2x;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
+import com.google.inject.AbstractModule;
 
 /**
- * Target host.
+ *
  *
  * @author Erwin Müller {@literal <erwin.mueller@deventm.de>}
  * @version 1.0
  */
-public interface TargetHost {
+public class KubectlLinuxModule extends AbstractModule {
 
-    String getProto();
-
-    String getHost();
-
-    Integer getPort();
-
-    default String getHostAddress() throws UnknownHostException {
-        return InetAddress.getByName(getHost()).getHostAddress();
-    }
-
-    default String getHostName() throws UnknownHostException {
-        return InetAddress.getByName(getHost()).getHostName();
+    @Override
+    protected void configure() {
     }
 
 }

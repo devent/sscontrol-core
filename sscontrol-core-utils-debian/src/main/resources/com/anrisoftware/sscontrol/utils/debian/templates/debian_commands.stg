@@ -59,4 +59,8 @@ check_package || \
 <endif>
 apt-get -y install <if(vars.backport)>-t <vars.backport><endif> <vars.package><if(vars.version)>=<vars.version><endif>
 
+<if(vars.hold)>
+apt-mark hold <vars.package>
+<endif>
+
 >>

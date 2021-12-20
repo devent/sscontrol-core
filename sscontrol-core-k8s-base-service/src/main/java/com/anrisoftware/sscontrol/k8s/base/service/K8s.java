@@ -30,14 +30,20 @@ import com.anrisoftware.sscontrol.types.misc.DebugLogging;
  */
 public interface K8s extends ClusterService {
 
-    DebugLogging getDebugLogging();
-
     /**
      * <pre>
      * target name: 'master'
      * </pre>
      */
     void target(Map<String, Object> args);
+
+    void addTargets(List<TargetHost> list);
+
+    void setNodeName(String name);
+
+    String getNodeName();
+
+    DebugLogging getDebugLogging();
 
     /**
      * <pre>
@@ -54,8 +60,6 @@ public interface K8s extends ClusterService {
     void debug(Map<String, Object> args);
 
     List<Object> getDebug();
-
-    void addTargets(List<TargetHost> list);
 
     /**
      * Sets the cluster configuration.

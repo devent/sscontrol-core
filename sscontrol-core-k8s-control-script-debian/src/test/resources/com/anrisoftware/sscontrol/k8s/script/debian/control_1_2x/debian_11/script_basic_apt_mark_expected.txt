@@ -1,0 +1,3 @@
+hold kubeadm=1.22.5-00
+hold kubelet=1.22.5-00
+hold kubectl=1.22.5-00

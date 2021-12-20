@@ -51,6 +51,7 @@ abstract class AbstractControlScriptTest extends AbstractControlRunnerTest {
             'rm',
             'cp',
             'apt-get',
+            'apt-mark',
             'systemctl',
             'which',
             'sha256sum',

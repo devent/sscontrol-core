@@ -13,31 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.anrisoftware.sscontrol.types.host;
+package com.anrisoftware.sscontrol.k8s.kubectl.linux.kubectl_1_2x
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
+import static com.anrisoftware.globalpom.utils.TestUtils.*
+
+import com.anrisoftware.sscontrol.k8s.kubectl.linux.kubectl_1_2x.KubectlLinuxModule
+
+import groovy.util.logging.Slf4j
 
 /**
- * Target host.
  *
- * @author Erwin Müller {@literal <erwin.mueller@deventm.de>}
+ *
+ * @author Erwin Müller <erwin.mueller@deventm.de>
  * @version 1.0
  */
-public interface TargetHost {
+@Slf4j
+class KubectlClientTestModules {
 
-    String getProto();
-
-    String getHost();
-
-    Integer getPort();
-
-    default String getHostAddress() throws UnknownHostException {
-        return InetAddress.getByName(getHost()).getHostAddress();
+    static List getModules() {
+        [
+            new KubectlLinuxModule(),
+        ]
     }
-
-    default String getHostName() throws UnknownHostException {
-        return InetAddress.getByName(getHost()).getHostName();
-    }
-
 }

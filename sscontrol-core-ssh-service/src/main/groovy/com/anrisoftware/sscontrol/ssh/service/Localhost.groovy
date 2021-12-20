@@ -58,6 +58,10 @@ class Localhost implements SshHost {
         '127.0.0.1'
     }
 
+    String getHostName() {
+        'localhost'
+    }
+
     @Override
     SystemInfo getSystem() {
         return null

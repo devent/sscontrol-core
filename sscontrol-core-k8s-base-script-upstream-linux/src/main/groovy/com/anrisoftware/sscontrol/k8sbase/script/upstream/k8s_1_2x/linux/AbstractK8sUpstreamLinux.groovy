@@ -26,10 +26,7 @@ import com.anrisoftware.sscontrol.groovy.script.ScriptBase
 import com.anrisoftware.sscontrol.k8s.base.service.K8s
 import com.anrisoftware.sscontrol.k8s.base.service.Taint
 import com.anrisoftware.sscontrol.k8s.base.service.TaintFactory
-import com.anrisoftware.sscontrol.k8skubectl.linux.external.kubectl_1_13.AbstractKubectlLinux
-import com.anrisoftware.sscontrol.tls.Tls
-import com.anrisoftware.sscontrol.types.cluster.ClusterHost
-import com.anrisoftware.sscontrol.types.ssh.external.SshHost
+import com.anrisoftware.sscontrol.k8s.kubectl.linux.kubectl_1_2x.AbstractKubectlLinux
 import com.anrisoftware.sscontrol.utils.st.base64renderer.external.UriBase64Renderer
 
 import groovy.util.logging.Slf4j
@@ -45,8 +42,6 @@ abstract class AbstractK8sUpstreamLinux extends ScriptBase {
 
     TemplateResource kubeadmConfigTemplate
 
-    TemplateResource kubeletConfigTemplate
-
     @Inject
     AddressesFactory addressesFactory
 
@@ -58,29 +53,27 @@ abstract class AbstractK8sUpstreamLinux extends ScriptBase {
         def attr = [renderers: [new UriBase64Renderer()]]
         def templates = templatesFactory.create('K8s_1_2x_UpstreamLinuxTemplates', attr)
         this.kubeadmConfigTemplate = templates.getResource('kubeadm_config')
-        this.kubeletConfigTemplate = templates.getResource('kubelet_config')
     }
 
     def setupMiscDefaults() {
         log.debug 'Setup misc defaults for {}', service
         K8s service = service
+        if (!service.nodeName) {
+            service.nodeName = service.target.hostName
+        }
         if (!service.debugLogging.modules['debug']) {
             service.debug "debug", level: defaultLogLevel
         }
-        if (!service.containerRuntime) {
-            service.containerRuntime = scriptProperties.default_container_runtime
-        }
         if (!service.allowPrivileged) {
-            service.privileged scriptBooleanProperties.default_allow_privileged
+            service.privileged defaultAllowPrivileged
         }
-        if (service.tls.cert) {
-            service.tls.certName = scriptProperties.default_kubernetes_tls_cert_name
+        if (!service.allocateNodeCidrs) {
+            service.allocateNodeCidrs defaultAllocateNodeCidrs
         }
-        if (service.tls.key) {
-            service.tls.keyName = scriptProperties.default_kubernetes_tls_key_name
-        }
-        if (service.tls.ca) {
-            service.tls.caName = scriptProperties.default_kubernetes_tls_ca_name
+        if (!service.podNetworkCidr) {
+            if (defaultPodNetworkCidr) {
+                service.podNetworkCidr defaultPodNetworkCidr
+            }
         }
     }
 
@@ -92,152 +85,22 @@ abstract class AbstractK8sUpstreamLinux extends ScriptBase {
         service.label key: label, value: name
     }
 
-    def setupClusterHostDefaults() {
-        K8s service = service
-        ClusterHost host = service.clusterHost
-        if (!host) {
-            return
-        }
-        if (!host.proto) {
-            if (host.credentials.type == 'cert') {
-                host.proto = scriptProperties.default_api_protocol_secure
-            } else {
-                host.proto = scriptProperties.default_api_protocol_insecure
-            }
-        }
-        if (!host.port) {
-            if (host.credentials.type == 'cert') {
-                host.port = scriptNumberProperties.default_api_port_secure
-            } else {
-                host.port = scriptNumberProperties.default_api_port_insecure
-            }
-        }
-    }
-
-    def setupClusterDefaults() {
-        log.debug 'Setup cluster defaults for {}', service
-        K8s service = service
-        if (!service.cluster.serviceRange) {
-            service.cluster.serviceRange = scriptProperties.default_service_network
-        }
-        if (!service.cluster.podRange) {
-            service.cluster.podRange = scriptProperties.default_pod_network
-        }
-        if (!service.cluster.dnsDomain) {
-            service.cluster.dnsDomain = scriptProperties.default_dns_domain
-        }
-        if (service.cluster.apiServers.isEmpty()) {
-            service.cluster.apiServers.addAll defaultApiServers
-        }
-        if (!service.cluster.advertiseAddress) {
-            service.cluster.advertiseAddress = target.hostAddress
-        }
-    }
-
-    def setupKubeletDefaults() {
-        log.debug 'Setup kubelet defaults for {}', service
-        K8s service = service
-        if (!service.kubelet.port) {
-            service.kubelet.port = defaultKubeletPort
-        }
-        if (!service.kubelet.readOnlyPort) {
-            service.kubelet.readOnlyPort = scriptNumberProperties.default_kubelet_read_only_port
-        }
-        if (service.kubelet.preferredAddressTypes.size() == 0) {
-            service.kubelet.preferredAddressTypes.addAll defaultPreferredAddressTypes
-        }
-        if (service.kubelet.tls.ca) {
-            service.kubelet.tls.caName = scriptProperties.default_kubelet_tls_ca_name
-        }
-        if (service.kubelet.tls.cert) {
-            service.kubelet.tls.certName = scriptProperties.default_kubelet_tls_cert_name
-        }
-        if (service.kubelet.tls.key) {
-            service.kubelet.tls.keyName = scriptProperties.default_kubelet_tls_key_name
-        }
-        if (service.kubelet.client.ca) {
-            service.kubelet.client.caName = scriptProperties.default_kubelet_client_ca_name
-        }
-        if (service.kubelet.client.cert) {
-            service.kubelet.client.certName = scriptProperties.default_kubelet_client_cert_name
-        }
-        if (service.kubelet.client.key) {
-            service.kubelet.client.keyName = scriptProperties.default_kubelet_client_key_name
-        }
-    }
-
-    def setupPluginsDefaults() {
-        log.debug 'Setup plugins defaults for {}', service
-        K8s service = service
-        service.plugins.findAll {it.value.hasProperty('port')} each {
-            def name = it.value.name
-            if (!it.value.port) {
-                it.value.port = getDefaultPluginPort(name)
-            }
-        }
-        service.plugins.findAll {it.value.hasProperty('protocol') && it.value.hasProperty('tls')} each {
-            def name = it.value.name
-            if (!it.value.protocol) {
-                it.value.protocol = getDefaultPluginProtocol(name, it.value.tls)
-            }
-        }
-        service.plugins.findAll {it.value.hasProperty('tls')} each {
-            def name = it.value.name
-            if (!it.value.tls.caName) {
-                it.value.tls.caName = getDefaultPluginCaName(name)
-            }
-            if (!it.value.tls.certName) {
-                it.value.tls.certName = getDefaultPluginCertName(name)
-            }
-            if (!it.value.tls.keyName) {
-                it.value.tls.keyName = getDefaultPluginKeyName(name)
-            }
-        }
-    }
-
-    /**
-     * Set some additional kernel parameter.
-     */
-    def setupKernelParameter() {
-        log.info 'Setup max_map_count.'
-        shell privileged: true, "sysctl -w vm.max_map_count=$maxMapCount"
-        replace privileged: true, dest: sysctlFile with {
-            line "s/#?vm.max_map_count=\\d*/vm.max_map_count=$maxMapCount/"
-            it
-        } call()
-    }
-
-    def setupApiServersDefaults() {
-        log.debug 'Setup api-servers hosts defaults for {}', service
-        def service = service
-        if (service.cluster.apiServers.size() == 0) {
-            service.cluster.apiServers << scriptProperties.default_api_server_host
-        }
-    }
-
-    def createDirectories() {
-        log.info 'Create k8s directories.'
-        def dirs = [certsDir,]
-        shell privileged: true, """
-mkdir -p ${dirs.join(' ')}
-chmod o-rx '$certsDir'
-""" call()
-    }
-
     def installKube() {
         K8s service = service
         shell privileged: true, timeout: timeoutLong, """
 if ! kubeadm token list; then
-kubeadm init --node-name=${service.cluster.name} --config /root/kubeadm.yaml ${ignoreChecksErrors}
+kubeadm init --config /root/kubeadm.yaml ${kubeadmArgs.join(" ")}
 fi
 """ call()
     }
 
-    def getKubeadmArgs() {
-        if (havePluginCanal) {
-            return "--pod-network-cidr=${clusterCidr}"
+    List getKubeadmArgs() {
+        K8s service = service
+        def list = []
+        if (service.podNetworkCidr) {
+            list << "--pod-network-cidr=${service.podNetworkCidr}"
         }
-        return ""
+        return list
     }
 
     def joinNode() {
@@ -254,7 +117,7 @@ fi
     def setupKubectl() {
         shell """
 mkdir -p \$HOME/.kube
-sudo cp -i /etc/kubernetes/admin.conf \$HOME/.kube/config
+sudo cp /etc/kubernetes/admin.conf \$HOME/.kube/config
 sudo chown \$(id -u):\$(id -g) \$HOME/.kube/config
 """ call()
     }
@@ -264,10 +127,10 @@ sudo chown \$(id -u):\$(id -g) \$HOME/.kube/config
      */
     def waitNodeReady() {
         K8s service = service
-        log.info 'Wait until the node is in Ready state: {}', service.cluster.name
+        log.info 'Wait until the node is in Ready state: {}', service.nodeName
         def vars = [:]
         vars.timeout = timeoutMiddle
-        kubectlCluster.waitNodeReady vars, service.cluster.name
+        kubectlCluster.waitNodeReady vars, service.nodeName
     }
 
     /**
@@ -275,35 +138,10 @@ sudo chown \$(id -u):\$(id -g) \$HOME/.kube/config
      */
     def waitNodeAvailable() {
         K8s service = service
-        log.info 'Wait until the node is available: {}', service.cluster.name
+        log.info 'Wait until the node is available: {}', service.nodeName
         def vars = [:]
         vars.timeout = timeoutMiddle
-        kubectlCluster.waitNodeAvailable vars, service.cluster.name
-    }
-
-    def getIgnoreChecksErrors() {
-        List ignoreCheckErrors = []
-        if (!failSwapOn) {
-            ignoreCheckErrors << "Swap"
-        }
-        if (ignoreCheckErrors.size() > 0) {
-            "--ignore-preflight-errors " + ignoreCheckErrors.join(",")
-        } else {
-            ""
-        }
-    }
-
-    def uploadK8sCertificates() {
-        log.info 'Uploads k8s certificates: {}', service.tls
-        def certsdir = certsDir
-        K8s service = service
-        uploadTlsCerts tls: service.tls, name: 'k8s-tls'
-        uploadTlsCerts tls: service.ca, name: 'k8s-ca'
-    }
-
-    def uploadEtcdCertificates() {
-        log.info 'Uploads etcd certificates: {}', etcdTls
-        uploadTlsCerts tls: etcdTls, name: 'etcd'
+        kubectlCluster.waitNodeAvailable vars, service.nodeName
     }
 
     def createKubeadmConfig() {
@@ -320,7 +158,7 @@ sudo chown \$(id -u):\$(id -g) \$HOME/.kube/config
 
     def applyTaints() {
         K8s service = service
-        def node = service.cluster.name
+        def node = service.nodeName
         if (service.taints.isEmpty()) {
             log.info 'No taints to apply for node {}.', node
             return
@@ -331,23 +169,13 @@ sudo chown \$(id -u):\$(id -g) \$HOME/.kube/config
 
     def applyLabels() {
         K8s service = service
-        def node = service.cluster.name
+        def node = service.nodeName
         if (service.labels.isEmpty()) {
             log.info 'No labels to apply for node {}.', node
             return
         }
         log.info 'Apply node labels {} for {}.', service.labels, node
         kubectlCluster.applyNodeLabels([:], node, service.labels)
-    }
-
-    /**
-     * Returns the cluster CIDR for kubeproxy.
-     */
-    def getClusterCidr() {
-        if (havePluginCanal) {
-            return getScriptProperty("canal_cidr")
-        }
-        return ""
     }
 
     def getJoinCommand() {
@@ -416,123 +244,30 @@ kubeadm token create \$token --print-join-command
      */
     abstract AbstractKubectlLinux getKubectlCluster()
 
-    def getDefaultContainerRuntime() {
-        getScriptProperty 'default_container_runtime'
-    }
-
-    def getDefaultAllowPrivileged() {
-        getScriptBooleanProperty "default_allow_privileged"
-    }
-
-    List getDefaultApiServers() {
-        properties.getListProperty 'default_api_servers', defaultProperties
-    }
-
-    def getDefaultKubeletPort() {
-        properties.getNumberProperty 'default_kubelet_port', defaultProperties
-    }
-
-    def getDefaultClusterRange() {
-        getScriptProperty 'default_cluster_range'
-    }
-
-    def getDefaultAdmissions() {
-        properties.getListProperty 'default_admissions', defaultProperties
-    }
-
-    def getDefaultPreferredAddressTypes() {
-        properties.getListProperty 'default_kubelet_preferred_address_types', defaultProperties
-    }
-
-    Map getDefaultAuthenticationTlsCaName() {
-        def s = getScriptProperty 'default_authentication_tls_ca_name'
-        Eval.me s
-    }
-
-    Map getDefaultAuthenticationTlsCertName() {
-        def s = getScriptProperty 'default_authentication_tls_cert_name'
-        Eval.me s
-    }
-
-    Map getDefaultAuthenticationTlsKeyName() {
-        def s = getScriptProperty 'default_authentication_tls_key_name'
-        Eval.me s
-    }
-
-    int getDefaultPluginPort(String name) {
-        name = name.toLowerCase()
-        properties.getNumberProperty "default_plugin_port_$name", defaultProperties
-    }
-
-    String getDefaultPluginProtocol(String name, Tls tls) {
-        name = name.toLowerCase()
-        def insecure = properties.getProperty "default_plugin_protocol_insecure_$name", defaultProperties
-        def secure = properties.getProperty "default_plugin_protocol_secure_$name", defaultProperties
-        tls.cert ? secure : insecure
-    }
-
-    String getDefaultPluginCaName(String name) {
-        name = name.toLowerCase()
-        properties.getProperty "default_plugin_ca_name_$name", defaultProperties
-    }
-
-    String getDefaultPluginCertName(String name) {
-        name = name.toLowerCase()
-        properties.getProperty "default_plugin_cert_name_$name", defaultProperties
-    }
-
-    String getDefaultPluginKeyName(String name) {
-        name = name.toLowerCase()
-        properties.getProperty "default_plugin_key_name_$name", defaultProperties
-    }
-
-    def getKubernetesVersion() {
-        getScriptProperty 'kubernetes_version'
-    }
-
-    Map getPluginsTargets() {
-        pluginTargetsMapFactory.create service, scriptsRepository, service.plugins
-    }
-
-    boolean getHavePluginCanal() {
-        K8s service = service
-        service.plugins.containsKey('canal')
-    }
-
-    Tls getPluginEtcdTls() {
-        K8s service = service
-        if (service.plugins.containsKey('etcd')) {
-            return service.plugins.etcd.tls
-        } else {
-            return null
-        }
-    }
-
     List getMasterHosts() {
         K8s service = service
         addressesFactory.create(service.cluster, service.cluster.apiServers).hosts
     }
 
-    String getAdvertiseAddress() {
-        K8s service = service
-        if (service.cluster.advertiseAddress instanceof SshHost) {
-            service.cluster.advertiseAddress.hostAddress
-        } else {
-            return service.cluster.advertiseAddress
-        }
+    boolean getDefaultAllowPrivileged() {
+        getScriptBooleanProperty "default_allow_privileged"
     }
 
-    File getContainersLogDir() {
-        properties.getFileProperty "containers_log_dir", base, defaultProperties
-    }
-
-    Tls getEtcdTls() {
-        def plugin = service.plugins['etcd']
-        if (plugin) {
-            return plugin.tls
-        } else {
+    String getDefaultPodNetworkCidr() {
+        def cidr = getScriptProperty "default_pod_network_cidr"
+        if (StringUtils.isBlank(cidr)) {
             return null
+        } else {
+            return cidr
         }
+    }
+
+    boolean getDefaultAllocateNodeCidrs() {
+        getScriptBooleanProperty "default_allocate_node_cidrs"
+    }
+
+    def getKubernetesVersion() {
+        getScriptProperty 'kubernetes_version'
     }
 
     String getRobobeeLabelNode() {
@@ -547,28 +282,8 @@ kubeadm token create \$token --print-join-command
         getScriptProperty 'kubernetes_label_hostname'
     }
 
-    long getMaxMapCount() {
-        getScriptNumberProperty 'max_map_count'
-    }
-
-    File getSysctlFile() {
-        getScriptFileProperty 'sysctl_file'
-    }
-
     Duration getKubectlTimeout() {
         getScriptDurationProperty 'kubectl_timeout'
-    }
-
-    boolean getFailSwapOn() {
-        getScriptBooleanProperty 'fail_swap_on'
-    }
-
-    int getKubeletReadOnlyPort() {
-        scriptNumberProperties
-    }
-
-    Map getFeatureGates() {
-        getScriptMapProperty 'feature_gates'
     }
 
     File getKubectlCmd() {
@@ -587,19 +302,75 @@ kubeadm token create \$token --print-join-command
     }
 
     /**
-     * Returns the file path of the apt repository list file for kubernetes.
-     * That is normally the {@code /etc/apt/sources.list.d/kubernetes.list} file.
+     * Returns the file path of the apt repository list file for Kubernetes,
+     * for example {@code /etc/apt/sources.list.d/kubernetes.list}
+     *
+     * <ul>
+     * <li>profile property {@code kubernetes_repository_list_file}</li>
+     * </ul>
      */
-    File getAptKubernetesListFile() {
-        getFileProperty 'apt_kubernetes_list_file'
+    File getKubernetesRepositoryListFile() {
+        getScriptFileProperty 'kubernetes_repository_list_file'
     }
 
-    URI getCanalRbacUrl() {
-        getScriptURIProperty 'canal_rbac_url'
+    /**
+     * Returns the url of the Kubernetes repository,
+     * for example {@code https://apt.kubernetes.io/}
+     *
+     * <ul>
+     * <li>profile property {@code kubernetes_repository_url}</li>
+     * </ul>
+     */
+    String getKubernetesRepositoryUrl() {
+        getScriptProperty 'kubernetes_repository_url'
     }
 
-    URI getCanalInstallUrl() {
-        getScriptURIProperty 'canal_install_url'
+    /**
+     * Returns the url of the Kubernetes repository signing key,
+     * for example {@code https://packages.cloud.google.com/apt/doc/apt-key.gpg}
+     *
+     * <ul>
+     * <li>profile property {@code kubernetes_repository_key}</li>
+     * </ul>
+     */
+    String getKubernetesRepositoryKey() {
+        getScriptProperty 'kubernetes_repository_key'
+    }
+
+    /**
+     * Returns the url of the Kubernetes repository distribution name,
+     * for example {@code kubernetes-xenial}
+     *
+     * <ul>
+     * <li>profile property {@code kubernetes_repository_dist}</li>
+     * </ul>
+     */
+    String getKubernetesRepositoryDist() {
+        getScriptProperty 'kubernetes_repository_dist'
+    }
+
+    /**
+     * Returns the url of the Kubernetes repository component,
+     * for example {@code main}
+     *
+     * <ul>
+     * <li>profile property {@code kubernetes_repository_component}</li>
+     * </ul>
+     */
+    String getKubernetesRepositoryComponent() {
+        getScriptProperty 'kubernetes_repository_component'
+    }
+
+    /**
+     * Returns the Kubernetes repository keyring file,
+     * for example {@code main}
+     *
+     * <ul>
+     * <li>profile property {@code /usr/share/keyrings/kubernetes-archive-keyring.gpg}</li>
+     * </ul>
+     */
+    File getKubernetesRepositoryKeyringFile() {
+        getScriptFileProperty 'kubernetes_repository_keyring_file'
     }
 
     @Override

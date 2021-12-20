@@ -20,8 +20,8 @@ import static org.hamcrest.Matchers.*
 import javax.inject.Inject
 
 import com.anrisoftware.propertiesutils.ContextProperties
+import com.anrisoftware.sscontrol.k8s.kubectl.linux.kubectl_1_2x.AbstractKubectlLinux
 import com.anrisoftware.sscontrol.k8sbase.script.upstream.debian.k8s_1_2x.debian_11.AbstractK8sUpstreamDebian
-import com.anrisoftware.sscontrol.k8skubectl.linux.external.kubectl_1_13.AbstractKubectlLinux
 
 import groovy.util.logging.Slf4j
 
