@@ -1,1 +1,2 @@
++r /tmp/junit/junit/usr/share/keyrings/kubernetes-archive-keyring.gpg
 o-rwx /var/lib/robobee/tmp

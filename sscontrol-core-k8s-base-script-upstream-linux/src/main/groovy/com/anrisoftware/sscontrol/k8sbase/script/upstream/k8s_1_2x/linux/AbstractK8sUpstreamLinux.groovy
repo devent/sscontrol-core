@@ -302,6 +302,17 @@ kubeadm token create \$token --print-join-command
     }
 
     /**
+     * Returns the needed package names to stop from being automatically updated or removed for kubeadm.
+     *
+     * <ul>
+     * <li>profile property {@code kubeadm_hold}</li>
+     * </ul>
+     */
+    List getKubeadmHold() {
+        getScriptListProperty "kubeadm_hold", ","
+    }
+
+    /**
      * Returns the file path of the apt repository list file for Kubernetes,
      * for example {@code /etc/apt/sources.list.d/kubernetes.list}
      *

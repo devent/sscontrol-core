@@ -44,10 +44,14 @@ abstract class AbstractK8sUpstreamDebian extends AbstractK8sUpstreamLinux {
             shell privileged: false, timeout: timeoutLong, """
 curl -fsSLo $it ${kubernetesRepositoryKey}
 sudo mv $it ${kubernetesRepositoryKeyringFile}
+sudo chown root.root ${kubernetesRepositoryKeyringFile}
+sudo chmod +r ${kubernetesRepositoryKeyringFile}
 echo "deb [signed-by=${kubernetesRepositoryKeyringFile}] ${kubernetesRepositoryUrl} ${kubernetesRepositoryDist} ${kubernetesRepositoryComponent}" | sudo tee ${kubernetesRepositoryListFile}
+sudo apt-get update
+sudo apt-get install -y ${kubeadmPackages.join(" ")}
+sudo apt-mark hold ${KubeadmHold.join(" ")}
 """ call()
         }
-        debian.installPackages packages: kubeadmPackages, update: true, hold: true
     }
 
     @Override

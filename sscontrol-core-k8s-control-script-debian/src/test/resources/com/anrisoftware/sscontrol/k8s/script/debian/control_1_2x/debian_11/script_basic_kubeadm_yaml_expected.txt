@@ -13,4 +13,4 @@ clusterName: "andrea-cluster-1"
 controllerManager:
   extraArgs:
     allocate-node-cidrs: "true"
-kubernetesVersion: v1.22.2
+kubernetesVersion: v1.22.5
