@@ -31,11 +31,11 @@ import com.anrisoftware.globalpom.core.strings.StringsModule
 import com.anrisoftware.propertiesutils.PropertiesUtilsModule
 import com.anrisoftware.sscontrol.debug.internal.DebugLoggingModule
 import com.anrisoftware.sscontrol.k8s.base.service.K8sModule
+import com.anrisoftware.sscontrol.k8s.cluster.service.K8sClusterFactory
+import com.anrisoftware.sscontrol.k8s.cluster.service.K8sClusterModule
 import com.anrisoftware.sscontrol.k8s.fromrepository.service.external.FromRepository
 import com.anrisoftware.sscontrol.k8s.fromrepository.service.internal.FromRepositoryModule
 import com.anrisoftware.sscontrol.k8s.fromrepository.service.internal.FromRepositoryImpl.FromRepositoryImplFactory
-import com.anrisoftware.sscontrol.k8scluster.service.K8sClusterFactory
-import com.anrisoftware.sscontrol.k8scluster.service.K8sClusterModule
 import com.anrisoftware.sscontrol.properties.internal.HostServicePropertiesServiceModule
 import com.anrisoftware.sscontrol.properties.internal.PropertiesModule
 import com.anrisoftware.sscontrol.repo.git.service.internal.GitRepoModule

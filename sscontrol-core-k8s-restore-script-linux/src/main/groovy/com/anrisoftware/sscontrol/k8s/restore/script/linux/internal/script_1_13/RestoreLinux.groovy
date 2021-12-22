@@ -27,9 +27,9 @@ import com.anrisoftware.sscontrol.k8s.backup.client.external.RsyncClient
 import com.anrisoftware.sscontrol.k8s.backup.client.external.RsyncClientFactory
 import com.anrisoftware.sscontrol.k8s.backup.client.external.Source
 import com.anrisoftware.sscontrol.k8s.backup.client.internal.DeploymentImpl
+import com.anrisoftware.sscontrol.k8s.cluster.service.K8sClusterFactory
 import com.anrisoftware.sscontrol.k8s.restore.service.external.Restore
 import com.anrisoftware.sscontrol.k8s.restore.service.internal.ServiceImpl.ServiceImplFactory
-import com.anrisoftware.sscontrol.k8scluster.service.K8sClusterFactory
 
 import groovy.util.logging.Slf4j
 

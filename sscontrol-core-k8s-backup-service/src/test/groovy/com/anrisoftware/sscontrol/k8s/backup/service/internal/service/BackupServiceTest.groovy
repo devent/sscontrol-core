@@ -36,8 +36,8 @@ import com.anrisoftware.sscontrol.k8s.backup.service.external.Backup
 import com.anrisoftware.sscontrol.k8s.backup.service.internal.BackupModule
 import com.anrisoftware.sscontrol.k8s.backup.service.internal.BackupImpl.BackupImplFactory
 import com.anrisoftware.sscontrol.k8s.base.service.K8sModule
-import com.anrisoftware.sscontrol.k8scluster.service.K8sClusterFactory
-import com.anrisoftware.sscontrol.k8scluster.service.K8sClusterModule
+import com.anrisoftware.sscontrol.k8s.cluster.service.K8sClusterFactory
+import com.anrisoftware.sscontrol.k8s.cluster.service.K8sClusterModule
 import com.anrisoftware.sscontrol.properties.internal.PropertiesModule
 import com.anrisoftware.sscontrol.properties.internal.HostServicePropertiesImpl.HostServicePropertiesImplFactory
 import com.anrisoftware.sscontrol.services.host.HostServicesModule

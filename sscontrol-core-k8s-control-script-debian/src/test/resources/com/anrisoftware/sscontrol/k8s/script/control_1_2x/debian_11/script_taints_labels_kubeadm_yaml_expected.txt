@@ -1,0 +1,15 @@
+apiVersion: kubeadm.k8s.io/v1beta3
+kind: InitConfiguration
+nodeRegistration:
+  kubeletExtraArgs:
+    node-labels: "robobeerun.com/node=localhost"
+---
+apiVersion: kubeadm.k8s.io/v1beta3
+kind: ClusterConfiguration
+apiServer:
+  extraArgs:
+clusterName: "andrea-cluster-1"
+controllerManager:
+  extraArgs:
+    allocate-node-cidrs: "true"
+kubernetesVersion: v1.22.5

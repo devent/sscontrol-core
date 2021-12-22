@@ -26,6 +26,7 @@ import com.anrisoftware.globalpom.core.resources.ResourcesModule
 import com.anrisoftware.globalpom.core.strings.StringsModule
 import com.anrisoftware.propertiesutils.PropertiesUtilsModule
 import com.anrisoftware.sscontrol.debug.internal.DebugLoggingModule
+import com.anrisoftware.sscontrol.k8s.base.service.K8s
 import com.anrisoftware.sscontrol.k8s.base.service.K8sModule
 import com.anrisoftware.sscontrol.k8s.control.service.K8sControlImpl.K8sControlImplFactory
 import com.anrisoftware.sscontrol.properties.internal.HostServicePropertiesServiceModule
@@ -212,6 +213,99 @@ service "k8s-control" with {
                 assert s.taints['node.alpha.kubernetes.io/ismaster'].effect == 'NoSchedule'
                 assert s.taints['extra'].value == 'foo'
                 assert s.taints['extra'].effect == 'aaa'
+            },
+        ]
+        doTest test
+    }
+
+    @Test
+    void "basic"() {
+        def test = [
+            name: 'cluster args',
+            input: """
+service "k8s-control"
+""",
+            expected: { HostServices services ->
+                assert services.getServices('k8s-control').size() == 1
+                K8s s = services.getServices('k8s-control')[0] as K8s
+                assert s.targets.size() == 0
+            },
+        ]
+        doTest test
+    }
+
+    @Test
+    void "cluster config"() {
+        def test = [
+            name: 'cluster config',
+            input: """
+service "k8s-control" with {
+    cluster apiServer: [extraArgs: ['allow-privileged': true]]
+}
+""",
+            expected: { HostServices services ->
+                assert services.getServices('k8s-control').size() == 1
+                K8s s = services.getServices('k8s-control')[0] as K8s
+                assert s.cluster.apiServer.extraArgs["allow-privileged"] == true
+            },
+        ]
+        doTest test
+    }
+
+    @Test
+    void "init config"() {
+        def test = [
+            name: 'init config',
+            input: """
+service "k8s-control" with {
+    init localAPIEndpoint: [advertiseAddress: "192.168.0.1", bindPort: 8888]
+}
+""",
+            expected: { HostServices services ->
+                assert services.getServices('k8s-control').size() == 1
+                K8s s = services.getServices('k8s-control')[0] as K8s
+                assert s.init.localAPIEndpoint.advertiseAddress == "192.168.0.1"
+                assert s.init.localAPIEndpoint.bindPort == 8888
+            },
+        ]
+        doTest test
+    }
+
+    @Test
+    void "join config"() {
+        def test = [
+            name: 'join config',
+            input: """
+service "k8s-control" with {
+    join discovery: [bootstrapToken: [apiServerEndpoint: "kube-apiserver:6443", token: "abcdef.0123456789abcdef", unsafeSkipCAVerification: true], timeout: "5m0s", tlsBootstrapToken: "abcdef.0123456789abcdef"]
+}
+""",
+            expected: { HostServices services ->
+                assert services.getServices('k8s-control').size() == 1
+                K8s s = services.getServices('k8s-control')[0] as K8s
+                assert s.join.discovery.bootstrapToken.apiServerEndpoint == "kube-apiserver:6443"
+                assert s.join.discovery.bootstrapToken.token == "abcdef.0123456789abcdef"
+                assert s.join.discovery.bootstrapToken.unsafeSkipCAVerification == true
+                assert s.join.discovery.timeout == "5m0s"
+                assert s.join.discovery.tlsBootstrapToken == "abcdef.0123456789abcdef"
+            },
+        ]
+        doTest test
+    }
+
+    @Test
+    void "kubelet config"() {
+        def test = [
+            name: 'kubelet config',
+            input: """
+service "k8s-control" with {
+    kubelet clusterDNS: "10.96.0.10"
+}
+""",
+            expected: { HostServices services ->
+                assert services.getServices('k8s-control').size() == 1
+                K8s s = services.getServices('k8s-control')[0] as K8s
+                assert s.kubelet.clusterDNS == "10.96.0.10"
             },
         ]
         doTest test

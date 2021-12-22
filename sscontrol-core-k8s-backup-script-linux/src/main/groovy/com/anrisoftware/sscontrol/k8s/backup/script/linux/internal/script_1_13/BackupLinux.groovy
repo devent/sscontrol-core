@@ -30,7 +30,7 @@ import com.anrisoftware.sscontrol.k8s.backup.client.external.Source
 import com.anrisoftware.sscontrol.k8s.backup.client.internal.DeploymentImpl
 import com.anrisoftware.sscontrol.k8s.backup.service.external.Backup
 import com.anrisoftware.sscontrol.k8s.backup.service.internal.ServiceImpl.ServiceImplFactory
-import com.anrisoftware.sscontrol.k8scluster.service.K8sClusterFactory
+import com.anrisoftware.sscontrol.k8s.cluster.service.K8sClusterFactory
 
 import groovy.util.logging.Slf4j
 
