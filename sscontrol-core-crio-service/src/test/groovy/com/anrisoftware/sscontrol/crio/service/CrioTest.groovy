@@ -25,10 +25,10 @@ import org.junit.jupiter.api.Test
 import com.anrisoftware.propertiesutils.PropertiesUtilsModule
 import com.anrisoftware.sscontrol.properties.internal.HostServicePropertiesServiceModule
 import com.anrisoftware.sscontrol.properties.internal.PropertiesModule
-import com.anrisoftware.sscontrol.services.internal.host.HostServicesModule
-import com.anrisoftware.sscontrol.services.internal.host.HostServicesImpl.HostServicesImplFactory
-import com.anrisoftware.sscontrol.services.internal.targets.TargetsModule
-import com.anrisoftware.sscontrol.services.internal.targets.TargetsServiceModule
+import com.anrisoftware.sscontrol.services.host.HostServicesModule
+import com.anrisoftware.sscontrol.services.host.HostServicesImpl.HostServicesImplFactory
+import com.anrisoftware.sscontrol.services.targets.TargetsModule
+import com.anrisoftware.sscontrol.services.targets.TargetsServiceModule
 import com.anrisoftware.sscontrol.types.host.HostServices
 import com.anrisoftware.sscontrol.types.ssh.external.Ssh
 import com.anrisoftware.sscontrol.utils.systemmappings.internal.SystemNameMappingsModule

@@ -34,7 +34,7 @@ import com.anrisoftware.sscontrol.debug.internal.DebugLoggingModule
 import com.anrisoftware.sscontrol.etcd.script.debian.internal.debian_10.etcd_3_4.Etcd_3_4_Debian_10_Module
 import com.anrisoftware.sscontrol.etcd.service.internal.BindingModule
 import com.anrisoftware.sscontrol.etcd.service.internal.EtcdModule
-import com.anrisoftware.sscontrol.services.internal.host.HostServicesModule
+import com.anrisoftware.sscontrol.services.host.HostServicesModule
 import com.anrisoftware.sscontrol.ssh.service.SshModule
 import com.anrisoftware.sscontrol.tls.TlsModule
 import com.anrisoftware.sscontrol.types.misc.TypesModule

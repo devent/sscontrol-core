@@ -15,6 +15,8 @@
  */
 package com.anrisoftware.sscontrol.k8scluster.service;
 
+import java.util.List;
+
 import com.anrisoftware.sscontrol.types.cluster.ClusterTargetService;
 
 /**
@@ -29,5 +31,17 @@ public interface K8sCluster extends ClusterTargetService {
     Cluster getCluster();
 
     Context getContext();
+
+    void setCaCertHashes(List<String> hashes);
+
+    List<String> getCaCertHashes();
+
+    void setToken(String token);
+
+    String getToken();
+
+    void setTlsBootstrapToken(String token);
+
+    String getTlsBootstrapToken();
 
 }

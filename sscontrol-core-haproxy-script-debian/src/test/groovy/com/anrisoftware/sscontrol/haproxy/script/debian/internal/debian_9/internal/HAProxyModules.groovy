@@ -34,7 +34,7 @@ import com.anrisoftware.sscontrol.debug.internal.DebugLoggingModule
 import com.anrisoftware.sscontrol.haproxy.script.debian.internal.debian_9.HAProxy_Debian_9_Module
 import com.anrisoftware.sscontrol.haproxy.script.haproxy_1_8.external.HAProxy_1_8_Module
 import com.anrisoftware.sscontrol.haproxy.service.internal.HAProxyModule
-import com.anrisoftware.sscontrol.services.internal.host.HostServicesModule
+import com.anrisoftware.sscontrol.services.host.HostServicesModule
 import com.anrisoftware.sscontrol.ssh.service.SshModule
 import com.anrisoftware.sscontrol.types.misc.TypesModule
 import com.anrisoftware.sscontrol.utils.debian.DebianUtilsModule

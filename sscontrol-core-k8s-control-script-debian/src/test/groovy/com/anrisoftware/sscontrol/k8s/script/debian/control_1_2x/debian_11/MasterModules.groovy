@@ -38,7 +38,7 @@ import com.anrisoftware.sscontrol.k8s.script.debian.control_1_2x.debian_11.K8sMa
 import com.anrisoftware.sscontrol.k8sbase.script.upstream.k8s_1_2x.linux.K8sUpstreamModule
 import com.anrisoftware.sscontrol.k8scluster.script.linux.k8scluster_1_2x.K8sClusterLinuxModule
 import com.anrisoftware.sscontrol.k8scluster.service.K8sClusterModule
-import com.anrisoftware.sscontrol.services.internal.host.HostServicesModule
+import com.anrisoftware.sscontrol.services.host.HostServicesModule
 import com.anrisoftware.sscontrol.ssh.service.SshModule
 import com.anrisoftware.sscontrol.tls.TlsModule
 import com.anrisoftware.sscontrol.types.misc.TypesModule

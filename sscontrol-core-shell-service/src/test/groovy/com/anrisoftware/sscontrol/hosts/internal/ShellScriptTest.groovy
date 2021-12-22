@@ -28,11 +28,11 @@ import com.anrisoftware.propertiesutils.PropertiesUtilsModule
 import com.anrisoftware.sscontrol.debug.internal.DebugLoggingModule
 import com.anrisoftware.sscontrol.properties.internal.PropertiesModule
 import com.anrisoftware.sscontrol.properties.internal.HostServicePropertiesImpl.HostServicePropertiesImplFactory
-import com.anrisoftware.sscontrol.services.internal.host.HostServicesModule
-import com.anrisoftware.sscontrol.services.internal.host.HostServicesImpl.HostServicesImplFactory
-import com.anrisoftware.sscontrol.services.internal.ssh.TargetsImpl.TargetsImplFactory
-import com.anrisoftware.sscontrol.services.internal.targets.TargetsModule
-import com.anrisoftware.sscontrol.services.internal.targets.TargetsServiceModule
+import com.anrisoftware.sscontrol.services.host.HostServicesModule
+import com.anrisoftware.sscontrol.services.host.HostServicesImpl.HostServicesImplFactory
+import com.anrisoftware.sscontrol.services.ssh.TargetsImpl.TargetsImplFactory
+import com.anrisoftware.sscontrol.services.targets.TargetsModule
+import com.anrisoftware.sscontrol.services.targets.TargetsServiceModule
 import com.anrisoftware.sscontrol.shell.external.Shell
 import com.anrisoftware.sscontrol.shell.internal.ShellModule
 import com.anrisoftware.sscontrol.shell.internal.ShellImpl.ShellImplFactory

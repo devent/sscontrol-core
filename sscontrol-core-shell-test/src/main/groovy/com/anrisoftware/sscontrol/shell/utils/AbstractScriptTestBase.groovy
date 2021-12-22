@@ -44,10 +44,10 @@ import com.anrisoftware.resources.templates.internal.maps.TemplatesDefaultMapsMo
 import com.anrisoftware.resources.templates.internal.templates.TemplatesResourcesModule
 import com.anrisoftware.sscontrol.properties.internal.HostServicePropertiesServiceModule
 import com.anrisoftware.sscontrol.properties.internal.PropertiesModule
-import com.anrisoftware.sscontrol.services.internal.host.HostServicesImpl.HostServicesImplFactory
-import com.anrisoftware.sscontrol.services.internal.ssh.TargetsImpl.TargetsImplFactory
-import com.anrisoftware.sscontrol.services.internal.targets.TargetsModule
-import com.anrisoftware.sscontrol.services.internal.targets.TargetsServiceModule
+import com.anrisoftware.sscontrol.services.host.HostServicesImpl.HostServicesImplFactory
+import com.anrisoftware.sscontrol.services.ssh.TargetsImpl.TargetsImplFactory
+import com.anrisoftware.sscontrol.services.targets.TargetsModule
+import com.anrisoftware.sscontrol.services.targets.TargetsServiceModule
 import com.anrisoftware.sscontrol.shell.utils.RobobeeScript.RobobeeScriptFactory
 import com.anrisoftware.sscontrol.types.host.HostService
 import com.anrisoftware.sscontrol.types.host.HostServiceScript

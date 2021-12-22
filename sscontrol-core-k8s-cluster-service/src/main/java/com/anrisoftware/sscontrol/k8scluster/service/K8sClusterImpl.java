@@ -39,12 +39,15 @@ import com.anrisoftware.sscontrol.types.host.TargetHost;
 import com.anrisoftware.sscontrol.types.misc.StringListPropertyUtil.ListProperty;
 import com.google.inject.assistedinject.Assisted;
 
+import lombok.Data;
+
 /**
  * <i>K8s-Cluster</i> service.
  *
  * @author Erwin Müller, erwin.mueller@deventm.de
  * @since 1.0
  */
+@Data
 public class K8sClusterImpl implements K8sCluster {
 
     private final K8sClusterImplLogger log;
@@ -70,11 +73,15 @@ public class K8sClusterImpl implements K8sCluster {
 
     private String group;
 
+    private List<String> caCertHashes;
+
+    private String token;
+
+    private String tlsBootstrapToken;
+
     @Inject
-    K8sClusterImpl(K8sClusterImplLogger log,
-            HostServicePropertiesService propertiesService,
-            ClusterImplFactory clusterFactory, ContextFactory contextFactory,
-            K8sClusterHostFactory clusterHostFactory,
+    K8sClusterImpl(K8sClusterImplLogger log, HostServicePropertiesService propertiesService,
+            ClusterImplFactory clusterFactory, ContextFactory contextFactory, K8sClusterHostFactory clusterHostFactory,
             @Assisted Map<String, Object> args) {
         this.log = log;
         this.serviceProperties = propertiesService.create();
@@ -84,6 +91,7 @@ public class K8sClusterImpl implements K8sCluster {
         this.contextFactory = contextFactory;
         this.clusterHostFactory = clusterHostFactory;
         this.group = "default";
+        this.caCertHashes = new ArrayList<>();
         parseArgs(args);
     }
 
@@ -177,36 +185,6 @@ public class K8sClusterImpl implements K8sCluster {
         return Collections.unmodifiableList(targets);
     }
 
-    @Override
-    public HostServiceProperties getServiceProperties() {
-        return serviceProperties;
-    }
-
-    @Override
-    public String getName() {
-        return "k8s-cluster";
-    }
-
-    @Override
-    public Cluster getCluster() {
-        return cluster;
-    }
-
-    @Override
-    public Context getContext() {
-        return context;
-    }
-
-    @Override
-    public List<Credentials> getCredentials() {
-        return credentials;
-    }
-
-    @Override
-    public String getGroup() {
-        return group;
-    }
-
     /**
      * Returns the hosts from where kubectl can be called, optionally with the
      * credentials for authentication.
@@ -223,31 +201,60 @@ public class K8sClusterImpl implements K8sCluster {
         return Collections.unmodifiableList(list);
     }
 
+    public void caCertHash(String hash) {
+        caCertHashes.add(hash);
+    }
+
+    public void caCertHashes(List<String> hashes) {
+        setCaCertHashes(hashes);
+    }
+
+    public void token(String token) {
+        setToken(token);
+    }
+
+    public void bootstrap(String bootstrap) {
+        setTlsBootstrapToken(bootstrap);
+    }
+
+
+    @Override
+    public String getName() {
+        return "k8s-cluster";
+    }
+
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("name", getName())
-                .append("targets", getTargets()).toString();
-    }
-
-    private void parseArgs(Map<String, Object> args) {
-        parseTargets(args);
-        parseGroup(args);
-        parseCluster(args);
-        parseContext(args);
-    }
-
-    private void parseGroup(Map<String, Object> args) {
-        Object v = args.get("group");
-        if (v != null) {
-            this.group = v.toString();
-        }
+        return new ToStringBuilder(this).append("name", getName()).append("targets", getTargets()).toString();
     }
 
     @SuppressWarnings("unchecked")
-    private void parseTargets(Map<String, Object> args) {
-        Object v = args.get("targets");
+    private void parseArgs(Map<String, Object> args) {
+        parseContext(args);
+        parseCluster(args);
+        var v = args.get("group");
+        if (v != null) {
+            this.group = v.toString();
+        }
+        v = args.get("targets");
         if (v != null) {
             targets.addAll((List<TargetHost>) v);
+        }
+        v = args.get("hashes");
+        if (v != null) {
+            setCaCertHashes((List<String>) v);
+        }
+        v = args.get("hash");
+        if (v != null) {
+            caCertHash(v.toString());
+        }
+        v = args.get("token");
+        if (v != null) {
+            setToken(v.toString());
+        }
+        v = args.get("bootstrap");
+        if (v != null) {
+            setTlsBootstrapToken(v.toString());
         }
     }
 

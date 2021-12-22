@@ -45,7 +45,7 @@ import com.anrisoftware.sscontrol.k8scluster.script.linux.k8scluster_1_2x.K8sClu
 import com.anrisoftware.sscontrol.k8scluster.script.linux.k8scluster_1_2x.K8sClusterLinuxModule
 import com.anrisoftware.sscontrol.k8scluster.service.K8sClusterFactory
 import com.anrisoftware.sscontrol.k8scluster.service.K8sClusterModule
-import com.anrisoftware.sscontrol.services.internal.host.HostServicesModule
+import com.anrisoftware.sscontrol.services.host.HostServicesModule
 import com.anrisoftware.sscontrol.shell.utils.AbstractScriptTestBase
 import com.anrisoftware.sscontrol.ssh.service.SshModule
 import com.anrisoftware.sscontrol.ssh.service.SshImpl.SshImplFactory

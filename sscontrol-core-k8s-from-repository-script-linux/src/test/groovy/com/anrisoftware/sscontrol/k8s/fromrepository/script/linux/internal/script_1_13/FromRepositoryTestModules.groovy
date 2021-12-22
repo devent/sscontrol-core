@@ -42,7 +42,7 @@ import com.anrisoftware.sscontrol.registry.docker.script.linux.internal.linux.Do
 import com.anrisoftware.sscontrol.registry.docker.service.internal.DockerRegistryModule
 import com.anrisoftware.sscontrol.repo.git.script.debian.internal.debian_9.GitRepoDebianModule
 import com.anrisoftware.sscontrol.repo.git.service.internal.GitRepoModule
-import com.anrisoftware.sscontrol.services.internal.host.HostServicesModule
+import com.anrisoftware.sscontrol.services.host.HostServicesModule
 import com.anrisoftware.sscontrol.ssh.service.SshModule
 import com.anrisoftware.sscontrol.tls.TlsModule
 import com.anrisoftware.sscontrol.types.misc.TypesModule
