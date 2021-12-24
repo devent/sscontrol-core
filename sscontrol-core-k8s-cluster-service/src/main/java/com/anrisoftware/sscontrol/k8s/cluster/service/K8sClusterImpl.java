@@ -79,6 +79,8 @@ public class K8sClusterImpl implements K8sCluster {
 
     private String tlsBootstrapToken;
 
+    private Integer apiPort;
+
     @Inject
     K8sClusterImpl(K8sClusterImplLogger log, HostServicePropertiesService propertiesService,
             ClusterImplFactory clusterFactory, ContextFactory contextFactory, K8sClusterHostFactory clusterHostFactory,
@@ -217,6 +219,9 @@ public class K8sClusterImpl implements K8sCluster {
         setTlsBootstrapToken(bootstrap);
     }
 
+    public void apiPort(int port) {
+        this.apiPort = port;
+    }
 
     @Override
     public String getName() {
@@ -255,6 +260,10 @@ public class K8sClusterImpl implements K8sCluster {
         v = args.get("bootstrap");
         if (v != null) {
             setTlsBootstrapToken(v.toString());
+        }
+        v = args.get("apiPort");
+        if (v != null) {
+            setApiPort((Integer) v);
         }
     }
 

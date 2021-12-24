@@ -15,11 +15,7 @@
  */
 package com.anrisoftware.sscontrol.k8s.base.script.upstream.k8s_1_2x.debian_11
 
-import javax.inject.Inject
-
 import com.anrisoftware.sscontrol.k8s.base.script.upstream.k8s_1_2x.linux.AbstractK8sUpstreamLinux
-import com.anrisoftware.sscontrol.utils.debian.DebianUtils
-import com.anrisoftware.sscontrol.utils.debian.Debian_11_UtilsFactory
 
 import groovy.util.logging.Slf4j
 
@@ -31,13 +27,6 @@ import groovy.util.logging.Slf4j
  */
 @Slf4j
 abstract class AbstractK8sUpstreamDebian extends AbstractK8sUpstreamLinux {
-
-    DebianUtils debian
-
-    @Inject
-    void setDebian(Debian_11_UtilsFactory factory) {
-        this.debian = factory.create this
-    }
 
     def installKubeadm() {
         withRemoteTempFile {

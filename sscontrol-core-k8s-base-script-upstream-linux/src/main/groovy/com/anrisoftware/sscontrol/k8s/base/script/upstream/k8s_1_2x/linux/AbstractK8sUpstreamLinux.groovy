@@ -23,7 +23,6 @@ import org.joda.time.Duration
 import com.anrisoftware.resources.templates.external.TemplateResource
 import com.anrisoftware.resources.templates.external.TemplatesFactory
 import com.anrisoftware.sscontrol.groovy.script.ScriptBase
-import com.anrisoftware.sscontrol.k8s.base.script.upstream.k8s_1_2x.linux.AddressesFactory
 import com.anrisoftware.sscontrol.k8s.base.service.K8s
 import com.anrisoftware.sscontrol.k8s.base.service.Taint
 import com.anrisoftware.sscontrol.k8s.base.service.TaintFactory
@@ -43,6 +42,8 @@ abstract class AbstractK8sUpstreamLinux extends ScriptBase {
 
     TemplateResource kubeadmConfigTemplate
 
+    TemplateResource kubeadmJoinTemplate
+
     @Inject
     AddressesFactory addressesFactory
 
@@ -53,7 +54,8 @@ abstract class AbstractK8sUpstreamLinux extends ScriptBase {
     void loadTemplates(TemplatesFactory templatesFactory) {
         def attr = [renderers: [new UriBase64Renderer()]]
         def templates = templatesFactory.create('K8s_1_2x_UpstreamLinuxTemplates', attr)
-        this.kubeadmConfigTemplate = templates.getResource('kubeadm_config')
+        this.kubeadmConfigTemplate = templates.getResource('kubeadm_control_config')
+        this.kubeadmJoinTemplate = templates.getResource('kubeadm_join_config')
     }
 
     def setupMiscDefaults() {
@@ -65,6 +67,14 @@ abstract class AbstractK8sUpstreamLinux extends ScriptBase {
         if (!service.debugLogging.modules['debug']) {
             service.debug "debug", level: defaultLogLevel
         }
+    }
+
+    /**
+     * Setup defaults for the control pane nodes.
+     */
+    def setupControlDefaults() {
+        log.debug 'Setup control defaults for {}', service
+        K8s service = service
         if (!service.allowPrivileged) {
             service.privileged defaultAllowPrivileged
         }
@@ -78,6 +88,15 @@ abstract class AbstractK8sUpstreamLinux extends ScriptBase {
         }
     }
 
+    def setupClusterDefaults() {
+        log.debug 'Setup cluster defaults for {}', service
+        K8s service = service
+        def cluster = service.clusterHost.cluster
+        if (!cluster.apiPort) {
+            cluster.apiPort defaultApiPort
+        }
+    }
+
     def setupLabelsDefaults() {
         log.debug 'Setup default labels for {}', service
         K8s service = service
@@ -85,6 +104,14 @@ abstract class AbstractK8sUpstreamLinux extends ScriptBase {
         def label = robobeeLabelNode
         service.label key: label, value: name
     }
+
+    def setupSwap() {
+        if (disableSwap) {
+            disableSwap()
+        }
+    }
+
+    abstract disableSwap()
 
     def installKube() {
         K8s service = service
@@ -106,11 +133,9 @@ fi
 
     def joinNode() {
         K8s service = service
-        def joinCommand = service.cluster.joinCommand
-        assert StringUtils.isNotBlank(joinCommand) : "No join command for node ${target}"
         shell privileged: true, timeout: timeoutLong, """
 if ! ls /etc/kubernetes/kubelet.conf&>/dev/null; then
-${joinCommand} --node-name=${service.cluster.name} ${ignoreChecksErrors}
+kubeadm join --config /root/kubeadm.yaml
 fi
 """ call()
     }
@@ -145,10 +170,16 @@ sudo chown \$(id -u):\$(id -g) \$HOME/.kube/config
         kubectlCluster.waitNodeAvailable vars, service.nodeName
     }
 
-    def createKubeadmConfig() {
-        log.info 'Create kubeadm configuration.'
+    def createKubeadmControlConfig() {
+        log.info 'Create kubeadm control configuration.'
         template privileged: true, resource: kubeadmConfigTemplate,
-        name: 'kubeadmConfig', dest: "/root/kubeadm.yaml", vars: [:] call()
+        name: 'kubeadmControlConfig', dest: "/root/kubeadm.yaml", vars: [:] call()
+    }
+
+    def createKubeadmJoinConfig() {
+        log.info 'Create kubeadm join configuration.'
+        template privileged: true, resource: kubeadmJoinTemplate,
+        name: 'kubeadmJoinConfig', dest: "/root/kubeadm.yaml", vars: [:] call()
     }
 
     def createKubeletConfig() {
@@ -267,6 +298,10 @@ kubeadm token create \$token --print-join-command
         getScriptBooleanProperty "default_allocate_node_cidrs"
     }
 
+    int getDefaultApiPort() {
+        getScriptNumberProperty "default_api_port"
+    }
+
     def getKubernetesVersion() {
         getScriptProperty 'kubernetes_version'
     }
@@ -311,6 +346,18 @@ kubeadm token create \$token --print-join-command
      */
     List getKubeadmHold() {
         getScriptListProperty "kubeadm_hold", ","
+    }
+
+    /**
+     * Returns if swap should be disabled,
+     * for example {@code true}
+     *
+     * <ul>
+     * <li>profile property {@code disable_swap}</li>
+     * </ul>
+     */
+    Boolean getDisableSwap() {
+        getScriptBooleanProperty 'disable_swap'
     }
 
     /**

@@ -1,0 +1,18 @@
+/bin/bash -s
+/bin/bash -s
+/bin/bash -s
+mv /tmp/junit/junit.tmp /tmp/junit/junit/usr/share/keyrings/kubernetes-archive-keyring.gpg
+chown root.root /tmp/junit/junit/usr/share/keyrings/kubernetes-archive-keyring.gpg
+chmod +r /tmp/junit/junit/usr/share/keyrings/kubernetes-archive-keyring.gpg
+tee /tmp/junit/junit/etc/apt/sources.list.d/kubernetes.list
+apt-get update
+apt-get install -y kubeadm=1.22.5-00 kubelet=1.22.5-00 kubectl=1.22.5-00
+apt-mark hold kubeadm kubelet kubectl
+/bin/bash -s
+/bin/bash -s
+/bin/bash -s
+/bin/bash -s
+/bin/bash -s
+/bin/bash -s
+/bin/bash -s
+/bin/bash -s

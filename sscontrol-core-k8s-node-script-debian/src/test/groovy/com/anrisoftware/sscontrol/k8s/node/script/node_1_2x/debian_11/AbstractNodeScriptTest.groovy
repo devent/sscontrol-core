@@ -33,11 +33,14 @@ abstract class AbstractNodeScriptTest extends AbstractNodeRunnerTest {
         key: AbstractNodeScriptTest.class.getResource('cert_key.txt'),
     ]
 
+    static final URL fstabSwapFile = AbstractNodeScriptTest.class.getResource('fstab_swap.txt')
+
     void createDummyCommands(File dir) {
         createCommand catCommand, dir, "cat"
         createCommand grepCommand, dir, 'grep'
         createCommand whichufwnotfoundCommand, dir, 'which'
         new File(dir, "/etc/apt/sources.list.d").mkdirs()
+        createFile fstabSwapFile, new File(dir, "/etc"), 'fstab'
         createEchoCommands dir, [
             'id',
             'mkdir',
@@ -48,6 +51,7 @@ abstract class AbstractNodeScriptTest extends AbstractNodeRunnerTest {
             'rm',
             'cp',
             'apt-get',
+            'apt-mark',
             'dpkg',
             'systemctl',
             'which',
@@ -64,6 +68,7 @@ abstract class AbstractNodeScriptTest extends AbstractNodeRunnerTest {
             'ufw',
             'modprobe',
             'kubeadm',
+            'swapoff',
         ]
     }
 }

@@ -1,0 +1,44 @@
+kubeadmJoinConfig(parent, vars) ::= <<
+apiVersion: kubeadm.k8s.io/v1beta3
+kind: InitConfiguration
+nodeRegistration:
+  kubeletExtraArgs:
+    node-labels: "<parent.robobeeLabelNode>=<parent.service.nodeName>"
+---
+apiVersion: kubeadm.k8s.io/v1beta3
+kind: JoinConfiguration
+discovery:
+  bootstrapToken:
+    apiServerEndpoint: "<parent.service.clusterHost.host>:<parent.service.clusterHost.cluster.apiPort>"
+    token: "<parent.service.clusterHost.cluster.token>"
+<if(parent.service.clusterHost.cluster.caCertHashes)>
+    caCertHashes:
+      <caCertHashesList(parent.service.clusterHost.cluster.caCertHashes)>
+<endif>
+    unsafeSkipCAVerification: true
+<if(parent.service.clusterHost.cluster.tlsBootstrapToken)>
+  tlsBootstrapToken: "<parent.service.clusterHost.cluster.tlsBootstrapToken>"
+<endif>
+nodeRegistration:
+  name: "<parent.service.nodeName>"
+<if(!parent.service.taints)>
+  taints: null
+<else>
+  <nodeTaints(parent.service.taints)>
+<endif>
+>>
+
+caCertHashesList(hashes) ::= <<
+<hashes:{h|- "<h>"<\n>}>
+>>
+
+nodeTaints(taints) ::= <<
+taints:
+  <taints.keys:{key|<nodeTaint(taints, key)>}>
+>>
+
+nodeTaint(taints, key) ::= <<
+- key: "<key>"
+  value: "<taints.(key).value>"
+  effect: "<taints.(key).effect>"
+>>

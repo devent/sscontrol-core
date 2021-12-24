@@ -71,7 +71,7 @@ abstract class AbstractNodeRunnerTest extends AbstractRunnerTestBase {
         services.putAvailableService 'k8s-cluster', clusterFactory
         services.putAvailableScriptService 'k8s/cluster/linux/0', clusterLinuxFactory
         services.putAvailableService 'k8s-node', nodeFactory
-        services.putAvailableScriptService 'k8s-node/debian/9', nodeDebianFactory
+        services.putAvailableScriptService 'k8s-node/debian/11', nodeDebianFactory
         return services
     }
 

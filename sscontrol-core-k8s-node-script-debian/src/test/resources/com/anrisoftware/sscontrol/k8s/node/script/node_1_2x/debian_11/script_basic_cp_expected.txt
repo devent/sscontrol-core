@@ -1,0 +1,3 @@
+/var/lib/robobee/tmp/kubeadm.yaml /root/kubeadm.yaml
+/tmp/junit/junit/etc/fstab /var/lib/robobee/tmp
+/var/lib/robobee/tmp/replace.dest /tmp/junit/junit/etc/fstab

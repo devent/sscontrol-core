@@ -1,0 +1,19 @@
+apiVersion: kubeadm.k8s.io/v1beta3
+kind: InitConfiguration
+nodeRegistration:
+  kubeletExtraArgs:
+    node-labels: "robobeerun.com/node=localhost"
+---
+apiVersion: kubeadm.k8s.io/v1beta3
+kind: JoinConfiguration
+discovery:
+  bootstrapToken:
+    apiServerEndpoint: "localhost:6443"
+    token: "34f578.e9676c9fc49544bb"
+    caCertHashes:
+      - "sha256:7501bc596d3dce2f88ece232d3454876293bea94884bb19f90f2ebc6824e845f"
+
+    unsafeSkipCAVerification: true
+nodeRegistration:
+  name: "localhost"
+  taints: null

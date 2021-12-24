@@ -32,6 +32,10 @@ public interface K8sCluster extends ClusterTargetService {
 
     Context getContext();
 
+    void setApiPort(Integer port);
+
+    Integer getApiPort();
+
     void setCaCertHashes(List<String> hashes);
 
     List<String> getCaCertHashes();

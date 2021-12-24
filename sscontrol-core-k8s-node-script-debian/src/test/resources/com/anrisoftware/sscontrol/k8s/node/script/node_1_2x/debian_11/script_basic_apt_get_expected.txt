@@ -1,0 +1,5 @@
+update
+-y install curl
+-y install apt-transport-https
+update
+install -y kubeadm=1.22.5-00 kubelet=1.22.5-00 kubectl=1.22.5-00

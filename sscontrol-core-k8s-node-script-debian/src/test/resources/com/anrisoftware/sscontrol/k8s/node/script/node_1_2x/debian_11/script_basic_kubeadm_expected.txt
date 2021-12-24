@@ -1,0 +1,1 @@
+join --config /root/kubeadm.yaml

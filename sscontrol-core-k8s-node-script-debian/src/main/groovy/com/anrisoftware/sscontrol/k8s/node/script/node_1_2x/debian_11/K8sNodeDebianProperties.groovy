@@ -19,14 +19,14 @@ import com.anrisoftware.propertiesutils.AbstractContextPropertiesProvider
 
 /**
  * K8s-Node Debian properties provider from
- * {@code "/k8s_node_1_13_debian_9.properties"}.
+ * {@code "/k8s_node_1_2x_debian_11.properties"}.
  *
  * @author Erwin Mueller, erwin.mueller@deventm.org
  * @since 1.0
  */
 class K8sNodeDebianProperties extends AbstractContextPropertiesProvider {
 
-    private static final URL RESOURCE = K8sNodeDebianProperties.class.getResource("/k8s_node_1_13_debian_9.properties")
+    private static final URL RESOURCE = K8sNodeDebianProperties.class.getResource("/k8s_node_1_2x_debian_11.properties")
 
     K8sNodeDebianProperties() {
         super(K8sNodeDebianProperties.class, RESOURCE)

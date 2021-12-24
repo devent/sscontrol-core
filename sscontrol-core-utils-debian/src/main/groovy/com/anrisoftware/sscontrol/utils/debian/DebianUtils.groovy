@@ -330,6 +330,43 @@ sudo bash -c 'echo "deb ${args.url} ${args.name} ${args.comp}" > ${args.file}'
     }
 
     /**
+     * Disables the swap.
+     */
+    def disableSwap() {
+        script.replace privileged: true, dest: fstabFile, escape: false, append: false with {
+            line search: "((#?).*${fstabSwapName}.*)", replace: '#$3'
+            it
+        }()
+        script.shell privileged: true, """
+swapoff -a
+""" call()
+    }
+
+    /**
+     * Returns the fstab file to disable swap,
+     * for example {@code /etc/fstab}
+     *
+     * <ul>
+     * <li>profile property {@code fstab_file}</li>
+     * </ul>
+     */
+    File getFstabFile() {
+        script.properties.getFileProperty 'fstab_file', script.base, defaultProperties
+    }
+
+    /**
+     * Returns the fstab swap name,
+     * for example {@code "swap"}
+     *
+     * <ul>
+     * <li>profile property {@code fstab_swap_name}</li>
+     * </ul>
+     */
+    String getFstabSwapName() {
+        script.properties.getProperty 'fstab_swap_name', defaultProperties
+    }
+
+    /**
      * Returns if the packages repository should be updated before any new packages are installed per default,
      * for example {@code "true"}
      *

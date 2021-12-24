@@ -32,6 +32,7 @@ import com.anrisoftware.sscontrol.debug.internal.DebugLoggingModule
 import com.anrisoftware.sscontrol.k8s.base.service.K8sModule
 import com.anrisoftware.sscontrol.k8s.cluster.service.K8sCluster
 import com.anrisoftware.sscontrol.k8s.cluster.service.K8sClusterFactory
+import com.anrisoftware.sscontrol.k8s.cluster.service.K8sClusterHost
 import com.anrisoftware.sscontrol.k8s.cluster.service.K8sClusterModule
 import com.anrisoftware.sscontrol.k8s.node.service.K8sNodeImpl.K8sNodeImplFactory
 import com.anrisoftware.sscontrol.properties.internal.HostServicePropertiesServiceModule
@@ -93,19 +94,22 @@ service "ssh", group: "control-nodes" with {
 service "k8s-cluster", target: "control-nodes" with {
     caCertHash "sha256:7501bc596d3dce2f88ece232d3454876293bea94884bb19f90f2ebc6824e845f"
     token "34f578.e9676c9fc49544bb"
+    apiPort 6443
 }
 service "k8s-node", clusters: "k8s-cluster"
 """,
             scriptVars: [ robobeeSocket: '/tmp/robobee@robobee-3-test:22'],
             expected: { HostServices services ->
-                assert services.getServices('k8s-cluster').size() == 1
-                K8sCluster c = services.getServices('k8s-cluster')[0]
+                assert services.getServices('k8s-node').size() == 1
+                K8sNode s = services.getServices('k8s-node')[0]
+                K8sClusterHost h = s.clusterHost
+                K8sCluster c = h.cluster
                 assert c.caCertHashes.size() == 1
                 assert c.caCertHashes.contains("sha256:7501bc596d3dce2f88ece232d3454876293bea94884bb19f90f2ebc6824e845f")
                 assert c.token == "34f578.e9676c9fc49544bb"
-                assert services.getServices('k8s-node').size() == 1
-                K8sNode s = services.getServices('k8s-node')[0]
+                assert c.apiPort == 6443
                 assert s.clusterHost.hostAddress == "192.168.56.203"
+                assert s.clusterHost.host == "node-3.robobee-test.test"
             },
         ]
         doTest test

@@ -60,7 +60,8 @@ class K8sNodeDebian extends ScriptBase {
         upstream.setupDefaults()
         ufwFactory.create(scriptsRepository, service, target, threads, scriptEnv).run()
         upstream.installKubeadm()
-        upstream.createService()
+        upstream.createConfig()
+        upstream.setupSwap()
         upstream.joinNode()
         upstream.postInstall()
     }

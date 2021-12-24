@@ -20,6 +20,8 @@ import javax.inject.Inject
 import com.anrisoftware.propertiesutils.ContextProperties
 import com.anrisoftware.sscontrol.k8s.base.script.upstream.k8s_1_2x.debian_11.AbstractK8sUpstreamDebian
 import com.anrisoftware.sscontrol.k8s.kubectl.linux.kubectl_1_2x.AbstractKubectlLinux
+import com.anrisoftware.sscontrol.utils.debian.DebianUtils
+import com.anrisoftware.sscontrol.utils.debian.Debian_11_UtilsFactory
 
 import groovy.util.logging.Slf4j
 
@@ -37,32 +39,35 @@ class K8sNodeUpstreamDebian extends AbstractK8sUpstreamDebian {
 
     KubectlClusterDebian kubectlClusterLinux
 
+    DebianUtils debian
+
+    @Inject
+    void setDebian(Debian_11_UtilsFactory factory) {
+        this.debian = factory.create this
+    }
+
     @Override
     Object run() {
     }
 
     def setupDefaults() {
         setupMiscDefaults()
-        setupLabelsDefaults()
-        setupApiServersDefaults()
         setupClusterDefaults()
-        setupClusterHostDefaults()
-        setupKubeletDefaults()
-        setupPluginsDefaults()
-        setupKernelParameter()
+        setupLabelsDefaults()
     }
 
-    def createService() {
-        createDirectories()
-        uploadEtcdCertificates()
-        createKubeletConfig()
-        restartKubelet()
+    def createConfig() {
+        createKubeadmJoinConfig()
     }
 
     def postInstall() {
         applyLabels()
         applyTaints()
-        installPlugins()
+    }
+
+    @Override
+    def disableSwap() {
+        debian.disableSwap()
     }
 
     @Inject
