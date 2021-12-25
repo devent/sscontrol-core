@@ -16,7 +16,7 @@
 package com.anrisoftware.sscontrol.k8s.script.control_1_2x.debian_11
 
 import static com.anrisoftware.globalpom.utils.TestUtils.*
-import static com.anrisoftware.sscontrol.shell.utils.Nodes3AvailableCondition.*
+import static com.anrisoftware.sscontrol.shell.utils.Nodes3Port22222AvailableCondition.*
 import static com.anrisoftware.sscontrol.shell.utils.UnixTestUtil.*
 import static org.junit.jupiter.api.Assumptions.*
 
@@ -24,7 +24,7 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 
-import com.anrisoftware.sscontrol.shell.utils.Nodes3AvailableCondition
+import com.anrisoftware.sscontrol.shell.utils.Nodes3Port22222AvailableCondition
 
 import groovy.util.logging.Slf4j
 
@@ -35,39 +35,31 @@ import groovy.util.logging.Slf4j
  * @version 1.0
  */
 @Slf4j
-@ExtendWith(Nodes3AvailableCondition.class)
+@ExtendWith(Nodes3Port22222AvailableCondition.class)
 class K8sControlClusterTest extends AbstractControlRunnerTest {
 
     @Test
-    void "cluster external etcd, canal"() {
+    void "cluster_basic"() {
         def test = [
-            name: "cluster_external_etcd_canal",
+            name: "cluster_basic",
             script: '''
-service "ssh", host: "robobee@node-0.robobee-test.test", socket: sockets.masters[0]
-service "ssh", group: "masters" with {
-    host "robobee@node-0.robobee-test.test", socket: sockets.masters[0]
+service "ssh", group: "control-nodes" with {
+    host "robobee@node-3.robobee-test.test", socket: sockets.controls[0]
 }
-service "ssh", group: "nodes" with {
-    host "robobee@node-1.robobee-test.test", socket: sockets.nodes[1]
-    host "robobee@node-2.robobee-test.test", socket: sockets.nodes[2]
+service "ssh", group: "worker-nodes" with {
+    host "robobee@node-4.robobee-test.test", socket: sockets.workers[0]
 }
-service "k8s-cluster", target: "masters" with {
+service "k8s-cluster", target: "control-nodes" with {
 }
-service "k8s-master", name: "node-0" with {
-    bind secure: "192.168.56.200"
-    kubelet address: "192.168.56.200"
-    nodes << "masters"
-    nodes << "nodes"
-    plugin "canal", iface: "enp0s8"
-    plugin "etcd", endpoint: "https://10.10.10.7:22379" with {
-        tls certs.etcd
-    }
+service "k8s-control", target: "control-nodes", clusterName: "andrea-cluster-1" with {
+    nodes << "control-nodes"
+    nodes << "worker-nodes"
     label << "robobeerun.com/heapster=required"
     label << "robobeerun.com/dashboard=required"
     label << "robobeerun.com/nfs=required"
 }
 ''',
-            scriptVars: [sockets: nodesSockets, certs: robobeetestCerts],
+            scriptVars: [sockets: nodesSockets],
             generatedDir: folder.newFolder(),
             expectedServicesSize: 3,
             expected: { Map args ->

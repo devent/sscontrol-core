@@ -30,6 +30,10 @@ import groovy.util.logging.Slf4j
 
 /**
  *
+ * <pre>
+ * token=$(kubeadm token generate)
+ * kubeadm token create $token --print-join-command --ttl=24h
+ * <pre>
  *
  * @author Erwin Müller <erwin.mueller@deventm.de>
  * @version 1.0
@@ -43,26 +47,19 @@ class K8sNodeClusterTest extends AbstractNodeRunnerTest {
         def test = [
             name: "nodes_tls",
             script: '''
-service "ssh", host: "robobee@node-0.robobee-test.test", socket: sockets.masters[0]
-service "ssh", group: "masters" with {
-    host "robobee@node-0.robobee-test.test", socket: sockets.masters[0]
+service "ssh", group: "control-nodes" with {
+    host "robobee@node-3.robobee-test.test", socket: sockets.controls[0]
 }
-service "ssh", group: "nodes" with {
-    host "robobee@node-1.robobee-test.test", socket: sockets.nodes[1]
-    host "robobee@node-2.robobee-test.test", socket: sockets.nodes[2]
+service "ssh", group: "worker-nodes" with {
+    host "robobee@node-4.robobee-test.test", socket: sockets.workers[0]
 }
-service "k8s-cluster", target: "masters"
-targets['nodes'].eachWithIndex { host, i ->
-    service "k8s-node", target: host, name: "node-${i+1}" with {
-        plugin "nfs-client"
-        kubelet address: host.hostAddress
-        cluster host: "masters", join: joinCommand
-        nodes.labels[i].each { label << it }
-        nodes.taints[i].each { taint << it }
-    }
+service "k8s-cluster", target: "control-nodes" with {
+    caCertHash "sha256:7501bc596d3dce2f88ece232d3454876293bea94884bb19f90f2ebc6824e845f"
+    token "34f578.e9676c9fc49544bb"
 }
+service "k8s-node", clusters: "k8s-cluster", target: "worker-nodes"
 ''',
-            scriptVars: [sockets: nodesSockets, certs: robobeetestCerts, nodes: nodes, joinCommand: joinCommand],
+            scriptVars: [sockets: nodesSockets],
             expectedServicesSize: 3,
             generatedDir: folder.newFolder(),
             expected: { Map args ->
@@ -72,35 +69,6 @@ targets['nodes'].eachWithIndex { host, i ->
         ]
         doTest test
     }
-
-    static final Map robobeetestCerts = [
-        etcd: [
-            ca: K8sNodeClusterTest.class.getResource('robobee_test_etcd_ca.pem'),
-            cert: K8sNodeClusterTest.class.getResource('robobee_test_etcd_kube_0_cert.pem'),
-            key: K8sNodeClusterTest.class.getResource('robobee_test_etcd_kube_0_key.pem'),
-        ]
-    ]
-
-    /**
-     * <pre>
-     * token=$(kubeadm token generate)
-     * kubeadm token create $token --print-join-command --ttl=24h
-     * <pre>
-     */
-    static final String joinCommand = 'kubeadm join 192.168.56.200:6443 --token 436iqp.g3d36revw808u8e0 --discovery-token-ca-cert-hash sha256:43b33fc2ab538e67b27202388596171f04b12eb02002c790e64395af6ee33a6c'
-
-    static final Map nodes = [
-        labels: [
-            [
-                "robobeerun.com/ingress-nginx=required",
-                "robobeerun.com/cert-manager=required",
-                "muellerpublic.de/role=web",
-            ],
-            [
-                "muellerpublic.de/role=dev",
-            ]
-        ],
-        taints: [[], []]]
 
     void createDummyCommands(File dir) {
     }

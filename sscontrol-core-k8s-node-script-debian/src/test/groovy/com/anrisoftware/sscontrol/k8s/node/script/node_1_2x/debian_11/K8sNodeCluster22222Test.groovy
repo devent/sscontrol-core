@@ -30,6 +30,10 @@ import groovy.util.logging.Slf4j
 
 /**
  *
+ * <pre>
+ * token=$(kubeadm token generate)
+ * kubeadm token create $token --print-join-command --ttl=24h
+ * <pre>
  *
  * @author Erwin Müller <erwin.mueller@deventm.de>
  * @version 1.0
@@ -39,30 +43,23 @@ import groovy.util.logging.Slf4j
 class K8sNodeCluster22222Test extends AbstractNodeRunnerTest {
 
     @Test
-    void "nodes_tls"() {
+    void "cluster_basic"() {
         def test = [
-            name: "nodes_tls",
+            name: "cluster_basic",
             script: '''
-service "ssh", host: "robobee@node-0.robobee-test.test", socket: sockets.masters[0]
-service "ssh", group: "masters" with {
-    host "robobee@node-0.robobee-test.test", socket: sockets.masters[0]
+service "ssh", group: "control-nodes" with {
+    host "robobee@node-3.robobee-test.test", socket: sockets.controls[0]
 }
-service "ssh", group: "nodes" with {
-    host "robobee@node-1.robobee-test.test", socket: sockets.nodes[1]
-    host "robobee@node-2.robobee-test.test", socket: sockets.nodes[2]
+service "ssh", group: "worker-nodes" with {
+    host "robobee@node-4.robobee-test.test", socket: sockets.workers[0]
 }
-service "k8s-cluster", target: "masters"
-targets['nodes'].eachWithIndex { host, i ->
-    service "k8s-node", target: host, name: "node-${i+1}" with {
-        plugin "nfs-client"
-        kubelet address: host.hostAddress
-        cluster host: "masters", join: joinCommand
-        nodes.labels[i].each { label << it }
-        nodes.taints[i].each { taint << it }
-    }
+service "k8s-cluster", target: "control-nodes" with {
+    caCertHash "sha256:c7c5a10534b966da79df9854201242090083520f5988ff6f70f54e191fd11fb1"
+    token "2bfhqk.ol099spevtrhpvml"
 }
+service "k8s-node", clusters: "k8s-cluster", target: "worker-nodes"
 ''',
-            scriptVars: [sockets: nodesSockets, nodes: nodes, joinCommand: joinCommand],
+            scriptVars: [sockets: nodesSockets],
             expectedServicesSize: 3,
             generatedDir: folder.newFolder(),
             expected: { Map args ->
@@ -72,32 +69,6 @@ targets['nodes'].eachWithIndex { host, i ->
         ]
         doTest test
     }
-
-    /**
-     * <pre>
-     * token=$(kubeadm token generate)
-     * kubeadm token create $token --print-join-command --ttl=24h
-     * <pre>
-     */
-    static final String joinCommand = 'kubeadm join 192.168.56.200:6443 --token d7tjs4.tfdwugtlai2j5qf9 --discovery-token-ca-cert-hash sha256:953a58596463f2f1bda76c0de2ea9621213a688c2814aa26b06c3762ff1b404e'
-
-    static final Map nodes = [
-        labels: [
-            [
-                "robobeerun.com/ingress-nginx=required",
-                "robobeerun.com/cert-manager=required",
-                "robobeerun.com/grafana=required",
-                "robobeerun.com/prometheus=required",
-                "robobeerun.com/mariadb=required",
-                "muellerpublic.de/role=web",
-            ],
-            [
-                "robobeerun.com/prometheus=required",
-                "robobeerun.com/mariadb=required",
-                "muellerpublic.de/role=dev",
-            ]
-        ],
-        taints: [[], []]]
 
     void createDummyCommands(File dir) {
     }

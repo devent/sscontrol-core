@@ -15,11 +15,6 @@
  */
 package com.anrisoftware.sscontrol.shell.utils;
 
-import static org.junit.jupiter.api.extension.ConditionEvaluationResult.*
-import org.junit.jupiter.api.extension.ConditionEvaluationResult;
-import org.junit.jupiter.api.extension.ExecutionCondition;
-import org.junit.jupiter.api.extension.ExtensionContext;
-
 /**
  * Checks that the sockets to the cluster nodes are available for tests. Nodes:
  * <ul>
@@ -34,17 +29,16 @@ import org.junit.jupiter.api.extension.ExtensionContext;
 class Nodes3Port22222AvailableCondition extends AbstractSocketsCondition {
 
     static final Map nodesSockets = [
-        masters: [
-            "/tmp/robobee@robobee-test:22"
+        controls: [
+            "/tmp/robobee@robobee-3-test:22"
         ],
-        nodes: [
-            "/tmp/robobee@robobee-test:22",
-            "/tmp/robobee@robobee-1-test:22222",
-            "/tmp/robobee@robobee-2-test:22222",
+        workers: [
+            "/tmp/robobee@robobee-4-test:22222",
+            //"/tmp/robobee@robobee-5-test:22222",
         ]
     ]
 
     Nodes3Port22222AvailableCondition() {
-        super(nodesSockets.nodes)
+        super(nodesSockets.values() as List)
     }
 }
