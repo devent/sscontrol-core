@@ -3,6 +3,7 @@ kind: InitConfiguration
 nodeRegistration:
   kubeletExtraArgs:
     node-labels: "robobeerun.com/node=localhost"
+  name: "localhost"
 ---
 apiVersion: kubeadm.k8s.io/v1beta3
 kind: ClusterConfiguration

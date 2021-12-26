@@ -13,11 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.anrisoftware.sscontrol.k8s.script.control_1_2x.debian_11
+package com.anrisoftware.sscontrol.cilium.script.debian_11
 
 import com.anrisoftware.globalpom.core.resources.ResourcesModule
 import com.anrisoftware.globalpom.core.strings.StringsModule
 import com.anrisoftware.globalpom.core.textmatch.tokentemplate.TokensTemplateModule
+import com.anrisoftware.globalpom.initfileparser.internal.InitFileParserModule
+import com.anrisoftware.resources.binary.internal.binaries.BinariesResourcesModule
+import com.anrisoftware.resources.binary.internal.maps.BinariesDefaultMapsModule
+import com.anrisoftware.resources.texts.internal.texts.TextsResourcesDefaultModule
+import com.anrisoftware.sscontrol.cilium.service.CiliumModule
 import com.anrisoftware.sscontrol.command.shell.internal.cmd.CmdModule
 import com.anrisoftware.sscontrol.command.shell.internal.copy.CopyModule
 import com.anrisoftware.sscontrol.command.shell.internal.facts.FactsModule
@@ -31,22 +36,12 @@ import com.anrisoftware.sscontrol.command.shell.internal.st.StModule
 import com.anrisoftware.sscontrol.command.shell.internal.template.TemplateModule
 import com.anrisoftware.sscontrol.command.shell.internal.templateres.TemplateResModule
 import com.anrisoftware.sscontrol.debug.internal.DebugLoggingModule
-import com.anrisoftware.sscontrol.k8s.base.script.upstream.k8s_1_2x.linux.K8sUpstreamModule
-import com.anrisoftware.sscontrol.k8s.base.service.K8sModule
-import com.anrisoftware.sscontrol.k8s.cluster.script.linux.cluster_1_2x.K8sClusterLinuxModule
-import com.anrisoftware.sscontrol.k8s.cluster.service.K8sClusterModule
-import com.anrisoftware.sscontrol.k8s.control.service.K8sControlModule
-import com.anrisoftware.sscontrol.k8s.kubectl.linux.kubectl_1_2x.KubectlLinuxModule
-import com.anrisoftware.sscontrol.k8s.script.control_1_2x.debian_11.K8sControlDebianModule
 import com.anrisoftware.sscontrol.services.host.HostServicesModule
 import com.anrisoftware.sscontrol.ssh.service.SshModule
 import com.anrisoftware.sscontrol.tls.TlsModule
 import com.anrisoftware.sscontrol.types.misc.TypesModule
-import com.anrisoftware.sscontrol.types.ssh.external.TargetsListModule
 import com.anrisoftware.sscontrol.utils.debian.DebianUtilsModule
-import com.anrisoftware.sscontrol.utils.systemd.SystemdUtilsModule
 import com.anrisoftware.sscontrol.utils.systemmappings.internal.SystemNameMappingsModule
-import com.anrisoftware.sscontrol.utils.ufw.linux.UfwUtilsModule
 
 /**
  *
@@ -54,7 +49,7 @@ import com.anrisoftware.sscontrol.utils.ufw.linux.UfwUtilsModule
  * @author Erwin Müller <erwin.mueller@deventm.de>
  * @version 1.0
  */
-class MasterModules {
+class CiliumTestModules {
 
     /**
      * Returns the needed modules.
@@ -62,16 +57,10 @@ class MasterModules {
     static List getAdditionalModules() {
         [
             new SshModule(),
-            new K8sModule(),
-            new K8sControlModule(),
-            new K8sControlDebianModule(),
-            new K8sUpstreamModule(),
-            new K8sClusterModule(),
-            new K8sClusterLinuxModule(),
-            new KubectlLinuxModule(),
+            new CiliumModule(),
+            new Cilium_Debian_11_Module(),
+            new InitFileParserModule(),
             new DebianUtilsModule(),
-            new SystemdUtilsModule(),
-            new UfwUtilsModule(),
             new DebugLoggingModule(),
             new TypesModule(),
             new StringsModule(),
@@ -87,12 +76,14 @@ class MasterModules {
             new FactsModule(),
             new TemplateModule(),
             new TemplateResModule(),
+            new StModule(),
+            new TextsResourcesDefaultModule(),
+            new BinariesResourcesModule(),
+            new BinariesDefaultMapsModule(),
             new TokensTemplateModule(),
             new ResourcesModule(),
             new TlsModule(),
             new SystemNameMappingsModule(),
-            new StModule(),
-            new TargetsListModule(),
         ]
     }
 }

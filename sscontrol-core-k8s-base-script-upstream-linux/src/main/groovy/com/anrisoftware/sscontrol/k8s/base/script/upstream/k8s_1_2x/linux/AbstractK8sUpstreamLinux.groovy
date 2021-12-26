@@ -117,7 +117,7 @@ abstract class AbstractK8sUpstreamLinux extends ScriptBase {
         K8s service = service
         def cluster = service.clusterHost.cluster
         shell privileged: true, timeout: timeoutLong, """
-if ! kubeadm token list && ! netstat -lnp | grep ${cluster.apiPort}; then
+if ! ls /root/.kube/config&>/dev/null && ! netstat -lnp | grep ${cluster.apiPort}; then
 kubeadm init --config /root/kubeadm.yaml ${kubeadmArgs.join(" ")}
 fi
 """ call()

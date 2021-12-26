@@ -4,6 +4,7 @@ kind: InitConfiguration
 nodeRegistration:
   kubeletExtraArgs:
     node-labels: "<parent.robobeeLabelNode>=<parent.service.nodeName>"
+  name: "<parent.service.nodeName>"
 ---
 apiVersion: kubeadm.k8s.io/v1beta3
 kind: ClusterConfiguration

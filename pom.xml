@@ -76,6 +76,9 @@
         <module>sscontrol-core-command-shell-linux-openssh</module>
         <module>sscontrol-core-command-shell-openssh</module>
         <module>sscontrol-core-command-template</module>
+        <module>sscontrol-core-cilium-script-debian</module>
+        <module>sscontrol-core-cilium-script-1-x</module>
+        <module>sscontrol-core-cilium-service</module>
         <module>sscontrol-core-crio-script-debian</module>
         <module>sscontrol-core-crio-script-crio-1-x</module>
         <module>sscontrol-core-crio-service</module>

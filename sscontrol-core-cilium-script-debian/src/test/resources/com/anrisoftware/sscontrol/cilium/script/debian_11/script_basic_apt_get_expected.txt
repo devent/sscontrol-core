@@ -1,0 +1,4 @@
+update
+-y install curl
+-y install coreutils
+-y install tar

@@ -13,20 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.anrisoftware.sscontrol.shell.linux.internal;
+package com.anrisoftware.sscontrol.cilium.service;
 
-import com.google.inject.AbstractModule;
+import com.anrisoftware.sscontrol.types.host.HostService;
 
 /**
+ * <i>Cilium</i> service.
  *
- *
- * @author Erwin Müller {@literal <erwin.mueller@deventm.de>}
- * @version 1.0
+ * @author Erwin Müller, erwin.mueller@deventm.de
+ * @since 1.0
  */
-public class Shell_Linux_Module extends AbstractModule {
+public interface Cilium extends HostService {
 
-    @Override
-    protected void configure() {
-    }
-
+    /**
+     * Returns the encryption interface.
+     */
+    String getEncryptionInterface();
 }

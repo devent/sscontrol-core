@@ -53,6 +53,7 @@ class K8sControlUpstreamDebian extends AbstractK8sUpstreamDebian {
 
     def setupDefaults() {
         setupMiscDefaults()
+        setupClusterDefaults()
         setupControlDefaults()
         setupLabelsDefaults()
     }
