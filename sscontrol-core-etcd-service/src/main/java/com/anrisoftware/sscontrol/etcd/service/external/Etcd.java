@@ -20,7 +20,7 @@ import java.util.List;
 import com.anrisoftware.sscontrol.tls.Tls;
 import com.anrisoftware.sscontrol.types.host.HostService;
 import com.anrisoftware.sscontrol.types.misc.DebugLogging;
-import com.anrisoftware.sscontrol.types.ssh.external.SshHost;
+import com.anrisoftware.sscontrol.types.ssh.SshHost;
 
 /**
  * <i>Etcd</i> service.

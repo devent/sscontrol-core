@@ -13,25 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.anrisoftware.sscontrol.shell.linux.internal
+package com.anrisoftware.sscontrol.types.ssh;
 
-import static com.anrisoftware.globalpom.utils.TestUtils.*
-import static com.anrisoftware.sscontrol.shell.utils.UnixTestUtil.*
+import com.anrisoftware.sscontrol.types.host.HostServiceFactory;
 
 /**
+ * Target service.
  *
- *
- * @author Erwin Müller <erwin.mueller@deventm.de>
- * @version 1.0
+ * @author Erwin Müller, erwin.mueller@deventm.de
+ * @since 1.0
  */
-abstract class AbstractShellScriptTestBase extends AbstractShellRunnerTestBase {
+public interface TargetServiceService extends HostServiceFactory {
 
-    void createDummyCommands(File dir) {
-        createIdCommand dir
-        createCommand exit1Command, dir, 'grep'
-        createEchoCommands dir, [
-            'cat',
-            'cmd',
-        ]
-    }
 }

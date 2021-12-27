@@ -22,7 +22,7 @@ import com.anrisoftware.sscontrol.services.ssh.TargetsImpl.TargetsImplFactory;
 import com.anrisoftware.sscontrol.types.cluster.ClustersService;
 import com.anrisoftware.sscontrol.types.registry.external.RegistriesService;
 import com.anrisoftware.sscontrol.types.repo.external.ReposService;
-import com.anrisoftware.sscontrol.types.ssh.external.TargetsService;
+import com.anrisoftware.sscontrol.types.ssh.TargetsService;
 import com.google.inject.AbstractModule;
 
 /**

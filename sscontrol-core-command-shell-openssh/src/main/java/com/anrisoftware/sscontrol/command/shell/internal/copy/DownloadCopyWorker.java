@@ -43,7 +43,7 @@ import com.anrisoftware.sscontrol.command.copy.external.Copy;
 import com.anrisoftware.sscontrol.command.shell.external.ssh.ShellExecException;
 import com.anrisoftware.sscontrol.command.shell.internal.ssh.SshRun.SshRunFactory;
 import com.anrisoftware.sscontrol.types.app.external.AppException;
-import com.anrisoftware.sscontrol.types.ssh.external.SshHost;
+import com.anrisoftware.sscontrol.types.ssh.SshHost;
 import com.google.inject.assistedinject.Assisted;
 
 /**

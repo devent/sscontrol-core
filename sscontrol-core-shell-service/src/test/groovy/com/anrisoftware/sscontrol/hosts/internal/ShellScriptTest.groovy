@@ -39,8 +39,8 @@ import com.anrisoftware.sscontrol.shell.internal.ShellImpl.ShellImplFactory
 import com.anrisoftware.sscontrol.types.host.HostServicePropertiesService
 import com.anrisoftware.sscontrol.types.host.HostServices
 import com.anrisoftware.sscontrol.types.misc.TypesModule
-import com.anrisoftware.sscontrol.types.ssh.external.Ssh
-import com.anrisoftware.sscontrol.types.ssh.external.TargetsService
+import com.anrisoftware.sscontrol.types.ssh.Ssh
+import com.anrisoftware.sscontrol.types.ssh.TargetsService
 import com.anrisoftware.sscontrol.utils.systemmappings.internal.SystemNameMappingsModule
 import com.google.inject.AbstractModule
 import com.google.inject.Guice

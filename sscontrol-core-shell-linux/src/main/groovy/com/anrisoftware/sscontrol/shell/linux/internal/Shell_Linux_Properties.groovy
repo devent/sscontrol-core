@@ -16,6 +16,7 @@
 package com.anrisoftware.sscontrol.shell.linux.internal;
 
 import com.anrisoftware.propertiesutils.AbstractContextPropertiesProvider
+import com.anrisoftware.sscontrol.shell.linux.internal.Shell_Linux_Properties
 
 /**
  * Shell GNU/Linux properties provider from

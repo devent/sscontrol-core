@@ -18,7 +18,7 @@ package com.anrisoftware.sscontrol.cilium.service;
 import com.anrisoftware.sscontrol.types.host.HostServiceFactory;
 
 /**
- * <i>Fail2ban</i> service.
+ * <i>Cilium</i> service.
  *
  * @author Erwin Mueller, erwin.mueller@deventm.org
  * @since 1.0

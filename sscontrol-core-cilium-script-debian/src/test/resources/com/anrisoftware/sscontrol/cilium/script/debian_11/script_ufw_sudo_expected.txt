@@ -1,0 +1,15 @@
+/bin/bash -s
+/bin/bash -s
+/bin/bash -s
+tar xzvfC cilium-linux-amd64.tar.gz /usr/local/bin
+/bin/bash -s
+/bin/bash -s
+/bin/bash -s
+/bin/bash -s
+/bin/bash -s
+/bin/bash -s
+/bin/bash -s
+/bin/bash -s
+/bin/bash -s
+/bin/bash -s
+/bin/bash -s

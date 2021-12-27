@@ -18,7 +18,7 @@ package com.anrisoftware.sscontrol.utils.ufw.linux
 import com.anrisoftware.globalpom.exec.external.core.ProcessTask
 import com.anrisoftware.resources.templates.external.TemplateResource
 import com.anrisoftware.sscontrol.types.host.HostServiceScript
-import com.anrisoftware.sscontrol.types.ssh.external.SshHost
+import com.anrisoftware.sscontrol.types.ssh.SshHost
 
 import groovy.util.logging.Slf4j
 
@@ -101,6 +101,14 @@ abstract class UfwUtils {
     def allowFromToAllPorts(def fromNetwork, def toNetwork, def script) {
         script.shell privileged: true, resource: ufwCommandsTemplate, name: "ufwAllowFromToAllPorts",
         vars: [fromNetwork: fromNetwork, toNetwork: toNetwork] call()
+    }
+
+    /**
+     * Allows the specified ports and protocol from address to address.
+     */
+    def allowFromToPorts(def fromNetwork, def toNetwork, List ports, String proto, def script) {
+        script.shell privileged: true, resource: ufwCommandsTemplate, name: "ufwAllowFromToPorts",
+        vars: [fromNetwork: fromNetwork, toNetwork: toNetwork, ports: getTcpPorts(ports), proto: proto] call()
     }
 
     /**

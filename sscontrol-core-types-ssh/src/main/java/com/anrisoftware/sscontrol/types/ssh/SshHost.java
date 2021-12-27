@@ -13,27 +13,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.anrisoftware.sscontrol.types.ssh.external;
+package com.anrisoftware.sscontrol.types.ssh;
 
-import com.google.inject.AbstractModule;
-import com.google.inject.assistedinject.FactoryModuleBuilder;
+import java.io.File;
+import java.net.URI;
+
+import com.anrisoftware.sscontrol.types.host.SystemInfo;
+import com.anrisoftware.sscontrol.types.host.TargetHost;
 
 /**
- *
+ * <i>Ssh</i> host.
  *
  * @author Erwin Müller {@literal <erwin.mueller@deventm.de>}
  * @version 1.0
  */
-public class TargetsListModule extends AbstractModule {
+public interface SshHost extends TargetHost {
 
-    @Override
-    protected void configure() {
-        install(new FactoryModuleBuilder()
-                .implement(TargetsList.class, TargetsList.class)
-                .build(TargetsListFactory.class));
-        install(new FactoryModuleBuilder()
-                .implement(TargetsAddressList.class, TargetsAddressList.class)
-                .build(TargetsAddressListFactory.class));
-    }
+    String getUser();
 
+    /**
+     * Returns the private SSH key.
+     */
+    URI getKey();
+
+    /**
+     * Returns the socket file of a control master for multiplexing.
+     */
+    File getSocket();
+
+    SystemInfo getSystem();
 }

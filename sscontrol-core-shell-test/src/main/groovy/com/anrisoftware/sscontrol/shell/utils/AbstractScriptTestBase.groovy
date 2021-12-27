@@ -52,8 +52,8 @@ import com.anrisoftware.sscontrol.shell.utils.RobobeeScript.RobobeeScriptFactory
 import com.anrisoftware.sscontrol.types.host.HostService
 import com.anrisoftware.sscontrol.types.host.HostServiceScript
 import com.anrisoftware.sscontrol.types.host.HostServices
-import com.anrisoftware.sscontrol.types.ssh.external.SshHost
-import com.anrisoftware.sscontrol.types.ssh.external.TargetsService
+import com.anrisoftware.sscontrol.types.ssh.SshHost
+import com.anrisoftware.sscontrol.types.ssh.TargetsService
 import com.google.inject.AbstractModule
 import com.google.inject.Guice
 import com.google.inject.Injector

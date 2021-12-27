@@ -74,6 +74,11 @@
 
         <!-- compile dependencies -->
         <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
             <groupId>com.anrisoftware.globalpom</groupId>
             <artifactId>globalpom-log</artifactId>
         </dependency>

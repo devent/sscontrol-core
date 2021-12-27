@@ -1,0 +1,23 @@
+
+status
+
+status
+allow from 127.0.0.1 to any port 2379:2380 proto tcp
+allow from 127.0.0.1 to any port 2379:2380 proto tcp
+allow from 127.0.0.1 to any port 4240 proto tcp
+allow from 127.0.0.1 to any port 4240 proto tcp
+
+status
+allow from 127.0.0.1 to any port 2379:2380 proto tcp
+allow from 127.0.0.1 to any port 2379:2380 proto tcp
+allow from 127.0.0.1 to any port 4240 proto tcp
+allow from 127.0.0.1 to any port 4240 proto tcp
+
+status
+allow from 127.0.0.1 to any port 8472 proto udp
+allow from 127.0.0.1 to any port 8472 proto udp
+
+status
+allow from 127.0.0.1 to any port 8472 proto udp
+allow from 127.0.0.1 to any port 8472 proto udp
+allow proto tcp from 10.0.0.0/8 to 127.0.0.1 port 6443

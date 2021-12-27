@@ -13,10 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.anrisoftware.sscontrol.types.ssh.external;
+package com.anrisoftware.sscontrol.cilium.script.debian_11;
 
-import com.anrisoftware.sscontrol.types.host.HostService;
-import com.anrisoftware.sscontrol.types.host.HostServices;
+import com.anrisoftware.sscontrol.types.host.HostServiceScriptFactory;
 
 /**
  *
@@ -24,8 +23,6 @@ import com.anrisoftware.sscontrol.types.host.HostServices;
  * @author Erwin Müller {@literal <erwin.mueller@deventm.de>}
  * @version 1.0
  */
-public interface TargetsAddressListFactory {
+public interface Cilium_Ufw_Debian_11_Factory extends HostServiceScriptFactory {
 
-    TargetsAddressList create(HostService service, HostServices repo,
-            String targetsPropertyName, Object parent);
 }

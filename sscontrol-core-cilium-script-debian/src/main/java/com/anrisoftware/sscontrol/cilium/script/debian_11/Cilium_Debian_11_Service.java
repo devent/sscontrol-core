@@ -15,23 +15,16 @@
  */
 package com.anrisoftware.sscontrol.cilium.script.debian_11;
 
-import static com.google.inject.Guice.createInjector;
-
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 
 import javax.inject.Inject;
-
-import org.osgi.service.component.annotations.Activate;
-import org.osgi.service.component.annotations.Component;
 
 import com.anrisoftware.sscontrol.types.host.HostService;
 import com.anrisoftware.sscontrol.types.host.HostServiceScript;
 import com.anrisoftware.sscontrol.types.host.HostServiceScriptFactory;
 import com.anrisoftware.sscontrol.types.host.HostServices;
 import com.anrisoftware.sscontrol.types.host.TargetHost;
-import com.google.inject.AbstractModule;
-import com.google.inject.assistedinject.FactoryModuleBuilder;
 
 /**
  *
@@ -39,7 +32,6 @@ import com.google.inject.assistedinject.FactoryModuleBuilder;
  * @author Erwin Müller {@literal <erwin.mueller@deventm.de>}
  * @version 1.0
  */
-@Component(service = HostServiceScriptFactory.class)
 public class Cilium_Debian_11_Service implements HostServiceScriptFactory {
 
     static final String SYSTEM_VERSION = "11";
@@ -47,7 +39,7 @@ public class Cilium_Debian_11_Service implements HostServiceScriptFactory {
     static final String SYSTEM_NAME = "debian";
 
     @Inject
-    private Cilium_Debian_11_Factory fail2banFactory;
+    private Cilium_Debian_11_Factory ciliumFactory;
 
     public String getSystemName() {
         return SYSTEM_NAME;
@@ -60,19 +52,6 @@ public class Cilium_Debian_11_Service implements HostServiceScriptFactory {
     @Override
     public HostServiceScript create(HostServices repository, HostService service, TargetHost target,
             ExecutorService threads, Map<String, Object> env) {
-        return fail2banFactory.create(repository, service, target, threads, env);
+        return ciliumFactory.create(repository, service, target, threads, env);
     }
-
-    @Activate
-    protected void start() {
-        createInjector(new AbstractModule() {
-
-            @Override
-            protected void configure() {
-                install(new FactoryModuleBuilder().implement(HostServiceScript.class, Cilium_Debian_11.class)
-                        .build(Cilium_Debian_11_Factory.class));
-            }
-        }).injectMembers(this);
-    }
-
 }

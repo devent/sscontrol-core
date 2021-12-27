@@ -26,7 +26,7 @@ import com.anrisoftware.sscontrol.services.ssh.TargetsImpl.TargetsImplFactory;
 import com.anrisoftware.sscontrol.types.cluster.Clusters;
 import com.anrisoftware.sscontrol.types.registry.external.Registries;
 import com.anrisoftware.sscontrol.types.repo.external.Repos;
-import com.anrisoftware.sscontrol.types.ssh.external.Targets;
+import com.anrisoftware.sscontrol.types.ssh.Targets;
 import com.google.inject.AbstractModule;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 

@@ -15,6 +15,8 @@
  */
 package com.anrisoftware.sscontrol.cilium.service;
 
+import java.util.List;
+
 import com.anrisoftware.sscontrol.types.host.HostService;
 
 /**
@@ -29,4 +31,10 @@ public interface Cilium extends HostService {
      * Returns the encryption interface.
      */
     String getEncryptionInterface();
+
+    /**
+     * Returns the list of Kubernetes nodes.
+     */
+    List<Object> getNodes();
+
 }

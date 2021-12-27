@@ -17,7 +17,7 @@ package com.anrisoftware.sscontrol.k8s.base.script.upstream.k8s_1_2x.linux
 
 import javax.inject.Inject
 
-import com.anrisoftware.sscontrol.types.ssh.external.SshHost
+import com.anrisoftware.sscontrol.types.ssh.SshHost
 import com.google.inject.assistedinject.Assisted
 
 /**

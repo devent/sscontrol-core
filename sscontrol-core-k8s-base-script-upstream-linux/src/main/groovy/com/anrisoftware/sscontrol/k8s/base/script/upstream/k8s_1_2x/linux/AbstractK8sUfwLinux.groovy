@@ -19,8 +19,8 @@ import javax.inject.Inject
 
 import com.anrisoftware.sscontrol.groovy.script.ScriptBase
 import com.anrisoftware.sscontrol.k8s.base.service.K8s
-import com.anrisoftware.sscontrol.types.ssh.external.TargetsAddressListFactory
-import com.anrisoftware.sscontrol.types.ssh.external.TargetsListFactory
+import com.anrisoftware.sscontrol.types.ssh.TargetsAddressListFactory
+import com.anrisoftware.sscontrol.types.ssh.TargetsListFactory
 import com.anrisoftware.sscontrol.utils.ufw.linux.UfwLinuxUtilsFactory
 import com.anrisoftware.sscontrol.utils.ufw.linux.UfwUtils
 

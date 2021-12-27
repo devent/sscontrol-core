@@ -13,16 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.anrisoftware.sscontrol.types.ssh.external;
+package com.anrisoftware.sscontrol.types.ssh;
 
-import com.anrisoftware.sscontrol.types.host.HostTargets;
+import com.anrisoftware.sscontrol.types.host.TargetHostService;
+import com.anrisoftware.sscontrol.types.misc.DebugLogging;
 
 /**
- * Ssh host targets.
+ * <i>Ssh</i> script service.
  *
  * @author Erwin Müller, erwin.mueller@deventm.de
  * @since 1.0
  */
-public interface Targets extends HostTargets<SshHost, Ssh> {
+public interface Ssh extends TargetHostService<SshHost> {
+
+    /**
+     * Returns the debug logging.
+     */
+    DebugLogging getDebugLogging();
 
 }

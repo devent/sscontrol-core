@@ -26,9 +26,14 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import com.anrisoftware.sscontrol.types.host.HostServiceProperties;
 import com.anrisoftware.sscontrol.types.host.HostServicePropertiesService;
 import com.anrisoftware.sscontrol.types.host.TargetHost;
+import com.anrisoftware.sscontrol.types.misc.GeneticListPropertyUtil;
+import com.anrisoftware.sscontrol.types.misc.GeneticListPropertyUtil.GeneticListProperty;
 import com.anrisoftware.sscontrol.types.misc.StringListPropertyUtil.ListProperty;
 import com.google.inject.assistedinject.Assisted;
 import com.google.inject.assistedinject.AssistedInject;
+
+import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Cilium service.
@@ -36,6 +41,8 @@ import com.google.inject.assistedinject.AssistedInject;
  * @author Erwin Müller, erwin.mueller@deventm.de
  * @since 1.0
  */
+@Data
+@Slf4j
 public class CiliumImpl implements Cilium {
 
     /**
@@ -56,10 +63,14 @@ public class CiliumImpl implements Cilium {
 
     private String encryptionInterface;
 
+    private final List<Object> nodes;
+
     @AssistedInject
     CiliumImpl(HostServicePropertiesService propertiesService, @Assisted Map<String, Object> args) {
         this.targets = new ArrayList<>();
         this.serviceProperties = propertiesService.create();
+        this.nodes = new ArrayList<>();
+        parseArgs(args);
     }
 
     @Override
@@ -109,4 +120,34 @@ public class CiliumImpl implements Cilium {
     public String getEncryptionInterface() {
         return encryptionInterface;
     }
+
+    /**
+     * <pre>
+     * node &lt;&lt; 'node0.test'
+     * node &lt;&lt; nodes
+     * </pre>
+     */
+    public List<Object> getNode() {
+        return GeneticListPropertyUtil.<Object>geneticListStatement(new GeneticListProperty<Object>() {
+
+            @Override
+            public void add(Object property) {
+                addNode(property);
+            }
+        });
+    }
+
+    public void addNode(Object node) {
+        nodes.add(node);
+        log.debug("Added node '{}'", node);
+    }
+
+    @SuppressWarnings("unchecked")
+    private void parseArgs(Map<String, Object> args) {
+        Object v = args.get("targets");
+        if (v != null) {
+            targets.addAll((List<TargetHost>) v);
+        }
+    }
+
 }

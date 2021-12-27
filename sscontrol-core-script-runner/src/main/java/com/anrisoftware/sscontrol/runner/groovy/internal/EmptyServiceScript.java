@@ -24,7 +24,7 @@ import com.anrisoftware.sscontrol.types.host.HostService;
 import com.anrisoftware.sscontrol.types.host.HostServiceProperties;
 import com.anrisoftware.sscontrol.types.host.HostServiceScript;
 import com.anrisoftware.sscontrol.types.host.HostServices;
-import com.anrisoftware.sscontrol.types.ssh.external.SshHost;
+import com.anrisoftware.sscontrol.types.ssh.SshHost;
 
 /**
  * 

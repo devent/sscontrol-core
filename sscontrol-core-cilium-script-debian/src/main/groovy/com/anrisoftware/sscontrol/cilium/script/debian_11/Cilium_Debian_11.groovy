@@ -34,6 +34,8 @@ class Cilium_Debian_11 extends Cilium_1_x_Debian {
 
     Upstream_CiliumCli_1_x_Debian_11 ciliumCliUpstreamScript
 
+    Cilium_Ufw_Debian_11 ciliumUfwScript
+
     DebianUtils debian
 
     @Inject
@@ -46,11 +48,17 @@ class Cilium_Debian_11 extends Cilium_1_x_Debian {
         ciliumCliUpstreamScript = factory.create scriptsRepository, service, target, threads, scriptEnv
     }
 
+    @Inject
+    void setCiliumCliUpstreamScript(Cilium_Ufw_Debian_11_Factory factory) {
+        ciliumUfwScript = factory.create scriptsRepository, service, target, threads, scriptEnv
+    }
+
     @Override
     def run() {
         setupDefaults()
         installPackages()
         ciliumCliUpstreamScript.run()
+        ciliumUfwScript.run()
         installCilium()
     }
 

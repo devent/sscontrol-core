@@ -53,11 +53,11 @@ import com.anrisoftware.sscontrol.types.repo.external.Repo;
 import com.anrisoftware.sscontrol.types.repo.external.RepoHost;
 import com.anrisoftware.sscontrol.types.repo.external.Repos;
 import com.anrisoftware.sscontrol.types.repo.external.ReposService;
-import com.anrisoftware.sscontrol.types.ssh.external.Ssh;
-import com.anrisoftware.sscontrol.types.ssh.external.SshHost;
-import com.anrisoftware.sscontrol.types.ssh.external.TargetServiceService;
-import com.anrisoftware.sscontrol.types.ssh.external.Targets;
-import com.anrisoftware.sscontrol.types.ssh.external.TargetsService;
+import com.anrisoftware.sscontrol.types.ssh.Ssh;
+import com.anrisoftware.sscontrol.types.ssh.SshHost;
+import com.anrisoftware.sscontrol.types.ssh.TargetServiceService;
+import com.anrisoftware.sscontrol.types.ssh.Targets;
+import com.anrisoftware.sscontrol.types.ssh.TargetsService;
 import com.anrisoftware.sscontrol.utils.systemmappings.external.DefaultScriptInfoFactory;
 
 /**

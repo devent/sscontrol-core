@@ -17,6 +17,7 @@ package com.anrisoftware.sscontrol.cilium.script.debian_11
 
 import static com.anrisoftware.sscontrol.shell.utils.LocalhostSocketCondition.*
 import static com.anrisoftware.sscontrol.shell.utils.UnixTestUtil.*
+import static com.anrisoftware.sscontrol.utils.debian.Debian_11_TestUtils.*
 
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.condition.EnabledIfSystemProperty
@@ -56,6 +57,40 @@ service "cilium"
                 assertFileResource CiliumScriptTest, dir, "sudo.out", "${args.test.name}_sudo_expected.txt"
                 assertFileResource CiliumScriptTest, dir, "apt-get.out", "${args.test.name}_apt_get_expected.txt"
                 assertFileResource CiliumScriptTest, dir, "cilium.out", "${args.test.name}_cilium_expected.txt"
+                assertFileResource CiliumScriptTest, dir, "kubectl.out", "${args.test.name}_kubectl_expected.txt"
+            }
+        ]
+        doTest test
+    }
+
+    @Test
+    void "script open ports ufw"() {
+        def test = [
+            name: "script_ufw",
+            script: '''
+service "ssh", host: "localhost", socket: localhostSocket
+service "ssh", group: "control-nodes", host: "localhost", socket: localhostSocket
+service "ssh", group: "worker-nodes", host: "localhost", socket: localhostSocket
+service "cilium" with {
+    node << "control-nodes"
+    node << "worker-nodes"
+}
+''',
+            scriptVars: [localhostSocket: localhostSocket],
+            before: { Map test ->
+                createEchoCommand test.dir, 'which'
+                createCommand ufwActiveCommand, test.dir, 'ufw'
+            },
+            generatedDir: folder.newFolder(),
+            expectedServicesSize: 2,
+            expected: { Map args ->
+                File dir = args.dir
+                File gen = args.test.generatedDir
+                assertFileResource CiliumScriptTest, dir, "sudo.out", "${args.test.name}_sudo_expected.txt"
+                assertFileResource CiliumScriptTest, dir, "apt-get.out", "${args.test.name}_apt_get_expected.txt"
+                assertFileResource CiliumScriptTest, dir, "cilium.out", "${args.test.name}_cilium_expected.txt"
+                assertFileResource CiliumScriptTest, dir, "kubectl.out", "${args.test.name}_kubectl_expected.txt"
+                assertFileResource CiliumScriptTest, dir, "ufw.out", "${args.test.name}_ufw_expected.txt"
             }
         ]
         doTest test

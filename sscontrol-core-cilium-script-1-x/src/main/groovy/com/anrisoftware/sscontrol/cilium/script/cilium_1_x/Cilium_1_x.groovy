@@ -17,9 +17,10 @@ package com.anrisoftware.sscontrol.cilium.script.cilium_1_x
 
 import javax.inject.Inject
 
+import com.anrisoftware.resources.templates.external.TemplateResource
+import com.anrisoftware.resources.templates.external.TemplatesFactory
 import com.anrisoftware.sscontrol.cilium.service.Cilium
 import com.anrisoftware.sscontrol.groovy.script.ScriptBase
-import com.anrisoftware.sscontrol.utils.iniconfig.external.InitSectionConfigurer
 
 import groovy.util.logging.Slf4j
 
@@ -32,17 +33,20 @@ import groovy.util.logging.Slf4j
 @Slf4j
 abstract class Cilium_1_x extends ScriptBase {
 
+    TemplateResource ciliumTemplate
+
     @Inject
-    InitSectionConfigurer initSection
+    void loadTemplates(TemplatesFactory templatesFactory) {
+        def templates = templatesFactory.create('Cilium_1_x_Linux_Templates')
+        this.ciliumTemplate = templates.getResource('cilium_cmd')
+    }
 
     def setupDefaults() {
         Cilium service = service
     }
 
     def installCilium() {
-        shell privileged: false, timeout: timeoutLong, """
-cilium install
-""" call()
+        shell privileged: false, timeout: timeoutLong, resource: ciliumTemplate, name: "ciliumInstall" call()
     }
 
     boolean getUseTransparentEncryption() {

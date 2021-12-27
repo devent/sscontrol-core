@@ -34,7 +34,7 @@ import com.anrisoftware.sscontrol.command.copy.external.Copy;
 import com.anrisoftware.sscontrol.command.shell.internal.copy.DownloadCopyWorker.DownloadCopyWorkerFactory;
 import com.anrisoftware.sscontrol.command.shell.internal.copy.ScpCopyWorker.ScpCopyWorkerFactory;
 import com.anrisoftware.sscontrol.types.app.external.AppException;
-import com.anrisoftware.sscontrol.types.ssh.external.SshHost;
+import com.anrisoftware.sscontrol.types.ssh.SshHost;
 import com.google.inject.assistedinject.Assisted;
 
 /**

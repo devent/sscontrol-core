@@ -13,12 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.anrisoftware.sscontrol.types.ssh.external
+package com.anrisoftware.sscontrol.types.ssh
 
 import javax.inject.Inject
 
 import com.anrisoftware.sscontrol.types.host.HostService
 import com.anrisoftware.sscontrol.types.host.HostServices
+import com.anrisoftware.sscontrol.types.ssh.SshHost
 import com.google.inject.assistedinject.Assisted
 
 /**

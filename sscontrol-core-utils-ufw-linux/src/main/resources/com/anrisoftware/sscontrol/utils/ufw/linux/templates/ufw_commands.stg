@@ -13,10 +13,21 @@ allowPortOnNodes(port, parent, vars) ::= <<
 
 /*
  * vars.fromNetwork
- * parent.toNetwork
+ * vars.toNetwork
  */
 ufwAllowFromToAllPorts(parent, vars) ::= <<
 ufw allow from <vars.fromNetwork> to <vars.toNetwork>
+
+>>
+
+/*
+ * vars.fromNetwork
+ * vars.toNetwork
+ * vars.ports
+ * vars.proto
+ */
+ufwAllowFromToPorts(parent, vars) ::= <<
+<vars.ports:{p|ufw allow proto <vars.proto> from <vars.fromNetwork> to <vars.toNetwork> port <p>};separator="\n">
 
 >>
 

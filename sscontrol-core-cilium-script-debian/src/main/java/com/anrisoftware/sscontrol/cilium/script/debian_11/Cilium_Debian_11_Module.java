@@ -23,6 +23,7 @@ import com.google.inject.assistedinject.FactoryModuleBuilder;
  *
  * @see Cilium_Debian_11_Factory
  * @see Upstream_CiliumCli_1_x_Debian_11_Factory
+ * @see Cilium_Ufw_Debian_11_Factory
  * @author Erwin Müller {@literal <erwin.mueller@deventm.de>}
  * @version 1.0
  */
@@ -34,6 +35,8 @@ public class Cilium_Debian_11_Module extends AbstractModule {
                 .build(Cilium_Debian_11_Factory.class));
         install(new FactoryModuleBuilder().implement(HostServiceScript.class, Upstream_CiliumCli_1_x_Debian_11.class)
                 .build(Upstream_CiliumCli_1_x_Debian_11_Factory.class));
+        install(new FactoryModuleBuilder().implement(HostServiceScript.class, Cilium_Ufw_Debian_11.class)
+                .build(Cilium_Ufw_Debian_11_Factory.class));
     }
 
 }

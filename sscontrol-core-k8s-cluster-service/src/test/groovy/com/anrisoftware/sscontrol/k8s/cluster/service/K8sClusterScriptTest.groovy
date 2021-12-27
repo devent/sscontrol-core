@@ -26,7 +26,7 @@ import com.anrisoftware.sscontrol.k8s.cluster.service.K8sCluster
 import com.anrisoftware.sscontrol.k8s.cluster.service.K8sClusterFactory
 import com.anrisoftware.sscontrol.services.host.HostServicesImpl.HostServicesImplFactory
 import com.anrisoftware.sscontrol.types.host.HostServices
-import com.anrisoftware.sscontrol.types.ssh.external.Ssh
+import com.anrisoftware.sscontrol.types.ssh.Ssh
 
 import groovy.util.logging.Slf4j
 

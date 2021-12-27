@@ -18,7 +18,7 @@ package com.anrisoftware.sscontrol.command.shell.linux.openssh.external.find;
 import java.util.Map;
 
 import com.anrisoftware.globalpom.threads.external.core.Threads;
-import com.anrisoftware.sscontrol.types.ssh.external.SshHost;
+import com.anrisoftware.sscontrol.types.ssh.SshHost;
 import com.google.inject.assistedinject.Assisted;
 
 /**

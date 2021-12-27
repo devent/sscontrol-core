@@ -43,7 +43,7 @@ import com.anrisoftware.sscontrol.command.shell.internal.scp.ScpRun.ScpRunFactor
 import com.anrisoftware.sscontrol.command.shell.internal.templateres.TemplateResourceArgs.TemplateResourceArgsFactory;
 import com.anrisoftware.sscontrol.template.external.Template;
 import com.anrisoftware.sscontrol.types.app.external.AppException;
-import com.anrisoftware.sscontrol.types.ssh.external.SshHost;
+import com.anrisoftware.sscontrol.types.ssh.SshHost;
 import com.google.inject.assistedinject.Assisted;
 
 /**

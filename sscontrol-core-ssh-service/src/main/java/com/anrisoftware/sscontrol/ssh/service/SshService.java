@@ -15,7 +15,7 @@
  */
 package com.anrisoftware.sscontrol.ssh.service;
 
-import com.anrisoftware.sscontrol.types.ssh.external.TargetServiceService;
+import com.anrisoftware.sscontrol.types.ssh.TargetServiceService;
 
 /**
  * <i>Ssh</i> service.

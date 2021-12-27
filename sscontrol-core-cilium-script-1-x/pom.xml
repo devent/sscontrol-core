@@ -50,7 +50,7 @@
         </dependency>
         <dependency>
             <groupId>com.anrisoftware.sscontrol</groupId>
-            <artifactId>sscontrol-core-utils-iniconfig</artifactId>
+            <artifactId>sscontrol-core-utils-ufw-linux</artifactId>
             <version>0.14.0-SNAPSHOT</version>
         </dependency>
 
@@ -74,6 +74,10 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-text</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.anrisoftware.resources</groupId>
+            <artifactId>resources-st</artifactId>
         </dependency>
 
     </dependencies>

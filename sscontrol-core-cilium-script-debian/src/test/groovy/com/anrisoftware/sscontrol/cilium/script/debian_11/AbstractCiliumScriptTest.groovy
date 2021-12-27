@@ -31,6 +31,7 @@ abstract class AbstractCiliumScriptTest extends AbstractCiliumRunnerTest {
     void createDummyCommands(File dir) {
         createCommand catCommand, dir, "cat"
         createCommand grepCommand, dir, 'grep'
+        createCommand whichufwnotfoundCommand, dir, 'which'
         createIdCommand dir
         createEchoCommands dir, [
             'touch',
@@ -43,7 +44,6 @@ abstract class AbstractCiliumScriptTest extends AbstractCiliumRunnerTest {
             'cp',
             'apt-get',
             'systemctl',
-            'which',
             'sha256sum',
             'mv',
             'basename',

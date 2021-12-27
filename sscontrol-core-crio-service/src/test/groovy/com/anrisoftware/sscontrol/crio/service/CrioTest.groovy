@@ -30,7 +30,7 @@ import com.anrisoftware.sscontrol.services.host.HostServicesImpl.HostServicesImp
 import com.anrisoftware.sscontrol.services.targets.TargetsModule
 import com.anrisoftware.sscontrol.services.targets.TargetsServiceModule
 import com.anrisoftware.sscontrol.types.host.HostServices
-import com.anrisoftware.sscontrol.types.ssh.external.Ssh
+import com.anrisoftware.sscontrol.types.ssh.Ssh
 import com.anrisoftware.sscontrol.utils.systemmappings.internal.SystemNameMappingsModule
 import com.google.inject.Guice
 

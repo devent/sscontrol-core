@@ -13,22 +13,34 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.anrisoftware.sscontrol.types.ssh.external;
+package com.anrisoftware.sscontrol.cilium.script.debian_11
 
-import com.anrisoftware.sscontrol.types.host.TargetHostService;
-import com.anrisoftware.sscontrol.types.misc.DebugLogging;
+import javax.inject.Inject
+
+import com.anrisoftware.propertiesutils.ContextProperties
+import com.anrisoftware.sscontrol.cilium.script.cilium_1_x.Abstract_Cilium_Ufw_Linux
+
+import groovy.util.logging.Slf4j
 
 /**
- * <i>Ssh</i> script service.
+ * Configures the ufw firewall for Cilium.
  *
  * @author Erwin Müller, erwin.mueller@deventm.de
  * @since 1.0
  */
-public interface Ssh extends TargetHostService<SshHost> {
+@Slf4j
+class Cilium_Ufw_Debian_11 extends Abstract_Cilium_Ufw_Linux {
 
-    /**
-     * Returns the debug logging.
-     */
-    DebugLogging getDebugLogging();
+    @Inject
+    Cilium_Debian_11_Properties debianPropertiesProvider
 
+    @Override
+    ContextProperties getDefaultProperties() {
+        debianPropertiesProvider.get()
+    }
+
+    @Override
+    def getLog() {
+        log
+    }
 }

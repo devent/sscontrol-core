@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.anrisoftware.sscontrol.types.ssh.external;
+package com.anrisoftware.sscontrol.types.ssh;
 
 import com.anrisoftware.sscontrol.types.host.HostService;
 import com.anrisoftware.sscontrol.types.host.HostServices;
@@ -26,6 +26,5 @@ import com.anrisoftware.sscontrol.types.host.HostServices;
  */
 public interface TargetsListFactory {
 
-    TargetsList create(HostService service, HostServices repo,
-            String targetsPropertyName, Object parent);
+    TargetsList create(HostService service, HostServices repo, String targetsPropertyName, Object parent);
 }

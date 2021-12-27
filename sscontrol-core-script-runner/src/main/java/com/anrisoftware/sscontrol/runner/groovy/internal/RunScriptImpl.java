@@ -34,7 +34,7 @@ import com.anrisoftware.sscontrol.types.host.PreHostFactory;
 import com.anrisoftware.sscontrol.types.host.ScriptInfo;
 import com.anrisoftware.sscontrol.types.host.TargetHost;
 import com.anrisoftware.sscontrol.types.run.external.RunScript;
-import com.anrisoftware.sscontrol.types.ssh.external.SshHost;
+import com.anrisoftware.sscontrol.types.ssh.SshHost;
 import com.anrisoftware.sscontrol.utils.systemmappings.external.AbstractScriptInfo;
 import com.anrisoftware.sscontrol.utils.systemmappings.external.AbstractSystemInfo;
 import com.google.inject.assistedinject.Assisted;

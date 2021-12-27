@@ -39,8 +39,8 @@ import com.anrisoftware.sscontrol.types.host.HostServicePropertiesService;
 import com.anrisoftware.sscontrol.types.host.TargetHost;
 import com.anrisoftware.sscontrol.types.misc.DebugLogging;
 import com.anrisoftware.sscontrol.types.misc.StringListPropertyUtil.ListProperty;
-import com.anrisoftware.sscontrol.types.ssh.external.Ssh;
-import com.anrisoftware.sscontrol.types.ssh.external.SshHost;
+import com.anrisoftware.sscontrol.types.ssh.Ssh;
+import com.anrisoftware.sscontrol.types.ssh.SshHost;
 import com.google.inject.assistedinject.Assisted;
 import com.google.inject.assistedinject.AssistedInject;
 

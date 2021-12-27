@@ -23,9 +23,9 @@ import com.anrisoftware.sscontrol.types.host.HostService
 import com.anrisoftware.sscontrol.types.host.HostServiceProperties
 import com.anrisoftware.sscontrol.types.host.TargetHost
 import com.anrisoftware.sscontrol.types.misc.DebugLogging
-import com.anrisoftware.sscontrol.types.ssh.external.Ssh
-import com.anrisoftware.sscontrol.types.ssh.external.SshHost
-import com.anrisoftware.sscontrol.types.ssh.external.TargetServiceService
+import com.anrisoftware.sscontrol.types.ssh.Ssh
+import com.anrisoftware.sscontrol.types.ssh.SshHost
+import com.anrisoftware.sscontrol.types.ssh.TargetServiceService
 import com.google.inject.assistedinject.Assisted
 
 import groovy.transform.ToString

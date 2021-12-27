@@ -33,7 +33,7 @@ import com.anrisoftware.sscontrol.command.shell.external.Shell.ShellFactory;
 import com.anrisoftware.sscontrol.command.shell.internal.facts.CatReleaseParse.CatReleaseParseFactory;
 import com.anrisoftware.sscontrol.types.app.external.AppException;
 import com.anrisoftware.sscontrol.types.host.SystemInfo;
-import com.anrisoftware.sscontrol.types.ssh.external.SshHost;
+import com.anrisoftware.sscontrol.types.ssh.SshHost;
 import com.google.inject.assistedinject.Assisted;
 
 /**

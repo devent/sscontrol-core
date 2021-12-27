@@ -35,7 +35,7 @@ import com.anrisoftware.sscontrol.command.shell.internal.replace.PushFileWorker.
 import com.anrisoftware.sscontrol.command.shell.internal.replace.ReplaceLine.ReplaceLineFactory;
 import com.anrisoftware.sscontrol.command.shell.internal.replace.ReplaceWorker.ReplaceWorkerFactory;
 import com.anrisoftware.sscontrol.types.app.external.AppException;
-import com.anrisoftware.sscontrol.types.ssh.external.SshHost;
+import com.anrisoftware.sscontrol.types.ssh.SshHost;
 import com.google.inject.assistedinject.Assisted;
 
 /**

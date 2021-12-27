@@ -13,16 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.anrisoftware.sscontrol.types.ssh.external;
+package com.anrisoftware.sscontrol.types.ssh;
+
+import com.anrisoftware.sscontrol.types.host.HostService;
+import com.anrisoftware.sscontrol.types.host.HostServices;
+import com.anrisoftware.sscontrol.types.ssh.TargetsAddressList;
 
 /**
- * Creates the ssh host targets.
  *
- * @author Erwin Müller, erwin.mueller@deventm.de
- * @since 1.0
+ *
+ * @author Erwin Müller {@literal <erwin.mueller@deventm.de>}
+ * @version 1.0
  */
-public interface TargetsService {
+public interface TargetsAddressListFactory {
 
-    Targets create();
-
+    TargetsAddressList create(HostService service, HostServices repo,
+            String targetsPropertyName, Object parent);
 }

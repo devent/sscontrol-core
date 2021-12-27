@@ -35,7 +35,7 @@ import com.anrisoftware.sscontrol.command.shell.external.Scp;
 import com.anrisoftware.sscontrol.command.shell.external.ssh.ShellExecException;
 import com.anrisoftware.sscontrol.command.shell.internal.scp.ScpRun.ScpRunFactory;
 import com.anrisoftware.sscontrol.types.app.external.AppException;
-import com.anrisoftware.sscontrol.types.ssh.external.SshHost;
+import com.anrisoftware.sscontrol.types.ssh.SshHost;
 import com.google.inject.assistedinject.Assisted;
 
 /**

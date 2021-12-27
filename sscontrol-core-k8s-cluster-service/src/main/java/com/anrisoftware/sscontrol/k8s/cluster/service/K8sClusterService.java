@@ -15,7 +15,7 @@
  */
 package com.anrisoftware.sscontrol.k8s.cluster.service;
 
-import com.anrisoftware.sscontrol.types.ssh.external.TargetServiceService;
+import com.anrisoftware.sscontrol.types.ssh.TargetServiceService;
 
 /**
  * Kubernetes control service.

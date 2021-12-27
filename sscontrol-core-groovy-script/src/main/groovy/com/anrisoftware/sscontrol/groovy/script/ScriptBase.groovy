@@ -53,7 +53,7 @@ import com.anrisoftware.sscontrol.types.host.HostServiceScriptFactory
 import com.anrisoftware.sscontrol.types.host.HostServices
 import com.anrisoftware.sscontrol.types.host.SystemInfo
 import com.anrisoftware.sscontrol.types.host.TargetHost
-import com.anrisoftware.sscontrol.types.ssh.external.SshHost
+import com.anrisoftware.sscontrol.types.ssh.SshHost
 import com.anrisoftware.sscontrol.utils.systemmappings.external.AbstractScriptInfo
 import com.google.inject.assistedinject.Assisted
 
