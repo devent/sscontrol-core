@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.anrisoftware.sscontrol.k8s.fromhelm.script.linux.internal.script_1_13;
+package com.anrisoftware.sscontrol.repo.git.script.debian_11
 
 import static com.anrisoftware.globalpom.utils.TestUtils.*
 
@@ -21,8 +21,6 @@ import javax.inject.Inject
 
 import org.junit.jupiter.api.BeforeEach
 
-import com.anrisoftware.sscontrol.k8s.fromhelm.service.internal.FromHelmImpl.FromHelmImplFactory
-import com.anrisoftware.sscontrol.repo.git.script.debian_11.GitRepoDebianFactory
 import com.anrisoftware.sscontrol.repo.git.service.GitRepoImpl.GitRepoImplFactory
 import com.anrisoftware.sscontrol.runner.groovy.internal.RunnerModule
 import com.anrisoftware.sscontrol.runner.groovy.internal.RunScriptImpl.RunScriptImplFactory
@@ -38,9 +36,7 @@ import com.anrisoftware.sscontrol.types.host.HostServices
  * @author Erwin Müller, erwin.mueller@deventm.de
  * @since 1.0
  */
-abstract class AbstractFromHelmRunnerTest extends AbstractRunnerTestBase {
-
-    static final URL helmCommand = AbstractFromHelmRunnerTest.class.getResource('helm_command.txt')
+abstract class AbstractGitRunnerTest extends AbstractRunnerTestBase {
 
     @Inject
     RunScriptImplFactory runnerFactory
@@ -57,12 +53,6 @@ abstract class AbstractFromHelmRunnerTest extends AbstractRunnerTestBase {
     @Inject
     GitRepoDebianFactory gitDebianFactory
 
-    @Inject
-    FromHelmImplFactory fromHelmFactory
-
-    @Inject
-    FromHelmLinuxFactory fromHelmLinuxFactory
-
     def getRunScriptFactory() {
         runnerFactory
     }
@@ -71,9 +61,7 @@ abstract class AbstractFromHelmRunnerTest extends AbstractRunnerTestBase {
         services.putAvailableService 'ssh', sshFactory
         services.putAvailableScriptService 'ssh/linux/0', sshLinuxFactory
         services.putAvailableService 'repo-git', gitFactory
-        services.putAvailableScriptService 'repo-git/debian/9', gitDebianFactory
-        services.putAvailableService 'from-helm', fromHelmFactory
-        services.putAvailableScriptService 'from-helm/linux/0', fromHelmLinuxFactory
+        services.putAvailableScriptService 'repo-git/debian/11', gitDebianFactory
         return services
     }
 
@@ -81,10 +69,9 @@ abstract class AbstractFromHelmRunnerTest extends AbstractRunnerTestBase {
         def modules = super.additionalModules
         modules << new RunnerModule()
         modules << new Ssh_Linux_Module()
-        modules.addAll FromRepositoryTestModules.getAdditionalModules()
+        modules.addAll GitRepoTestModules.getAdditionalModules()
         modules
     }
-
 
     @BeforeEach
     void setupTest() {

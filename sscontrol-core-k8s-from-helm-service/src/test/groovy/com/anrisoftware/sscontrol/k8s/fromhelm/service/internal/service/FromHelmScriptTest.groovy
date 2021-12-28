@@ -37,8 +37,8 @@ import com.anrisoftware.sscontrol.k8s.fromhelm.service.internal.FromHelmModule
 import com.anrisoftware.sscontrol.k8s.fromhelm.service.internal.FromHelmImpl.FromHelmImplFactory
 import com.anrisoftware.sscontrol.properties.internal.HostServicePropertiesServiceModule
 import com.anrisoftware.sscontrol.properties.internal.PropertiesModule
-import com.anrisoftware.sscontrol.repo.git.service.internal.GitRepoModule
-import com.anrisoftware.sscontrol.repo.git.service.internal.GitRepoImpl.GitRepoImplFactory
+import com.anrisoftware.sscontrol.repo.git.service.GitRepoModule
+import com.anrisoftware.sscontrol.repo.git.service.GitRepoImpl.GitRepoImplFactory
 import com.anrisoftware.sscontrol.services.host.HostServicesModule
 import com.anrisoftware.sscontrol.services.host.HostServicesImpl.HostServicesImplFactory
 import com.anrisoftware.sscontrol.services.targets.TargetsModule

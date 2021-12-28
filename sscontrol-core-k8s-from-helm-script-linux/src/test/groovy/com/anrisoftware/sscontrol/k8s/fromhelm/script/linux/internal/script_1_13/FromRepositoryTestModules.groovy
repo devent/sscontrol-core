@@ -37,8 +37,8 @@ import com.anrisoftware.sscontrol.k8s.fromhelm.service.internal.FromHelmModule
 import com.anrisoftware.sscontrol.k8s.kubectl.linux.kubectl_1_2x.KubectlLinuxModule
 import com.anrisoftware.sscontrol.registry.docker.script.linux.internal.linux.DockerRegistryLinuxModule
 import com.anrisoftware.sscontrol.registry.docker.service.internal.DockerRegistryModule
-import com.anrisoftware.sscontrol.repo.git.script.debian.internal.debian_9.GitRepoDebianModule
-import com.anrisoftware.sscontrol.repo.git.service.internal.GitRepoModule
+import com.anrisoftware.sscontrol.repo.git.script.debian_11.GitRepoDebianModule
+import com.anrisoftware.sscontrol.repo.git.service.GitRepoModule
 import com.anrisoftware.sscontrol.services.host.HostServicesModule
 import com.anrisoftware.sscontrol.ssh.service.SshModule
 import com.anrisoftware.sscontrol.tls.TlsModule

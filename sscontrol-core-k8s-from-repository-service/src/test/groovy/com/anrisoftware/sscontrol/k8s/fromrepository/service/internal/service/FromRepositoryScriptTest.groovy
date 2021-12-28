@@ -38,8 +38,8 @@ import com.anrisoftware.sscontrol.k8s.fromrepository.service.internal.FromReposi
 import com.anrisoftware.sscontrol.k8s.fromrepository.service.internal.FromRepositoryImpl.FromRepositoryImplFactory
 import com.anrisoftware.sscontrol.properties.internal.HostServicePropertiesServiceModule
 import com.anrisoftware.sscontrol.properties.internal.PropertiesModule
-import com.anrisoftware.sscontrol.repo.git.service.internal.GitRepoModule
-import com.anrisoftware.sscontrol.repo.git.service.internal.GitRepoImpl.GitRepoImplFactory
+import com.anrisoftware.sscontrol.repo.git.service.GitRepoModule
+import com.anrisoftware.sscontrol.repo.git.service.GitRepoImpl.GitRepoImplFactory
 import com.anrisoftware.sscontrol.services.host.HostServicesModule
 import com.anrisoftware.sscontrol.services.host.HostServicesImpl.HostServicesImplFactory
 import com.anrisoftware.sscontrol.services.targets.TargetsModule
