@@ -1,0 +1,2 @@
+-v
+upgrade -f /tmp/junit/junit.tmp stable/mariadb
