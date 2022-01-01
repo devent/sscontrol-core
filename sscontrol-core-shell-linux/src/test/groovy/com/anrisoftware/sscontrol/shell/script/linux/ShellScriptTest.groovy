@@ -58,6 +58,20 @@ service "shell" with {
                     File gen = it.test.generatedDir
                     assertFileResource ShellScriptTest, dir, "mkdir.out", "${it.test.name}_mkdir_expected.txt"
                 })
+        list << of(
+                "shell_privileged",
+                """\
+service "ssh", host: "localhost", socket: localhostSocket
+service "shell", privileged: true with {
+    script "mkdir Hello"
+    script << "mkdir Hello"
+}
+""", {
+                    File dir = it.dir
+                    File gen = it.test.generatedDir
+                    assertFileResource ShellScriptTest, dir, "sudo.out", "${it.test.name}_sudo_expected.txt"
+                    assertFileResource ShellScriptTest, dir, "mkdir.out", "${it.test.name}_mkdir_expected.txt"
+                })
         list.stream()
     }
 

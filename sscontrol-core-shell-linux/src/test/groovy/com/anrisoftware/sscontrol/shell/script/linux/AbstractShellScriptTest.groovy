@@ -33,6 +33,7 @@ abstract class AbstractShellScriptTest extends AbstractShellRunnerTest {
         createIdCommand dir
         createEchoCommands dir, [
             'mkdir',
+            'sudo',
         ]
     }
 }

@@ -177,15 +177,11 @@ public class ShellImpl implements Shell {
                 .toString();
     }
 
+    @SuppressWarnings("unchecked")
     private void parseArgs(Map<String, Object> args) {
         if (vars.containsKey("target")) {
             vars.remove("target");
         }
-        parseTargets(args);
-    }
-
-    @SuppressWarnings("unchecked")
-    private void parseTargets(Map<String, Object> args) {
         Object v = args.get("targets");
         if (v != null) {
             targets.addAll((List<TargetHost>) v);
