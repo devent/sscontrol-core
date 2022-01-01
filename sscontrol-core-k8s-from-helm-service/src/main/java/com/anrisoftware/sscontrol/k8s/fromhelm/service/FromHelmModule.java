@@ -22,6 +22,8 @@ import com.google.inject.AbstractModule;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 
 /**
+ * @see FromHelmImplFactory
+ * @see ReleaseImplFactory
  * @author Erwin Müller {@literal <erwin.mueller@deventm.de>}
  * @version 1.0
  */
