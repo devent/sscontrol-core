@@ -18,7 +18,7 @@ package com.anrisoftware.sscontrol.fail2ban.script.centos.internal.centos
 import javax.inject.Inject
 
 import com.anrisoftware.sscontrol.fail2ban.script.fail2ban_0_11.Fail2ban_0_11
-import com.anrisoftware.sscontrol.utils.centos.external.CentosUtils
+import com.anrisoftware.sscontrol.utils.centos.CentosUtils
 import com.anrisoftware.sscontrol.utils.systemd.SystemdUtils
 import com.anrisoftware.sscontrol.utils.systemd.SystemdUtilsFactory
 

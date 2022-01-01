@@ -36,7 +36,7 @@ import com.anrisoftware.sscontrol.debug.internal.DebugLoggingModule
 import com.anrisoftware.sscontrol.services.host.HostServicesModule
 import com.anrisoftware.sscontrol.ssh.service.SshModule
 import com.anrisoftware.sscontrol.types.misc.TypesModule
-import com.anrisoftware.sscontrol.utils.centos.external.CentosUtilsModule
+import com.anrisoftware.sscontrol.utils.centos.CentosUtilsModule
 import com.anrisoftware.sscontrol.utils.systemd.SystemdUtilsModule
 import com.anrisoftware.sscontrol.utils.systemmappings.internal.SystemNameMappingsModule
 

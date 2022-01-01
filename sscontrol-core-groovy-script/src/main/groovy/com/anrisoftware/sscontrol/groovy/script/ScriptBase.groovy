@@ -676,7 +676,7 @@ abstract class ScriptBase extends Script implements HostServiceScript {
      * @see #getDefaultProperties()
      */
     File getConfigFile() {
-        etFileProperty "config_file", configDir
+        getFileProperty "config_file", configDir
     }
 
     URI getArchive() {

@@ -19,8 +19,8 @@ import javax.inject.Inject
 
 import com.anrisoftware.sscontrol.fail2ban.script.centos.internal.centos.Fail2ban_Centos
 import com.anrisoftware.sscontrol.fail2ban.script.fail2ban_0_x.Jail_0_x
-import com.anrisoftware.sscontrol.utils.centos.external.CentosUtils
-import com.anrisoftware.sscontrol.utils.centos.external.Centos_7_UtilsFactory
+import com.anrisoftware.sscontrol.utils.centos.CentosUtils
+import com.anrisoftware.sscontrol.utils.centos.Centos_7_UtilsFactory
 
 /**
  * Configures the <i>Fail2ban</i> service for CentOS 7.

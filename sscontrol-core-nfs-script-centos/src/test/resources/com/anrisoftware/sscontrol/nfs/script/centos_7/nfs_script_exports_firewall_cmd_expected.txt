@@ -1,0 +1,9 @@
+--get-zones
+--permanent --zone=nfs --add-service=mountd
+--permanent --zone=nfs --add-service=rpc-bind
+--permanent --zone=nfs --add-service=nfs
+--permanent --zone=nfs --add-source=185.24.220.41
+--permanent --zone=nfs --add-source=37.252.124.149
+--permanent --zone=nfs --add-source=84.22.100.9
+--permanent --zone=nfs --add-source=46.19.33.244
+--reload

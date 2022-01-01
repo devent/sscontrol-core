@@ -18,8 +18,8 @@ package com.anrisoftware.sscontrol.collectd.script.centos.external
 import javax.inject.Inject
 
 import com.anrisoftware.sscontrol.groovy.script.ScriptBase
-import com.anrisoftware.sscontrol.utils.centos.external.CentosUtils
-import com.anrisoftware.sscontrol.utils.centos.external.Centos_7_UtilsFactory
+import com.anrisoftware.sscontrol.utils.centos.CentosUtils
+import com.anrisoftware.sscontrol.utils.centos.Centos_7_UtilsFactory
 
 import groovy.util.logging.Slf4j
 

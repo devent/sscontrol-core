@@ -20,8 +20,8 @@ import javax.inject.Inject
 import com.anrisoftware.propertiesutils.ContextProperties
 import com.anrisoftware.sscontrol.sshd.script.openssh.SshdSystemd
 import com.anrisoftware.sscontrol.sshd.service.Sshd
-import com.anrisoftware.sscontrol.utils.centos.external.CentosUtils
-import com.anrisoftware.sscontrol.utils.centos.external.Centos_7_UtilsFactory
+import com.anrisoftware.sscontrol.utils.centos.CentosUtils
+import com.anrisoftware.sscontrol.utils.centos.Centos_7_UtilsFactory
 
 import groovy.util.logging.Slf4j
 

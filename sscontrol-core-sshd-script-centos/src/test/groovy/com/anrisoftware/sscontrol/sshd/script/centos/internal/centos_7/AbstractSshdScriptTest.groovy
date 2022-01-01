@@ -16,7 +16,7 @@
 package com.anrisoftware.sscontrol.sshd.script.centos.internal.centos_7
 
 import static com.anrisoftware.sscontrol.shell.utils.UnixTestUtil.*
-import static com.anrisoftware.sscontrol.utils.centos.external.Centos_7_TestUtils.*
+import static com.anrisoftware.sscontrol.utils.centos.Centos_7_TestUtils.*
 
 /**
  *
