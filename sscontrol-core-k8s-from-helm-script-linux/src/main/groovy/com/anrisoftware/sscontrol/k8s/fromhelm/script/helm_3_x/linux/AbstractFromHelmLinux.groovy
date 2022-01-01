@@ -145,7 +145,7 @@ abstract class AbstractFromHelmLinux extends ScriptBase {
         v.name = "helmReleaseCmd"
         v.timeout = timeoutShort
         v.exitCodes = [0, 1] as int[]
-        v.vars = [service: service, status: "DEPLOYED"]
+        v.vars = [service: service, status: "deployed"]
         def p = shell v call()
         return p.exitValue == 0
     }
