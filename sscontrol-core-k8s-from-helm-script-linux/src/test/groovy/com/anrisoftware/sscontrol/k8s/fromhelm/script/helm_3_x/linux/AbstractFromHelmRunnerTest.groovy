@@ -79,7 +79,7 @@ abstract class AbstractFromHelmRunnerTest extends AbstractRunnerTestBase {
         def modules = super.additionalModules
         modules << new RunnerModule()
         modules << new Ssh_Linux_Module()
-        modules.addAll FromRepositoryTestModules.getAdditionalModules()
+        modules.addAll FromHelmTestModules.getAdditionalModules()
         modules
     }
 

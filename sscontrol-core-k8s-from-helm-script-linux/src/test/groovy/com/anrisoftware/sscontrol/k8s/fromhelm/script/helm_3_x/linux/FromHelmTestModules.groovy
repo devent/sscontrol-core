@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.anrisoftware.sscontrol.shell.linux
+package com.anrisoftware.sscontrol.k8s.fromhelm.script.helm_3_x.linux
 
 import com.anrisoftware.globalpom.core.resources.ResourcesModule
 import com.anrisoftware.globalpom.core.strings.StringsModule
@@ -30,11 +30,19 @@ import com.anrisoftware.sscontrol.command.shell.internal.ssh.SshShellModule
 import com.anrisoftware.sscontrol.command.shell.internal.st.StModule
 import com.anrisoftware.sscontrol.command.shell.internal.template.TemplateModule
 import com.anrisoftware.sscontrol.command.shell.internal.templateres.TemplateResModule
+import com.anrisoftware.sscontrol.command.shell.linux.openssh.internal.find.FindModule
 import com.anrisoftware.sscontrol.debug.internal.DebugLoggingModule
+import com.anrisoftware.sscontrol.k8s.base.service.K8sModule
+import com.anrisoftware.sscontrol.k8s.fromhelm.service.FromHelmModule
+import com.anrisoftware.sscontrol.k8s.kubectl.linux.kubectl_1_2x.KubectlLinuxModule
+import com.anrisoftware.sscontrol.repo.helm.script.debian_11.HelmRepoDebianModule
+import com.anrisoftware.sscontrol.repo.helm.service.HelmRepoModule
 import com.anrisoftware.sscontrol.services.host.HostServicesModule
-import com.anrisoftware.sscontrol.shell.internal.ShellModule
 import com.anrisoftware.sscontrol.ssh.service.SshModule
+import com.anrisoftware.sscontrol.tls.TlsModule
 import com.anrisoftware.sscontrol.types.misc.TypesModule
+import com.anrisoftware.sscontrol.utils.debian.DebianUtilsModule
+import com.anrisoftware.sscontrol.utils.repo.UtilsRepoModule
 import com.anrisoftware.sscontrol.utils.systemmappings.internal.SystemNameMappingsModule
 
 /**
@@ -43,22 +51,25 @@ import com.anrisoftware.sscontrol.utils.systemmappings.internal.SystemNameMappin
  * @author Erwin Müller <erwin.mueller@deventm.de>
  * @version 1.0
  */
-class ShellTestModules {
+class FromHelmTestModules {
 
-    /**
-     * Returns the needed modules.
-     */
     static List getAdditionalModules() {
         [
             new SshModule(),
-            new ShellModule(),
+            new K8sModule(),
+            new KubectlLinuxModule(),
+            new FromHelmModule(),
+            new FromHelmLinuxModule(),
+            new HelmRepoModule(),
+            new HelmRepoDebianModule(),
+            new UtilsRepoModule(),
+            new DebianUtilsModule(),
             new DebugLoggingModule(),
             new TypesModule(),
             new StringsModule(),
             new HostServicesModule(),
             new ShellCmdModule(),
             new SshShellModule(),
-            new StModule(),
             new CmdImplModule(),
             new CmdModule(),
             new ScpModule(),
@@ -68,9 +79,12 @@ class ShellTestModules {
             new FactsModule(),
             new TemplateModule(),
             new TemplateResModule(),
+            new StModule(),
             new TokensTemplateModule(),
             new ResourcesModule(),
+            new TlsModule(),
             new SystemNameMappingsModule(),
+            new FindModule(),
         ]
     }
 }

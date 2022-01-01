@@ -13,10 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.anrisoftware.sscontrol.shell.linux
+package com.anrisoftware.sscontrol.shell.script.linux
 
 import static com.anrisoftware.globalpom.utils.TestUtils.*
 import static com.anrisoftware.sscontrol.shell.utils.UnixTestUtil.*
+import static com.anrisoftware.sscontrol.utils.debian.Debian_11_TestUtils.*
 
 /**
  *
@@ -24,14 +25,14 @@ import static com.anrisoftware.sscontrol.shell.utils.UnixTestUtil.*
  * @author Erwin Müller <erwin.mueller@deventm.de>
  * @version 1.0
  */
-abstract class AbstractShellScriptTestBase extends AbstractShellRunnerTestBase {
+abstract class AbstractShellScriptTest extends AbstractShellRunnerTest {
 
     void createDummyCommands(File dir) {
+        createCommand catCommand, dir, "cat"
+        createCommand grepCommand, dir, 'grep'
         createIdCommand dir
-        createCommand exit1Command, dir, 'grep'
         createEchoCommands dir, [
-            'cat',
-            'cmd',
+            'mkdir',
         ]
     }
 }

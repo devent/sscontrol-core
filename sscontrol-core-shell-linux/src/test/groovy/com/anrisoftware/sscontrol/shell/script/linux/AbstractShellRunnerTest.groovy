@@ -13,7 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.anrisoftware.sscontrol.shell.linux
+package com.anrisoftware.sscontrol.shell.script.linux;
+
 
 import static com.anrisoftware.globalpom.utils.TestUtils.*
 
@@ -24,8 +25,7 @@ import org.junit.jupiter.api.BeforeEach
 import com.anrisoftware.sscontrol.runner.groovy.internal.RunnerModule
 import com.anrisoftware.sscontrol.runner.groovy.internal.RunScriptImpl.RunScriptImplFactory
 import com.anrisoftware.sscontrol.runner.test.external.AbstractRunnerTestBase
-import com.anrisoftware.sscontrol.shell.internal.ShellImpl.ShellImplFactory
-import com.anrisoftware.sscontrol.shell.linux.external.Shell_Linux_Factory
+import com.anrisoftware.sscontrol.shell.service.ShellImpl.ShellImplFactory
 import com.anrisoftware.sscontrol.ssh.script.linux.Ssh_Linux_Factory
 import com.anrisoftware.sscontrol.ssh.script.linux.Ssh_Linux_Module
 import com.anrisoftware.sscontrol.ssh.service.SshImpl.SshImplFactory
@@ -37,7 +37,7 @@ import com.anrisoftware.sscontrol.types.host.HostServices
  * @author Erwin Müller, erwin.mueller@deventm.de
  * @since 1.0
  */
-abstract class AbstractShellRunnerTestBase extends AbstractRunnerTestBase {
+abstract class AbstractShellRunnerTest extends AbstractRunnerTestBase {
 
     @Inject
     RunScriptImplFactory runnerFactory
@@ -46,7 +46,7 @@ abstract class AbstractShellRunnerTestBase extends AbstractRunnerTestBase {
     SshImplFactory sshFactory
 
     @Inject
-    Ssh_Linux_Factory ssh_Linux_Factory
+    Ssh_Linux_Factory sshLinuxFactory
 
     @Inject
     ShellImplFactory shellFactory
@@ -60,7 +60,7 @@ abstract class AbstractShellRunnerTestBase extends AbstractRunnerTestBase {
 
     HostServices putServices(HostServices services) {
         services.putAvailableService 'ssh', sshFactory
-        services.putAvailableScriptService 'ssh/linux/0', ssh_Linux_Factory
+        services.putAvailableScriptService 'ssh/linux/0', sshLinuxFactory
         services.putAvailableService 'shell', shellFactory
         services.putAvailableScriptService 'shell/linux/0', shellLinuxFactory
         return services

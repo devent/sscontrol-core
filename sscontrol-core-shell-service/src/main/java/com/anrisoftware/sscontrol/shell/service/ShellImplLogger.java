@@ -13,14 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.anrisoftware.sscontrol.shell.internal;
+package com.anrisoftware.sscontrol.shell.service;
 
-import static com.anrisoftware.sscontrol.shell.internal.ShellImplLogger.m.scriptAdded;
+import static com.anrisoftware.sscontrol.shell.service.ShellImplLogger.m.scriptAdded;
 
 import javax.inject.Singleton;
 
 import com.anrisoftware.globalpom.log.AbstractLogger;
-import com.anrisoftware.sscontrol.shell.external.Script;
 
 /**
  * Logging for {@link ShellImpl}.

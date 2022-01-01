@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.anrisoftware.sscontrol.hosts.internal
+package com.anrisoftware.sscontrol.shell.service
 
 import static com.anrisoftware.globalpom.utils.TestUtils.*
 
@@ -33,9 +33,9 @@ import com.anrisoftware.sscontrol.services.host.HostServicesImpl.HostServicesImp
 import com.anrisoftware.sscontrol.services.ssh.TargetsImpl.TargetsImplFactory
 import com.anrisoftware.sscontrol.services.targets.TargetsModule
 import com.anrisoftware.sscontrol.services.targets.TargetsServiceModule
-import com.anrisoftware.sscontrol.shell.external.Shell
-import com.anrisoftware.sscontrol.shell.internal.ShellModule
-import com.anrisoftware.sscontrol.shell.internal.ShellImpl.ShellImplFactory
+import com.anrisoftware.sscontrol.shell.service.Shell
+import com.anrisoftware.sscontrol.shell.service.ShellModule
+import com.anrisoftware.sscontrol.shell.service.ShellImpl.ShellImplFactory
 import com.anrisoftware.sscontrol.types.host.HostServicePropertiesService
 import com.anrisoftware.sscontrol.types.host.HostServices
 import com.anrisoftware.sscontrol.types.misc.TypesModule
@@ -54,7 +54,7 @@ import groovy.util.logging.Slf4j
  * @version 1.0
  */
 @Slf4j
-class ShellScriptTest {
+class ShellServiceTest {
 
     @Inject
     ShellImplFactory serviceFactory
@@ -77,7 +77,7 @@ service "shell" with {
                 Shell s = services.getServices('shell')[0]
                 assert s.name == 'shell'
                 assert s.scripts.size() == 2
-                com.anrisoftware.sscontrol.shell.external.Script script = s.scripts[0]
+                com.anrisoftware.sscontrol.shell.service.Script script = s.scripts[0]
                 assert script.vars.command =~ /echo.*/
             },
         ]
@@ -99,7 +99,7 @@ service "shell", privileged: true with {
                 Shell s = services.getServices('shell')[0]
                 assert s.name == 'shell'
                 assert s.scripts.size() == 2
-                com.anrisoftware.sscontrol.shell.external.Script script = s.scripts[0]
+                com.anrisoftware.sscontrol.shell.service.Script script = s.scripts[0]
                 assert script.vars.command =~ /echo.*/
                 assert script.vars.privileged == true
             },
@@ -121,7 +121,7 @@ service "shell", privileged: true with {
                 Shell s = services.getServices('shell')[0]
                 assert s.name == 'shell'
                 assert s.scripts.size() == 1
-                com.anrisoftware.sscontrol.shell.external.Script script = s.scripts[0]
+                com.anrisoftware.sscontrol.shell.service.Script script = s.scripts[0]
                 assert script.vars.command =~ /echo.*/
                 assert script.vars.privileged == true
                 assert script.vars.timeout == 'PT10M'

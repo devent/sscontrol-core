@@ -13,16 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.anrisoftware.sscontrol.shell.linux.external;
+package com.anrisoftware.sscontrol.shell.service;
 
-import com.anrisoftware.sscontrol.types.host.HostServiceScriptFactory;
+import com.anrisoftware.sscontrol.types.host.HostServiceFactory;
 
 /**
+ * <i>Shell</i> service.
  *
- *
- * @author Erwin Müller {@literal <erwin.mueller@deventm.de>}
- * @version 1.0
+ * @author Erwin Müller, erwin.mueller@deventm.de
+ * @since 1.0
  */
-public interface Shell_Linux_Factory extends HostServiceScriptFactory {
+public interface ShellService extends HostServiceFactory {
 
 }

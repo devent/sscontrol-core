@@ -13,22 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.anrisoftware.sscontrol.shell.external;
+package com.anrisoftware.sscontrol.shell.script.linux;
 
-import java.util.List;
-
-import com.anrisoftware.sscontrol.types.host.HostService;
+import com.anrisoftware.sscontrol.types.host.HostServiceScript;
+import com.google.inject.AbstractModule;
+import com.google.inject.assistedinject.FactoryModuleBuilder;
 
 /**
- * <i>Shell</i> service.
- *
- * @author Erwin Müller, erwin.mueller@deventm.de
- * @since 1.0
+ * @see Shell_Linux_Factory
+ * @author Erwin Müller {@literal <erwin.mueller@deventm.de>}
+ * @version 1.0
  */
-public interface Shell extends HostService {
+public class ShellLinuxModule extends AbstractModule {
 
-    /**
-     * Returns the shell scripts to run.
-     */
-    List<Script> getScripts();
+	@Override
+	protected void configure() {
+        install(new FactoryModuleBuilder().implement(HostServiceScript.class, Shell_Linux.class)
+                .build(Shell_Linux_Factory.class));
+	}
+
 }

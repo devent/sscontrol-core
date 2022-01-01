@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.anrisoftware.sscontrol.shell.internal;
+package com.anrisoftware.sscontrol.shell.service;
 
 import static com.anrisoftware.sscontrol.types.misc.StringListPropertyUtil.stringListStatement;
 
@@ -24,10 +24,7 @@ import java.util.Map;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-import com.anrisoftware.sscontrol.shell.external.Script;
-import com.anrisoftware.sscontrol.shell.external.Shell;
-import com.anrisoftware.sscontrol.shell.external.ShellService;
-import com.anrisoftware.sscontrol.shell.internal.ScriptImpl.ScriptImplFactory;
+import com.anrisoftware.sscontrol.shell.service.ScriptImpl.ScriptImplFactory;
 import com.anrisoftware.sscontrol.types.host.HostServiceProperties;
 import com.anrisoftware.sscontrol.types.host.HostServicePropertiesService;
 import com.anrisoftware.sscontrol.types.host.TargetHost;
@@ -68,8 +65,7 @@ public class ShellImpl implements Shell {
     private transient Map<String, Object> vars;
 
     @AssistedInject
-    ShellImpl(ShellImplLogger log, HostServicePropertiesService propertiesService,
-            ScriptImplFactory scriptFactory,
+    ShellImpl(ShellImplLogger log, HostServicePropertiesService propertiesService, ScriptImplFactory scriptFactory,
             @Assisted Map<String, Object> args) {
         this.log = log;
         this.targets = new ArrayList<>();
@@ -177,8 +173,8 @@ public class ShellImpl implements Shell {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("name", getName())
-                .append("hosts", scripts).append("targets", targets).toString();
+        return new ToStringBuilder(this).append("name", getName()).append("hosts", scripts).append("targets", targets)
+                .toString();
     }
 
     private void parseArgs(Map<String, Object> args) {

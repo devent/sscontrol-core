@@ -13,11 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.anrisoftware.sscontrol.shell.internal;
+package com.anrisoftware.sscontrol.shell.service;
 
-import com.anrisoftware.sscontrol.shell.external.Script;
-import com.anrisoftware.sscontrol.shell.internal.ScriptImpl.ScriptImplFactory;
-import com.anrisoftware.sscontrol.shell.internal.ShellImpl.ShellImplFactory;
+import com.anrisoftware.sscontrol.shell.service.ScriptImpl.ScriptImplFactory;
+import com.anrisoftware.sscontrol.shell.service.ShellImpl.ShellImplFactory;
 import com.anrisoftware.sscontrol.types.host.HostService;
 import com.google.inject.AbstractModule;
 import com.google.inject.assistedinject.FactoryModuleBuilder;

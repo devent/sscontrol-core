@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.anrisoftware.sscontrol.shell.internal;
+package com.anrisoftware.sscontrol.shell.service;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,7 +22,6 @@ import javax.inject.Inject;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-import com.anrisoftware.sscontrol.shell.external.Script;
 import com.google.inject.assistedinject.Assisted;
 
 /**

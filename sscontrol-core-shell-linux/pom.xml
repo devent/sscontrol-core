@@ -44,6 +44,11 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-params</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>com.anrisoftware.sscontrol</groupId>
             <artifactId>sscontrol-core-shell-test</artifactId>
             <version>0.14.0-SNAPSHOT</version>
@@ -82,6 +87,12 @@
         <dependency>
             <groupId>com.anrisoftware.sscontrol</groupId>
             <artifactId>sscontrol-core-ssh-script-linux</artifactId>
+            <version>0.14.0-SNAPSHOT</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.anrisoftware.sscontrol</groupId>
+            <artifactId>sscontrol-core-utils-debian</artifactId>
             <version>0.14.0-SNAPSHOT</version>
             <scope>test</scope>
         </dependency>
