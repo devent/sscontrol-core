@@ -27,9 +27,13 @@ import static com.anrisoftware.sscontrol.utils.debian.Debian_11_TestUtils.*
  */
 abstract class AbstractFromHelmScriptTest extends AbstractFromHelmRunnerTest {
 
+    static final URL helmCommand = AbstractFromHelmRunnerTest.class.getResource('helm.txt')
+
+    static final URL helmGrepCommand = AbstractFromHelmRunnerTest.class.getResource('helm_grep.txt')
+
     void createDummyCommands(File dir) {
         createCommand catCommand, dir, "cat"
-        createCommand grepCommand, dir, 'grep'
+        createCommand helmGrepCommand, dir, 'grep'
         createCommand helmCommand, dir, 'helm'
         createIdCommand dir
         createEchoCommands dir, [

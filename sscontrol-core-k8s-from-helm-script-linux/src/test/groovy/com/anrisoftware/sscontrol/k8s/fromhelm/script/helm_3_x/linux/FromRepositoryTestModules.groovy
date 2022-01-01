@@ -35,13 +35,14 @@ import com.anrisoftware.sscontrol.debug.internal.DebugLoggingModule
 import com.anrisoftware.sscontrol.k8s.base.service.K8sModule
 import com.anrisoftware.sscontrol.k8s.fromhelm.service.FromHelmModule
 import com.anrisoftware.sscontrol.k8s.kubectl.linux.kubectl_1_2x.KubectlLinuxModule
-import com.anrisoftware.sscontrol.repo.git.script.debian_11.GitRepoDebianModule
-import com.anrisoftware.sscontrol.repo.git.service.GitRepoModule
+import com.anrisoftware.sscontrol.repo.helm.script.debian_11.HelmRepoDebianModule
+import com.anrisoftware.sscontrol.repo.helm.service.HelmRepoModule
 import com.anrisoftware.sscontrol.services.host.HostServicesModule
 import com.anrisoftware.sscontrol.ssh.service.SshModule
 import com.anrisoftware.sscontrol.tls.TlsModule
 import com.anrisoftware.sscontrol.types.misc.TypesModule
 import com.anrisoftware.sscontrol.utils.debian.DebianUtilsModule
+import com.anrisoftware.sscontrol.utils.repo.UtilsRepoModule
 import com.anrisoftware.sscontrol.utils.systemmappings.internal.SystemNameMappingsModule
 
 /**
@@ -59,8 +60,9 @@ class FromRepositoryTestModules {
             new KubectlLinuxModule(),
             new FromHelmModule(),
             new FromHelmLinuxModule(),
-            new GitRepoModule(),
-            new GitRepoDebianModule(),
+            new HelmRepoModule(),
+            new HelmRepoDebianModule(),
+            new UtilsRepoModule(),
             new DebianUtilsModule(),
             new DebugLoggingModule(),
             new TypesModule(),

@@ -121,6 +121,9 @@
         <module>sscontrol-core-nfs-service</module>
         <module>sscontrol-core-repo-git-script-debian</module>
         <module>sscontrol-core-repo-git-service</module>
+        <module>sscontrol-core-repo-helm-script-debian</module>
+        <module>sscontrol-core-repo-helm-script-linux</module>
+        <module>sscontrol-core-repo-helm-service</module>
         <module>sscontrol-core-script-runner</module>
         <module>sscontrol-core-script-runner-test</module>
         <module>sscontrol-core-services-properties</module>
@@ -147,6 +150,7 @@
         <module>sscontrol-core-utils-debian</module>
         <module>sscontrol-core-utils-grub</module>
         <module>sscontrol-core-utils-iniconfig</module>
+        <module>sscontrol-core-utils-repo</module>
         <module>sscontrol-core-utils-st-base64renderer</module>
         <module>sscontrol-core-utils-st-durationrenderer</module>
         <module>sscontrol-core-utils-st-miscrenderers</module>

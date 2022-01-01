@@ -29,8 +29,7 @@ import com.google.inject.assistedinject.Assisted;
  * @author Erwin Müller {@literal <erwin.mueller@deventm.de>}
  * @version 1.0
  */
-public class SshCredentialsImpl extends AbstractCredentials
-        implements SshCredentials {
+public class SshCredentialsImpl extends AbstractCredentials implements SshCredentials {
 
     /**
      *
@@ -47,8 +46,7 @@ public class SshCredentialsImpl extends AbstractCredentials
     private final SshCredentialsImplLogger log;
 
     @Inject
-    SshCredentialsImpl(SshCredentialsImplLogger log,
-            @Assisted Map<String, Object> args) {
+    SshCredentialsImpl(SshCredentialsImplLogger log, @Assisted Map<String, Object> args) {
         super(args);
         this.log = log;
         parseArgs(args);

@@ -1,0 +1,2 @@
+mv linux-amd64/helm /tmp/junit/junit/usr/local/bin/helm
+chmod o+rx /tmp/junit/junit/usr/local/bin/helm

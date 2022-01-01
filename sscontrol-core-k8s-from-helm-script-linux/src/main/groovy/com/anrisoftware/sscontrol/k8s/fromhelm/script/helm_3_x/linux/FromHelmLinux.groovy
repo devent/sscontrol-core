@@ -19,6 +19,7 @@ import javax.inject.Inject
 
 import com.anrisoftware.propertiesutils.ContextProperties
 import com.anrisoftware.sscontrol.k8s.fromhelm.service.FromHelm
+import com.anrisoftware.sscontrol.repo.helm.script.linux.Helm_3_RepoUpstreamLinux
 
 /**
  * From Helm service for Kubernetes.
@@ -31,9 +32,18 @@ class FromHelmLinux extends AbstractFromHelmLinux {
     @Inject
     FromHelmLinuxProperties linuxPropertiesProvider
 
+    @Inject
+    HelmRepoUpstreamLinuxFactory helmRepoUpstreamLinuxFactory
+
+    @Override
+    Helm_3_RepoUpstreamLinux getHelmRepoUpstream() {
+        helmRepoUpstreamLinuxFactory.create(scriptsRepository, service, target, threads, scriptEnv)
+    }
+
     @Override
     def run() {
         FromHelm service = service
+        setupDefaults()
         installHelm()
         def file = createConfig()
         try {

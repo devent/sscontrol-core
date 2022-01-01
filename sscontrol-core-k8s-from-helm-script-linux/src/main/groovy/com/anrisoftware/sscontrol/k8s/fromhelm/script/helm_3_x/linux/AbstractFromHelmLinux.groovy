@@ -26,6 +26,7 @@ import com.anrisoftware.resources.templates.external.TemplateResource
 import com.anrisoftware.resources.templates.external.TemplatesFactory
 import com.anrisoftware.sscontrol.groovy.script.ScriptBase
 import com.anrisoftware.sscontrol.k8s.fromhelm.service.FromHelm
+import com.anrisoftware.sscontrol.repo.helm.script.linux.Helm_3_RepoUpstreamLinux
 
 import groovy.json.JsonOutput
 import groovy.util.logging.Slf4j
@@ -48,22 +49,37 @@ abstract class AbstractFromHelmLinux extends ScriptBase {
     }
 
     /**
+     * Returns the script to install Helm from the upstream sources.
+     */
+    abstract Helm_3_RepoUpstreamLinux getHelmRepoUpstream()
+
+    /**
+     * Setups defaults for the Helm service.
+     */
+    def setupDefaults() {
+        FromHelm service = this.service
+        if (!service.release.name) {
+            service.release.name = parseName(service.chart)
+        }
+    }
+
+    /**
+     * Returns the name part of the chart. Giving the chart {@code 'stable/mariadb'} it will return the name {@code 'mariadb'}.
+     */
+    String parseName(String chart) {
+        String[] split = chart.split('/')
+        if (split.length > 1) {
+            return split[1]
+        } else {
+            return split[0]
+        }
+    }
+
+    /**
      * Downloads Helm.
      */
     def installHelm() {
-        log.info 'Installs Helm.'
-        withRemoteTempDir {
-            shell chdir: it, privileged: false, """
-if ! helm version | grep ${version}; then
-    curl -L -O ${upstreamSourceArchive}
-    curl -L -O ${upstreamSourceShasum}
-    sha256sum --check helm-${version}-linux-amd64.tar.gz.sha256sum
-    tar xzvfC helm-${version}-linux-amd64.tar.gz .
-    sudo mv linux-amd64/helm $binDir/helm
-    sudo chmod o+rx $binDir/helm
-fi
-""" call()
-        }
+        helmRepoUpstream.installHelm()
     }
 
     /**
@@ -80,8 +96,22 @@ fi
      * Installs a chart from a specified source repository.
      */
     def fromRepo(Map args) {
+        "from_${service.repo.type}_Repo"(args)
+    }
+
+    def from_git_Repo(Map args) {
         File dir = getState "${service.repo.type}-${service.repo.repo.group}-dir"
         assertThat "checkout-dir=null for $service", dir, notNullValue()
+    }
+
+    def from_helm_Repo(Map args) {
+        FromHelm service = this.service
+        assertThat "Helm repository exists for $service", repoExists, equalTo(true)
+        shell resource: helmCmdTemplate, name: "helmUpdate", vars: [args: args, service: service], timeout: timeoutMiddle call()
+        if (!service.chart.contains('/')) {
+            service.chart = "${service.repo.repo.group}/${service.chart}"
+        }
+        fromChart args
     }
 
     /**
@@ -89,6 +119,8 @@ fi
      */
     def fromChart(Map args) {
         FromHelm service = this.service
+        assertThat "Helm release set for $service", service.release, notNullValue()
+        assertThat "Helm name set for $service", service.release.name, not(emptyOrNullString())
         log.info 'Installing chart: {}', service.chart
         assertThat "args.config != null for $service", args.config, notNullValue()
         def v = [:]
@@ -114,6 +146,21 @@ fi
         v.timeout = timeoutShort
         v.exitCodes = [0, 1] as int[]
         v.vars = [service: service, status: "DEPLOYED"]
+        def p = shell v call()
+        return p.exitValue == 0
+    }
+
+    /**
+     * Checks if a Helm repository exists.
+     */
+    boolean isRepoExists() {
+        FromHelm service = this.service
+        def v = [:]
+        v.resource = helmCmdTemplate
+        v.name = "helmCheckRepo"
+        v.timeout = timeoutShort
+        v.exitCodes = [0, 1] as int[]
+        v.vars = [service: service, repoName: service.repo.repo.group]
         def p = shell v call()
         return p.exitValue == 0
     }

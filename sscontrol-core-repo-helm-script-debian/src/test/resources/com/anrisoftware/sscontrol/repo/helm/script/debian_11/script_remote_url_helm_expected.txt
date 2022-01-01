@@ -1,0 +1,1 @@
+repo add fantastic-charts https://fantastic-charts.storage.googleapis.com

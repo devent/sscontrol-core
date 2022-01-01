@@ -54,6 +54,7 @@ service "from-helm", chart: "stable/mariadb"
                     File dir = it.dir
                     File gen = it.test.generatedDir
                     assertFileResource FromHelmScriptTest, dir, "sudo.out", "${it.test.name}_sudo_expected.txt"
+                    assertFileResource FromHelmScriptTest, dir, "helm.out", "${it.test.name}_helm_expected.txt"
                 })
         list << of(
                 "script_config",
@@ -71,6 +72,7 @@ image:
                     File dir = it.dir
                     File gen = it.test.generatedDir
                     assertFileResource FromHelmScriptTest, dir, "sudo.out", "${it.test.name}_sudo_expected.txt"
+                    assertFileResource FromHelmScriptTest, dir, "helm.out", "${it.test.name}_helm_expected.txt"
                 })
         list.stream()
     }
@@ -81,6 +83,34 @@ image:
         log.info "########### {}: {}\n###########", name, script
         doTest([name: name, script: script, expected: expected,
             expectedServicesSize: 2, generatedDir: folder.newFolder(),
+            scriptVars: [localhostSocket: LocalhostSocketCondition.localhostSocket]])
+    }
+
+    static Stream<Arguments> script_repo() {
+        def list = []
+        list << of(
+                "script_repo_basic",
+                """\
+service "ssh", host: "localhost", socket: localhostSocket
+service "repo-helm", group: 'fantastic-charts' with {
+    remote url: "https://fantastic-charts.storage.googleapis.com"
+}
+service "from-helm", repo: "fantastic-charts", chart: "mariadb"
+""", {
+                    File dir = it.dir
+                    File gen = it.test.generatedDir
+                    assertFileResource FromHelmScriptTest, dir, "sudo.out", "${it.test.name}_sudo_expected.txt"
+                    assertFileResource FromHelmScriptTest, dir, "helm.out", "${it.test.name}_helm_expected.txt"
+                })
+        list.stream()
+    }
+
+    @ParameterizedTest
+    @MethodSource
+    void script_repo(def name, def script, def expected) {
+        log.info "########### {}: {}\n###########", name, script
+        doTest([name: name, script: script, expected: expected,
+            expectedServicesSize: 3, generatedDir: folder.newFolder(),
             scriptVars: [localhostSocket: LocalhostSocketCondition.localhostSocket]])
     }
 }

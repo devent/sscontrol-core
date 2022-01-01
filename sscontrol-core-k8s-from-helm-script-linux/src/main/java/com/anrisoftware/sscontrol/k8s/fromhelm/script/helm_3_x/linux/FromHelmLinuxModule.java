@@ -20,8 +20,8 @@ import com.google.inject.AbstractModule;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 
 /**
- *
- *
+ * @see FromHelmLinuxFactory
+ * @see HelmRepoUpstreamLinuxFactory
  * @author Erwin Müller {@literal <erwin.mueller@deventm.de>}
  * @version 1.0
  */
@@ -31,6 +31,8 @@ public class FromHelmLinuxModule extends AbstractModule {
 	protected void configure() {
 		install(new FactoryModuleBuilder().implement(HostServiceScript.class, FromHelmLinux.class)
 				.build(FromHelmLinuxFactory.class));
+        install(new FactoryModuleBuilder().implement(HostServiceScript.class, HelmRepoUpstreamLinux.class)
+                .build(HelmRepoUpstreamLinuxFactory.class));
 		install(new FactoryModuleBuilder().implement(HostServiceScript.class, KubectlClusterLinux.class)
 				.build(KubectlClusterLinuxFactory.class));
 	}

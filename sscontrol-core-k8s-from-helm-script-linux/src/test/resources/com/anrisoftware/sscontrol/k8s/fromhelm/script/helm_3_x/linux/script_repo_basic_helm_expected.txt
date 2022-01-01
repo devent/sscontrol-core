@@ -1,0 +1,3 @@
+repo add fantastic-charts https://fantastic-charts.storage.googleapis.com
+repo update
+upgrade -f /tmp/junit/junit.tmp mariadb fantastic-charts/mariadb

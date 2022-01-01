@@ -1,0 +1,15 @@
+#!/bin/bash
+theCommand="$0"
+if [ "$#" -gt 0 ]; then
+    if [ "x$1" = "xversion" ]; then
+        echo ""
+        exit 1
+    fi
+    cmd=($1)
+    cmd=${cmd[0]}
+    if command -v -- "$cmd">/dev/null; then
+       $@
+    fi
+fi
+echo "$theCommand $@"
+echo "$@" >> $theCommand.out

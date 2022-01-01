@@ -21,10 +21,9 @@ import javax.inject.Inject
 
 import org.junit.jupiter.api.BeforeEach
 
-import com.anrisoftware.sscontrol.k8s.fromhelm.script.helm_3_x.linux.FromHelmLinuxFactory
 import com.anrisoftware.sscontrol.k8s.fromhelm.service.FromHelmImpl.FromHelmImplFactory
-import com.anrisoftware.sscontrol.repo.git.script.debian_11.GitRepoDebianFactory
-import com.anrisoftware.sscontrol.repo.git.service.GitRepoImpl.GitRepoImplFactory
+import com.anrisoftware.sscontrol.repo.helm.script.debian_11.HelmRepoDebianFactory
+import com.anrisoftware.sscontrol.repo.helm.service.HelmRepoImpl.HelmRepoImplFactory
 import com.anrisoftware.sscontrol.runner.groovy.internal.RunnerModule
 import com.anrisoftware.sscontrol.runner.groovy.internal.RunScriptImpl.RunScriptImplFactory
 import com.anrisoftware.sscontrol.runner.test.external.AbstractRunnerTestBase
@@ -41,8 +40,6 @@ import com.anrisoftware.sscontrol.types.host.HostServices
  */
 abstract class AbstractFromHelmRunnerTest extends AbstractRunnerTestBase {
 
-    static final URL helmCommand = AbstractFromHelmRunnerTest.class.getResource('helm_command.txt')
-
     @Inject
     RunScriptImplFactory runnerFactory
 
@@ -53,10 +50,10 @@ abstract class AbstractFromHelmRunnerTest extends AbstractRunnerTestBase {
     Ssh_Linux_Factory sshLinuxFactory
 
     @Inject
-    GitRepoImplFactory gitFactory
+    HelmRepoImplFactory helmFactory
 
     @Inject
-    GitRepoDebianFactory gitDebianFactory
+    HelmRepoDebianFactory helmDebianFactory
 
     @Inject
     FromHelmImplFactory fromHelmFactory
@@ -71,8 +68,8 @@ abstract class AbstractFromHelmRunnerTest extends AbstractRunnerTestBase {
     HostServices putServices(HostServices services) {
         services.putAvailableService 'ssh', sshFactory
         services.putAvailableScriptService 'ssh/linux/0', sshLinuxFactory
-        services.putAvailableService 'repo-git', gitFactory
-        services.putAvailableScriptService 'repo-git/debian/9', gitDebianFactory
+        services.putAvailableService 'repo-helm', helmFactory
+        services.putAvailableScriptService 'repo-helm/debian/11', helmDebianFactory
         services.putAvailableService 'from-helm', fromHelmFactory
         services.putAvailableScriptService 'from-helm/linux/0', fromHelmLinuxFactory
         return services

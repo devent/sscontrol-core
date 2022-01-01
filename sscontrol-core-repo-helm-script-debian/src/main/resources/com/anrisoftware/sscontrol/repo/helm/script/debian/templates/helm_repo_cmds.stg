@@ -1,0 +1,3 @@
+helmRepoAdd(parent, vars) ::= <<
+helm repo add <parent.service.group> <parent.service.remote.uri>
+>>

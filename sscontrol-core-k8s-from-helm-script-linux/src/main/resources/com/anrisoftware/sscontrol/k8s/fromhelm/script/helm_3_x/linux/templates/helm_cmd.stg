@@ -1,20 +1,21 @@
-helmInstallCmd(parent, vars) ::= <<
-helm install -f <vars.args.config> \\
-	<if(vars.service.version)> --version <vars.service.version><endif> \\
-	<if(vars.service.release.namespace)> --namespace <vars.service.release.namespace><endif> \\
-	<if(vars.service.release.name)> --name <vars.service.release.name><endif> \\
-	<vars.service.chart>
+helmInstallCmd(parent, vars) ::= <%
+helm install -f <vars.args.config>
+<\ ><if(vars.service.version)> --version <vars.service.version><endif>
+<\ ><if(vars.service.release.namespace)> --namespace <vars.service.release.namespace><endif>
+<\ ><if(vars.service.release.name)> --name <vars.service.release.name><endif>
+<\ ><if(vars.service.dryrun)> --dry-run<endif>
+<\ ><vars.service.release.name>
+<\ ><vars.service.chart>
+%>
 
->>
-
-helmUpgradeCmd(parent, vars) ::= <<
-helm upgrade -f <vars.args.config> \\
-	<if(vars.service.version)> --version <vars.service.version><endif> \\
-	<if(vars.service.release.namespace)> --namespace <vars.service.release.namespace><endif> \\
-	<vars.service.release.name> \\
-	<vars.service.chart>
-
->>
+helmUpgradeCmd(parent, vars) ::= <%
+helm upgrade -f <vars.args.config>
+<\ ><if(vars.service.version)> --version <vars.service.version><endif>
+<\ ><if(vars.service.release.namespace)> --namespace <vars.service.release.namespace><endif>
+<\ ><if(vars.service.dryrun)> --dry-run<endif>
+<\ ><vars.service.release.name>
+<\ ><vars.service.chart>
+%>
 
 helmReleaseCmd(parent, vars) ::= <<
 if helm ls | grep <vars.service.release.name> | grep <vars.status>; then
@@ -23,4 +24,17 @@ else
   exit 1
 fi
 
+>>
+
+helmCheckRepo(parent, vars) ::= <<
+if helm repo list | grep <vars.repoName>; then
+  exit 0
+else
+  exit 1
+fi
+
+>>
+
+helmUpdate(parent, vars) ::= <<
+helm repo update
 >>

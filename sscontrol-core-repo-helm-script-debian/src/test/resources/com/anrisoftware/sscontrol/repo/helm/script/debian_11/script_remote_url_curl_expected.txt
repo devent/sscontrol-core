@@ -1,0 +1,2 @@
+-L -O https://get.helm.sh/helm-v3.7.2-linux-amd64.tar.gz
+-L -O https://get.helm.sh/helm-v3.7.2-linux-amd64.tar.gz.sha256sum

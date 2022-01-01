@@ -90,19 +90,8 @@
         </dependency>
         <dependency>
             <groupId>com.anrisoftware.sscontrol</groupId>
-            <artifactId>sscontrol-core-repo-git-service</artifactId>
+            <artifactId>sscontrol-core-repo-helm-script-debian</artifactId>
             <version>0.14.0-SNAPSHOT</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.anrisoftware.sscontrol</groupId>
-            <artifactId>sscontrol-core-repo-git-script-debian</artifactId>
-            <version>0.14.0-SNAPSHOT</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>net.lingala.zip4j</groupId>
-            <artifactId>zip4j</artifactId>
             <scope>test</scope>
         </dependency>
 
@@ -194,6 +183,11 @@
         <dependency>
             <groupId>com.anrisoftware.sscontrol</groupId>
             <artifactId>sscontrol-core-utils-st-base64renderer</artifactId>
+            <version>0.14.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.anrisoftware.sscontrol</groupId>
+            <artifactId>sscontrol-core-repo-helm-script-linux</artifactId>
             <version>0.14.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
