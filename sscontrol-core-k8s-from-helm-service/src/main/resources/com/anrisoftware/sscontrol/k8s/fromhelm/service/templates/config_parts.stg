@@ -1,0 +1,76 @@
+podAffinityTerm(vars) ::= <<
+requiredDuringSchedulingIgnoredDuringExecution:
+- labelSelector:
+    matchExpressions:
+    - key: "<vars.key>"
+      operator: In
+      values:
+      - "<vars.value>"
+<if(vars.topologyKey)>
+  topologyKey: "<vars.topologyKey>"
+<endif>
+>>
+
+weightedPodAffinityTerm(vars) ::= <<
+preferredDuringSchedulingIgnoredDuringExecution:
+- weight: <vars.weight>
+  podAffinityTerm:
+    labelSelector:
+      matchExpressions:
+      - key: <vars.key>
+        operator: In
+        values:
+        - <vars.value>
+<if(vars.topologyKey)>
+    topologyKey: "<vars.topologyKey>"
+<endif>
+>>
+
+nodeSelector(vars) ::= <<
+requiredDuringSchedulingIgnoredDuringExecution:
+  nodeSelectorTerms:
+  - matchExpressions:
+    - key: <vars.key>
+      operator: In
+      values:
+      - <vars.value>
+>>
+
+preferredSchedulingTerm(vars) ::= <<
+preferredDuringSchedulingIgnoredDuringExecution:
+- weight: <vars.weight>
+  preference:
+    matchExpressions:
+    - key: <vars.key>
+      operator: In
+      values:
+      - <vars.value>
+>>
+
+tolerationControlPane(vars) ::= <<
+- effect: NoSchedule
+  key: node-role.kubernetes.io/master
+  operator: Equal
+>>
+
+tolerationTerm(vars) ::= <<
+- effect: <vars.effect>
+  key: <vars.key>
+  operator: <vars.operator>
+<if(vars.value)>
+  value: <vars.value>
+<endif>
+>>
+
+resources(vars) ::= <<
+<if(vars.limits)>
+limits:
+  <if(vars.limits.cpu)>cpu: <vars.limits.cpu><endif>
+  <if(vars.limits.memory)>memory: <vars.limits.memory><endif>
+<endif>
+<if(vars.requests)>
+requests:
+  <if(vars.requests.cpu)>cpu: <vars.requests.cpu><endif>
+  <if(vars.requests.memory)>memory: <vars.requests.memory><endif>
+<endif>
+>>

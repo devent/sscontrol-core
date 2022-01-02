@@ -87,5 +87,10 @@ public interface FromHelm extends HostService {
      * Returns true if it should just output the generated manifests but not run
      * anything.
      */
-    boolean getDryrun();
+    boolean isDryrun();
+
+    /**
+     * Returns true to output debugging information.
+     */
+    boolean isDebug();
 }

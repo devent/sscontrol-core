@@ -2,7 +2,7 @@
 theCommand="$0"
 if [ "$#" -gt 0 ]; then
     if [[ "x$1" == "xls" ]]; then
-        echo ""
+        echo "ls"
         exit 1
     fi
     if [[ "x$1" == "xversion" ]]; then

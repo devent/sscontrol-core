@@ -15,7 +15,6 @@
  */
 package com.anrisoftware.sscontrol.k8s.fromhelm.service;
 
-import com.anrisoftware.sscontrol.k8s.fromhelm.service.FromHelmImpl.FromHelmImplFactory;
 import com.anrisoftware.sscontrol.k8s.fromhelm.service.ReleaseImpl.ReleaseImplFactory;
 import com.anrisoftware.sscontrol.types.host.HostService;
 import com.google.inject.AbstractModule;

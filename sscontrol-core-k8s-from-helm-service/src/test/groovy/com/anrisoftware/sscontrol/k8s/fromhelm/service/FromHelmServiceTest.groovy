@@ -24,24 +24,30 @@ import java.util.stream.Stream
 import javax.inject.Inject
 
 import org.junit.Rule
+import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.migrationsupport.rules.EnableRuleMigrationSupport
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
 import org.junit.rules.TemporaryFolder
+import org.yaml.snakeyaml.DumperOptions
+import org.yaml.snakeyaml.Yaml
 import org.yaml.snakeyaml.composer.ComposerException
 
 import com.anrisoftware.globalpom.core.resources.ResourcesModule
 import com.anrisoftware.globalpom.core.strings.StringsModule
 import com.anrisoftware.propertiesutils.PropertiesUtilsModule
+import com.anrisoftware.resources.st.internal.worker.STDefaultPropertiesModule
+import com.anrisoftware.resources.st.internal.worker.STWorkerModule
+import com.anrisoftware.resources.templates.internal.maps.TemplatesDefaultMapsModule
+import com.anrisoftware.resources.templates.internal.templates.TemplatesResourcesModule
 import com.anrisoftware.sscontrol.debug.internal.DebugLoggingModule
 import com.anrisoftware.sscontrol.k8s.base.service.K8sModule
-import com.anrisoftware.sscontrol.k8s.fromhelm.service.FromHelmImpl.FromHelmImplFactory
 import com.anrisoftware.sscontrol.properties.internal.HostServicePropertiesServiceModule
 import com.anrisoftware.sscontrol.properties.internal.PropertiesModule
-import com.anrisoftware.sscontrol.repo.git.service.GitRepoModule
-import com.anrisoftware.sscontrol.repo.git.service.GitRepoImpl.GitRepoImplFactory
+import com.anrisoftware.sscontrol.repo.helm.service.HelmRepoModule
+import com.anrisoftware.sscontrol.repo.helm.service.HelmRepoImpl.HelmRepoImplFactory
 import com.anrisoftware.sscontrol.services.host.HostServicesModule
 import com.anrisoftware.sscontrol.services.host.HostServicesImpl.HostServicesImplFactory
 import com.anrisoftware.sscontrol.services.targets.TargetsModule
@@ -52,6 +58,7 @@ import com.anrisoftware.sscontrol.shell.utils.RobobeeScript.RobobeeScriptFactory
 import com.anrisoftware.sscontrol.tls.TlsModule
 import com.anrisoftware.sscontrol.types.host.HostServices
 import com.anrisoftware.sscontrol.types.misc.TypesModule
+import com.anrisoftware.sscontrol.utils.repo.UtilsRepoModule
 import com.anrisoftware.sscontrol.utils.systemmappings.internal.SystemNameMappingsModule
 import com.google.inject.Guice
 
@@ -77,14 +84,14 @@ class FromHelmServiceTest {
     HostServicesImplFactory servicesFactory
 
     @Inject
-    GitRepoImplFactory gitFactory
+    HelmRepoImplFactory helmFactory
 
     static Stream<Arguments> service_script() {
         def list = []
         list << of(
                 "use external cluster in the group default implicit with repository",
                 """\
-service "repo-git", group: "wordpress-app" with {
+service "repo-helm", group: "wordpress-app" with {
     remote url: "git@github.com:devent/wordpress-app.git"
     credentials "ssh", key: "id_rsa"
 }
@@ -99,7 +106,7 @@ service "from-helm", repo: "wordpress-app" with {
         list << of(
                 "use custom config",
                 """\
-service "repo-git", group: "wordpress-app" with {
+service "repo-helm", group: "wordpress-app" with {
     remote url: "git@github.com:devent/wordpress-app.git"
     credentials "ssh", key: "id_rsa"
 }
@@ -114,7 +121,7 @@ service "from-helm", repo: "wordpress-app" with {
         list << of(
                 "multiple custom config",
                 """\
-service "repo-git", group: "wordpress-app" with {
+service "repo-helm", group: "wordpress-app" with {
     remote url: "git@github.com:devent/wordpress-app.git"
     credentials "ssh", key: "id_rsa"
 }
@@ -163,6 +170,31 @@ service "from-helm", chart: "stable/mariadb", repo: "nfs-subdir-external-provisi
                     assert s.release.namespace == "helm-test"
                     assert s.release.name == "wordpress"
                 })
+        list << of(
+                "helm chart with dry-run and debug output extern",
+                """\
+service "from-helm", chart: "stable/mariadb" with {
+    dryrun true
+    debug true
+}
+""", { HostServices services ->
+                    assert services.getServices('from-helm').size() == 1
+                    FromHelm s = services.getServices('from-helm')[0]
+                    assert s.chart == "stable/mariadb"
+                    assert s.dryrun
+                    assert s.debug
+                })
+        list << of(
+                "helm chart with dry-run and debug output inline",
+                """\
+service "from-helm", chart: "stable/mariadb", dryrun: true, debug: true
+""", { HostServices services ->
+                    assert services.getServices('from-helm').size() == 1
+                    FromHelm s = services.getServices('from-helm')[0]
+                    assert s.chart == "stable/mariadb"
+                    assert s.dryrun
+                    assert s.debug
+                })
         list.stream()
     }
 
@@ -178,7 +210,7 @@ service "from-helm", chart: "stable/mariadb", repo: "nfs-subdir-external-provisi
         list << of(
                 "invalid custom config",
                 """\
-service "repo-git", group: "wordpress-app" with {
+service "repo-helm", group: "wordpress-app" with {
     remote url: "git@github.com:devent/wordpress-app.git"
     credentials "ssh", key: "id_rsa"
 }
@@ -203,11 +235,155 @@ The last line.
         assertThrows ComposerException.class, { doTest([name: name, script: script, scriptVars: [:], expected: expected]) }
     }
 
+    static Stream<Arguments> service_with_inline() {
+        def list = []
+        list << of(
+                "helm chart with insertNodeSelector",
+                '''\
+service "from-helm", chart: "stable/mariadb" with {
+    config << """
+wordpress:
+  affinity:
+    nodeAntiAffinity:
+${insertNodeSelector(6, "app", "nfs-subdir-external-provisioner")}
+${insertPreferredSchedulingTerm(6, "app", "nfs-subdir-external-provisioner", 100)}
+    podAntiAffinity:
+${insertPodAffinityTerm(6, "app", "nfs-subdir-external-provisioner", "kubernetes.io/hostname")}
+${insertWeightedPodAffinityTerm(6, "app", "nfs-subdir-external-provisioner", 100, "kubernetes.io/hostname")}
+"""
+}
+''', { HostServices services ->
+                    assert services.getServices('from-helm').size() == 1
+                    FromHelm s = services.getServices('from-helm')[0]
+                    assert s.chart == "stable/mariadb"
+                    println dumpYaml(s.configYaml)
+                    assert dumpYaml(s.configYaml) == '''\
+wordpress:
+  affinity:
+    nodeAntiAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: app
+            operator: In
+            values:
+            - nfs-subdir-external-provisioner
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 100
+        preference:
+          matchExpressions:
+          - key: app
+            operator: In
+            values:
+            - nfs-subdir-external-provisioner
+    podAntiAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchExpressions:
+          - key: app
+            operator: In
+            values:
+            - nfs-subdir-external-provisioner
+        topologyKey: kubernetes.io/hostname
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 100
+        podAffinityTerm:
+          labelSelector:
+            matchExpressions:
+            - key: app
+              operator: In
+              values:
+              - nfs-subdir-external-provisioner
+          topologyKey: kubernetes.io/hostname
+'''
+                })
+        list << of(
+                "helm chart with insertToleration",
+                '''\
+service "from-helm", chart: "stable/mariadb" with {
+    config << """
+wordpress:
+  toleration:
+${insertTolerationControlPane(4)}
+${insertToleration(4, "robobeerun.com/grafana")}
+${insertToleration(4, "robobeerun.com/keycloak", "required")}
+"""
+}
+''', { HostServices services ->
+                    assert services.getServices('from-helm').size() == 1
+                    FromHelm s = services.getServices('from-helm')[0]
+                    assert s.chart == "stable/mariadb"
+                    println dumpYaml(s.configYaml)
+                    assert dumpYaml(s.configYaml) == '''\
+wordpress:
+  toleration:
+  - effect: NoSchedule
+    key: node-role.kubernetes.io/master
+    operator: Equal
+  - effect: NoSchedule
+    key: robobeerun.com/grafana
+    operator: Equal
+  - effect: NoSchedule
+    key: robobeerun.com/keycloak
+    operator: Equal
+    value: required
+'''
+                })
+        list << of(
+                "helm chart with insertResources",
+                '''\
+service "from-helm", chart: "stable/mariadb" with {
+    config << """
+wordpress:
+  resources:
+${insertResources(4, [cpu: 0.5, memory: "600Mi"])}
+"""
+}
+''', { HostServices services ->
+                    assert services.getServices('from-helm').size() == 1
+                    FromHelm s = services.getServices('from-helm')[0]
+                    assert s.chart == "stable/mariadb"
+                    println dumpYaml(s.configYaml)
+                    assert dumpYaml(s.configYaml) == '''\
+wordpress:
+  resources:
+    limits:
+      cpu: 0.5
+      memory: 600Mi
+    requests:
+      cpu: 0.5
+      memory: 600Mi
+'''
+                })
+        list.stream()
+    }
+
+    static Yaml yaml
+
+    @BeforeAll
+    static void createYaml() {
+        def options = new DumperOptions();
+        options.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
+        yaml = new Yaml(options);
+    }
+
+
+    static String dumpYaml(def object) {
+        return yaml.dump(object)
+    }
+
+    @ParameterizedTest
+    @MethodSource
+    void service_with_inline(def name, def script, def expected) {
+        log.info "########### {}: {}\n###########", name, script
+        doTest([name: name, script: script, scriptVars: [:], expected: expected])
+    }
+
     void doTest(Map test) {
         log.info '\n######### {} #########\ncase: {}', test.name, test
         def services = servicesFactory.create()
         services.targets.addTarget SshFactory.localhost(injector)
-        services.putAvailableService 'repo-git', gitFactory
+        services.putAvailableService 'repo-helm', helmFactory
         services.putAvailableService 'from-helm', fromHelmFactory
         robobeeScriptFactory.create folder.newFile(), test.script, test.scriptVars, services call()
         Closure expected = test.expected
@@ -225,7 +401,8 @@ The last line.
         injector = Guice.createInjector(
                 new K8sModule(),
                 new FromHelmModule(),
-                new GitRepoModule(),
+                new HelmRepoModule(),
+                new UtilsRepoModule(),
                 new PropertiesModule(),
                 new DebugLoggingModule(),
                 new TypesModule(),
@@ -239,6 +416,10 @@ The last line.
                 new RobobeeScriptModule(),
                 new SystemNameMappingsModule(),
                 new HostServicePropertiesServiceModule(),
+                new TemplatesDefaultMapsModule(),
+                new STWorkerModule(),
+                new STDefaultPropertiesModule(),
+                new TemplatesResourcesModule(),
                 )
         injector.injectMembers(this)
     }

@@ -21,7 +21,7 @@ import javax.inject.Inject
 
 import org.junit.jupiter.api.BeforeEach
 
-import com.anrisoftware.sscontrol.k8s.fromhelm.service.FromHelmImpl.FromHelmImplFactory
+import com.anrisoftware.sscontrol.k8s.fromhelm.service.FromHelmImplFactory
 import com.anrisoftware.sscontrol.repo.helm.script.debian_11.HelmRepoDebianFactory
 import com.anrisoftware.sscontrol.repo.helm.service.HelmRepoImpl.HelmRepoImplFactory
 import com.anrisoftware.sscontrol.runner.groovy.internal.RunnerModule

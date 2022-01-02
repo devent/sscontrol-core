@@ -74,6 +74,45 @@ image:
                     assertFileResource FromHelmScriptTest, dir, "sudo.out", "${it.test.name}_sudo_expected.txt"
                     assertFileResource FromHelmScriptTest, dir, "helm.out", "${it.test.name}_helm_expected.txt"
                 })
+        list << of(
+                "script_dryrun",
+                """\
+service "ssh", host: "localhost", socket: localhostSocket
+service "from-helm", chart: "stable/mariadb" with {
+    dryrun true
+    config << '''
+image:
+  registry: docker.io
+  repository: bitnami/mariadb
+  tag: 10.1.38
+'''
+}
+""", {
+                    File dir = it.dir
+                    File gen = it.test.generatedDir
+                    assertFileResource FromHelmScriptTest, dir, "sudo.out", "${it.test.name}_sudo_expected.txt"
+                    assertFileResource FromHelmScriptTest, dir, "helm.out", "${it.test.name}_helm_expected.txt"
+                })
+        list << of(
+                "script_debug",
+                """\
+service "ssh", host: "localhost", socket: localhostSocket
+service "from-helm", chart: "stable/mariadb" with {
+    debug true
+    config << '''
+image:
+  registry: docker.io
+  repository: bitnami/mariadb
+  tag: 10.1.38
+'''
+}
+""", {
+                    File dir = it.dir
+                    File gen = it.test.generatedDir
+                    assertFileResource FromHelmScriptTest, dir, "sudo.out", "${it.test.name}_sudo_expected.txt"
+                    assertFileResource FromHelmScriptTest, dir, "helm.out", "${it.test.name}_helm_expected.txt"
+                    assertFileResource FromHelmScriptTest, dir, "cat.out", "${it.test.name}_cat_expected.txt"
+                })
         list.stream()
     }
 

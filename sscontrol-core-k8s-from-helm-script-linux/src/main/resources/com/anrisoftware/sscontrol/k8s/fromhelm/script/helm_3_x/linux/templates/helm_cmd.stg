@@ -1,4 +1,11 @@
-helmInstallCmd(parent, vars) ::= <%
+helmInstallCmd(parent, vars) ::= <<
+<if(vars.service.debug)>
+cat <vars.args.config>
+<endif>
+<helm_install(parent, vars)>
+>>
+
+helm_install(parent, vars) ::= <%
 helm install -f <vars.args.config>
 <\ ><if(vars.service.version)> --version <vars.service.version><endif>
 <\ ><if(vars.service.release.namespace)> --namespace <vars.service.release.namespace><endif>
@@ -7,7 +14,14 @@ helm install -f <vars.args.config>
 <\ ><vars.service.chart>
 %>
 
-helmUpgradeCmd(parent, vars) ::= <%
+helmUpgradeCmd(parent, vars) ::= <<
+<if(vars.service.debug)>
+cat <vars.args.config>
+<endif>
+<helm_upgrade(parent, vars)>
+>>
+
+helm_upgrade(parent, vars) ::= <%
 helm upgrade -f <vars.args.config>
 <\ ><if(vars.service.version)> --version <vars.service.version><endif>
 <\ ><if(vars.service.release.namespace)> --namespace <vars.service.release.namespace><endif>
