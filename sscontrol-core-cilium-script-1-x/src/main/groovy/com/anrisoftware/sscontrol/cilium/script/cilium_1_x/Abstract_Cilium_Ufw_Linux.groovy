@@ -74,8 +74,8 @@ abstract class Abstract_Cilium_Ufw_Linux extends ScriptBase {
      */
     def openPublicPorts() {
         Cilium service = this.service
-        service.targets.forEach {
-            ufw.allowPortsToNetwork publicTcpPorts, it.hostAddress, this
+        nodesAddresses.each {
+            ufw.allowPortsToNetwork publicTcpPorts, it, this
         }
     }
 
@@ -84,10 +84,10 @@ abstract class Abstract_Cilium_Ufw_Linux extends ScriptBase {
      */
     def openNodesPorts() {
         Cilium service = this.service
-        ufw.allowTcpPortsOnNodes nodes, nodesAddresses, privateTcpPorts, this
-        ufw.allowUdpPortsOnNodes nodes, nodesAddresses, privateUdpPorts, this
-        service.targets.each {
-            ufw.allowFromToPorts clusterPoolIpv4Didr, it.hostAddress, apiServerPorts, "tcp", this
+        ufw.allowTcpPortsOnNodes nodes, nodesAddresses, nodesTcpPorts, this
+        ufw.allowUdpPortsOnNodes nodes, nodesAddresses, nodesUdpPorts, this
+        nodes.each {
+            ufw.allowFromToPorts it, clusterPoolIpv4Didr, it.hostAddress, podsPorts, "tcp", this
         }
     }
 
@@ -99,16 +99,16 @@ abstract class Abstract_Cilium_Ufw_Linux extends ScriptBase {
         getScriptListProperty 'public_udp_ports'
     }
 
-    List getPrivateTcpPorts() {
-        getScriptListProperty 'private_tcp_ports'
+    List getNodesTcpPorts() {
+        getScriptListProperty 'nodes_tcp_ports'
     }
 
-    List getPrivateUdpPorts() {
-        getScriptListProperty 'private_udp_ports'
+    List getNodesUdpPorts() {
+        getScriptListProperty 'nodes_udp_ports'
     }
 
-    List getApiServerPorts() {
-        getScriptListProperty 'api_server_ports'
+    List getPodsPorts() {
+        getScriptListProperty 'pods_ports'
     }
 
     String getClusterPoolIpv4Didr() {

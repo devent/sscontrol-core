@@ -89,6 +89,7 @@ abstract class UfwUtils {
     def allowPortsOnNodes(List<SshHost> nodes, List<String> nodesAddresses, List ports, String proto, def script) {
         nodes.each { SshHost target ->
             if (isActive(target)) {
+                log.debug "Host {} allow ports {}/{} from nodes {}", target, ports, proto, nodesAddresses
                 script.shell target: target, privileged: true, resource: ufwCommandsTemplate, name: "ufwAllowPortsOnNodes",
                 vars: [nodes: nodesAddresses, ports: getTcpPorts(ports), proto: proto] call()
             }
@@ -106,9 +107,11 @@ abstract class UfwUtils {
     /**
      * Allows the specified ports and protocol from address to address.
      */
-    def allowFromToPorts(def fromNetwork, def toNetwork, List ports, String proto, def script) {
-        script.shell privileged: true, resource: ufwCommandsTemplate, name: "ufwAllowFromToPorts",
-        vars: [fromNetwork: fromNetwork, toNetwork: toNetwork, ports: getTcpPorts(ports), proto: proto] call()
+    def allowFromToPorts(def target, def fromNetwork, def toNetwork, List ports, String proto, def script) {
+        if (isActive(target)) {
+            script.shell target: target, privileged: true, resource: ufwCommandsTemplate, name: "ufwAllowFromToPorts",
+            vars: [fromNetwork: fromNetwork, toNetwork: toNetwork, ports: getTcpPorts(ports), proto: proto] call()
+        }
     }
 
     /**
