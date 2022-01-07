@@ -355,6 +355,32 @@ wordpress:
       memory: 600Mi
 '''
                 })
+        list << of(
+                "helm chart with persistentVolumeClaimSpec",
+                '''\
+service "from-helm", chart: "stable/mariadb" with {
+    config << """
+wordpress:
+  dataVolumeClaimSpec:
+${insertPersistentVolumeClaimSpec(4, "1Gi", "nfs")}
+"""
+}
+''', { HostServices services ->
+                    assert services.getServices('from-helm').size() == 1
+                    FromHelm s = services.getServices('from-helm')[0]
+                    assert s.chart == "stable/mariadb"
+                    println dumpYaml(s.configYaml)
+                    assert dumpYaml(s.configYaml) == '''\
+wordpress:
+  dataVolumeClaimSpec:
+    accessModes:
+    - ReadWriteOnce
+    storageClassName: nfs
+    resources:
+      requests:
+        storage: 1Gi
+'''
+                })
         list.stream()
     }
 

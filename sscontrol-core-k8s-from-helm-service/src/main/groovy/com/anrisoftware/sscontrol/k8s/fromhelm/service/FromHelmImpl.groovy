@@ -222,6 +222,14 @@ class FromHelmImpl implements FromHelm {
         indentString configPartsTemplate.getText(true, "resources", "vars", [limits: limits, requests: requests]), n
     }
 
+    def insertPersistentVolumeClaimSpec(int n, def requests, def className = null, List accessModes = null) {
+        def vars = [:]
+        vars.requests = requests
+        vars.className = className
+        vars.accessModes = accessModes ? accessModes : ["ReadWriteOnce"]
+        indentString configPartsTemplate.getText(true, "persistentVolumeClaimSpec", "vars", vars), n
+    }
+
     /**
      * @see <a href="https://www.logicbig.com/how-to/java-string/java-indent-string.html">Java - How to Indent multiline String?</a>
      */

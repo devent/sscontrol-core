@@ -74,3 +74,16 @@ requests:
   <if(vars.requests.memory)>memory: <vars.requests.memory><endif>
 <endif>
 >>
+
+persistentVolumeClaimSpec(vars) ::= <<
+<if(vars.accessModes)>
+accessModes:
+<vars.accessModes:{m|- <m>}; separator="\n">
+<endif>
+<if(vars.className)>
+storageClassName: "<vars.className>"
+<endif>
+resources:
+  requests:
+    storage: <vars.requests>
+>>
