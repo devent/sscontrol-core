@@ -28,18 +28,31 @@
         <version>0.14.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>sscontrol-core-haproxy-service</artifactId>
-    <name>sscontrol-core - haproxy-service</name>
-    <description>HAProxy service.</description>
+    <artifactId>sscontrol-core-haproxy-script-haproxy-2-x</artifactId>
+    <name>sscontrol-core - haproxy-script-haproxy-2-x</name>
+    <description>HAProxy 2.x.</description>
 
     <properties>
     </properties>
 
     <dependencies>
+
         <!-- test dependencies -->
         <dependency>
             <groupId>com.anrisoftware.globalpom</groupId>
             <artifactId>globalpom-groovytestutils</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.anrisoftware.sscontrol</groupId>
+            <artifactId>sscontrol-core-shell-test</artifactId>
+            <version>0.14.0-SNAPSHOT</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.anrisoftware.sscontrol</groupId>
+            <artifactId>sscontrol-core-command-shell-openssh</artifactId>
+            <version>0.14.0-SNAPSHOT</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -50,42 +63,29 @@
         </dependency>
         <dependency>
             <groupId>com.anrisoftware.sscontrol</groupId>
-            <artifactId>sscontrol-core-services-properties</artifactId>
+            <artifactId>sscontrol-core-ssh-service</artifactId>
             <version>0.14.0-SNAPSHOT</version>
             <scope>test</scope>
         </dependency>
 
-        <!-- own dependencies -->
+        <!-- own bundles -->
         <dependency>
             <groupId>com.anrisoftware.sscontrol</groupId>
-            <artifactId>sscontrol-core-types-ssh</artifactId>
+            <artifactId>sscontrol-core-groovy-script</artifactId>
             <version>0.14.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.anrisoftware.sscontrol</groupId>
-            <artifactId>sscontrol-core-types-host</artifactId>
+            <artifactId>sscontrol-core-haproxy-service</artifactId>
             <version>0.14.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.anrisoftware.sscontrol</groupId>
-            <artifactId>sscontrol-core-debug</artifactId>
+            <artifactId>sscontrol-core-utils-ufw-linux</artifactId>
             <version>0.14.0-SNAPSHOT</version>
         </dependency>
 
         <!-- compile dependencies -->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.anrisoftware.globalpom</groupId>
-            <artifactId>globalpom-log</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.anrisoftware.globalpom</groupId>
-            <artifactId>globalpomutils-core</artifactId>
-        </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
@@ -99,14 +99,25 @@
             <artifactId>guice-assistedinject</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.google.code.findbugs</groupId>
+            <artifactId>jsr305</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.codehaus.groovy</groupId>
             <artifactId>groovy</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy-templates</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.anrisoftware.resources</groupId>
+            <artifactId>resources-templates</artifactId>
         </dependency>
         <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest</artifactId>
         </dependency>
-
     </dependencies>
 
 </project>

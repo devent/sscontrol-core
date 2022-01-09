@@ -94,7 +94,7 @@
         <module>sscontrol-core-groovy-script</module>
         <module>sscontrol-core-groovy-types</module>
         <module>sscontrol-core-haproxy-script-debian</module>
-        <module>sscontrol-core-haproxy-script-haproxy-1-8</module>
+        <module>sscontrol-core-haproxy-script-haproxy-2-x</module>
         <module>sscontrol-core-haproxy-service</module>
         <module>sscontrol-core-k8s-backup-client</module>
         <module>sscontrol-core-k8s-backup-script-linux</module>
