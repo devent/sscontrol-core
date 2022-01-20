@@ -58,6 +58,8 @@ class FromHelmImpl implements FromHelm {
 
     boolean debug;
 
+    boolean wait;
+
     String chart;
 
     String version;
@@ -191,6 +193,15 @@ class FromHelmImpl implements FromHelm {
         setDebug(debug);
     }
 
+    /**
+     * <pre>
+     * wait true
+     * </pre>
+     */
+    public void wait(boolean wait) {
+        setWait(wait);
+    }
+
     def insertPodAffinityTerm(int n, def key, def value, def topologyKey = null) {
         indentString configPartsTemplate.getText(true, "podAffinityTerm", "vars", [key: key, value: value, topologyKey: topologyKey]), n
     }
@@ -283,6 +294,10 @@ class FromHelmImpl implements FromHelm {
         v = args.get("debug");
         if (v != null) {
             setDebug((boolean) v);
+        }
+        v = args.get("wait");
+        if (v != null) {
+            setWait((boolean) v);
         }
     }
 

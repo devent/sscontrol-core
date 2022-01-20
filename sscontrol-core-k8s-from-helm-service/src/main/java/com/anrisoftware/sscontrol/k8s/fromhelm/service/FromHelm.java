@@ -93,4 +93,9 @@ public interface FromHelm extends HostService {
      * Returns true to output debugging information.
      */
     boolean isDebug();
+
+    /**
+     * Returns true to wait for the chart version to become available.
+     */
+    boolean isWait();
 }

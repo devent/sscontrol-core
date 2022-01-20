@@ -185,15 +185,32 @@ service "from-helm", chart: "stable/mariadb" with {
                     assert s.debug
                 })
         list << of(
-                "helm chart with dry-run and debug output inline",
+                "helm chart with inline parameters",
                 """\
-service "from-helm", chart: "stable/mariadb", dryrun: true, debug: true
+service "from-helm", chart: "stable/mariadb", dryrun: true, debug: true, wait: true
 """, { HostServices services ->
                     assert services.getServices('from-helm').size() == 1
                     FromHelm s = services.getServices('from-helm')[0]
                     assert s.chart == "stable/mariadb"
                     assert s.dryrun
                     assert s.debug
+                    assert s.wait
+                })
+        list << of(
+                "helm chart with explicit parameters",
+                """\
+service "from-helm", chart: "stable/mariadb" with {
+    dryrun true
+    debug true
+    wait true
+}
+""", { HostServices services ->
+                    assert services.getServices('from-helm').size() == 1
+                    FromHelm s = services.getServices('from-helm')[0]
+                    assert s.chart == "stable/mariadb"
+                    assert s.dryrun
+                    assert s.debug
+                    assert s.wait
                 })
         list.stream()
     }

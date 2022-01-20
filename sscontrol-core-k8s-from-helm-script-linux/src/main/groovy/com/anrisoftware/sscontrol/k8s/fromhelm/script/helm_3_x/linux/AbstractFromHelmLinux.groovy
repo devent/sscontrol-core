@@ -111,7 +111,26 @@ abstract class AbstractFromHelmLinux extends ScriptBase {
         if (!service.chart.contains('/')) {
             service.chart = "${service.repo.repo.group}/${service.chart}"
         }
+        if (service.wait) {
+            waitChart args
+        }
         fromChart args
+    }
+
+    /**
+     * Waits for the chart to become available.
+     */
+    def waitChart(Map args) {
+        FromHelm service = this.service
+        assertThat "Helm release set for $service", service.release, notNullValue()
+        assertThat "Helm name set for $service", service.release.name, not(emptyOrNullString())
+        log.info 'Wait for chart: {}', service.chart
+        def v = [:]
+        v.resource = helmCmdTemplate
+        v.timeout = timeoutMiddle
+        v.vars = [args: args, service: service]
+        v.name = "helmWait"
+        shell v call()
     }
 
     /**
