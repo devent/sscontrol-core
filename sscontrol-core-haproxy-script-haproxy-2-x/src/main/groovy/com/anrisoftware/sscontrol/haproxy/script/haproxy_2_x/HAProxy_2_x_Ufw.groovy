@@ -52,7 +52,7 @@ abstract class HAProxy_2_x_Ufw extends ScriptBase {
         service.proxies.each { Proxy proxy ->
             def address = proxy.frontend.address == "*" ? "any" : proxy.frontend.address
             shell privileged: true, """
-ufw allow from ${target.hostAddress} to ${address} port ${proxy.frontend.port}
+ufw allow from any to ${address} port ${proxy.frontend.port}
 """ call()
         }
     }
