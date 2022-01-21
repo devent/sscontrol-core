@@ -10,7 +10,6 @@ backend nodes-ssh
     stick on        dst
     balance         roundrobin
     retries         3
-    option          tcplog
     server          ingress01-ssh <vars.proxy.backend.address>:<vars.proxy.backend.port> check inter <vars.proxy.backend.checkInterval>
 
 >>
