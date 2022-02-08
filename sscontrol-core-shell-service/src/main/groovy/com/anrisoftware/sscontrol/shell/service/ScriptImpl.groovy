@@ -15,9 +15,6 @@
  */
 package com.anrisoftware.sscontrol.shell.service;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.inject.Inject;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -30,20 +27,9 @@ import com.google.inject.assistedinject.Assisted;
  * @author Erwin Müller, erwin.mueller@deventm.de
  * @since 1.0
  */
-public class ScriptImpl implements Script {
+class ScriptImpl implements Script {
 
-    /**
-     *
-     *
-     * @author Erwin Müller {@literal <erwin.mueller@deventm.de>}
-     * @version 1.0
-     */
-    public interface ScriptImplFactory {
-
-        Script create(Map<String, Object> args);
-    }
-
-    private final Map<String, Object> vars;
+    final Map<String, Object> vars;
 
     @Inject
     ScriptImpl(@Assisted Map<String, Object> args) {
@@ -51,13 +37,12 @@ public class ScriptImpl implements Script {
     }
 
     @Override
-    public Map<String, Object> getVars() {
+    Map<String, Object> getVars() {
         return vars;
     }
 
     @Override
-    public String toString() {
+    String toString() {
         return new ToStringBuilder(this).append("vars", getVars()).toString();
     }
-
 }

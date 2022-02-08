@@ -15,8 +15,6 @@
  */
 package com.anrisoftware.sscontrol.shell.service;
 
-import com.anrisoftware.sscontrol.shell.service.ScriptImpl.ScriptImplFactory;
-import com.anrisoftware.sscontrol.shell.service.ShellImpl.ShellImplFactory;
 import com.anrisoftware.sscontrol.types.host.HostService;
 import com.google.inject.AbstractModule;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
@@ -31,12 +29,8 @@ public class ShellModule extends AbstractModule {
 
     @Override
     protected void configure() {
-        install(new FactoryModuleBuilder()
-                .implement(HostService.class, ShellImpl.class)
-                .build(ShellImplFactory.class));
-        install(new FactoryModuleBuilder()
-                .implement(Script.class, ScriptImpl.class)
-                .build(ScriptImplFactory.class));
+        install(new FactoryModuleBuilder().implement(HostService.class, ShellImpl.class).build(ShellImplFactory.class));
+        install(new FactoryModuleBuilder().implement(Script.class, ScriptImpl.class).build(ScriptImplFactory.class));
     }
 
 }

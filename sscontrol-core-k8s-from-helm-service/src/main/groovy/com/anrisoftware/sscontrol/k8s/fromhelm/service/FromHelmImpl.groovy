@@ -15,6 +15,7 @@
  */
 package com.anrisoftware.sscontrol.k8s.fromhelm.service;
 
+import static com.anrisoftware.sscontrol.types.host.StringUtils.indentString
 import static com.anrisoftware.sscontrol.types.misc.StringListPropertyUtil.stringListStatement;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.notNullValue;
@@ -233,31 +234,16 @@ class FromHelmImpl implements FromHelm {
         indentString configPartsTemplate.getText(true, "resources", "vars", [limits: limits, requests: requests]), n
     }
 
+    def insertIndent(int n, def string) {
+        indentString string, n
+    }
+
     def insertPersistentVolumeClaimSpec(int n, def requests, def className = null, List accessModes = null) {
         def vars = [:]
         vars.requests = requests
         vars.className = className
         vars.accessModes = accessModes ? accessModes : ["ReadWriteOnce"]
         indentString configPartsTemplate.getText(true, "persistentVolumeClaimSpec", "vars", vars), n
-    }
-
-    /**
-     * @see <a href="https://www.logicbig.com/how-to/java-string/java-indent-string.html">Java - How to Indent multiline String?</a>
-     */
-    private static String indentString(String input, int n) {
-        char[] chars = new char[ n];
-        Arrays.fill(chars, ' ' as char);
-        StringBuilder sb = new StringBuilder();
-        boolean first = true;
-        for (String line : input.split("\n")) {
-            if(!first){
-                sb.append("\n");
-            }
-            sb.append(chars).append(line);
-            first=false;
-        }
-
-        return sb.toString();
     }
 
     @Override

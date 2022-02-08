@@ -33,9 +33,6 @@ import com.anrisoftware.sscontrol.services.host.HostServicesImpl.HostServicesImp
 import com.anrisoftware.sscontrol.services.ssh.TargetsImpl.TargetsImplFactory
 import com.anrisoftware.sscontrol.services.targets.TargetsModule
 import com.anrisoftware.sscontrol.services.targets.TargetsServiceModule
-import com.anrisoftware.sscontrol.shell.service.Shell
-import com.anrisoftware.sscontrol.shell.service.ShellModule
-import com.anrisoftware.sscontrol.shell.service.ShellImpl.ShellImplFactory
 import com.anrisoftware.sscontrol.types.host.HostServicePropertiesService
 import com.anrisoftware.sscontrol.types.host.HostServices
 import com.anrisoftware.sscontrol.types.misc.TypesModule

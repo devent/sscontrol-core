@@ -15,16 +15,11 @@
  */
 package com.anrisoftware.sscontrol.shell.service;
 
+import static com.anrisoftware.sscontrol.types.host.StringUtils.indentString
 import static com.anrisoftware.sscontrol.types.misc.StringListPropertyUtil.stringListStatement;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-import com.anrisoftware.sscontrol.shell.service.ScriptImpl.ScriptImplFactory;
 import com.anrisoftware.sscontrol.types.host.HostServiceProperties;
 import com.anrisoftware.sscontrol.types.host.HostServicePropertiesService;
 import com.anrisoftware.sscontrol.types.host.TargetHost;
@@ -39,16 +34,6 @@ import com.google.inject.assistedinject.AssistedInject;
  * @since 1.0
  */
 public class ShellImpl implements Shell {
-
-    /**
-     *
-     *
-     * @author Erwin Müller {@literal <erwin.mueller@deventm.de>}
-     * @version 1.0
-     */
-    public interface ShellImplFactory extends ShellService {
-
-    }
 
     public static final String SERVICE_NAME = "shell";
 
@@ -66,7 +51,7 @@ public class ShellImpl implements Shell {
 
     @AssistedInject
     ShellImpl(ShellImplLogger log, HostServicePropertiesService propertiesService, ScriptImplFactory scriptFactory,
-            @Assisted Map<String, Object> args) {
+    @Assisted Map<String, Object> args) {
         this.log = log;
         this.targets = new ArrayList<>();
         this.scripts = new ArrayList<>();
@@ -89,11 +74,11 @@ public class ShellImpl implements Shell {
     public List<String> getProperty() {
         return stringListStatement(new ListProperty() {
 
-            @Override
-            public void add(String property) {
-                serviceProperties.addProperty(property);
-            }
-        });
+                    @Override
+                    public void add(String property) {
+                        serviceProperties.addProperty(property);
+                    }
+                });
     }
 
     /**
@@ -104,12 +89,11 @@ public class ShellImpl implements Shell {
     public List<String> getScript() {
         return stringListStatement(new ListProperty() {
 
-            @Override
-            public void add(String property) {
-                script(property);
-            }
-
-        });
+                    @Override
+                    public void add(String property) {
+                        script(property);
+                    }
+                });
     }
 
     /**
@@ -146,6 +130,10 @@ public class ShellImpl implements Shell {
         addScript(script);
     }
 
+    def insertIndent(int n, def string) {
+        indentString string, n
+    }
+
     @Override
     public TargetHost getTarget() {
         return getTargets().get(0);
@@ -177,7 +165,6 @@ public class ShellImpl implements Shell {
                 .toString();
     }
 
-    @SuppressWarnings("unchecked")
     private void parseArgs(Map<String, Object> args) {
         if (vars.containsKey("target")) {
             vars.remove("target");
