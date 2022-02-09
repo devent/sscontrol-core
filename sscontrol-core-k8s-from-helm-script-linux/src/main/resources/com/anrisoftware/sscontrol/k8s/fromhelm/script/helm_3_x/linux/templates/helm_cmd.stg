@@ -33,7 +33,7 @@ helm upgrade -f <vars.args.config>
 %>
 
 helmReleaseCmd(parent, vars) ::= <<
-if <helmLs(parent, vars)> | grep <vars.service.release.name> | egrep "<vars.status>"; then
+if <helmLs(parent, vars)> | egrep "^<vars.service.release.name>.*<vars.status>"; then
   exit 0
 else
   exit 1
